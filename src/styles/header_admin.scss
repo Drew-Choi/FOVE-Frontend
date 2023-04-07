@@ -1,0 +1,23 @@
+header.header_admin {
+  border-bottom: solid 0.5px black;
+  height: 60px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  p {
+    margin-bottom: 0px;
+  }
+
+  .logo {
+    padding: 30px;
+    cursor: pointer;
+  }
+
+  .admin {
+    margin-left: auto;
+    margin-right: auto;
+    transform: translateX(-55px);
+    cursor: pointer;
+  }
+}

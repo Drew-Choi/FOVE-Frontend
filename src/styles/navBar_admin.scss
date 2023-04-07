@@ -1,0 +1,17 @@
+nav.navbar_admin {
+  border-right: solid 0.5px black;
+  width: 150px;
+  height: 100vh;
+  display: inline-block;
+  ul {
+    list-style: none;
+    padding-top: 30px;
+   li{
+    margin-bottom: 10px;
+    cursor: pointer;
+    &:hover {
+      color: grey;
+    }
+   }
+  }
+}
