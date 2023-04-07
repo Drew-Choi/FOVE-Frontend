@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/header_admin.scss';
+import '../../styles/header_admin.scss';
 import { useNavigate } from 'react-router-dom';
 
 export default function Header_admin() {

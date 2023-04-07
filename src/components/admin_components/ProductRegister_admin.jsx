@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import '../styles/productRegister_admin.scss';
+import '../../styles/productRegister_admin.scss';
 import axios from 'axios';
 
 export default function ProductRegister_admin() {

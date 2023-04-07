@@ -1,9 +1,9 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import Header_admin from './components/Header_admin';
-import NavBar_admin from './components/NavBar_admin';
-import ProductRegister_admin from './components/ProductRegister_admin';
-import Home_admin from './components/Home_admin';
+import Header_admin from './components/admin_components/Header_admin';
+import NavBar_admin from './components/admin_components/NavBar_admin';
+import ProductRegister_admin from './components/admin_components/ProductRegister_admin';
+import Home_admin from './components/admin_components/Home_admin';
 
 function App() {
   return (

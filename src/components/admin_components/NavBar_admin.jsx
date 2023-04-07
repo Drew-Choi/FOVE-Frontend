@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/navBar_admin.scss';
+import '../../styles/navBar_admin.scss';
 import { useNavigate } from 'react-router-dom';
 
 export default function NavBar_admin() {
