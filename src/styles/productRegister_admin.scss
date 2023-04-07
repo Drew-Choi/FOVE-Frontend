@@ -1,0 +1,38 @@
+section.productRegister_admin {
+  position: absolute;
+  display: inline-block;
+  width: 100vw;
+  height: 50vw;
+  border-bottom: solid 0.5px black;
+
+  .register_container {
+    padding: 30px;
+    div {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+  
+      p {
+        display: block;
+        margin-right: 20px;
+        margin-top: auto;
+        margin-bottom: auto;
+      }
+      input {
+        display: block;
+      }
+    }
+    button {
+      all: unset;
+      cursor: pointer;
+      background-color: black;
+      color: white;
+      padding: 4px 10px;
+      font-size: 15px;
+      border-radius: 5px;
+      &:hover {
+        background-color: gray;
+      }
+    }
+  }
+}
