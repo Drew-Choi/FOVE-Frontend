@@ -1,8 +1,25 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import '../../styles/productRegister_admin.scss';
 import axios from 'axios';
 
 export default function ProductRegister_admin() {
+  //가격 콤마용
+  const [enterNumPrice, setEnterNumPrice] = useState('');
+  //재고수량 콤마용
+  const [enterNumQuantity, setEnterNumQuantity] = useState('');
+  //천단위 콤마생성
+  const changeEnteredNumComma = (el) => {
+    const comma = (el) => {
+      el = String(el);
+      return el.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+    };
+    const uncomma = (el) => {
+      el = String(el);
+      return el.replace(/[^\d]+/g, '');
+    };
+    return comma(uncomma(el));
+  };
+
   //input 값을 받을 useRef생성
   const pd_name = useRef();
   const pd_price = useRef();
@@ -13,11 +30,13 @@ export default function ProductRegister_admin() {
   //Post요청이므로 ref값에 접근하여 객체(혹은 배열)를 만들고 데이터를 담아서 보낸다.
   //express에서는 이 값을 req.body로 받는다.
   const newProductPost = async () => {
-    //ref로 값이 잘 넘어왔는지 확인하기 위한 콘솔로그
-    console.log(pd_name.current.value);
-    console.log(pd_price.current.value);
-    console.log(pd_quantity.current.value);
+    const pdName = pd_name.current.value;
+    const pdPrice = pd_price.current.value;
+    const pdQuantity = pd_quantity.current.value;
 
+    //빈 인풋이 없는 지 체크
+    if (!pdName || !pdPrice || !pdQuantity)
+      return alert('모든 필수 정보를 입력해 주세요.');
     //async/await를 이용해 axios 구현
     const newPdPostData = await axios.post(
       //요청할 페이지 날림 -> 이 서버 라우터에서 몽고디비에 인설트 하는 컨트롤을 가지고 있음
@@ -57,9 +76,13 @@ export default function ProductRegister_admin() {
           <input
             // input 값을 ref로 보내기
             ref={pd_price}
-            type="number"
+            type="text"
+            placeholder="가격을 입력해주세요."
             name="price"
-            placeholder="가격을 입력해주세요"
+            value={enterNumPrice}
+            onChange={() =>
+              setEnterNumPrice(changeEnteredNumComma(pd_price.current.value))
+            }
           />
         </div>
         <div>
@@ -67,9 +90,15 @@ export default function ProductRegister_admin() {
           <input
             // input 값을 ref로 보내기
             ref={pd_quantity}
-            type="number"
+            type="text"
+            placeholder="재고수량을 입력해주세요."
             name="quantity"
-            placeholder="재고수량을 입력해주세요"
+            value={enterNumQuantity}
+            onChange={() =>
+              setEnterNumQuantity(
+                changeEnteredNumComma(pd_quantity.current.value),
+              )
+            }
           />
         </div>
         {/* 클릭시 axios각 작동할 수 있게 위에 만든 함수를 넣어준다. */}

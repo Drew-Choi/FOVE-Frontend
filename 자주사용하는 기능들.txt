@@ -1,0 +1,17 @@
+ //천단위 콤마생성
+  const changeEnteredNumComma = (el) => {
+    const comma = (el) => {
+      el = String(el);
+      return el.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+    };
+    const uncomma = (el) => {
+      el = String(el);
+      return el.replace(/[^\d]+/g, '');
+    };
+    return comma(uncomma(el));
+  };
+  
+//콤마제거하고 연산 가능한 숫자로 바꾸기
+  const resultCommaRemove = (el) => {
+    return Number(el.split(',').reduce((curr, acc) => curr + acc, ''));
+  };
