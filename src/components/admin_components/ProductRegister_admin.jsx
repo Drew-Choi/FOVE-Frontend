@@ -20,6 +20,11 @@ export default function ProductRegister_admin() {
     return comma(uncomma(el));
   };
 
+  //콤마제거하고 연산 가능한 숫자로 바꾸기
+  const resultCommaRemove = (el) => {
+    return Number(el.split(',').reduce((curr, acc) => curr + acc, ''));
+  };
+
   //input 값을 받을 useRef생성
   const pd_name = useRef();
   const pd_price = useRef();
@@ -31,8 +36,13 @@ export default function ProductRegister_admin() {
   //express에서는 이 값을 req.body로 받는다.
   const newProductPost = async () => {
     const pdName = pd_name.current.value;
-    const pdPrice = pd_price.current.value;
-    const pdQuantity = pd_quantity.current.value;
+    const pdPrice = resultCommaRemove(pd_price.current.value);
+    const pdQuantity = resultCommaRemove(pd_quantity.current.value);
+
+    //데이터 확인용 콘솔로그
+    console.log(pdName);
+    console.log(pdPrice);
+    console.log(pdQuantity);
 
     //빈 인풋이 없는 지 체크
     if (!pdName || !pdPrice || !pdQuantity)
@@ -43,9 +53,9 @@ export default function ProductRegister_admin() {
       'http://localhost:4000/pd_register/add_pd',
       //요청 페이지 다음에는 데이터를 담는다.(ref값 활용)
       {
-        name: pd_name.current.value,
-        price: pd_price.current.value,
-        quantity: pd_quantity.current.value,
+        name: pdName,
+        price: pdPrice,
+        quantity: pdQuantity,
       },
     );
     //페이지 요청 성공하면 200번, 아니면 오류표시

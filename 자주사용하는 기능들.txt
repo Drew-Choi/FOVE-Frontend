@@ -15,3 +15,10 @@
   const resultCommaRemove = (el) => {
     return Number(el.split(',').reduce((curr, acc) => curr + acc, ''));
   };
+
+//프론트에 컴마로 뿌리기
+const formattedPrice = 값.toLocaleString('en-US', {
+  style: 'currency',
+  currency: 'KRW',
+  currencyDisplay: 'none',
+});
