@@ -1,24 +1,32 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import Header_admin from './components/admin_components/Header_admin';
-import NavBar_admin from './components/admin_components/NavBar_admin';
-import ProductRegister_admin from './components/admin_components/ProductRegister_admin';
-import Home_admin from './components/admin_components/Home_admin';
+import Admin_main from './components_pages/admin_components/Admin_main';
+import ProductRegister_admin from './components_pages/admin_components/ProductRegister_admin';
+import Home_admin from './components_pages/admin_components/Home_admin';
 
 function App() {
   return (
     <div>
-      <Header_admin />
-      <NavBar_admin />
       <Routes>
-        <Route path="/" element={<Home_admin />} />
-        <Route path="/pd_register" element={<ProductRegister_admin />} />
         <Route
-          path="*"
+          path="/"
           element={
-            <h2 style={{ display: 'inline-block' }}>NOT FOUND 404err</h2>
+            <h1>여기에 메인 작성하시오</h1>
+            //컴포넌트들 여기에 추가추가
+            //하하하하하하
+            //어드민으로 나누다보니 모두 라우터 처리 해야함
           }
         />
+        <Route path="/fove_admin" element={<Admin_main />}>
+          <Route path="" element={<Home_admin />} />
+          <Route path="pd_register" element={<ProductRegister_admin />} />
+          <Route
+            path="*"
+            element={
+              <h2 style={{ display: 'inline-block' }}>NOT FOUND 404err</h2>
+            }
+          />
+        </Route>
       </Routes>
     </div>
   );
