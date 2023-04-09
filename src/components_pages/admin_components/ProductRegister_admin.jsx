@@ -1,8 +1,10 @@
 import React, { useRef, useState } from 'react';
 import '../../styles/productRegister_admin.scss';
 import axios from 'axios';
-import RadioGroup from './productRegister_Elements/RadioGroup';
-import RadioEl from './productRegister_Elements/RadioEl';
+import RadioGroup from '../../components_elements/RadioGroup';
+import RadioEl from '../../components_elements/RadioEl';
+import Input_Custom from '../../components_elements/Input_Custom';
+import BTN_black_nomal_comp from '../../styles/BTN_black_nomal_comp';
 
 export default function ProductRegister_admin() {
   //-------
@@ -11,7 +13,7 @@ export default function ProductRegister_admin() {
   //재고수량 콤마용
   const [enterNumQuantity, setEnterNumQuantity] = useState('');
   //사이즈를 위한 state
-  const [sizeType, setSizeType] = useState('');
+  const [sizeType, setSizeType] = useState('S');
   console.log(sizeType);
 
   //천단위 콤마생성
@@ -84,30 +86,31 @@ export default function ProductRegister_admin() {
   return (
     <section className="productRegister_admin">
       <form className="register_container">
-        <div>
-          <p>상품명</p>
-          <input
-            // input 값을 ref로 보내기
-            ref={pd_name}
-            type="text"
-            name="name"
-            placeholder="상품이름을 입력해주세요"
-          />
-        </div>
-        <div>
-          <p>가격&nbsp;&nbsp;&nbsp;</p>
-          <input
-            // input 값을 ref로 보내기
-            ref={pd_price}
-            type="text"
-            placeholder="가격을 입력해주세요."
-            name="price"
-            value={enterNumPrice}
-            onChange={() =>
-              setEnterNumPrice(changeEnteredNumComma(pd_price.current.value))
-            }
-          />
-        </div>
+        {/* 상품명 인풋 */}
+        <Input_Custom
+          inputref={pd_name}
+          type="text"
+          name="name"
+          placeholder="상품이름을 입력해주세요"
+        >
+          상품명
+        </Input_Custom>
+
+        {/* 가격인풋 */}
+        <Input_Custom
+          inputref={pd_price}
+          type="text"
+          placeholder="가격을 입력해주세요."
+          name="price"
+          value={enterNumPrice}
+          onChangeEvent={() =>
+            setEnterNumPrice(changeEnteredNumComma(pd_price.current.value))
+          }
+        >
+          가격 &nbsp;&nbsp;
+        </Input_Custom>
+
+        {/* 사이즈라디오 */}
         <RadioGroup style={{}}>
           사이즈 &nbsp;&nbsp;&nbsp;&nbsp;
           <RadioEl
@@ -139,48 +142,44 @@ export default function ProductRegister_admin() {
           </RadioEl>
           &nbsp;&nbsp;&nbsp;&nbsp;
         </RadioGroup>
-        <div>
-          <p>수량&nbsp;&nbsp;&nbsp;</p>
-          <input
-            // input 값을 ref로 보내기
-            ref={pd_quantity}
-            type="text"
-            placeholder="재고수량을 입력해주세요."
-            name="quantity"
-            value={enterNumQuantity}
-            onChange={() =>
-              setEnterNumQuantity(
-                changeEnteredNumComma(pd_quantity.current.value),
-              )
-            }
-          />
-        </div>
-        <div>
-          <p>상품 메인 이미지</p>
-          <input type="file" name="img" />
-        </div>
-        <div>
-          <p>상품 서브 이미지1</p>
-          <input type="file" name="img" />
-        </div>
-        <div>
-          <p>상품 서브 이미지2</p>
-          <input type="file" name="img" />
-        </div>
-        <div>
-          <p>상품 서브 이미지3</p>
-          <input type="file" name="img" />
-        </div>
-        <div>
-          <p>상품 서브 이미지4</p>
-          <input type="file" name="img" />
-        </div>
-        <div>
-          <p>상품 서브 이미지5</p>
-          <input type="file" name="img" />
-        </div>
+
+        {/* 수량 인풋 */}
+        <Input_Custom
+          inputref={pd_quantity}
+          type="text"
+          placeholder="재고수량을 입력해주세요."
+          name="quantity"
+          value={enterNumQuantity}
+          onChangeEvent={() =>
+            setEnterNumQuantity(
+              changeEnteredNumComma(pd_quantity.current.value),
+            )
+          }
+        >
+          수량&nbsp;&nbsp;&nbsp;
+        </Input_Custom>
+
+        {/* 상품이미지 등록 */}
+        <Input_Custom type="file" name="pd_img">
+          상품 메인 이미지
+        </Input_Custom>
+        <Input_Custom type="file" name="pd_img">
+          상품 서브 이미지1
+        </Input_Custom>
+        <Input_Custom type="file" name="pd_img">
+          상품 서브 이미지2
+        </Input_Custom>
+        <Input_Custom type="file" name="pd_img">
+          상품 서브 이미지3
+        </Input_Custom>
+        <Input_Custom type="file" name="pd_img">
+          상품 서브 이미지4
+        </Input_Custom>
+        <Input_Custom type="file" name="pd_img">
+          상품 서브 이미지5
+        </Input_Custom>
         {/* 클릭시 axios각 작동할 수 있게 위에 만든 함수를 넣어준다. */}
-        <button onClick={newProductPost}>등록</button>
+        <BTN_black_nomal_comp text="등록" onClickEvent={newProductPost} />
       </form>
     </section>
   );
