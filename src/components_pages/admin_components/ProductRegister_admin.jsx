@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import '../../styles/productRegister_admin.scss';
 import axios from 'axios';
 import RadioGroup from '../../components_elements/RadioGroup';
@@ -53,11 +53,58 @@ export default function ProductRegister_admin() {
   const pd_sizeM = useRef();
   const pd_sizeL = useRef();
 
+  //--------이미지 영역 특수해서 따로 분리----------
+  //이미지 파일 업로드용 Ref
+  const fileInputRef = useRef();
+  //이미지 url접근값 저장 state
+  const [imageFile, setImageFile] = useState(null);
+  //이미지인풋클릭 함수
+  const handleClickFileInput = () => {
+    fileInputRef.current?.click();
+  };
+  //이미지 접근하여 state를 이미지 값으로 변경
+  const uploadProfile = (e) => {
+    const fileList = e.target.files;
+    const length = fileList.length;
+    let copy = [];
+    if (fileList) {
+      for (let i = 0; i < length; i += 1) {
+        const imgInfo = {
+          file: fileList[i],
+          thumbnail: URL.createObjectURL(fileList[i]),
+          type: fileList[i].type.slice(0, 5),
+        };
+        copy.push(imgInfo);
+      }
+    }
+    setImageFile((cur) => copy);
+  };
+
+  console.log(imageFile);
+
+  //이미지 뿌려주기, 유즈 메모로 image파일이 업로드 될때만 반응하도록
+  const showImage = useMemo(() => {
+    if (!imageFile && imageFile === null) {
+      return <></>;
+    }
+    return imageFile.map((el, index) => (
+      <img
+        key={index}
+        src={el.thumbnail}
+        alt={el.type}
+        onClick={handleClickFileInput}
+      />
+    ));
+  }, [imageFile]);
+
+  //----- 이미지 끝-------
+
   //클릭이벤트시 실행될 함수 생성
   //기능: 클릭 발생하면 axios로 서버에 해당 페이지 요청을 보냄
   //Post요청이므로 ref값에 접근하여 객체(혹은 배열)를 만들고 데이터를 담아서 보낸다.
   //express에서는 이 값을 req.body로 받는다.
   const newProductPost = async () => {
+    //이미지 폼데이터 만들기
     const pdName = pd_name.current.value;
     const pdPrice = resultCommaRemove(pd_price.current.value);
     const pdSize = sizeType;
@@ -75,9 +122,19 @@ export default function ProductRegister_admin() {
     console.log(pdKinde);
     console.log(pdDescription);
 
-    //빈 인풋이 없는 지 체크
-    if (!pdName || !pdPrice || !pdQuantity || !pdSize || !pdColor || !pdKinde)
-      return alert('모든 필수 정보를 입력해 주세요.');
+    //필수값 설정
+    if (
+      !pdName ||
+      !pdPrice ||
+      !pdSize ||
+      !pdQuantity ||
+      !pdColor ||
+      !pdKinde ||
+      !pdDescription
+    )
+      //필수정보가 입력 안되었다면 알러트
+      return alert('필수 정보를 입력해주세요.');
+
     //async/await를 이용해 axios 구현
     const newPdPostData = await axios.post(
       //요청할 페이지 날림 -> 이 서버 라우터에서 몽고디비에 인설트 하는 컨트롤을 가지고 있음
@@ -103,7 +160,7 @@ export default function ProductRegister_admin() {
 
   return (
     <section className="productRegister_admin">
-      <form className="register_container">
+      <div className="register_container">
         {/* 상품명 인풋 */}
         <Input_Custom
           inputref={pd_name}
@@ -125,12 +182,12 @@ export default function ProductRegister_admin() {
             setEnterNumPrice(changeEnteredNumComma(pd_price.current.value))
           }
         >
-          가격 &nbsp;&nbsp;
+          가격&nbsp;&nbsp;
         </Input_Custom>
 
         {/* 사이즈라디오 */}
         <RadioGroup>
-          사이즈 &nbsp;&nbsp;&nbsp;&nbsp;
+          사이즈&nbsp;&nbsp;&nbsp;&nbsp;
           <RadioEl
             inputref={pd_sizeOS}
             name="size"
@@ -181,14 +238,6 @@ export default function ProductRegister_admin() {
         </Select_Custom>
 
         {/* 상품이미지 등록 */}
-        <Input_Custom
-          type="file"
-          name="pd_img"
-          multiple="multiple"
-          accept="image/*"
-        >
-          상품 메인 이미지
-        </Input_Custom>
 
         {/* 수량 인풋 */}
         <Input_Custom
@@ -205,6 +254,28 @@ export default function ProductRegister_admin() {
         >
           수량&nbsp;&nbsp;&nbsp;
         </Input_Custom>
+
+        <div>
+          {showImage}
+          <p>파일업로드</p>
+          <form>
+            <input
+              style={{ display: 'none' }}
+              type="file"
+              accept="image/jpg, image/jpeg, image/png"
+              ref={fileInputRef}
+              onChange={uploadProfile}
+              multiple
+            />
+            <BTN_black_nomal_comp
+              type="button"
+              onClickEvent={handleClickFileInput}
+              fontSize="12px"
+            >
+              파일선택
+            </BTN_black_nomal_comp>
+          </form>
+        </div>
 
         {/* 상품상세설명 인풋 */}
         <TextArea_Custom
@@ -240,7 +311,7 @@ export default function ProductRegister_admin() {
         >
           등록
         </BTN_black_nomal_comp>
-      </form>
+      </div>
     </section>
   );
 }
