@@ -4,11 +4,23 @@ import Admin_main from './components_pages/admin_components/Admin_main';
 import ProductRegister_admin from './components_pages/admin_components/ProductRegister_admin';
 import Home_admin from './components_pages/admin_components/Home_admin';
 import FileUpload_img_madal from './components_elements/FileUpload_img_madal';
+import { useState } from 'react';
 
 function App() {
+  const [test, setTest] = useState([
+    {
+      thumbnail: 'https://t1.daumcdn.net/cfile/tistory/2463694C53D0A5D806',
+      type: 'png',
+    },
+    {
+      thumbnail:
+        'https://blog.kakaocdn.net/dn/0mySg/btqCUccOGVk/nQ68nZiNKoIEGNJkooELF1/img.jpg',
+      type: 'png',
+    },
+  ]);
   return (
     <div>
-      <FileUpload_img_madal />
+      <FileUpload_img_madal imageFilesData={test} />
       <Routes>
         <Route
           path="/"
