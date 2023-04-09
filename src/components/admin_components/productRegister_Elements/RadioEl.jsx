@@ -7,7 +7,7 @@ export default function RadioEl({
   defaultChecked,
   disabled,
   inputref,
-  onClick,
+  onChangeEvent,
 }) {
   return (
     <label>
@@ -19,7 +19,7 @@ export default function RadioEl({
         name={name}
         defaultChecked={defaultChecked}
         disabled={disabled}
-        onClick={onClick}
+        onChange={onChangeEvent}
       />
     </label>
   );

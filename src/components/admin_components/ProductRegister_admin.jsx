@@ -12,6 +12,8 @@ export default function ProductRegister_admin() {
   const [enterNumQuantity, setEnterNumQuantity] = useState('');
   //사이즈를 위한 state
   const [sizeType, setSizeType] = useState('');
+  console.log(sizeType);
+
   //천단위 콤마생성
   const changeEnteredNumComma = (el) => {
     const comma = (el) => {
@@ -56,6 +58,7 @@ export default function ProductRegister_admin() {
     //빈 인풋이 없는 지 체크
     if (!pdName || !pdPrice || !pdQuantity || !pdSize)
       return alert('모든 필수 정보를 입력해 주세요.');
+
     //async/await를 이용해 axios 구현
     const newPdPostData = await axios.post(
       //요청할 페이지 날림 -> 이 서버 라우터에서 몽고디비에 인설트 하는 컨트롤을 가지고 있음
@@ -76,7 +79,6 @@ export default function ProductRegister_admin() {
       //서버에서 res로 날라오는 내용을 로그로 띄움
       console.log(await newPdPostData);
     }
-    newPdPostData();
   };
 
   return (
@@ -112,7 +114,7 @@ export default function ProductRegister_admin() {
             inputref={pd_size}
             name="size"
             value={sizeType}
-            onClick={() => setSizeType((cur) => 'S')}
+            onChangeEvent={() => setSizeType((cur) => 'S')}
             defaultChecked
           >
             S
@@ -122,7 +124,7 @@ export default function ProductRegister_admin() {
             inputref={pd_size}
             name="size"
             value={sizeType}
-            onClick={() => setSizeType((cur) => 'M')}
+            onChangeEvent={() => setSizeType((cur) => 'M')}
           >
             M
           </RadioEl>
@@ -131,7 +133,7 @@ export default function ProductRegister_admin() {
             inputref={pd_size}
             name="size"
             value={sizeType}
-            onClick={() => setSizeType((cur) => 'L')}
+            onChangeEvent={() => setSizeType((cur) => 'L')}
           >
             L
           </RadioEl>
