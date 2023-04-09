@@ -1,10 +1,7 @@
 section.productRegister_admin {
-  position: absolute;
-  display: inline-block;
-  width: 100vw;
-  height: 80vw;
-  border-bottom: solid 0.5px black;
-
+  width: 100%;
+  // background-color: bisque;
+  border-bottom: 0.5px solid black;
   .register_container {
     padding: 30px;
     div {
@@ -22,17 +19,6 @@ section.productRegister_admin {
         display: block;
       }
     }
-    button {
-      all: unset;
-      cursor: pointer;
-      background-color: black;
-      color: white;
-      padding: 4px 10px;
-      font-size: 15px;
-      border-radius: 5px;
-      &:hover {
-        background-color: gray;
-      }
-    }
+    
   }
 }
