@@ -181,23 +181,13 @@ export default function ProductRegister_admin() {
         </Select_Custom>
 
         {/* 상품이미지 등록 */}
-        <Input_Custom type="file" name="pd_img">
+        <Input_Custom
+          type="file"
+          name="pd_img"
+          multiple="multiple"
+          accept="image/*"
+        >
           상품 메인 이미지
-        </Input_Custom>
-        <Input_Custom type="file" name="pd_img">
-          상품 서브 이미지1
-        </Input_Custom>
-        <Input_Custom type="file" name="pd_img">
-          상품 서브 이미지2
-        </Input_Custom>
-        <Input_Custom type="file" name="pd_img">
-          상품 서브 이미지3
-        </Input_Custom>
-        <Input_Custom type="file" name="pd_img">
-          상품 서브 이미지4
-        </Input_Custom>
-        <Input_Custom type="file" name="pd_img">
-          상품 서브 이미지5
         </Input_Custom>
 
         {/* 수량 인풋 */}

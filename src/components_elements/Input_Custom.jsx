@@ -7,6 +7,8 @@ export default function Input_Custom({
   onChangeEvent,
   value,
   onClickEvent,
+  multiple,
+  accept,
 }) {
   return (
     <div>
@@ -20,6 +22,8 @@ export default function Input_Custom({
         placeholder={placeholder}
         onChange={onChangeEvent}
         onClick={onClickEvent}
+        multiple={multiple}
+        accept={accept}
       />
     </div>
   );
