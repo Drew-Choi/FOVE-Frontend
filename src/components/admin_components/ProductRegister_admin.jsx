@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react';
 import '../../styles/productRegister_admin.scss';
 import axios from 'axios';
-import RadioGroup from './etc_elements/RadioGroup';
-import RadioEl from './etc_elements/RadioEl';
+import RadioGroup from './productRegister_Elements/RadioGroup';
+import RadioEl from './productRegister_Elements/RadioEl';
 
 export default function ProductRegister_admin() {
   //-------
@@ -10,6 +10,8 @@ export default function ProductRegister_admin() {
   const [enterNumPrice, setEnterNumPrice] = useState('');
   //재고수량 콤마용
   const [enterNumQuantity, setEnterNumQuantity] = useState('');
+  //사이즈를 위한 state
+  const [sizeType, setSizeType] = useState('');
   //천단위 콤마생성
   const changeEnteredNumComma = (el) => {
     const comma = (el) => {
@@ -34,9 +36,6 @@ export default function ProductRegister_admin() {
   const pd_price = useRef();
   const pd_size = useRef();
   const pd_quantity = useRef();
-
-  //사이즈를 위한 state
-  const [sizeType, setSizeType] = useState('');
 
   //클릭이벤트시 실행될 함수 생성
   //기능: 클릭 발생하면 axios로 서버에 해당 페이지 요청을 보냄
