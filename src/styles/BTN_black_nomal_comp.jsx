@@ -25,14 +25,20 @@ export default function BTN_black_nomal_comp({
   onClickEvent,
   fontSize,
   transFontSize,
+  type,
 }) {
   return (
     <Btn_blakc_nomal
       transFontSize={transFontSize}
       fontSize={fontSize}
       onClick={onClickEvent}
+      type={type}
     >
       {children}
     </Btn_blakc_nomal>
   );
 }
+
+BTN_black_nomal_comp.defaultProps = {
+  fontSize: '15px',
+};
