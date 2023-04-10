@@ -17,6 +17,7 @@ header.header_client {
   justify-content: space-between;
   white-space: nowrap;
   padding: 0px 75px;
+  z-index: 3;
 
   .logo {
     position: relative;
