@@ -4,6 +4,9 @@ import Admin_main from './components_pages/admin_components/Admin_main';
 import ProductRegister_admin from './components_pages/admin_components/ProductRegister_admin';
 import Home_admin from './components_pages/admin_components/Home_admin';
 import { useState } from 'react';
+import Header_client from './components_pages/client_components/Header_client';
+import Footer_client from './components_pages/client_components/Footer_client';
+import Client_main from './components_pages/client_components/Client_main';
 
 function App() {
   const [test, setTest] = useState([
@@ -20,15 +23,7 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <h1>여기에 메인 작성하시오</h1>
-            //컴포넌트들 여기에 추가추가
-            //하하하하하하
-            //어드민으로 나누다보니 모두 라우터 처리 해야함
-          }
-        />
+        <Route path="/" element={<Client_main />} />
         <Route path="/admin" element={<Admin_main />}>
           <Route path="" element={<Home_admin />} />
           <Route path="register" element={<ProductRegister_admin />} />
