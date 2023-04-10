@@ -6,6 +6,7 @@ body {
 }
 
 header.header_client {
+  background-color: white;
   box-sizing: border-box;
   position: fixed;
   border-bottom: solid 0.5px black;
@@ -16,6 +17,7 @@ header.header_client {
   justify-content: space-between;
   white-space: nowrap;
   padding: 0px 75px;
+  z-index: 3;
 
   .logo {
     cursor: pointer;

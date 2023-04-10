@@ -1,0 +1,40 @@
+.client_main {
+  position: relative;
+  width: 100vw;
+  z-index: 1;
+  // background-color: beige;
+  
+  nav {
+    position: relative;
+    top: 75px;
+    background-color: white;
+    border-bottom: solid 0.5px black;
+
+    ul {
+      display: flex;
+      padding-top: 12px;
+      padding-bottom: 2px;
+      padding-left: 60px;
+      align-items: center;
+
+      li {
+       cursor: pointer;
+       padding: 0px 20px;
+       font-size: 75%;
+       list-style: none;
+       color: rgb(84, 84, 84);
+      &:hover {
+        color: rgb(0, 0, 0);
+      }
+      }
+    }
+  }
+
+  .product_display {
+    top: 80px;
+    background-color: bisque;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+  }
+}
