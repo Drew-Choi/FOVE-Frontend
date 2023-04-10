@@ -8,30 +8,17 @@ export default function Footer_client() {
     <footer className="footer_client">
       <ul id="foot_li">
         <li id="foot_info">
-          <p>
-            © FOVE
-            <span>/ site by KDT 5th POSCO X CodingOn PROJECT</span>
-          </p>
-        </li>
-        <li id="foot_info">
-          <p className="agreement" onClick={() => navigate('/agreement')}>
+          <p>© FOVE / site by KDT 5th POSCO X CodingOn PROJECT</p>
+          <span className="agreement" onClick={() => navigate('/agreement')}>
             Agreement
-          </p>
-        </li>
-        <li id="foot_info">
-          <p className="privacy" onClick={() => navigate('#')}>
+          </span>
+          <span className="privacy" onClick={() => navigate('#')}>
             Privacy
-          </p>
-        </li>
-        <li id="foot_info">
-          <p className="guide" onClick={() => navigate('#')}>
+          </span>
+          <span className="guide" onClick={() => navigate('#')}>
             Guide
-          </p>
-        </li>
-        <li id="kakao">
+          </span>
           <img src="/kakao.jpg" onClick={() => navigate('#')}></img>
-        </li>
-        <li id="instagram">
           <img src="/instagram.jpg" onClick={() => navigate('#')}></img>
         </li>
       </ul>
