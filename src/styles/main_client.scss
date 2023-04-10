@@ -20,7 +20,7 @@
       li {
        cursor: pointer;
        padding: 0px 20px;
-       font-size: 75%;
+       font-size: 70%;
        list-style: none;
        color: rgb(84, 84, 84);
       &:hover {
@@ -32,9 +32,9 @@
 
   .product_display {
     top: 80px;
-    background-color: bisque;
+    // background-color: rgb(255, 208, 208);
     position: relative;
     width: 100vw;
-    height: 100vh;
+    height: 650px;
   }
 }
