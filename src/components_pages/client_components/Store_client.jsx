@@ -1,9 +1,9 @@
 import React from 'react';
-import '../../styles/main_client.scss';
+import '../../styles/store_client.scss';
 import Product_client_indiLayout from './Product_client_indiLayout';
 import { Container, Row, Col } from 'react-bootstrap';
 
-export default function Main_client() {
+export default function Store_client() {
   return (
     <main className="client_main">
       <nav>
