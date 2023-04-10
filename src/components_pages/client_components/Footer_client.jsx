@@ -14,7 +14,7 @@ export default function Footer_client() {
           </p>
         </li>
         <li id="foot_info">
-          <p className="agreement" onClick={() => navigate('#')}>
+          <p className="agreement" onClick={() => navigate('/agreement')}>
             Agreement
           </p>
         </li>

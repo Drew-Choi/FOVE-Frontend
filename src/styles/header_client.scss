@@ -19,10 +19,12 @@ header.header_client {
   padding: 0px 75px;
 
   .logo {
+    position: relative;
     cursor: pointer;
     font-size: 283%;
     font-weight: 600;
     font-style: italic;
+    margin-top: 2.7%;
   }
 
   // MAIN MENU
