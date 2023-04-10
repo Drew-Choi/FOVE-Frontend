@@ -1,6 +1,5 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import '../../styles/productRegister_admin.scss';
-import axios from 'axios';
 import RadioGroup from '../../components_elements/RadioGroup';
 import RadioEl from '../../components_elements/RadioEl';
 import Input_Custom from '../../components_elements/Input_Custom';
@@ -52,6 +51,8 @@ export default function ProductRegister_admin() {
   const pd_sizeS = useRef();
   const pd_sizeM = useRef();
   const pd_sizeL = useRef();
+  //이미지업로드 컨트롤용
+  const pd_img = useRef();
 
   //--------이미지 영역 특수해서 따로 분리----------
   //이미지 파일 업로드용 Ref
@@ -62,9 +63,9 @@ export default function ProductRegister_admin() {
   const handleClickFileInput = () => {
     fileInputRef.current?.click();
   };
+
   //이미지 접근하여 state를 이미지 값으로 변경
   const uploadProfile = (e) => {
-    console.log(e.target.files);
     const fileList = e.target.files;
     const length = fileList.length;
     let copy = [];
@@ -79,6 +80,8 @@ export default function ProductRegister_admin() {
       }
     }
     setImageFile((cur) => copy);
+    pd_img.current = fileList;
+    console.log(pd_img.current);
   };
 
   //이미지 뿌려주기, 유즈 메모로 image파일이 업로드 될때만 반응하도록
@@ -95,15 +98,14 @@ export default function ProductRegister_admin() {
       />
     ));
   }, [imageFile]);
-
   //----- 이미지 끝-------
 
   //클릭이벤트시 실행될 함수 생성
-  //기능: 클릭 발생하면 axios로 서버에 해당 페이지 요청을 보냄
+  //기능: 클릭 발생하면 fetch로 서버에 해당 페이지 요청을 보냄
   //Post요청이므로 ref값에 접근하여 객체(혹은 배열)를 만들고 데이터를 담아서 보낸다.
-  //express에서는 이 값을 req.body로 받는다.
+  //express에서는 이 값을 req.body.data / 혹은 req.files로 받는다.
   const newProductPost = async () => {
-    //이미지 폼데이터 만들기
+    //이미지 외 자료들 남기
     const pdProductName = pd_productName.current.value;
     const pdPrice = resultCommaRemove(pd_price.current.value);
     const pdSize = sizeType;
@@ -112,34 +114,17 @@ export default function ProductRegister_admin() {
     const pdCategory = pd_category.current.value;
     const pdDetail = pd_detail.current.value;
 
-    //데이터 확인용 콘솔로그
-    console.log(pdProductName);
-    console.log(pdPrice);
-    console.log(pdSize);
-    console.log(pdQuantity);
-    console.log(pdColor);
-    console.log(pdCategory);
-    console.log(pdDetail);
-
-    //필수값 설정
-    if (
-      !pdProductName ||
-      !pdPrice ||
-      !pdSize ||
-      !pdQuantity ||
-      !pdColor ||
-      !pdCategory ||
-      !pdDetail
-    )
-      //필수정보가 입력 안되었다면 알러트
-      return alert('필수 정보를 입력해주세요.');
-
-    //async/await를 이용해 axios 구현
-    const newPdPostData = await axios.post(
-      //요청할 페이지 날림 -> 이 서버 라우터에서 몽고디비에 인설트 하는 컨트롤을 가지고 있음
-      'http://localhost:4000/admin/register-product',
-      //요청 페이지 다음에는 데이터를 담는다.(ref값 활용)
-      {
+    //이미지 폼데이터 만들기
+    const formData = new FormData();
+    //여러 이미지라 formdata에 담아줌
+    for (let i = 0; i < pd_img.current.length; i += 1) {
+      formData.append('img', pd_img.current[i]);
+    }
+    //이미지 외 자료들 formdata에 담음
+    formData.append(
+      'data',
+      //제이슨 형식으로 바꿔줘야함
+      JSON.stringify({
         productName: pdProductName,
         price: pdPrice,
         size: pdSize,
@@ -147,13 +132,26 @@ export default function ProductRegister_admin() {
         category: pdCategory,
         quantity: pdQuantity,
         detail: pdDetail,
+      }),
+    );
+
+    //async/await를 이용해 fetch 구현
+    const newPdPostData = await fetch(
+      //요청할 페이지 날림 -> 이 서버 라우터에서 몽고디비에 인설트 하는 컨트롤을 가지고 있음
+      'http://localhost:4000/admin/register-product',
+      {
+        method: 'POST',
+        headers: {},
+        //여기가 데이터 담아 보내는 것
+        body: formData,
       },
     );
     //페이지 요청 성공하면 200번, 아니면 오류표시
     if (newPdPostData.status !== 200) {
-      return alert(await newPdPostData);
+      //json형식으로 불러들임
+      return alert(await newPdPostData.json());
     } else {
-      return alert(await newPdPostData);
+      return alert(await newPdPostData.json());
     }
   };
 
@@ -181,7 +179,7 @@ export default function ProductRegister_admin() {
             setEnterNumPrice(changeEnteredNumComma(pd_price.current.value))
           }
         >
-          가격&nbsp;&nbsp;
+          가격&nbsp;&nbsp;&nbsp;
         </Input_Custom>
 
         {/* 사이즈라디오 */}
@@ -251,7 +249,7 @@ export default function ProductRegister_admin() {
             )
           }
         >
-          수량&nbsp;&nbsp;&nbsp;
+          수량
         </Input_Custom>
 
         <div>
@@ -264,6 +262,7 @@ export default function ProductRegister_admin() {
               accept="image/jpg, image/jpeg, image/png"
               ref={fileInputRef}
               onChange={uploadProfile}
+              name="imgMain"
               multiple
             />
             <BTN_black_nomal_comp
