@@ -5,6 +5,8 @@ import ProductRegister_admin from './components_pages/admin_components/ProductRe
 import Home_admin from './components_pages/admin_components/Home_admin';
 import { useState } from 'react';
 import Header_client from './components_pages/client_components/Header_client';
+import Footer_client from './components_pages/client_components/Footer_client';
+import Client_main from './components_pages/client_components/Client_main';
 
 function App() {
   const [test, setTest] = useState([
@@ -21,7 +23,7 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Header_client />} />
+        <Route path="/" element={<Client_main />} />
         <Route path="/admin" element={<Admin_main />}>
           <Route path="" element={<Home_admin />} />
           <Route path="register" element={<ProductRegister_admin />} />

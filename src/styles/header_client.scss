@@ -6,48 +6,59 @@ body {
 }
 
 header.header_client {
+  position: relative;
   border-bottom: solid 0.5px black;
-  height: 60px;
+  height: 70px;
   width: 100%;
   display: flex;
   align-items: center;
   white-space: nowrap;
 
-  p {
-    margin-bottom: 0px;
-  }
-
   .logo {
-    padding: 0 30px 41px 25px;
+    position: absolute;
+    margin: auto;
+    left: 1.5vw;
     cursor: pointer;
-    font-size: 40px;
+    font-size: 283%;
+    font-weight: 645;
     font-style: italic;
-    font-weight: 648;
+    text-align: center;
   }
 
+  // MAIN MENU
  #cate {
-  position: relative;
-  font-size: 100%;
+  position: absolute;
+  font-size: 80%;
   display: flex;
-  justify-content: space-between;
-  // text-align: center;
-  // align-items: center;
-  margin: 31em;
+  justify-content: center;
+  align-items: center;
   display: flex;
+  top: 30%;
+  left: 39%;
+  transform: translateY(-50%);
   }
   #cate_li {
-    // position: absolute;
-    width: 50%;
-    transform: translateX(-55px);
     cursor: pointer;
     list-style: none;
     list-style-type: none;
-    margin-bottom: 1em;
-  }
-  a {
-    font-size: 1em;
-    text-decoration: none;
-    color: black;
-    padding: 1em;
+    margin: 10%;
   }
 }
+
+// MAIN MENU 2
+#cate2 {
+  font-size: 80%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  top: 40%;
+  bottom: 38%;
+  }
+  #cate_li2 {
+    position: absolute;
+    cursor: pointer;
+    list-style: none;
+    list-style-type: none;
+    line-height: 1.5;
+    right: 1vw;
+  }
