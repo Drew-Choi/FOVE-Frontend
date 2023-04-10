@@ -20,10 +20,12 @@ header.header_client {
   z-index: 3;
 
   .logo {
+    position: relative;
     cursor: pointer;
     font-size: 283%;
     font-weight: 600;
     font-style: italic;
+    margin-top: 2.7%;
   }
 
   // MAIN MENU

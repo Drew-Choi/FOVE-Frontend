@@ -6,16 +6,15 @@ body {
 }
 
 footer.footer_client {
+  background-color: white;
   box-sizing: border-box;
   position: fixed;
   border-top: solid 0.5px black;
-  bottom: 0.1em;
+  bottom: 0;
   width: 100%;
   display: flex;
-  // align-items: center;
   justify-content: space-between;
   white-space: nowrap;
-  // padding: 0px;s
 
   // FOOTER LEFT
  #foot_li {
@@ -52,15 +51,12 @@ footer.footer_client {
   #foot_li2 {
     display: flex;
     justify-content: space-between;
-    // align-items: right;
-    // gap: 14px;
     list-style: none;
     list-style-type: none;
     width: 300px;
     flex-direction: column;
     align-items: flex-end;
     line-height: 0;
-    // margin-top: 1em;
     margin-right: 2em;
   }
 
