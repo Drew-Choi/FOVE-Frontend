@@ -32,7 +32,6 @@ header.header_client {
   display: flex;
   justify-content: center;
   align-items: center;
-  display: flex;
   top: 30%;
   left: 39%;
   transform: translateY(-50%);
@@ -48,7 +47,7 @@ header.header_client {
 // MAIN MENU 2
 #cate2 {
   font-size: 80%;
-  justify-content: center;
+  // justify-content: center;
   align-items: center;
   display: flex;
   top: 40%;
@@ -61,4 +60,6 @@ header.header_client {
     list-style-type: none;
     line-height: 1.5;
     right: 1vw;
+    display: block;
+    padding: 2em;
   }

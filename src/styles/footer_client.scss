@@ -8,29 +8,25 @@ body {
 footer.footer_client {
   position: relative;
   border-bottom: solid 0.5px black;
-  top: 73vh;
+  bottom: -60vh;
   width: 100%;
   display: flex;
-  // align-items: center;
   white-space: nowrap;
 
   // left
  .footer_client {
-  // display: flex;
-  // justify-content: center;
+  position: absolute;
   top: 30%;
   left: 35%;
-  // transform: translateY(-50%);
   }
   #foot_li {
     font-size: 0.7em;
     list-style: none;
     list-style-type: none;
-    // text-align:center;
     margin-right: 1px;
   }
   p {
-    display: block;
+    // display: block;
     cursor: pointer;
     text-decoration: none;
     color: black;
