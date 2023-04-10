@@ -3,7 +3,6 @@ import { Route, Routes } from 'react-router-dom';
 import Admin_main from './components_pages/admin_components/Admin_main';
 import ProductRegister_admin from './components_pages/admin_components/ProductRegister_admin';
 import Home_admin from './components_pages/admin_components/Home_admin';
-import FileUpload_img_madal from './components_elements/FileUpload_img_madal';
 import { useState } from 'react';
 
 function App() {
