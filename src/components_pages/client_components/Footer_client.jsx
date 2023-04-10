@@ -9,6 +9,7 @@ export default function Footer_client() {
       <ul id="foot_li">
         <li id="foot_info">
           <p>© FOVE / site by KDT 5th POSCO X CodingOn PROJECT</p>
+          <br />
         </li>
         <li id="foot_info">
           <p className="agreement" onClick={() => navigate('#')}>

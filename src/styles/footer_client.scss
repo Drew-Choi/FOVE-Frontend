@@ -7,34 +7,25 @@ body {
 
 footer.footer_client {
   position: relative;
-  border-bottom: solid 0.5px black;
-  top: 73vh;
+  border-top: solid 0.5px black;
+  bottom: -80vh;
   width: 100%;
-  display: flex;
-  // align-items: center;
+  height: 50px;
   white-space: nowrap;
+  left: -1.2em;
 
-  // left
- .footer_client {
-  // display: flex;
-  // justify-content: center;
-  top: 30%;
-  left: 35%;
-  // transform: translateY(-50%);
-  }
   #foot_li {
+    height: inherit;
+    display: flex;
     font-size: 0.7em;
     list-style: none;
     list-style-type: none;
-    // text-align:center;
-    margin-right: 1px;
   }
+
   p {
-    display: block;
+    left: -2vw;
     cursor: pointer;
-    text-decoration: none;
-    color: black;
-    // align-items: center; /* 수직 가운데 정렬 */
+    margin-right: 1.3em;
   }
 }
 
