@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
 
 body {
@@ -16,8 +15,7 @@ header.header_client {
   align-items: center;
   justify-content: space-between;
   white-space: nowrap;
-  padding: 0px 75px;
-  z-index: 3;
+  padding: 0 50px;
 
   .logo {
     position: relative;
@@ -25,7 +23,7 @@ header.header_client {
     font-size: 283%;
     font-weight: 600;
     font-style: italic;
-    margin-top: 2.7%;
+    margin-top: 1%;
   }
 
   // MAIN MENU
@@ -35,12 +33,13 @@ header.header_client {
     justify-content: space-between;
     align-items: center;
     gap: 30px;
-  }
+    margin-top: 2.3%;
 
-  #cate_li {
-    cursor: pointer;
-    list-style: none;
-    list-style-type: none;
+    #cate_li {
+      cursor: pointer;
+      list-style: none;
+      list-style-type: none;
+    }
   }
 
   #cate2 {
@@ -48,12 +47,12 @@ header.header_client {
     font-size: 80%;
     display: flex;
     gap: 30px;
-  }
+    margin-top: 2.3%;
 
-  #cate_li2 {
-    cursor: pointer;
-    list-style: none;
-    list-style-type: none;
+    #cate_li2 {
+      cursor: pointer;
+      list-style: none;
+      list-style-type: none;
+    }
   }
 }
-
