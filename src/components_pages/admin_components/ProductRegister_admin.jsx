@@ -41,12 +41,12 @@ export default function ProductRegister_admin() {
   //-------
 
   //input 값을 받을 useRef생성
-  const pd_name = useRef();
+  const pd_productName = useRef();
   const pd_price = useRef();
   const pd_quantity = useRef();
   const pd_color = useRef();
-  const pd_kind = useRef();
-  const pd_description = useRef();
+  const pd_category = useRef();
+  const pd_detail = useRef();
   //사이즈의 경우 초기화를 위해 사용
   const pd_sizeOS = useRef();
   const pd_sizeS = useRef();
@@ -64,6 +64,7 @@ export default function ProductRegister_admin() {
   };
   //이미지 접근하여 state를 이미지 값으로 변경
   const uploadProfile = (e) => {
+    console.log(e.target.files);
     const fileList = e.target.files;
     const length = fileList.length;
     let copy = [];
@@ -79,8 +80,6 @@ export default function ProductRegister_admin() {
     }
     setImageFile((cur) => copy);
   };
-
-  console.log(imageFile);
 
   //이미지 뿌려주기, 유즈 메모로 image파일이 업로드 될때만 반응하도록
   const showImage = useMemo(() => {
@@ -105,32 +104,32 @@ export default function ProductRegister_admin() {
   //express에서는 이 값을 req.body로 받는다.
   const newProductPost = async () => {
     //이미지 폼데이터 만들기
-    const pdName = pd_name.current.value;
+    const pdProductName = pd_productName.current.value;
     const pdPrice = resultCommaRemove(pd_price.current.value);
     const pdSize = sizeType;
     const pdQuantity = resultCommaRemove(pd_quantity.current.value);
     const pdColor = pd_color.current.value;
-    const pdKinde = pd_kind.current.value;
-    const pdDescription = pd_description.current.value;
+    const pdCategory = pd_category.current.value;
+    const pdDetail = pd_detail.current.value;
 
     //데이터 확인용 콘솔로그
-    console.log(pdName);
+    console.log(pdProductName);
     console.log(pdPrice);
     console.log(pdSize);
     console.log(pdQuantity);
     console.log(pdColor);
-    console.log(pdKinde);
-    console.log(pdDescription);
+    console.log(pdCategory);
+    console.log(pdDetail);
 
     //필수값 설정
     if (
-      !pdName ||
+      !pdProductName ||
       !pdPrice ||
       !pdSize ||
       !pdQuantity ||
       !pdColor ||
-      !pdKinde ||
-      !pdDescription
+      !pdCategory ||
+      !pdDetail
     )
       //필수정보가 입력 안되었다면 알러트
       return alert('필수 정보를 입력해주세요.');
@@ -138,16 +137,16 @@ export default function ProductRegister_admin() {
     //async/await를 이용해 axios 구현
     const newPdPostData = await axios.post(
       //요청할 페이지 날림 -> 이 서버 라우터에서 몽고디비에 인설트 하는 컨트롤을 가지고 있음
-      'http://localhost:4000/pd_register/add_pd',
+      'http://localhost:4000/admin/register-product',
       //요청 페이지 다음에는 데이터를 담는다.(ref값 활용)
       {
-        name: pdName,
+        productName: pdProductName,
         price: pdPrice,
         size: pdSize,
         color: pdColor,
-        kind: pdKinde,
+        category: pdCategory,
         quantity: pdQuantity,
-        description: pdDescription,
+        detail: pdDetail,
       },
     );
     //페이지 요청 성공하면 200번, 아니면 오류표시
@@ -163,7 +162,7 @@ export default function ProductRegister_admin() {
       <div className="register_container">
         {/* 상품명 인풋 */}
         <Input_Custom
-          inputref={pd_name}
+          inputref={pd_productName}
           type="text"
           name="name"
           placeholder="상품이름을 입력해주세요"
@@ -233,7 +232,7 @@ export default function ProductRegister_admin() {
         </Select_Custom>
 
         {/* 색상인풋(셀렉터) */}
-        <Select_Custom selectList={kindArr} inputRef={pd_kind}>
+        <Select_Custom selectList={kindArr} inputRef={pd_category}>
           종류
         </Select_Custom>
 
@@ -279,7 +278,7 @@ export default function ProductRegister_admin() {
 
         {/* 상품상세설명 인풋 */}
         <TextArea_Custom
-          inputref={pd_description}
+          inputref={pd_detail}
           type="text"
           name="pd_description"
           placeholder="필요시에만 사용"
@@ -296,17 +295,17 @@ export default function ProductRegister_admin() {
           transFontSize="13px"
           onClickEvent={() => {
             newProductPost();
-            pd_name.current.value = '';
-            setEnterNumPrice((cur) => '');
-            setEnterNumQuantity((cur) => '');
-            setSizeType((cur) => 'OS');
-            pd_color.current.value = 'black';
-            pd_sizeOS.current.checked = true;
-            pd_sizeS.current.checked = false;
-            pd_sizeM.current.checked = false;
-            pd_sizeL.current.checked = false;
-            pd_kind.current.value = 'beanie';
-            pd_description.current.value = '';
+            // pd_productName.current.value = '';
+            // setEnterNumPrice((cur) => '');
+            // setEnterNumQuantity((cur) => '');
+            // setSizeType((cur) => 'OS');
+            // pd_color.current.value = 'black';
+            // pd_sizeOS.current.checked = true;
+            // pd_sizeS.current.checked = false;
+            // pd_sizeM.current.checked = false;
+            // pd_sizeL.current.checked = false;
+            // pd_category.current.value = 'beanie';
+            // pd_detail.current.value = '';
           }}
         >
           등록

@@ -6,10 +6,10 @@ export default function Header_admin() {
   const navigate = useNavigate();
   return (
     <header className="header_admin">
-      <p className="logo" onClick={() => navigate('/fove_admin')}>
+      <p className="logo" onClick={() => navigate('/admin')}>
         logo
       </p>
-      <p className="admin" onClick={() => navigate('/fove_admin')}>
+      <p className="admin" onClick={() => navigate('/admin')}>
         Admin
       </p>
     </header>

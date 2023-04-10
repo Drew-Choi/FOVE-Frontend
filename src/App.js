@@ -20,7 +20,7 @@ function App() {
   ]);
   return (
     <div>
-      <FileUpload_img_madal imageFilesData={test} />
+      {/* <FileUpload_img_madal imageFilesData={test} /> */}
       <Routes>
         <Route
           path="/"
@@ -31,9 +31,9 @@ function App() {
             //어드민으로 나누다보니 모두 라우터 처리 해야함
           }
         />
-        <Route path="/fove_admin" element={<Admin_main />}>
+        <Route path="/admin" element={<Admin_main />}>
           <Route path="" element={<Home_admin />} />
-          <Route path="pd_register" element={<ProductRegister_admin />} />
+          <Route path="register" element={<ProductRegister_admin />} />
           <Route
             path="*"
             element={
