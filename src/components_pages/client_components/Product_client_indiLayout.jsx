@@ -7,7 +7,7 @@ const ImageContainer = styled.div`
 `;
 
 const ImageLayout = styled.img`
-  width: 200px;
+  width: 180px;
   display: inline-block;
 `;
 

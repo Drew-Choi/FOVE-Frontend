@@ -37,4 +37,37 @@
     width: 100vw;
     height: 650px;
   }
+  .swiper_pagination_container{
+    position: absolute;
+    bottom: 25px;
+    right: 50%;
+    transform: translateX(50%);
+    bottom: 10px;
+
+    .pagi1.on{
+      text-decoration: underline;
+    }
+    .pagi2.on{
+      text-decoration: underline;
+    }
+    .pagi3.on{
+      text-decoration: underline;
+    }
+    .pagi4.on{
+      text-decoration: underline;
+    }
+  }
+
+  .swiper_navigation_container {
+    position: absolute;
+    bottom: 19px;
+    right: 50%;
+    transform: translateX(50%);
+    .nav_arrow_pre{
+      padding-right: 120px;
+    }
+    .nav_arrow_next{
+      padding-left: 120px;
+    }
+  }
 }
