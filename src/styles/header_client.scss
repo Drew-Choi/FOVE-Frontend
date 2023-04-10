@@ -6,60 +6,50 @@ body {
 }
 
 header.header_client {
-  position: relative;
+  box-sizing: border-box;
+  position: fixed;
   border-bottom: solid 0.5px black;
   height: 70px;
   width: 100%;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   white-space: nowrap;
+  padding: 0px 75px;
 
   .logo {
-    position: absolute;
-    margin: auto;
-    left: 1.5vw;
     cursor: pointer;
     font-size: 283%;
-    font-weight: 645;
+    font-weight: 600;
     font-style: italic;
-    text-align: center;
   }
 
   // MAIN MENU
  #cate {
-  position: absolute;
-  font-size: 80%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: 30%;
-  left: 39%;
-  transform: translateY(-50%);
+    font-size: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
   }
+
   #cate_li {
     cursor: pointer;
     list-style: none;
     list-style-type: none;
-    margin: 10%;
   }
-}
 
-// MAIN MENU 2
-#cate2 {
-  font-size: 80%;
-  // justify-content: center;
-  align-items: center;
-  display: flex;
-  top: 40%;
-  bottom: 38%;
+  #cate2 {
+    position: relative;
+    font-size: 80%;
+    display: flex;
+    gap: 30px;
   }
+
   #cate_li2 {
-    position: absolute;
     cursor: pointer;
     list-style: none;
     list-style-type: none;
-    line-height: 1.5;
-    right: 1vw;
-    display: block;
-    padding: 2em;
   }
+}
+

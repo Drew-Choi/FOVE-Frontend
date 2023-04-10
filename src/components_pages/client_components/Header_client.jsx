@@ -9,30 +9,26 @@ export default function Header_client() {
       <p className="logo" onClick={() => navigate('#')}>
         FOVE
       </p>
-      <p className="header_bar">
-        <nav id="main_menu">
-          <ul id="cate">
-            <li id="cate_li">
-              <p onClick={() => navigate('#')}>ABOUT US</p>
-            </li>
-            <li id="cate_li">
-              <p onClick={() => navigate('#')}>STORE</p>
-            </li>
-            <li id="cate_li">
-              <p onClick={() => navigate('#')}>COLLECTION</p>
-            </li>
-          </ul>
-          <ul id="cate2">
-            <li id="cate_li2">
-              <p onClick={() => navigate('#')}>ACCOUNT</p>
-            </li>
-            <li id="cate_li2">
-              <p onClick={() => navigate('#')}>SHOPPING BAG /0</p>
-              {/* 0 이라는 숫자 장바구니에 넣을 때 올라가야 함 */}
-            </li>
-          </ul>
-        </nav>
-      </p>
+      <ul id="cate">
+        <li id="cate_li">
+          <p onClick={() => navigate('#')}>ABOUT US</p>
+        </li>
+        <li id="cate_li">
+          <p onClick={() => navigate('#')}>STORE</p>
+        </li>
+        <li id="cate_li">
+          <p onClick={() => navigate('#')}>COLLECTION</p>
+        </li>
+      </ul>
+      <ul id="cate2">
+        <li id="cate_li2">
+          <p onClick={() => navigate('#')}>ACCOUNT</p>
+        </li>
+        <li id="cate_li2">
+          <p onClick={() => navigate('#')}>SHOPPING BAG /0</p>
+          {/* 0 이라는 숫자 장바구니에 넣을 때 올라가야 함 */}
+        </li>
+      </ul>
     </header>
   );
 }
