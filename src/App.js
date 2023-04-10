@@ -20,7 +20,6 @@ function App() {
   ]);
   return (
     <div>
-      {/* <FileUpload_img_madal imageFilesData={test} /> */}
       <Routes>
         <Route
           path="/"
