@@ -18,9 +18,6 @@ import { BrowserRouter } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  // 2번 렌더링 방지
-  // <React.StrictMode>
-
   //router-dom 설정
   <BrowserRouter>
     {/* redux 세팅  추후 store추가해야함*/}
@@ -28,7 +25,6 @@ root.render(
     <App />
     {/* </Provider> */}
   </BrowserRouter>,
-  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
