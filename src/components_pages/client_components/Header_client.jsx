@@ -6,7 +6,7 @@ export default function Header_client() {
   const navigate = useNavigate();
   return (
     <header className="header_client">
-      <p className="logo" onClick={() => navigate('#')}>
+      <p className="logo" onClick={() => navigate('/')}>
         FOVE
       </p>
       <ul id="cate">
@@ -14,7 +14,7 @@ export default function Header_client() {
           <p onClick={() => navigate('#')}>ABOUT US</p>
         </li>
         <li id="cate_li">
-          <p onClick={() => navigate('#')}>STORE</p>
+          <p onClick={() => navigate('/store')}>STORE</p>
         </li>
         <li id="cate_li">
           <p onClick={() => navigate('#')}>COLLECTION</p>

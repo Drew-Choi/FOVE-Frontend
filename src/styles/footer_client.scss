@@ -15,15 +15,16 @@ footer.footer_client {
   display: flex;
   justify-content: space-between;
   white-space: nowrap;
+  z-index: 3;
 
   // FOOTER LEFT
  #foot_li {
     display: flex;
-    // justify-content: space-between;
-    gap: 14px;
+    justify-content: space-between;
+    align-items: center;
     list-style: none;
     list-style-type: none;
-    margin-top: 1%;
+    line-height: 0;
   }
 
   p {
@@ -31,18 +32,19 @@ footer.footer_client {
   }
 
   span {
-    font-size: 40%;
+    font-size: 68%;
+    padding: 4px;
   }
 
   #foot_info {
-    cursor: pointer
+    cursor: pointer;
   }
 
   img {
     cursor: pointer;
-    width: 1.2em;
-    display: flex;
-    gap: 10px;
+    width: 1.3em;
+    padding: 2px;
+    margin: 3px;
   }
 }
 

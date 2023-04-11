@@ -14,11 +14,9 @@ function App() {
         {/* Client 영역 */}
         <Route path="/" element={<Client_main />}>
           <Route path="/store" element={<Store_client />} />
-          <Route path="/agreement" element={<Agreement_client />} />
+          <Route path="agreement" element={<Agreement_client />} />
         </Route>
-
         {/* admin 영역 */}
-
         <Route path="/admin" element={<Admin_main />}>
           <Route path="" element={<Home_admin />} />
           <Route path="register" element={<ProductRegister_admin />} />
