@@ -4,6 +4,7 @@ import Admin_main from './components_pages/admin_components/Admin_main';
 import ProductRegister_admin from './components_pages/admin_components/ProductRegister_admin';
 import Home_admin from './components_pages/admin_components/Home_admin';
 import Agreement_client from './components_pages/client_components/Agreement_client';
+import Privacy_client from './components_pages/client_components/Privacy_client';
 import Client_main from './components_pages/client_components/Client_main';
 import Store_client from './components_pages/client_components/Store_client';
 
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element={<Client_main />}>
           <Route path="/store" element={<Store_client />} />
           <Route path="agreement" element={<Agreement_client />} />
+          <Route path="privacy" element={<Privacy_client />} />
         </Route>
         {/* admin 영역 */}
         <Route path="/admin" element={<Admin_main />}>
