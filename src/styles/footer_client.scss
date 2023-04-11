@@ -7,11 +7,9 @@ body {
 footer.footer_client {
   background-color: white;
   box-sizing: border-box;
-  position: relative;
-  // position: fixed;
+  position: fixed;
   border-top: solid 0.5px black;
-  bottom: -35px;
-  // bottom: 0px;
+  bottom: 0px;
   width: 100%;
   height: 15vh;
   display: flex;
