@@ -6,6 +6,7 @@ import Home_admin from './components_pages/admin_components/Home_admin';
 import Agreement_client from './components_pages/client_components/Agreement_client';
 import Privacy_client from './components_pages/client_components/Privacy_client';
 import Client_main from './components_pages/client_components/Client_main';
+import AboutUs_client from './components_pages/client_components/AboutUs_client';
 import Store_client from './components_pages/client_components/Store_client';
 import Guide_client from './components_pages/client_components/Guide_client';
 
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         {/* Client 영역 */}
         <Route path="/" element={<Client_main />}>
+          <Route path="/aboutus" element={<AboutUs_client />} />
           <Route path="/store" element={<Store_client />} />
           <Route path="agreement" element={<Agreement_client />} />
           <Route path="privacy" element={<Privacy_client />} />
