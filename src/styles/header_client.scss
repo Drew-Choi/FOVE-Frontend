@@ -40,6 +40,13 @@ header.header_client {
       cursor: pointer;
       list-style: none;
       list-style-type: none;
+      transition: color 0.3s ease-in-out;
+
+      &:hover {
+        color: darken(#000000, 10%);
+        font-weight: bold;
+      }
+    
     }
   }
 
@@ -54,6 +61,14 @@ header.header_client {
       cursor: pointer;
       list-style: none;
       list-style-type: none;
+      transition: color 0.3s ease-in-out;
+
+      &:hover {
+        color: darken(#000000, 10%);
+        font-weight: bold;
+      }
+    
+
     }
   }
 }

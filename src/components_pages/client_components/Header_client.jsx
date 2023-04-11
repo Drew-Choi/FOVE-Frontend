@@ -22,7 +22,7 @@ export default function Header_client() {
       </ul>
       <ul id="cate2">
         <li id="cate_li2">
-          <p onClick={() => navigate('#')}>ACCOUNT</p>
+          <p onClick={() => navigate('/dropdown')}>ACCOUNT</p>
         </li>
         <li id="cate_li2">
           <p onClick={() => navigate('#')}>SHOPPING BAG /0</p>
