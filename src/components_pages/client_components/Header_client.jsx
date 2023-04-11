@@ -11,7 +11,7 @@ export default function Header_client() {
       </p>
       <ul id="cate">
         <li id="cate_li">
-          <p onClick={() => navigate('#')}>ABOUT US</p>
+          <p onClick={() => navigate('/aboutus')}>ABOUT US</p>
         </li>
         <li id="cate_li">
           <p onClick={() => navigate('/store')}>STORE</p>
