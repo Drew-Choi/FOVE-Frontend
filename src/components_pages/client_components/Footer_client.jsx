@@ -18,8 +18,12 @@ export default function Footer_client() {
           <span className="guide" onClick={() => navigate('/guide')}>
             Guide
           </span>
-          <img src="/kakao.jpg" onClick={() => navigate('#')}></img>
-          <img src="/instagram.jpg" onClick={() => navigate('#')}></img>
+          <a href="#">
+            <img src="/kakao.jpg" alt="kakaoicon"></img>
+          </a>
+          <a href="https://www.instagram.com/tlstkddk">
+            <img src="/instagram.jpg" alt="instagramicon"></img>
+          </a>
         </li>
       </ul>
       <ul id="foot_li2">
