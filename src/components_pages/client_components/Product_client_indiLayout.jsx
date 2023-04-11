@@ -41,13 +41,15 @@ export default function Product_client_indiLayout({
   imgFileName,
   productName,
   price,
+  onMouseEnter,
+  onMouseLeave,
 }) {
   return (
-    <ImageContainer>
+    <ImageContainer onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
       <ImageLayout src={'http://localhost:4000/uploads/' + imgFileName} />
       <ProductInfoLayout>
         <ProductName>{productName}</ProductName>
-        <ProductPrice>{price}</ProductPrice>
+        <ProductPrice>₩ {price}</ProductPrice>
       </ProductInfoLayout>
     </ImageContainer>
   );
