@@ -24,17 +24,21 @@ export default function Store_client() {
 
   useEffect(() => {
     getAllProducts();
+    // getFit();
   }, []);
 
   const getAllProducts = async () => {
     const productsData = await axios.get('http://localhost:4000/store/all');
-    if (productsData.status !== 200) {
-      return await productsData;
-    } else {
+    if (productsData.status === 200) {
       await setPd_Datas(productsData.data);
-      return await productsData;
+      return productsData.data;
+    } else {
+      return productsData.data;
     }
   };
+
+  const country = navigator.language;
+  const frontPriceComma = (price) => price.toLocaleString(country);
 
   return (
     <main className="client_main">
@@ -76,16 +80,17 @@ export default function Store_client() {
         >
           <SwiperSlide className="swiper_slide">
             <Container>
-              <Row>
+              <Row xs={2} md={4} lg={5}>
                 {pd_Datas.map((el, index) => {
-                  if (index < 5 && index >= 0) {
-                    console.log(el.img[0]);
-                    return (
-                      <Col key={el._id}>
-                        <Product_client_indiLayout imgFileName={el.img[0]} />
-                      </Col>
-                    );
-                  }
+                  return (
+                    <Col key={el._id}>
+                      <Product_client_indiLayout
+                        imgFileName={el.img[0]}
+                        productName={el.productName}
+                        price={frontPriceComma(el.price)}
+                      />
+                    </Col>
+                  );
                 })}
               </Row>
             </Container>
