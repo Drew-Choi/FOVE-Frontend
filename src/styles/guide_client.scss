@@ -1,6 +1,3 @@
-body {
-}
-
 .titleArea {
   width: 100%;
   padding-top: 150px;
@@ -15,10 +12,16 @@ body {
   font-size: 14px;
 }
 
-.privacy {
+.guide {
   font-size: 12px;
-  // margin: 50px;
   padding: 70px 150px 150px 150px;
-  // padding: 0;
-  // justify-content: center;
+
+  p {
+    font-weight: bold;
+    font-size: 12.5px;
+  }
+
+  .my-span {
+    font-weight: bold;
+  }
 }

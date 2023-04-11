@@ -7,6 +7,7 @@ import Agreement_client from './components_pages/client_components/Agreement_cli
 import Privacy_client from './components_pages/client_components/Privacy_client';
 import Client_main from './components_pages/client_components/Client_main';
 import Store_client from './components_pages/client_components/Store_client';
+import Guide_client from './components_pages/client_components/Guide_client';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/store" element={<Store_client />} />
           <Route path="agreement" element={<Agreement_client />} />
           <Route path="privacy" element={<Privacy_client />} />
+          <Route path="guide" element={<Guide_client />} />
         </Route>
         {/* admin 영역 */}
         <Route path="/admin" element={<Admin_main />}>
