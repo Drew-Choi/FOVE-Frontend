@@ -12,7 +12,7 @@ export default function Footer_client() {
           <span className="agreement" onClick={() => navigate('/agreement')}>
             Agreement
           </span>
-          <span className="privacy" onClick={() => navigate('#')}>
+          <span className="privacy" onClick={() => navigate('/privacy')}>
             Privacy
           </span>
           <span className="guide" onClick={() => navigate('#')}>
