@@ -53,14 +53,6 @@ export default function Store_client() {
 
   return (
     <main className="store_main">
-      <SubNav_client
-        menu1="VIEW ALL"
-        menu2="NEW ARRIVALS"
-        menu3="BEANIE"
-        menu4="HAT"
-        menu5="MUFFLER"
-        top="70px"
-      />
       <section className="product_display">
         <Swiper
           // install Swiper modules
