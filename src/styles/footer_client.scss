@@ -58,10 +58,11 @@ footer.footer_client {
     flex-direction: column;
     align-items: flex-end;
     line-height: 0;
-    margin: 1.2em 2em 0 0;
+    // margin: 1.2em 2em;
+    padding: 27px;
 
     p {
-      font-size: 68%;
+      font-size: 69%;
     }
 
     img {

@@ -3,16 +3,22 @@ body {
 
 .titleArea {
   width: 100%;
-  padding: 20vh;
+  padding-top: 150px;
   text-align: center;
+
+  h2 {
+    font-weight: bold;
+  }
 }
 
 .subtitle {
-  font-size: 20px;
+  font-size: 14px;
 }
 
 .agreement {
-  margin: 0;
-  padding: 0;
-  justify-content: center;
+  font-size: 12px;
+  // margin: 50px;
+  padding: 70px 150px 150px 150px;
+  // padding: 0;
+  // justify-content: center;
 }

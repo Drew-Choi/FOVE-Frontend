@@ -24,7 +24,7 @@ header.header_client {
     font-size: 283%;
     font-weight: 600;
     font-style: italic;
-    margin-top: 1%;
+    margin-top: 0.8%;
   }
 
   // MAIN MENU
@@ -34,7 +34,7 @@ header.header_client {
     justify-content: space-between;
     align-items: center;
     gap: 30px;
-    margin-top: 2.3%;
+    margin-top: 2%;
 
     #cate_li {
       cursor: pointer;
@@ -48,7 +48,7 @@ header.header_client {
     font-size: 80%;
     display: flex;
     gap: 30px;
-    margin-top: 2.3%;
+    margin-top: 2%;
 
     #cate_li2 {
       cursor: pointer;
