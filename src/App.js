@@ -10,6 +10,7 @@ import AboutUs_client from './components_pages/client_components/AboutUs_client'
 import Store_client from './components_pages/client_components/Store_client';
 import Guide_client from './components_pages/client_components/Guide_client';
 import DetailProduct_client from './components_pages/client_components/DetailProduct_client';
+import Intro_movie_client from './components_pages/client_components/Intro_movie_clinet';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Routes>
         {/* Client 영역 */}
         <Route path="/" element={<Client_main />}>
+          <Route path="" element={<Intro_movie_client />} />
           <Route path="/aboutus" element={<AboutUs_client />} />
           <Route path="/store" element={<Store_client />} />
           <Route path="/store/detail/:id" element={<DetailProduct_client />} />
