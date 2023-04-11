@@ -82,24 +82,60 @@ export default function Store_client() {
             <Container>
               <Row xs={2} md={4} lg={5}>
                 {pd_Datas.map((el, index) => {
-                  return (
-                    <Col key={el._id}>
-                      <Product_client_indiLayout
-                        imgFileName={el.img[0]}
-                        productName={el.productName}
-                        price={frontPriceComma(el.price)}
-                      />
-                    </Col>
-                  );
+                  if (index < 10 && index >= 0)
+                    return (
+                      <Col key={el._id}>
+                        <Product_client_indiLayout
+                          imgFileName={el.img[0]}
+                          productName={el.productName}
+                          price={frontPriceComma(el.price)}
+                        />
+                      </Col>
+                    );
                 })}
               </Row>
             </Container>
           </SwiperSlide>
 
-          <SwiperSlide className="swiper_slide">Slide 2</SwiperSlide>
-          <SwiperSlide className="swiper_slide">Slide 3</SwiperSlide>
-          <SwiperSlide className="swiper_slide">Slide 4</SwiperSlide>
+          <SwiperSlide className="swiper_slide">
+            <Container>
+              <Row xs={2} md={4} lg={5}>
+                {pd_Datas.map((el, index) => {
+                  if (index < 20 && index >= 10)
+                    return (
+                      <Col key={el._id}>
+                        <Product_client_indiLayout
+                          imgFileName={el.img[0]}
+                          productName={el.productName}
+                          price={frontPriceComma(el.price)}
+                        />
+                      </Col>
+                    );
+                })}
+              </Row>
+            </Container>
+          </SwiperSlide>
+
+          <SwiperSlide className="swiper_slide">
+            <Container>
+              <Row xs={2} md={4} lg={5}>
+                {pd_Datas.map((el, index) => {
+                  if (index < 30 && index >= 20)
+                    return (
+                      <Col key={el._id}>
+                        <Product_client_indiLayout
+                          imgFileName={el.img[0]}
+                          productName={el.productName}
+                          price={frontPriceComma(el.price)}
+                        />
+                      </Col>
+                    );
+                })}
+              </Row>
+            </Container>
+          </SwiperSlide>
         </Swiper>
+
         <div className="swiper_navigation_container">
           <SwiperPaginationBTN
             color="gray"
@@ -143,14 +179,6 @@ export default function Store_client() {
             onClickEvent={() => swiperEl.slideTo(2)}
           >
             3
-          </SwiperPaginationBTN>
-          <SwiperPaginationBTN
-            className={`pagi4 ${pagination4}`}
-            color="gray"
-            hoverColor="lightgray"
-            onClickEvent={() => swiperEl.slideTo(3)}
-          >
-            4
           </SwiperPaginationBTN>
         </SwiperPaginationContainer>
       </section>
