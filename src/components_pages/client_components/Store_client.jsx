@@ -51,14 +51,6 @@ export default function Store_client() {
   const country = navigator.language;
   const frontPriceComma = (price) => price.toLocaleString(country);
 
-  //마우스오버시 변경조건
-  const [mouseCondition, setMouseCondition] = useState(true);
-
-  const mouseOverFunc = (condition, el) => {
-    if (condition) return el.img[0];
-    return el.img[1];
-  };
-
   return (
     <main className="store_main">
       <SubNav_client
@@ -108,9 +100,7 @@ export default function Store_client() {
                         key={el._id}
                       >
                         <Product_client_indiLayout
-                          // onMouseEnter={() => setMouseCondition((cur) => !cur)}
-                          // onMouseLeave={() => setMouseCondition((cur) => !cur)}
-                          imgFileName={el.img[0]}
+                          imgFileName={el.img}
                           productName={el.productName}
                           price={frontPriceComma(el.price)}
                         />
@@ -133,7 +123,7 @@ export default function Store_client() {
                         key={el._id}
                       >
                         <Product_client_indiLayout
-                          imgFileName={el.img[0]}
+                          imgFileName={el.img}
                           productName={el.productName}
                           price={frontPriceComma(el.price)}
                         />
@@ -154,9 +144,10 @@ export default function Store_client() {
                         onClick={() => navigate(`/store/detail/${el._id}`)}
                         className="store_col"
                         key={el._id}
+                        onMouseEnter={() => {}}
                       >
                         <Product_client_indiLayout
-                          imgFileName={el.img[0]}
+                          imgFileName={el.img}
                           productName={el.productName}
                           price={frontPriceComma(el.price)}
                         />
