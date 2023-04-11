@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
@@ -6,8 +7,8 @@ import reportWebVitals from './reportWebVitals';
 //router-dom 설정
 import { BrowserRouter } from 'react-router-dom';
 //redux 세팅
-import { Provider } from 'react-redux';
-import { configureStore } from '@reduxjs/toolkit';
+// import { Provider } from 'react-redux';
+// import { configureStore } from '@reduxjs/toolkit';
 
 //크롭 redux 도구 사용 세팅
 // const reduxDevTool =
@@ -23,7 +24,7 @@ root.render(
   //router-dom 설정
   <BrowserRouter>
     {/* redux 세팅  추후 store추가해야함*/}
-    {/* <Provider> */}
+    {/* <Provider store={store}> */}
     <App />
     {/* </Provider> */}
   </BrowserRouter>,
