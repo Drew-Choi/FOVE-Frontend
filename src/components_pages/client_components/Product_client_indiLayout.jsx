@@ -28,12 +28,16 @@ const ProductPrice = styled.p`
   margin-bottom: 10px;
 `;
 
-export default function Product_client_indiLayout() {
+export default function Product_client_indiLayout({
+  imgFileName,
+  productName,
+  price,
+}) {
   return (
     <ImageContainer>
-      <ImageLayout src="/images/beanie_black_1.jpg" alt="product_img" />
-      <ProductName>Beanie</ProductName>
-      <ProductPrice>₩ 32,000</ProductPrice>
+      <ImageLayout src={'http://localhost:4000/uploads/' + imgFileName} />
+      <ProductName>{productName}</ProductName>
+      <ProductPrice>{price}</ProductPrice>
     </ImageContainer>
   );
 }

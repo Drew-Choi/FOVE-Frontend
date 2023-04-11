@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import axios from 'axios';
 import '../../styles/store_client.scss';
 import Product_client_indiLayout from './Product_client_indiLayout';
 import { Container, Row, Col } from 'react-bootstrap';
@@ -19,6 +20,21 @@ export default function Store_client() {
   const [pagination2, setPagination2] = useState('off');
   const [pagination3, setPagination3] = useState('off');
   const [pagination4, setPagination4] = useState('off');
+  const [pd_Datas, setPd_Datas] = useState([]);
+
+  useEffect(() => {
+    getAllProducts();
+  }, []);
+
+  const getAllProducts = async () => {
+    const productsData = await axios.get('http://localhost:4000/store/all');
+    if (productsData.status !== 200) {
+      return await productsData;
+    } else {
+      await setPd_Datas(productsData.data);
+      return await productsData;
+    }
+  };
 
   return (
     <main className="client_main">
@@ -61,41 +77,20 @@ export default function Store_client() {
           <SwiperSlide className="swiper_slide">
             <Container>
               <Row>
-                <Col>
-                  <Product_client_indiLayout />
-                </Col>
-                <Col>
-                  <Product_client_indiLayout />
-                </Col>
-                <Col>
-                  <Product_client_indiLayout />
-                </Col>
-                <Col>
-                  <Product_client_indiLayout />
-                </Col>
-                <Col>
-                  <Product_client_indiLayout />
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <Product_client_indiLayout />
-                </Col>
-                <Col>
-                  <Product_client_indiLayout />
-                </Col>
-                <Col>
-                  <Product_client_indiLayout />
-                </Col>
-                <Col>
-                  <Product_client_indiLayout />
-                </Col>
-                <Col>
-                  <Product_client_indiLayout />
-                </Col>
+                {pd_Datas.map((el, index) => {
+                  if (index < 5 && index >= 0) {
+                    console.log(el.img[0]);
+                    return (
+                      <Col key={el._id}>
+                        <Product_client_indiLayout imgFileName={el.img[0]} />
+                      </Col>
+                    );
+                  }
+                })}
               </Row>
             </Container>
           </SwiperSlide>
+
           <SwiperSlide className="swiper_slide">Slide 2</SwiperSlide>
           <SwiperSlide className="swiper_slide">Slide 3</SwiperSlide>
           <SwiperSlide className="swiper_slide">Slide 4</SwiperSlide>
