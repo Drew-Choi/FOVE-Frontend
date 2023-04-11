@@ -9,7 +9,7 @@ export default function Privacy_client() {
       <div className="titleArea">
         <h2 className="subtitle">개인정보취급방침</h2>
       </div>
-      <div className="agreement">
+      <div className="privacy">
         <span>
           (주)포브는 (이하 “회사”는) 고객님의 개인정보를 중요시하며, “개인정보
           보호법” 등 관련 법령을 준수하고 있습니다.
@@ -341,11 +341,11 @@ export default function Privacy_client() {
           (spo.go.kr / 지역번호+1301)
           <br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;경찰청 사이버안전국
           (cyberbureau.police.go.kr / 국번없이 182)
+          <br />
+          <br />
+          <br />
+          <br />
         </span>
-        <br />
-        <br />
-        <br />
-        <br />
       </div>
     </>
   );

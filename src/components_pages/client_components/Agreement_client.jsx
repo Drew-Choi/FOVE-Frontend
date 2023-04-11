@@ -768,10 +768,13 @@ export default function Agreement_client() {
         <span>- 개인정보제공처 : 주식회사 카카오 </span>
         <br />
         <br />
-        <span>- 위탁 업무 내용 : 카카오톡 알림톡(정보성 메시지) 발송 업무</span>
-        <br />
-        <br />
-        <br />
+        <span>
+          - 위탁 업무 내용 : 카카오톡 알림톡(정보성 메시지) 발송 업무
+          <br />
+          <br />
+          <br />
+          <br />
+        </span>
       </div>
     </>
   );

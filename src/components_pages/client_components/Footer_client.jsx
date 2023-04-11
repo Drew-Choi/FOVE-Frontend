@@ -15,7 +15,7 @@ export default function Footer_client() {
           <span className="privacy" onClick={() => navigate('/privacy')}>
             Privacy
           </span>
-          <span className="guide" onClick={() => navigate('#')}>
+          <span className="guide" onClick={() => navigate('/guide')}>
             Guide
           </span>
           <img src="/kakao.jpg" onClick={() => navigate('#')}></img>
