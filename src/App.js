@@ -9,7 +9,6 @@ import Client_main from './components_pages/client_components/Client_main';
 import AboutUs_client from './components_pages/client_components/AboutUs_client';
 import Store_client from './components_pages/client_components/Store_client';
 import Guide_client from './components_pages/client_components/Guide_client';
-import DropdownMenu_client from './components_pages/client_components/DropdownMenu_client';
 
 function App() {
   return (
@@ -19,7 +18,6 @@ function App() {
         <Route path="/" element={<Client_main />}>
           <Route path="/aboutus" element={<AboutUs_client />} />
           <Route path="/store" element={<Store_client />} />
-          <Route path="/dropdown" element={<DropdownMenu_client />} />
           <Route path="agreement" element={<Agreement_client />} />
           <Route path="privacy" element={<Privacy_client />} />
           <Route path="guide" element={<Guide_client />} />
