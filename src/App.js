@@ -12,6 +12,8 @@ import Guide_client from './components_pages/client_components/Guide_client';
 import Detail_client from './components_pages/client_components/Detail_client';
 import Intro_movie_client from './components_pages/client_components/Intro_movie_clinet';
 import Register_client from './components_pages/client_components/Register_client';
+import Mypage_client from './components_pages/client_components/Mypage_client';
+
 import { useSelector } from 'react-redux';
 
 function App() {
@@ -25,10 +27,11 @@ function App() {
           <Route path="" element={<Intro_movie_client />} />
           <Route path="/aboutus" element={<AboutUs_client />} />
           <Route path="/store" element={<Store_client />} />
-          <Route path="/store/detail/:id" element={<Detail_client />} />
-          <Route path="agreement" element={<Agreement_client />} />
-          <Route path="privacy" element={<Privacy_client />} />
-          <Route path="guide" element={<Guide_client />} />
+          <Route path="/store/detail/:id" element={<DetailProduct_client />} />
+          <Route path="/mypage" element={<Mypage_client />} />
+          <Route path="/agreement" element={<Agreement_client />} />
+          <Route path="/privacy" element={<Privacy_client />} />
+          <Route path="/guide" element={<Guide_client />} />
 
           {/* 자동 로그인 되는 버전 - 수정 예정 */}
           <Route
