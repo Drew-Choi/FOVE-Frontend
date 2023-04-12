@@ -12,13 +12,14 @@ const Detail_Order = styled.div`
   border: 1px solid black;
   width: 300px;
   height: 550px;
+  z-index: 3;
 `;
 
 const Title = styled.p`
   position: relative;
   top: 50px;
   text-align: center;
-  font-size: 20px;
+  font-size: 25px;
   font-weight: 700;
   letter-spacing: 1px;
 `;
@@ -127,38 +128,86 @@ const CartIcon = styled.span`
   left: 3px;
 `;
 
+const CountContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+`;
+
+const Plus = styled.span`
+  font-size: 20px;
+  padding-right: 15px;
+  cursor: pointer;
+  &:active {
+    color: #b4b4b4;
+  }
+`;
+
+const Miners = styled.span`
+  font-size: 22px;
+  font-weight: 500;
+  transform: translateY(-2px);
+  padding-left: 15px;
+  cursor: pointer;
+  &:active {
+    color: #b4b4b4;
+  }
+`;
+
+const CountNumber = styled.span`
+  font-size: 20px;
+`;
+
+const SumPrice = styled.p`
+  position: absolute;
+  font-size: 25px;
+  right: 50%;
+  transform: translateX(50%);
+  bottom: -40px;
+  letter-spacing: 3px;
+`;
+
+const DownInfoContain = styled.div`
+  transform: translateY(-25px);
+`;
+
 export default function Detail_OrderMenu_client({
   productName,
   size,
   price,
   detail,
-  data,
+  datas,
 }) {
-  const { id } = useParams();
   const addToCart = async () => {
     try {
       const reqData = await axios.post(
-        `http://localhost:4000/store/productId/6434f6e0354e918b1d7453f4`,
+        `http://localhost:4000/store/productId/${datas._id}`,
         {
-          productData: data.productData,
-          img: data.img[0],
-          price: data.price,
-          size: data.size,
-          color: data.color,
-          quantity: 4,
-          unitSumPrice: data.price * 4,
-          _id: id,
+          productData: datas.productData,
+          img: datas.img[0],
+          price: datas.price,
+          size: datas.size,
+          color: datas.color,
+          quantity: count,
+          unitSumPrice: datas.price * count,
+          _id: datas._id,
         },
       );
+      console.log('성공');
     } catch (err) {
       alert(err.response.data);
     }
   };
 
+  const [count, setCount] = useState(1);
+
+  const country = navigator.language;
+  const frontPriceComma = (price) => price.toLocaleString(country);
+
   return (
     <Detail_Order>
       <Title>{productName}</Title>
-      <Price>₩ {price}</Price>
       <InfoContain>
         <SizeBTN>OS</SizeBTN>
         <SizeBTN>S</SizeBTN>
@@ -166,12 +215,26 @@ export default function Detail_OrderMenu_client({
         <SizeBTN>L</SizeBTN>
         <SizeFitCheck>Size Fit*</SizeFitCheck>
         <DetailDesc>{detail}</DetailDesc>
-        <CartIcon className="material-symbols-rounded">
-          add_shopping_cart
-        </CartIcon>
-        <AddCart onClick={addToCart}>Add Cart</AddCart>
-        <br></br>
-        <BuyCart>buy</BuyCart>
+        <DownInfoContain>
+          <CountContainer>
+            <Plus onClick={() => setCount((cur) => cur + 1)}> + </Plus>
+            <CountNumber>{count}</CountNumber>
+            <Miners
+              onClick={() =>
+                count <= 1 ? setCount((cur) => 1) : setCount((cur) => cur - 1)
+              }
+            >
+              -
+            </Miners>
+          </CountContainer>
+          <CartIcon className="material-symbols-rounded">
+            add_shopping_cart
+          </CartIcon>
+          <AddCart onClick={addToCart}>Add Cart</AddCart>
+          <br></br>
+          <BuyCart>buy</BuyCart>
+          <SumPrice>₩{frontPriceComma(count * price)}</SumPrice>
+        </DownInfoContain>
       </InfoContain>
     </Detail_Order>
   );
