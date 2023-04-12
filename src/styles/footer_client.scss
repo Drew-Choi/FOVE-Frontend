@@ -43,6 +43,7 @@ footer.footer_client {
 
   #foot_info {
     span{
+
     cursor: pointer;}
   }
 
@@ -57,23 +58,16 @@ footer.footer_client {
   // FOOTER RIGHT
   #foot_li2 {
     display: flex;
-    // justify-content: space-between;
     list-style: none;
     list-style-type: none;
-    width: 300px;
     flex-direction: column;
     align-items: flex-end;
     line-height: 0;
-    // margin: 1.2em 2em;
-    padding: 27px;
+    padding: 30px;
+    margin-left: 830px;
+
 
     p {
       font-size: 69%;
-    }
-
-    img {
-      width: 1.3em;
-      display: flex;
-      gap: 10px;
     }
   }
