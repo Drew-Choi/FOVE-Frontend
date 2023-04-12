@@ -7,11 +7,13 @@ const ImageContainer = styled.div`
   display: inline-block;
   height: 540px;
   width: 400px;
+  z-index: 1;
 `;
 
 const ImageLayout = styled.img`
   display: inline-block;
   width: 400px;
+  z-index: 1;
 `;
 
 export default function Detail_Image_Layout_client({ imgFileData }) {

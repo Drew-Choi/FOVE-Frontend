@@ -38,26 +38,55 @@ const Sub_IMG = styled.div`
   }
 `;
 
-export default function Detail_SubImgae_client({ data }) {
-  const [selectImgFileName, setSelectImgFileName] = useState(data[0].img[0]);
+const MainIMG_Contain = styled.div`
+  position: absolute;
+  right: 50%;
+  transform: translateX(50%);
+`;
+
+const FirstDot = styled.div`
+  position: absolute;
+  bottom: 90px;
+  left: 0px;
+  width: 50px;
+  height: 2px;
+  background-color: black;
+`;
+
+const SecondDot = styled.div`
+  position: absolute;
+  bottom: 17px;
+  left: px;
+  width: 50px;
+  height: 2px;
+  background-color: black;
+`;
+
+export default function Detail_SubImgae_client({ datas }) {
+  const [selectImgFileName, setSelectImgFileName] = useState(datas[0].img[0]);
+  const [selectDot, setSelectDot] = useState(false);
 
   return (
     <>
       <Detail_Sub_Image_Contain>
         <Detail_Sub_Image_PositionCenter>
-          {data[0].img.map((el, index) => (
+          {datas[0].img.map((el, index) => (
             <Sub_IMG
-              onClick={() => setSelectImgFileName((cur) => el)}
+              onClick={() => {
+                setSelectImgFileName((cur) => el);
+                setSelectDot(el);
+              }}
               key={index}
               imgFileName={el}
             ></Sub_IMG>
           ))}
+          {selectDot === datas[0].img[0] ? <FirstDot /> : <SecondDot />}
         </Detail_Sub_Image_PositionCenter>
       </Detail_Sub_Image_Contain>
 
-      <div className="image_area">
+      <MainIMG_Contain className="image_area">
         <Detail_Image_Layout_client imgFileData={selectImgFileName} />
-      </div>
+      </MainIMG_Contain>
     </>
   );
 }
