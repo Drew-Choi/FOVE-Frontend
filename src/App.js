@@ -9,7 +9,7 @@ import Client_main from './components_pages/client_components/Client_main';
 import AboutUs_client from './components_pages/client_components/AboutUs_client';
 import Store_client from './components_pages/client_components/Store_client';
 import Guide_client from './components_pages/client_components/Guide_client';
-import DetailProduct_client from './components_pages/client_components/DetailProduct_client';
+import Detail_client from './components_pages/client_components/Detail_client';
 import Intro_movie_client from './components_pages/client_components/Intro_movie_clinet';
 import Register_client from './components_pages/client_components/Register_client';
 import { useSelector } from 'react-redux';
@@ -25,7 +25,7 @@ function App() {
           <Route path="" element={<Intro_movie_client />} />
           <Route path="/aboutus" element={<AboutUs_client />} />
           <Route path="/store" element={<Store_client />} />
-          <Route path="/store/detail/:id" element={<DetailProduct_client />} />
+          <Route path="/store/detail/:id" element={<Detail_client />} />
           <Route path="agreement" element={<Agreement_client />} />
           <Route path="privacy" element={<Privacy_client />} />
           <Route path="guide" element={<Guide_client />} />

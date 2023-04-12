@@ -1,0 +1,38 @@
+import styled from 'styled-components';
+
+const ImageContainer = styled.div`
+  position: relative;
+  top: 40px;
+  background-color: white;
+  display: inline-block;
+  height: 540px;
+  width: 400px;
+`;
+
+const ImageLayout = styled.img`
+  display: inline-block;
+  width: 400px;
+`;
+
+export default function Detail_Image_Layout_client({
+  imgFileName,
+  onMouseEnterEvent,
+  onMouseLeaveEvent,
+  onClickEvent,
+}) {
+  return (
+    <>
+      <ImageContainer
+        onMouseEnter={onMouseEnterEvent}
+        onMouseLeave={onMouseLeaveEvent}
+        onClick={onClickEvent}
+      >
+        {/* 위에서 선별된 이미지를 실제로 쏴준다. */}
+        <ImageLayout
+          src={`http://localhost:4000/uploads/${imgFileName[0].img[0]}`}
+          alt="main_preview"
+        />
+      </ImageContainer>
+    </>
+  );
+}
