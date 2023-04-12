@@ -12,15 +12,21 @@ export default function Mypage_client() {
           <div className="titleArea">
             <h2 className="subtitle">ACCOUNT</h2>
           </div>
-          {/* STANDAR 등급 두번째 박스 */}
-          <div className="inforamtion">
-            <p className="thumbnail"></p>
+          {/* 회원 등급 박스 */}
+          <div className="information">
+            <p className="thumbnail">
+              <img src="/images/standard.jpg"></img>
+            </p>
             <div className="description">
               <span>
                 저희 쇼핑몰을 이용해주셔서 감사합니다.
                 <br />
-                <span className="name">김영호</span> 님은{' '}
-                <img src="#" alt="grade"></img> 회원이십니다.
+                <span className="name">김영호</span> 님은
+                <img
+                  className="namegrade"
+                  src="/images/standard.jpg"
+                ></img>{' '}
+                회원이십니다.
                 <br />
                 <span className="price"> KRW 10,000 이상</span> 구매시
                 <span className="percent">5%</span>을 추가할인 받으실 수
@@ -34,74 +40,80 @@ export default function Mypage_client() {
           </div>
           {/* 나의 주문처리 현황 박스 */}
           <div className="orderstate">
-            <div className="title">
-              <h3>
-                나의 주문처리 현황 <span>(최근 3개월 기준)</span>
-              </h3>
-            </div>
-            <div className="state">
-              <ul className="order">
-                {/* order 리스트 4개 */}
-                <li>
-                  <a href="#">
-                    <strong>입금전</strong>
-                    <span className="count">
-                      <span id="count">0</span>
-                    </span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <strong>입금전</strong>
-                    <span className="count">
-                      <span id="count">0</span>
-                    </span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <strong>입금전</strong>
-                    <span className="count">
-                      <span id="count">0</span>
-                    </span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <strong>입금전</strong>
-                    <span className="count">
-                      <span id="count">0</span>
-                    </span>
-                  </a>
-                </li>
-              </ul>
-              {/* cs 리스트 3개 */}
-              <ul className="cs">
-                <li>
-                  <a href="#">
-                    <strong>취소 : </strong>
-                    <span className="count">
-                      <span id="count">0</span>
-                    </span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <strong>취소 : </strong>
-                    <span className="count">
-                      <span id="count">0</span>
-                    </span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <strong>취소 : </strong>
-                    <span className="count">
-                      <span id="count">0</span>
-                    </span>
-                  </a>
-                </li>
-              </ul>
+            <div className="orderstate_box">
+              <div className="title">
+                <h3>
+                  나의 주문처리 현황 <span>(최근 3개월 기준)</span>
+                </h3>
+              </div>
+              <div className="state">
+                <div className="orderbox">
+                  <ul className="order">
+                    {/* order 리스트 4개 */}
+                    <li>
+                      <a href="#">
+                        <strong>입금전</strong>
+                        <span className="count">
+                          <span id="count">0</span>
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <strong>배송준비중</strong>
+                        <span className="count">
+                          <span id="count">0</span>
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <strong>배송중</strong>
+                        <span className="count">
+                          <span id="count">0</span>
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <strong>배송완료</strong>
+                        <span className="count">
+                          <span id="count">0</span>
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div className="csbox">
+                  <ul className="cs">
+                    {/* cs 리스트 3개 */}
+                    <li>
+                      <a href="#">
+                        <strong>취소 : </strong>
+                        <span className="count">
+                          <span id="count">0</span>
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <strong>교환 : </strong>
+                        <span className="count">
+                          <span id="count">0</span>
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <strong>반품 : </strong>
+                        <span className="count">
+                          <span id="count">0</span>
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         </div>

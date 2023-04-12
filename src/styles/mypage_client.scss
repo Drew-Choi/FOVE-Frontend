@@ -5,9 +5,75 @@
 
   h2 {
     font-weight: bold;
+    font-size: 14px;
   }
 }
 
-.subtitle {
-  font-size: 14px;
+.information {
+    position: relative;
+    display: flex;
+    // width: 500px;
+    // height: auto;
+    table-layout:fixed;
+    padding: 40px 0;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid black;
+    justify-content: center;
+    white-space: nowrap;
+    margin-top: 75px;
+
+    .thumbnail {
+      margin: 30px 20px;
+    }
+
+    .namegrade {
+      width: 60px;
+      height: auto;
+      }
+}
+
+.orderstate_box {
+  display: table;
+  table-layout:fixed;
+  padding: 20px;
+  width: 100%;
+  height: 300px;
+  border: 1px solid black; 
+  display: flex; 
+  flex-direction: column; 
+  
+  .orderstate_box > div {
+    flex: 1; 
+    border-bottom: 1px solid black; 
+}
+
+  .order {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+    ul {
+    text-align: center;
+
+    }
+    #count {
+      display: flex;
+      justify-content: flex-start;
+      
+    }
+  }
+
+  .cs {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .cs > a {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+
 }
