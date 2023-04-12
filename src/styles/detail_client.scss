@@ -1,0 +1,12 @@
+.pd_detail {
+position: relative;
+top: 70px;
+width: 100vw;
+height: 650px;
+
+  .image_area {
+    position: absolute;
+    right: 50%;
+    transform: translateX(50%);
+  }
+}
