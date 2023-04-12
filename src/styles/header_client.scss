@@ -40,6 +40,13 @@ header.header_client {
       cursor: pointer;
       list-style: none;
       list-style-type: none;
+      transition: color 0.3s ease-in-out;
+
+      &:hover {
+        color: darken(#000000, 10%);
+        font-weight: bold;
+      }
+    
     }
   }
 
@@ -49,11 +56,19 @@ header.header_client {
     display: flex;
     gap: 30px;
     margin-top: 2%;
+    list-style: none;
+    list-style-type: none;
 
-    #cate_li2 {
-      cursor: pointer;
-      list-style: none;
-      list-style-type: none;
+    li {
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+
+      &:hover {
+        color: darken(#000000, 10%);
+        font-weight: bold;
+      }
+    
+
     }
   }
 }

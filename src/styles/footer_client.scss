@@ -34,10 +34,17 @@ footer.footer_client {
   span {
     font-size: 68%;
     padding: 4px;
+    transition: color 0.3s ease-in-out;
+
+    &:hover {
+      color: darken(#000000, 10%);
+      font-weight: bold;
+    }
   }
 
   #foot_info {
-    cursor: pointer;
+    span{
+    cursor: pointer;}
   }
 
   img {
@@ -70,5 +77,4 @@ footer.footer_client {
       display: flex;
       gap: 10px;
     }
-    
   }
