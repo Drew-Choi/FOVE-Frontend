@@ -88,26 +88,26 @@ export default function Mypage_client() {
                     {/* cs 리스트 3개 */}
                     <li>
                       <a href="#">
-                        <strong>취소 : </strong>
-                        <span className="count">
-                          <span id="count">0</span>
-                        </span>
+                        <span>취소 : </span>
+                        <strong className="count">
+                          <strong id="count">0</strong>
+                        </strong>
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <strong>교환 : </strong>
-                        <span className="count">
-                          <span id="count">0</span>
-                        </span>
+                        <span>교환 : </span>
+                        <strong className="count">
+                          <strong id="count">0</strong>
+                        </strong>
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <strong>반품 : </strong>
-                        <span className="count">
-                          <span id="count">0</span>
-                        </span>
+                        <span>반품 : </span>
+                        <strong className="count">
+                          <strong id="count">0</strong>
+                        </strong>
                       </a>
                     </li>
                   </ul>

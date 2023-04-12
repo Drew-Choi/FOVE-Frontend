@@ -61,9 +61,8 @@ span {
 .orderstate_box {
   display: table;
   table-layout:fixed;
-  padding: 20px;
+  padding: 20px 20px 0px 20px;
   width: 100%;
-  height: 150px;
   border: 1px solid black; 
   flex-direction: column; 
   margin-bottom: 30px;
@@ -81,7 +80,7 @@ span {
 
     .title_order {
       border-bottom: 1px solid black;
-      margin-bottom: 20px;
+      margin-bottom: 3px;
     }
 
   }
@@ -92,10 +91,10 @@ span {
     flex-direction: row;
     justify-content: space-between;
     border-bottom: 1px solid black;
-    padding-bottom: 17px;
+    padding: 10px;
 
     li {
-      font-size: 14px;
+      font-size: 13px;
       margin: auto;
       list-style: none;
       list-style-type: none;
@@ -104,6 +103,12 @@ span {
         margin: auto;
         text-decoration: none;
         color: black;
+
+        #count {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
       }
     }
     
@@ -113,20 +118,26 @@ span {
     }
   }
 
+  .csbox {
+
   .cs {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
-
+    flex-direction: row;
+    padding: 10px;
+    
     li {
       list-style: none;
       list-style-type: none;
-      font-size: 14px;
+      font-size: 13px;
+      margin: -5px 0 -5px 0;
 
       a {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        text-decoration: none;
+        color: black;
 
         #count {
           margin-left: 150px;
@@ -134,6 +145,7 @@ span {
       }
     }
   }
+}
 
   .fourbox {
     display: flex;
