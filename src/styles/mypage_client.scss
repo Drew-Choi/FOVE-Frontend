@@ -1,7 +1,7 @@
 .titleArea {
   width: 100%;
   text-align: center;
-  margin-bottom: 30px;
+  margin: 
 
   h2 {
     font-weight: bold;
@@ -21,7 +21,7 @@
 
 .information {
     display: flex;
-    padding: 20px 0;
+    padding: 6px 0;
     width: 100%;
     border: 1px solid rgb(36, 35, 35);
     margin-bottom: 30px;
@@ -66,6 +66,7 @@ span {
   height: 150px;
   border: 1px solid black; 
   flex-direction: column; 
+  margin-bottom: 30px;
 
     h3 {
       font-size: 14px;
@@ -80,6 +81,7 @@ span {
 
     .title_order {
       border-bottom: 1px solid black;
+      margin-bottom: 20px;
     }
 
   }
@@ -89,11 +91,25 @@ span {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    border-bottom: 1px solid black;
+    padding-bottom: 17px;
+
+    li {
+      font-size: 14px;
+      margin: auto;
+      list-style: none;
+      list-style-type: none;
+
+      a {
+        margin: auto;
+        text-decoration: none;
+        color: black;
+      }
+    }
     
     #count {
       display: flex;
-      justify-content: flex-start;
-      
+      justify-content: flex-start; 
     }
   }
 
@@ -102,9 +118,52 @@ span {
     flex-direction: row;
     justify-content: space-between;
 
-    .cs > a {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
+    li {
+      list-style: none;
+      list-style-type: none;
+      font-size: 14px;
+
+      a {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        #count {
+          margin-left: 150px;
+        }
+      }
+    }
+  }
+
+  .fourbox {
+    display: flex;
+    justify-content: space-between;
+    border: 2px;
+    padding-bottom: 150px;
+
+    .shopmain_order {
+      width: 530px;
+      height: 100px;
+      background-color: red;
+      margin-bottom: 30px;
+    }
+
+    .shopmain_profile {
+      width: 530px;
+      height: 100px;
+      background-color: blue;
+    }
+
+    .shopmain_address {
+      width: 530px;
+      height: 100px;
+      background-color: green;
+      margin-bottom: 30px;
+    }
+
+    .shopmain_mypick {
+      width: 530px;
+      height: 100px;
+      background-color: orange;
     }
   }
