@@ -1,7 +1,8 @@
 import axios from 'axios';
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { add } from '../../store/modules/cart';
 
 const Detail_Order = styled.div`
   position: absolute;
@@ -24,15 +25,6 @@ const Title = styled.p`
   letter-spacing: 1px;
 `;
 
-const Price = styled.p`
-  position: relative;
-  top: 40px;
-  text-align: center;
-  font-size: 15px;
-  font-weight: 500;
-  letter-spacing: 1px;
-`;
-
 const InfoContain = styled.div`
   position: absolute;
   top: 120px;
@@ -41,6 +33,8 @@ const InfoContain = styled.div`
 
 const SizeBTN = styled.button`
   all: unset;
+  position: relative;
+  bottom: 10px;
   background-color: #000000;
   color: white;
   border: 2px solid black;
@@ -129,6 +123,8 @@ const CartIcon = styled.span`
 `;
 
 const CountContainer = styled.div`
+  position: relative;
+  right: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -160,12 +156,11 @@ const CountNumber = styled.span`
 `;
 
 const SumPrice = styled.p`
-  position: absolute;
+  position: relative;
   font-size: 25px;
-  right: 50%;
-  transform: translateX(50%);
-  bottom: -40px;
   letter-spacing: 3px;
+  bottom: 30px;
+  left: 25px;
 `;
 
 const DownInfoContain = styled.div`
@@ -179,6 +174,9 @@ export default function Detail_OrderMenu_client({
   detail,
   datas,
 }) {
+  const dispatch = useDispatch();
+
+  //카트에 추가하는 Post 요청
   const addToCart = async () => {
     try {
       const reqData = await axios.post(
@@ -194,9 +192,31 @@ export default function Detail_OrderMenu_client({
           _id: datas._id,
         },
       );
-      console.log('성공');
+      if (reqData.status === 200) {
+        updateCart();
+        console.log('성공');
+      } else {
+        console.error(reqData.status);
+        console.log(reqData.data.message);
+      }
     } catch (err) {
-      alert(err.response.data);
+      console.error(err);
+    }
+  };
+
+  //카트 업데이트용 겟요청. => 이 데이터를 리덕스 리듀서로 보내서 데이터 업데이트 해줌
+  const updateCart = async () => {
+    try {
+      const reqUpdat = await axios.get('http://localhost:4000');
+      if (reqUpdat.status === 200) {
+        dispatch(add(reqUpdat.data));
+        console.log('성공');
+      } else {
+        console.error(reqUpdat.status);
+        console.log(reqUpdat.data.message);
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
 
@@ -218,6 +238,7 @@ export default function Detail_OrderMenu_client({
         <DownInfoContain>
           <CountContainer>
             <Plus onClick={() => setCount((cur) => cur + 1)}> + </Plus>
+
             <CountNumber>{count}</CountNumber>
             <Miners
               onClick={() =>
@@ -227,14 +248,16 @@ export default function Detail_OrderMenu_client({
               -
             </Miners>
           </CountContainer>
+
           <CartIcon className="material-symbols-rounded">
             add_shopping_cart
           </CartIcon>
+
           <AddCart onClick={addToCart}>Add Cart</AddCart>
           <br></br>
           <BuyCart>buy</BuyCart>
-          <SumPrice>₩{frontPriceComma(count * price)}</SumPrice>
         </DownInfoContain>
+        <SumPrice>₩ {frontPriceComma(count * price)}</SumPrice>
       </InfoContain>
     </Detail_Order>
   );

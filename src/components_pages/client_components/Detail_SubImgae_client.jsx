@@ -64,7 +64,7 @@ const SecondDot = styled.div`
 
 export default function Detail_SubImgae_client({ datas }) {
   const [selectImgFileName, setSelectImgFileName] = useState(datas[0].img[0]);
-  const [selectDot, setSelectDot] = useState(false);
+  const [selectDot, setSelectDot] = useState(datas[0].img[0]);
 
   return (
     <>

@@ -14,6 +14,7 @@ const ImageLayout = styled.img`
   display: inline-block;
   width: 400px;
   z-index: 1;
+  transition: 0.3s ease;
 `;
 
 export default function Detail_Image_Layout_client({ imgFileData }) {

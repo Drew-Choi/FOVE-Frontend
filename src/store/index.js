@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import user from './modules/user';
-import cartdata from './modules/cartdata';
+import cart from './modules/cart';
 
 export default combineReducers({
-  cartdata,
+  cart,
   user,
 });
