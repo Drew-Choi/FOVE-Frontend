@@ -27,6 +27,9 @@ export default function Detail_client() {
     }
   };
 
+  const country = navigator.language;
+  const frontPriceComma = (price) => price.toLocaleString(country);
+
   return (
     <>
       <SubNav_client
@@ -42,11 +45,13 @@ export default function Detail_client() {
       그래서 아래와 같이 데이터가 들어오면 컴포넌트를 띄울 수 있게 순서적으로 처리해줘야함 */}
         {productData && (
           <>
-            <Detail_OrderMenu_client />
-            <Detail_SubImgae_client imgFileName={productData} />
-            <div className="image_area">
-              <Detail_Image_Layout_client imgFileName={productData} />
-            </div>
+            <Detail_OrderMenu_client
+              productName={productData[0].productName}
+              detail={productData[0].detail}
+              price={frontPriceComma(productData[0].price)}
+              data={productData[0]}
+            />
+            <Detail_SubImgae_client data={productData} />
           </>
         )}
       </section>

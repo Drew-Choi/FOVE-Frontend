@@ -27,7 +27,7 @@ function App() {
           <Route path="" element={<Intro_movie_client />} />
           <Route path="/aboutus" element={<AboutUs_client />} />
           <Route path="/store" element={<Store_client />} />
-          <Route path="/store/detail/:id" element={<DetailProduct_client />} />
+          <Route path="/store/detail/:id" element={<Detail_client />} />
           <Route path="/mypage" element={<Mypage_client />} />
           <Route path="/agreement" element={<Agreement_client />} />
           <Route path="/privacy" element={<Privacy_client />} />

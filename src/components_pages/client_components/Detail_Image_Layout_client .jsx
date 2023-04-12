@@ -14,22 +14,13 @@ const ImageLayout = styled.img`
   width: 400px;
 `;
 
-export default function Detail_Image_Layout_client({
-  imgFileName,
-  onMouseEnterEvent,
-  onMouseLeaveEvent,
-  onClickEvent,
-}) {
+export default function Detail_Image_Layout_client({ imgFileData }) {
   return (
     <>
-      <ImageContainer
-        onMouseEnter={onMouseEnterEvent}
-        onMouseLeave={onMouseLeaveEvent}
-        onClick={onClickEvent}
-      >
+      <ImageContainer>
         {/* 위에서 선별된 이미지를 실제로 쏴준다. */}
         <ImageLayout
-          src={`http://localhost:4000/uploads/${imgFileName[0].img[0]}`}
+          src={`http://localhost:4000/uploads/${imgFileData}`}
           alt="main_preview"
         />
       </ImageContainer>

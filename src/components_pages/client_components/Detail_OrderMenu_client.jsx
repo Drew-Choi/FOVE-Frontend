@@ -1,15 +1,17 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Detail_Order = styled.div`
   position: absolute;
-  top: 70px;
+  top: 40px;
   right: 150px;
   /* box-shadow: 0.5px 0.5px 2px 2px rgba(58, 58, 58, 0.2); */
   border-radius: 10px;
   border: 1px solid black;
   width: 300px;
-  height: 500px;
+  height: 550px;
 `;
 
 const Title = styled.p`
@@ -18,6 +20,15 @@ const Title = styled.p`
   text-align: center;
   font-size: 20px;
   font-weight: 700;
+  letter-spacing: 1px;
+`;
+
+const Price = styled.p`
+  position: relative;
+  top: 40px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 500;
   letter-spacing: 1px;
 `;
 
@@ -63,7 +74,7 @@ const SizeFitCheck = styled.p`
   }
 `;
 
-const DetailDesc = styled.p`
+const DetailDesc = styled.div`
   margin-bottom: 70px;
   font-size: 15px;
   font-weight: 500p;
@@ -116,21 +127,49 @@ const CartIcon = styled.span`
   left: 3px;
 `;
 
-export default function Detail_OrderMenu_client({ productName, size, detail }) {
+export default function Detail_OrderMenu_client({
+  productName,
+  size,
+  price,
+  detail,
+  data,
+}) {
+  const { id } = useParams();
+  const addToCart = async () => {
+    try {
+      const reqData = await axios.post(
+        `http://localhost:4000/store/productId/6434f6e0354e918b1d7453f4`,
+        {
+          productData: data.productData,
+          img: data.img[0],
+          price: data.price,
+          size: data.size,
+          color: data.color,
+          quantity: 4,
+          unitSumPrice: data.price * 4,
+          _id: id,
+        },
+      );
+    } catch (err) {
+      alert(err.response.data);
+    }
+  };
+
   return (
     <Detail_Order>
-      <Title>타이틀1111111111</Title>
+      <Title>{productName}</Title>
+      <Price>₩ {price}</Price>
       <InfoContain>
         <SizeBTN>OS</SizeBTN>
         <SizeBTN>S</SizeBTN>
         <SizeBTN>M</SizeBTN>
         <SizeBTN>L</SizeBTN>
         <SizeFitCheck>Size Fit*</SizeFitCheck>
-        <DetailDesc>상세설명</DetailDesc>
+        <DetailDesc>{detail}</DetailDesc>
         <CartIcon className="material-symbols-rounded">
           add_shopping_cart
         </CartIcon>
-        <AddCart>Add Cart</AddCart>
+        <AddCart onClick={addToCart}>Add Cart</AddCart>
         <br></br>
         <BuyCart>buy</BuyCart>
       </InfoContain>

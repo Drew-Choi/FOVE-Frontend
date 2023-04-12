@@ -1,5 +1,6 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
+import Detail_Image_Layout_client from './Detail_Image_Layout_client ';
 
 const Detail_Sub_Image_Contain = styled.div`
   position: absolute;
@@ -37,14 +38,26 @@ const Sub_IMG = styled.div`
   }
 `;
 
-export default function Detail_SubImgae_client({ imgFileName }) {
+export default function Detail_SubImgae_client({ data }) {
+  const [selectImgFileName, setSelectImgFileName] = useState(data[0].img[0]);
+
   return (
-    <Detail_Sub_Image_Contain>
-      <Detail_Sub_Image_PositionCenter>
-        {imgFileName[0].img.map((el, index) => (
-          <Sub_IMG key={index} imgFileName={el}></Sub_IMG>
-        ))}
-      </Detail_Sub_Image_PositionCenter>
-    </Detail_Sub_Image_Contain>
+    <>
+      <Detail_Sub_Image_Contain>
+        <Detail_Sub_Image_PositionCenter>
+          {data[0].img.map((el, index) => (
+            <Sub_IMG
+              onClick={() => setSelectImgFileName((cur) => el)}
+              key={index}
+              imgFileName={el}
+            ></Sub_IMG>
+          ))}
+        </Detail_Sub_Image_PositionCenter>
+      </Detail_Sub_Image_Contain>
+
+      <div className="image_area">
+        <Detail_Image_Layout_client imgFileData={selectImgFileName} />
+      </div>
+    </>
   );
 }

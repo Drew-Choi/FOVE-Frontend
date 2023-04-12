@@ -19,10 +19,9 @@
 
     .swiper_pagination_container{
     position: absolute;
-    bottom: 25px;
+    bottom: 20px;
     right: 50%;
     transform: translateX(50%);
-    bottom: 10px;
 
     .pagi1.on{
       text-decoration: underline;
@@ -40,7 +39,7 @@
 
   .swiper_navigation_container {
     position: absolute;
-    bottom: 19px;
+    bottom: 28px;
     right: 50%;
     transform: translateX(50%);
     .nav_arrow_pre{
