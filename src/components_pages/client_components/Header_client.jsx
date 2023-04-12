@@ -3,13 +3,13 @@ import '../../styles/header_client.scss';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import cartdatas from '../../store/modules/cartdata';
+import { importdb } from '../../store/modules/cart';
 
 export default function Header_client() {
-  const cartLength = useSelector((state) => state.cartdata.length);
-  const cartProductsData = useSelector((state) => state.cartdata.products);
   const [cartDataOrigin, setCartDataOrigin] = useState(null);
+  //리덕스 디스패치(액션함수 전달용)
   const dispatch = useDispatch();
+  const cartLength = useSelector((state) => state.cart.cartProductsLength);
 
   useEffect(() => {
     cartDataReq();
@@ -17,16 +17,20 @@ export default function Header_client() {
 
   const cartDataReq = async () => {
     try {
-      const cartDateGet = await axios.get('http://localhost:4000');
-      await setCartDataOrigin((cur) => cartDateGet.data);
-      console.log('성공');
-      if (cartDateGet.status === 200) {
-        dispatch(cartdatas(cartDataOrigin));
+      const cartDataGet = await axios.get('http://localhost:4000');
+      if (cartDataGet.status === 200) {
+        await setCartDataOrigin((cur) => cartDataGet.data.length);
+        dispatch(importdb(cartDataGet.data));
+      } else {
+        console.error(cartDataGet.status);
+        console.log(cartDataGet.data.message);
       }
     } catch (err) {
-      alert(err.response.data);
+      console.error(err);
     }
   };
+
+  console.log(cartLength);
 
   const navigate = useNavigate();
   return (
