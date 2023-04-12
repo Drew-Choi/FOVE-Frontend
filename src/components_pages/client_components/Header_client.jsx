@@ -22,9 +22,9 @@ export default function Header_client() {
       </ul>
       <ul id="cate2">
         <li id="cate_li2">
-          <p onClick={() => navigate('/dropdown')}>ACCOUNT</p>
+          <p onClick={() => navigate('#')}>ACCOUNT</p>
         </li>
-        <li id="cate_li2">
+        <li id="cate_li2_shopbag">
           <p onClick={() => navigate('#')}>SHOPPING BAG /0</p>
           {/* 0 이라는 숫자 장바구니에 넣을 때 올라가야 함 */}
         </li>
