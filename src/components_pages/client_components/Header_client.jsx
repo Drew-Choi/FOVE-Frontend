@@ -2,20 +2,31 @@ import React, { useEffect, useState } from 'react';
 import '../../styles/header_client.scss';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import cartdatas from '../../store/modules/cartdata';
 
 export default function Header_client() {
-  const [cartProductsLength, setCartProductsLength] = useState(null);
+  const cartLength = useSelector((state) => state.cartdata.length);
+  const cartProductsData = useSelector((state) => state.cartdata.products);
+  const [cartDataOrigin, setCartDataOrigin] = useState(null);
+  const dispatch = useDispatch();
 
-  useEffect(async () => {
+  useEffect(() => {
+    cartDataReq();
+  }, []);
+
+  const cartDataReq = async () => {
     try {
       const cartDateGet = await axios.get('http://localhost:4000');
-      await setCartProductsLength((cur) => cartDateGet.data.length);
+      await setCartDataOrigin((cur) => cartDateGet.data);
       console.log('성공');
-      console.log(cartDateGet.data.product);
+      if (cartDateGet.status === 200) {
+        dispatch(cartdatas(cartDataOrigin));
+      }
     } catch (err) {
       alert(err.response.data);
     }
-  }, []);
+  };
 
   const navigate = useNavigate();
   return (
@@ -39,9 +50,7 @@ export default function Header_client() {
           <p onClick={() => navigate('#')}>ACCOUNT</p>
         </li>
         <li id="cate_li2_shopbag">
-          <p onClick={() => navigate('#')}>
-            SHOPPING BAG / {cartProductsLength}
-          </p>
+          <p onClick={() => navigate('#')}>SHOPPING BAG / {cartLength}</p>
           {/* 0 이라는 숫자 장바구니에 넣을 때 올라가야 함 */}
         </li>
       </ul>
