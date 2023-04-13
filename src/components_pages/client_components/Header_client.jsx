@@ -13,9 +13,6 @@ export default function Header_client() {
   const cartLength = useSelector((state) =>
     state.cart.cartProductsLength === 0 ? 0 : state.cart.cartProductsLength,
   );
-  const cartProducts = useSelector((state) =>
-    !state.cart.cartProducts ? [] : state.cart.cartProducts,
-  );
 
   useEffect(() => {
     cartDataReq();
@@ -69,11 +66,7 @@ export default function Header_client() {
       </header>
 
       {/* 카트 모달 임 */}
-      <CartModal
-        className={`cart_modal ${offonKey}`}
-        cartProductsData={cartProducts}
-        cartProductsLength={cartLength}
-      />
+      <CartModal className={`cart_modal ${offonKey}`} />
     </>
   );
 }

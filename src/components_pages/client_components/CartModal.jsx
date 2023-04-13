@@ -1,5 +1,8 @@
+import axios from 'axios';
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { reset, update } from '../../store/modules/cart';
 
 const CartModal_Layout = styled.div`
   position: fixed;
@@ -168,11 +171,7 @@ const RemoveIcon = styled.span`
   }
 `;
 
-export default function CartModal({
-  className,
-  cartProductsData,
-  cartProductsLength,
-}) {
+export default function CartModal({ className }) {
   //천단위 콤마
   const country = navigator.language;
   const frontPriceComma = (price) => {
@@ -185,12 +184,34 @@ export default function CartModal({
     }
   };
 
+  const dispatch = useDispatch();
+  const cartProducts = useSelector((state) =>
+    !state.cart.cartProducts ? [] : state.cart.cartProducts,
+  );
+
+  const deletePD = async (identity_id) => {
+    try {
+      const deleteID = await axios.post(
+        `http://localhost:4000/cart/productId/${identity_id}`,
+      );
+      if (deleteID.status === 200) {
+        console.log(deleteID.data.updatedCart);
+        dispatch(update(deleteID.data.updatedCart));
+        console.log('성공');
+      } else {
+        console.log('실패');
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <>
       <CartModal_Layout className={className}>
         <CartTitle>ORDER SUMMERY</CartTitle>
         <CloseIcon className="material-symbols-outlined">close</CloseIcon>
-        {cartProductsData.map((el, index) => (
+        {cartProducts.map((el, index) => (
           <ContentContainer key={index}>
             <Img imgURL={el.img}></Img>
             <Pd_name>{el.productName}</Pd_name>
@@ -205,7 +226,10 @@ export default function CartModal({
               <Pd_count>{el.quantity}</Pd_count>
               <Pd_miners>-</Pd_miners>
             </Pd_quantity_contain>
-            <RemoveIcon className="material-symbols-outlined">
+            <RemoveIcon
+              onClick={() => deletePD(el._id)}
+              className="material-symbols-outlined"
+            >
               remove
             </RemoveIcon>
           </ContentContainer>
