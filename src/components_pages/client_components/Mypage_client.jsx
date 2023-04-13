@@ -120,17 +120,23 @@ export default function Mypage_client() {
             <div className="line_one">
               <div className="shopmain_order">
                 <p>주문조회</p>
+                <span className="material-symbols-outlined">
+                  local_shipping
+                </span>
               </div>
               <div className="shopmain_profile">
                 <p>회원정보</p>
+                <span className="material-symbols-outlined">person</span>
               </div>
             </div>
             <div className="line_two">
               <div className="shopmain_address">
                 <p>배송주소록</p>
+                <span className="material-symbols-outlined">home</span>
               </div>
               <div className="shopmain_mypick">
                 <p>MY STYLING PICK</p>
+                <span className="material-symbols-outlined">favorite</span>
               </div>
             </div>
           </div>

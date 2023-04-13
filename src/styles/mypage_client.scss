@@ -28,7 +28,6 @@
 
     .thumbnail {
       margin: 30px 80px;
-      padding: 0;
 
       .thumbnail > img {
         width: 100px;
@@ -39,10 +38,10 @@
 
 .description {
   margin: auto;
-  padding-right: 350px;
+  padding-right: 390px;
 
 span {
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .namegrade {
@@ -155,27 +154,41 @@ span {
 
     .shopmain_order {
       width: 530px;
-      height: 100px;
-      background-color: red;
+      height: 80px;
+      font-size: 14px;
       margin-bottom: 30px;
+      text-align: center;
+      padding-top: 10px;
+      border: 1px black solid;
     }
 
     .shopmain_profile {
       width: 530px;
-      height: 100px;
-      background-color: blue;
+      height: 80px;
+      font-size: 14px;
+      margin-bottom: 30px;
+      text-align: center;
+      padding-top: 10px;
+      border: 1px black solid;
     }
 
     .shopmain_address {
       width: 530px;
-      height: 100px;
-      background-color: green;
+      height: 80px;
+      font-size: 14px;
       margin-bottom: 30px;
+      text-align: center;
+      padding-top: 10px;
+      border: 1px black solid;
     }
 
     .shopmain_mypick {
       width: 530px;
-      height: 100px;
-      background-color: orange;
+      height: 80px;
+      font-size: 14px;
+      margin-bottom: 30px;
+      text-align: center;
+      padding-top: 10px;
+      border: 1px black solid;
     }
   }
