@@ -31,43 +31,25 @@ export default function Order_client() {
     }
   };
 
-  // const [datas, setDatas] = useState(null);
-
-  // useEffect(() => {
-  //   getSeletOrder();
-  // }, []);
-
-  // const getSeletOrder = async () => {
-  //   const selectPD = await axios.get(
-  //     `http://localhost:4000/store/productId/${id}`,
-  //   );
-  //   if (selectPD.status === 200) {
-  //     await setDatas((cur) => selectPD.data);
-  //     return selectPD.data;
-  //   } else {
-  //     return selectPD.data;
-  //   }
-  // };
-
   return (
     <div className="order_main">
       <p className="order_title">주문서 작성</p>
 
-      {/* {datas && (
-        <>
-          <img
-            className="order_pdIMG"
-            // src={`http://localhost:4000/uploads/${datas.img}`}
-          ></img>
-          <p className="order_product_title">상품이름</p>
-          <p className="order_product_price">가격</p>
-          <p className="order_product_size">사이즈</p>
-          <p className="order_product_color">컬러</p>
-          <p className="order_product_quantity">수량</p>
-          <p className="order_product_unitSumPrice">총 가격</p>
-          <button>결제하기</button>
-        </>
-      )} */}
+      {/* {datas && ( */}
+      <>
+        <img
+          className="order_pdIMG"
+          // src={`http://localhost:4000/uploads/${datas.img}`}
+        ></img>
+        <p className="order_product_title">상품이름</p>
+        <p className="order_product_price">가격</p>
+        <p className="order_product_size">사이즈</p>
+        <p className="order_product_color">컬러</p>
+        <p className="order_product_quantity">수량</p>
+        <p className="order_product_unitSumPrice">총 가격</p>
+        <button>결제하기</button>
+      </>
+      {/* )} */}
       <button onClick={() => orderPOST()}>결제하기</button>
     </div>
   );

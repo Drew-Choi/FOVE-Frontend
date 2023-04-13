@@ -5,21 +5,25 @@ import axios from 'axios';
 import Detail_OrderMenu_client from './Detail_OrderMenu_client';
 import Detail_SubImgae_client from './Detail_SubImgae_client';
 import SubNav_client from './SubNav_client';
+import { useDispatch, useSelector } from 'react-redux';
+import single from '../../store/modules/order';
 
 export default function Detail_client() {
   const { id } = useParams();
   const [productData, setProductData] = useState();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     getSelectProduct();
-  }, []);
+  }, [id]);
 
   const getSelectProduct = async () => {
     const selectData = await axios.get(
       `http://localhost:4000/store/productId/${id}`,
     );
     if (selectData.status === 200) {
-      await setProductData(selectData.data);
+      await setProductData(selectData.data[0]);
+      dispatch(single(productData));
       return selectData.data;
     } else {
       return selectData.data;
