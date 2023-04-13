@@ -6,6 +6,7 @@ import { reset, update } from '../../store/modules/cart';
 import { offon } from '../../store/modules/cartmodal';
 import BTN_black_nomal_comp from '../../styles/BTN_black_nomal_comp';
 import '../../styles/cartModal.scss';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const CartModal_Layout = styled.div`
   position: fixed;
@@ -27,10 +28,19 @@ const CartTitle = styled.span`
   padding: 20px;
 `;
 
+const ExtraTextContainer = styled.div`
+  position: relative;
+  /* background-color: aqua; */
+  display: block;
+  width: 270px;
+  height: 10px;
+`;
+
 const UnitSum = styled.span`
   position: relative;
-  top: 20px;
-  right: 148px;
+  display: inline-block;
+  top: -5px;
+  left: 20px;
   font-size: 11px;
   font-weight: 500;
   margin-right: 5px;
@@ -38,11 +48,28 @@ const UnitSum = styled.span`
 
 const UnitSumNum = styled.span`
   position: relative;
-  top: 20px;
-  right: 148px;
+  top: -5px;
+  left: 20px;
   font-size: 11px;
   font-weight: 600;
   margin-right: 5px;
+`;
+
+const AllRemove = styled.p`
+  position: absolute;
+  display: inline-block;
+  top: 20px;
+  left: 21px;
+  font-size: 10px;
+  font-weight: 500;
+  margin-right: 5px;
+  cursor: pointer;
+  &:hover {
+    color: #ff5858;
+  }
+  &:active {
+    color: #ffe0e0;
+  }
 `;
 
 const CloseIcon = styled.span`
@@ -83,6 +110,7 @@ const Img = styled.div`
 
 const Pd_name = styled.p`
   position: relative;
+  width: 200px;
   left: 100px;
   font-weight: 600;
   font-size: 13px;
@@ -90,6 +118,7 @@ const Pd_name = styled.p`
   margin-bottom: 3px;
 `;
 const Pd_color = styled.p`
+  width: 200px;
   position: relative;
   left: 100px;
   font-weight: 500;
@@ -99,6 +128,7 @@ const Pd_color = styled.p`
 `;
 
 const Pd_size = styled.p`
+  width: 200px;
   position: relative;
   left: 100px;
   font-weight: 500;
@@ -108,6 +138,7 @@ const Pd_size = styled.p`
 `;
 
 const Pd_price = styled.p`
+  width: 200px;
   position: relative;
   left: 100px;
   font-weight: 500;
@@ -186,7 +217,7 @@ const RemoveIcon = styled.span`
   bottom: 105px;
   cursor: pointer;
   &:hover {
-    color: red;
+    color: #ff5858;
   }
   &:active {
     color: #b4b4b4;
@@ -211,6 +242,7 @@ export default function CartModal({ className }) {
     !state.cart.cartProducts ? [] : state.cart.cartProducts,
   );
 
+  //개별 상품 삭제
   const deletePD = async (identity_id) => {
     try {
       const deleteID = await axios.post(
@@ -236,6 +268,24 @@ export default function CartModal({ className }) {
     return sum;
   };
 
+  //전체 삭제(카트 비움)
+  const allRemove = async () => {
+    try {
+      const allRemoveCart = await axios.post(`http://localhost:4000/cleancart`);
+      if (allRemoveCart.status === 200) {
+        // dispatch(update(allRemoveCart.data.updatedCart));
+        console.log('성공');
+        dispatch(update(allRemoveCart.data.updatedCart));
+      } else {
+        console.log('실패');
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const navigate = useNavigate();
+
   return (
     <>
       <CartModal_Layout className={className}>
@@ -247,15 +297,24 @@ export default function CartModal({ className }) {
         >
           close
         </CloseIcon>
-        <UnitSum>Total:&nbsp;&nbsp;&nbsp;₩</UnitSum>
-        <UnitSumNum>{frontPriceComma(unitSum(cartProducts))}</UnitSumNum>
-        <BTN_black_nomal_comp
-          className="cart_btn"
-          fontSize="12px"
-          transFontSize="10px"
-        >
-          Buy
-        </BTN_black_nomal_comp>
+        <ExtraTextContainer>
+          <UnitSum>Total:&nbsp;&nbsp;&nbsp;₩</UnitSum>
+          <UnitSumNum>{frontPriceComma(unitSum(cartProducts))}</UnitSumNum>
+          <UnitSum>/ {cartProducts.length} ea</UnitSum>
+          <AllRemove onClick={allRemove}>All Remove</AllRemove>
+          <BTN_black_nomal_comp
+            className="cart_Btn"
+            fontSize="12px"
+            transFontSize="10px"
+            padding="7px 30px"
+            onClickEvent={() => {
+              navigate(`/store/order`);
+              dispatch(offon());
+            }}
+          >
+            Buy
+          </BTN_black_nomal_comp>
+        </ExtraTextContainer>
 
         {cartProducts.map((el, index) => (
           <ContentContainer key={index}>

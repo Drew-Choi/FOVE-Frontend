@@ -5,9 +5,9 @@ const Btn_blakc_nomal = styled.span`
   cursor: pointer;
   background-color: black;
   color: white;
-  padding: 4px 10px;
+  padding: ${(props) => props.padding};
   font-size: ${(props) => props.fontSize};
-  border-radius: 5px;
+  border-radius: ${(props) => props.borderRadius};
   transform-origin: center;
   transition: 0.2s ease;
   text-align: center;
@@ -27,6 +27,8 @@ export default function BTN_black_nomal_comp({
   transFontSize,
   type,
   className,
+  padding,
+  borderRadius,
 }) {
   return (
     <Btn_blakc_nomal
@@ -35,6 +37,8 @@ export default function BTN_black_nomal_comp({
       onClick={onClickEvent}
       type={type}
       className={className}
+      padding={padding}
+      borderRadius={borderRadius}
     >
       {children}
     </Btn_blakc_nomal>
@@ -43,4 +47,6 @@ export default function BTN_black_nomal_comp({
 
 BTN_black_nomal_comp.defaultProps = {
   fontSize: '15px',
+  padding: '4px 10px',
+  borderRadius: '5px',
 };
