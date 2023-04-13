@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { add } from '../../store/modules/cart';
-import { offon } from '../../store/modules/cartmodal';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Detail_Order = styled.div`
   position: absolute;
@@ -175,6 +175,8 @@ export default function Detail_OrderMenu_client({
   detail,
   datas,
 }) {
+  const { id } = useParams();
+
   const dispatch = useDispatch();
 
   //카트에 추가하는 Post 요청
@@ -235,6 +237,9 @@ export default function Detail_OrderMenu_client({
     }
   };
 
+  //라우터
+  const navigate = useNavigate();
+
   return (
     <Detail_Order>
       <Title>{productName}</Title>
@@ -265,7 +270,9 @@ export default function Detail_OrderMenu_client({
 
           <AddCart onClick={addToCart}>Add Cart</AddCart>
           <br></br>
-          <BuyCart>buy</BuyCart>
+          <BuyCart onClick={() => navigate(`/store/detail/${id}/order`)}>
+            buy
+          </BuyCart>
         </DownInfoContain>
         <SumPrice>₩ {frontPriceComma(count * price)}</SumPrice>
       </InfoContain>

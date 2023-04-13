@@ -15,6 +15,7 @@ import Register_client from './components_pages/client_components/Register_clien
 import Mypage_client from './components_pages/client_components/Mypage_client';
 
 import { useSelector } from 'react-redux';
+import Order_client from './components_pages/client_components/Order_client';
 
 function App() {
   const isLogin = useSelector((state) => state.user.isLogin);
@@ -28,6 +29,7 @@ function App() {
           <Route path="/aboutus" element={<AboutUs_client />} />
           <Route path="/store" element={<Store_client />} />
           <Route path="/store/detail/:id" element={<Detail_client />} />
+          <Route path="/store/detail/:id/order" element={<Order_client />} />
           <Route path="/mypage" element={<Mypage_client />} />
           <Route path="/agreement" element={<Agreement_client />} />
           <Route path="/privacy" element={<Privacy_client />} />
