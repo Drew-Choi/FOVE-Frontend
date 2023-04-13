@@ -1,7 +1,6 @@
 .titleArea {
   width: 100%;
   text-align: center;
-  margin: 
 
   h2 {
     font-weight: bold;
@@ -15,13 +14,13 @@
   width: 1200px;
   justify-content: center;
   flex-direction: column;
-  padding: 50px;
+  padding: 70px;
   margin-left: 250px;
 }
 
 .information {
     display: flex;
-    padding: 6px 0;
+    padding: 7px 0;
     width: 100%;
     border: 1px solid rgb(36, 35, 35);
     margin-bottom: 30px;
@@ -30,7 +29,7 @@
       margin: 30px 80px;
 
       .thumbnail > img {
-        width: 100px;
+        width: 200px;
         height: auto;
       }
     }
@@ -38,7 +37,7 @@
 
 .description {
   margin: auto;
-  padding-right: 390px;
+  padding-right: 350px;
 
 span {
   font-size: 13px;
@@ -152,43 +151,48 @@ span {
     border: 2px;
     padding-bottom: 150px;
 
+
     .shopmain_order {
-      width: 530px;
+      width: 510px;
       height: 80px;
       font-size: 14px;
       margin-bottom: 30px;
       text-align: center;
       padding-top: 10px;
       border: 1px black solid;
+      cursor: pointer;
     }
 
     .shopmain_profile {
-      width: 530px;
+      width: 510px;
       height: 80px;
       font-size: 14px;
       margin-bottom: 30px;
       text-align: center;
       padding-top: 10px;
       border: 1px black solid;
+      cursor: pointer;
     }
 
     .shopmain_address {
-      width: 530px;
+      width: 510px;
       height: 80px;
       font-size: 14px;
       margin-bottom: 30px;
       text-align: center;
       padding-top: 10px;
       border: 1px black solid;
+      cursor: pointer;
     }
 
     .shopmain_mypick {
-      width: 530px;
+      width: 510px;
       height: 80px;
       font-size: 14px;
       margin-bottom: 30px;
       text-align: center;
       padding-top: 10px;
       border: 1px black solid;
+      cursor: pointer;
     }
   }
