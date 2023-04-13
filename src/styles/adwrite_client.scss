@@ -1,0 +1,45 @@
+.titleArea {
+  width: 100%;
+  text-align: center;
+  padding-bottom: 40px;
+
+  h2 {
+    font-weight: bold;
+    font-size: 14px;
+  }
+}
+
+.ad_wrap {
+  padding-top: 30px;
+  text-align: center;
+
+  input {
+    padding: 12px 800px 12px 10px; 
+  }
+
+}
+
+.ad_mom {
+  display: flex;
+  justify-content: center;
+
+  .ad_btn_submit_blk {
+    width: 400px;
+    height: 45px;
+    border-radius: 60px;
+    margin-top: 70px;
+    line-height: 37px;
+  }
+  
+  .ad_btn_submit_wht {
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+    width: 400px;
+    height: 45px;
+    border-radius: 60px;
+    margin-top: 70px;
+    line-height: 37px;
+  }
+}
+
