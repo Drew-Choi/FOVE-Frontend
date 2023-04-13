@@ -26,6 +26,7 @@ export default function BTN_black_nomal_comp({
   fontSize,
   transFontSize,
   type,
+  className,
 }) {
   return (
     <Btn_blakc_nomal
@@ -33,6 +34,7 @@ export default function BTN_black_nomal_comp({
       fontSize={fontSize}
       onClick={onClickEvent}
       type={type}
+      className={className}
     >
       {children}
     </Btn_blakc_nomal>
