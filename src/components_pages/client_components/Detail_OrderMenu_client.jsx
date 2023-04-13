@@ -185,7 +185,7 @@ export default function Detail_OrderMenu_client({
       const reqData = await axios.post(
         `http://localhost:4000/store/productId/${datas._id}`,
         {
-          productData: datas.productData,
+          productName: datas.productName,
           img: datas.img[0],
           price: datas.price,
           size: datas.size,

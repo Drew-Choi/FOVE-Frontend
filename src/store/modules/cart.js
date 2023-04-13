@@ -63,12 +63,6 @@ export default function cart(state = initState, action) {
         cartProducts: action.payload.products,
         cartProductsLength: action.payload.products.length,
       };
-    case RESET:
-      return {
-        ...state,
-        cartProducts: [],
-        cartProductsLength: 0,
-      };
     default:
       return state;
   }

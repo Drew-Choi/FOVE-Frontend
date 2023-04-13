@@ -1,8 +1,11 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { reset, update } from '../../store/modules/cart';
+import { offon } from '../../store/modules/cartmodal';
+import BTN_black_nomal_comp from '../../styles/BTN_black_nomal_comp';
+import '../../styles/cartModal.scss';
 
 const CartModal_Layout = styled.div`
   position: fixed;
@@ -24,6 +27,24 @@ const CartTitle = styled.span`
   padding: 20px;
 `;
 
+const UnitSum = styled.span`
+  position: relative;
+  top: 20px;
+  right: 148px;
+  font-size: 11px;
+  font-weight: 500;
+  margin-right: 5px;
+`;
+
+const UnitSumNum = styled.span`
+  position: relative;
+  top: 20px;
+  right: 148px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-right: 5px;
+`;
+
 const CloseIcon = styled.span`
   top: 12px;
   position: relative;
@@ -40,6 +61,7 @@ const ContentContainer = styled.div`
   width: 300px;
   height: 120px;
   padding: 10px;
+  margin-top: 40px;
   margin-left: auto;
   margin-right: auto;
 `;
@@ -85,12 +107,12 @@ const Pd_size = styled.p`
   margin-bottom: 3px;
 `;
 
-const Pd_pice = styled.p`
+const Pd_price = styled.p`
   position: relative;
-  left: 200px;
+  left: 100px;
   font-weight: 500;
   font-size: 13px;
-  top: 15px;
+  top: 45px;
   letter-spacing: 2px;
   margin-bottom: 3px;
 `;
@@ -195,7 +217,6 @@ export default function CartModal({ className }) {
         `http://localhost:4000/cart/productId/${identity_id}`,
       );
       if (deleteID.status === 200) {
-        console.log(deleteID.data.updatedCart);
         dispatch(update(deleteID.data.updatedCart));
         console.log('성공');
       } else {
@@ -206,18 +227,43 @@ export default function CartModal({ className }) {
     }
   };
 
+  //카트 함에 담긴 물품들 합산
+  const unitSum = (el) => {
+    let sum = 0;
+    for (let i = 0; i < el.length; i += 1) {
+      sum += el[i].unitSumPrice;
+    }
+    return sum;
+  };
+
   return (
     <>
       <CartModal_Layout className={className}>
         <CartTitle>ORDER SUMMERY</CartTitle>
-        <CloseIcon className="material-symbols-outlined">close</CloseIcon>
+
+        <CloseIcon
+          onClick={() => dispatch(offon())}
+          className="material-symbols-outlined"
+        >
+          close
+        </CloseIcon>
+        <UnitSum>Total:&nbsp;&nbsp;&nbsp;₩</UnitSum>
+        <UnitSumNum>{frontPriceComma(unitSum(cartProducts))}</UnitSumNum>
+        <BTN_black_nomal_comp
+          className="cart_btn"
+          fontSize="12px"
+          transFontSize="10px"
+        >
+          Buy
+        </BTN_black_nomal_comp>
+
         {cartProducts.map((el, index) => (
           <ContentContainer key={index}>
             <Img imgURL={el.img}></Img>
             <Pd_name>{el.productName}</Pd_name>
             <Pd_color>{el.color}</Pd_color>
             <Pd_size>size {el.size}</Pd_size>
-            <Pd_pice>₩ {frontPriceComma(el.unitSumPrice)}</Pd_pice>
+            <Pd_price>₩ {frontPriceComma(el.unitSumPrice)}</Pd_price>
             <Pd_quantity_contain>
               <Line1></Line1>
               <Line2></Line2>
