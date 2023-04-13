@@ -11,6 +11,7 @@ const CartModal_Layout = styled.div`
   right: 0px;
   border: 0.5px solid black;
   padding: 10px;
+  overflow: scroll;
 `;
 
 const CartTitle = styled.span`
@@ -47,7 +48,9 @@ const Img = styled.div`
   left: 0px;
   width: 100px;
   height: 100px;
-  background-image: url('/images/beanie_black_1.jpg');
+  ${(props) =>
+    props.imgURL &&
+    `background-image: url('http://localhost:4000/uploads/${props.imgURL}');`};
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -151,27 +154,50 @@ const Line3 = styled.div`
   border: 0.5px solid black;
 `;
 
-export default function CartModal({ className }) {
+const RemoveIcon = styled.span`
+  font-size: 25px;
+  position: relative;
+  left: 260px;
+  bottom: 105px;
+  cursor: pointer;
+  &:hover {
+    color: red;
+  }
+  &:active {
+    color: #b4b4b4;
+  }
+`;
+
+export default function CartModal({
+  className,
+  cartProductsData,
+  cartProductsLength,
+}) {
   return (
     <>
       <CartModal_Layout className={className}>
         <CartTitle>ORDER SUMMERY</CartTitle>
         <CloseIcon className="material-symbols-outlined">close</CloseIcon>
-        <ContentContainer>
-          <Img></Img>
-          <Pd_name>타이틀zz11111</Pd_name>
-          <Pd_color>색상</Pd_color>
-          <Pd_size>size S</Pd_size>
-          <Pd_pice>₩ 1000000</Pd_pice>
-          <Pd_quantity_contain>
-            <Line1></Line1>
-            <Line2></Line2>
-            <Line3></Line3>
-            <Pd_plus>+</Pd_plus>
-            <Pd_count>1</Pd_count>
-            <Pd_miners>-</Pd_miners>
-          </Pd_quantity_contain>
-        </ContentContainer>
+        {cartProductsData.map((el, index) => (
+          <ContentContainer key={index}>
+            <Img imgURL={el.img}></Img>
+            <Pd_name>{el.productName}</Pd_name>
+            <Pd_color>{el.color}</Pd_color>
+            <Pd_size>size {el.size}</Pd_size>
+            <Pd_pice>₩ {el.unitSumPrice}</Pd_pice>
+            <Pd_quantity_contain>
+              <Line1></Line1>
+              <Line2></Line2>
+              <Line3></Line3>
+              <Pd_plus>+</Pd_plus>
+              <Pd_count>{el.quantity}</Pd_count>
+              <Pd_miners>-</Pd_miners>
+            </Pd_quantity_contain>
+            <RemoveIcon className="material-symbols-outlined">
+              remove
+            </RemoveIcon>
+          </ContentContainer>
+        ))}
       </CartModal_Layout>
     </>
   );

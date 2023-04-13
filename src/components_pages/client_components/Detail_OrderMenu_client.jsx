@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { add } from '../../store/modules/cart';
+import { offon } from '../../store/modules/cartmodal';
 
 const Detail_Order = styled.div`
   position: absolute;
