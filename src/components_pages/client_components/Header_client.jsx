@@ -32,6 +32,11 @@ export default function Header_client() {
   };
 
   const navigate = useNavigate();
+
+  //모달을 위한 state
+  const [turn, setTurn] = useState('off');
+  console.log(turn);
+
   return (
     <>
       <header className="header_client">
@@ -54,14 +59,18 @@ export default function Header_client() {
             <p onClick={() => navigate('#')}>ACCOUNT</p>
           </li>
           <li id="cate_li2_shopbag">
-            <p onClick={() => navigate('#')}>SHOPPING BAG / {cartLength}</p>
+            <p
+              onClick={() => (turn === 'off' ? setTurn('on') : setTurn('off'))}
+            >
+              SHOPPING BAG / {cartLength}
+            </p>
             {/* 0 이라는 숫자 장바구니에 넣을 때 올라가야 함 */}
           </li>
         </ul>
       </header>
 
       {/* 카트 모달 임 */}
-      <CartModal />
+      <CartModal className={`cart_modal ${turn}`} />
     </>
   );
 }

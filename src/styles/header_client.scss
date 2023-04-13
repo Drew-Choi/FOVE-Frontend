@@ -72,3 +72,13 @@ header.header_client {
     }
   }
 }
+
+.cart_modal.off {
+  transform: translateX(360px);
+  transition: transform 0.5s ease-out;
+}
+
+.cart_modal.on {
+  transform: translateX(0px);
+  transition: transform 0.5s ease-out;
+}
