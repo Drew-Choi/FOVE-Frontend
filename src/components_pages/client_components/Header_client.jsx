@@ -38,9 +38,7 @@ export default function Header_client() {
   const navigate = useNavigate();
 
   //모달을 위한 state
-  const [turn, setTurn] = useState('off');
   const offonKey = useSelector((state) => state.cartmodal.offon);
-  console.log(offonKey);
 
   return (
     <>
