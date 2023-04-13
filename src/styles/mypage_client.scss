@@ -1,7 +1,7 @@
 .titleArea {
   width: 100%;
   text-align: center;
-  margin-bottom: 30px;
+  margin: 
 
   h2 {
     font-weight: bold;
@@ -21,14 +21,13 @@
 
 .information {
     display: flex;
-    padding: 20px 0;
+    padding: 6px 0;
     width: 100%;
     border: 1px solid rgb(36, 35, 35);
     margin-bottom: 30px;
 
     .thumbnail {
       margin: 30px 80px;
-      padding: 0;
 
       .thumbnail > img {
         width: 100px;
@@ -39,10 +38,10 @@
 
 .description {
   margin: auto;
-  padding-right: 350px;
+  padding-right: 390px;
 
 span {
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .namegrade {
@@ -61,11 +60,11 @@ span {
 .orderstate_box {
   display: table;
   table-layout:fixed;
-  padding: 20px;
+  padding: 20px 20px 0px 20px;
   width: 100%;
-  height: 150px;
   border: 1px solid black; 
   flex-direction: column; 
+  margin-bottom: 30px;
 
     h3 {
       font-size: 14px;
@@ -80,6 +79,7 @@ span {
 
     .title_order {
       border-bottom: 1px solid black;
+      margin-bottom: 3px;
     }
 
   }
@@ -89,22 +89,106 @@ span {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    border-bottom: 1px solid black;
+    padding: 10px;
+
+    li {
+      font-size: 13px;
+      margin: auto;
+      list-style: none;
+      list-style-type: none;
+
+      a {
+        margin: auto;
+        text-decoration: none;
+        color: black;
+
+        #count {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+    }
     
     #count {
       display: flex;
-      justify-content: flex-start;
-      
+      justify-content: flex-start; 
     }
   }
 
+  .csbox {
+
   .cs {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
+    flex-direction: row;
+    padding: 10px;
+    
+    li {
+      list-style: none;
+      list-style-type: none;
+      font-size: 13px;
+      margin: -5px 0 -5px 0;
 
-    .cs > a {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
+      a {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        text-decoration: none;
+        color: black;
+
+        #count {
+          margin-left: 150px;
+        }
+      }
+    }
+  }
+}
+
+  .fourbox {
+    display: flex;
+    justify-content: space-between;
+    border: 2px;
+    padding-bottom: 150px;
+
+    .shopmain_order {
+      width: 530px;
+      height: 80px;
+      font-size: 14px;
+      margin-bottom: 30px;
+      text-align: center;
+      padding-top: 10px;
+      border: 1px black solid;
+    }
+
+    .shopmain_profile {
+      width: 530px;
+      height: 80px;
+      font-size: 14px;
+      margin-bottom: 30px;
+      text-align: center;
+      padding-top: 10px;
+      border: 1px black solid;
+    }
+
+    .shopmain_address {
+      width: 530px;
+      height: 80px;
+      font-size: 14px;
+      margin-bottom: 30px;
+      text-align: center;
+      padding-top: 10px;
+      border: 1px black solid;
+    }
+
+    .shopmain_mypick {
+      width: 530px;
+      height: 80px;
+      font-size: 14px;
+      margin-bottom: 30px;
+      text-align: center;
+      padding-top: 10px;
+      border: 1px black solid;
     }
   }

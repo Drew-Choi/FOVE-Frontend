@@ -51,34 +51,34 @@ export default function Mypage_client() {
                     {/* order 리스트 4개 */}
                     <li>
                       <a href="#">
-                        <strong>입금전</strong>
-                        <span className="count">
-                          <span id="count">0</span>
-                        </span>
+                        <span>입금전</span>
+                        <strong className="count">
+                          <strong id="count">0</strong>
+                        </strong>
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <strong>배송준비중</strong>
-                        <span className="count">
-                          <span id="count">0</span>
-                        </span>
+                        <span>배송준비중</span>
+                        <strong className="count">
+                          <strong id="count">0</strong>
+                        </strong>
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <strong>배송중</strong>
-                        <span className="count">
-                          <span id="count">0</span>
-                        </span>
+                        <span>배송중</span>
+                        <strong className="count">
+                          <strong id="count">0</strong>
+                        </strong>
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <strong>배송완료</strong>
-                        <span className="count">
-                          <span id="count">0</span>
-                        </span>
+                        <span>배송완료</span>
+                        <strong className="count">
+                          <strong id="count">0</strong>
+                        </strong>
                       </a>
                     </li>
                   </ul>
@@ -88,30 +88,55 @@ export default function Mypage_client() {
                     {/* cs 리스트 3개 */}
                     <li>
                       <a href="#">
-                        <strong>취소 : </strong>
-                        <span className="count">
-                          <span id="count">0</span>
-                        </span>
+                        <span>취소 : </span>
+                        <strong className="count">
+                          <strong id="count">0</strong>
+                        </strong>
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <strong>교환 : </strong>
-                        <span className="count">
-                          <span id="count">0</span>
-                        </span>
+                        <span>교환 : </span>
+                        <strong className="count">
+                          <strong id="count">0</strong>
+                        </strong>
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <strong>반품 : </strong>
-                        <span className="count">
-                          <span id="count">0</span>
-                        </span>
+                        <span>반품 : </span>
+                        <strong className="count">
+                          <strong id="count">0</strong>
+                        </strong>
                       </a>
                     </li>
                   </ul>
                 </div>
+              </div>
+            </div>
+          </div>
+          {/* 박스 4개 */}
+          <div className="fourbox">
+            <div className="line_one">
+              <div className="shopmain_order">
+                <p>주문조회</p>
+                <span className="material-symbols-outlined">
+                  local_shipping
+                </span>
+              </div>
+              <div className="shopmain_profile">
+                <p>회원정보</p>
+                <span className="material-symbols-outlined">person</span>
+              </div>
+            </div>
+            <div className="line_two">
+              <div className="shopmain_address">
+                <p>배송주소록</p>
+                <span className="material-symbols-outlined">home</span>
+              </div>
+              <div className="shopmain_mypick">
+                <p>MY STYLING PICK</p>
+                <span className="material-symbols-outlined">favorite</span>
               </div>
             </div>
           </div>
