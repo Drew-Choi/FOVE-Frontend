@@ -207,7 +207,7 @@ export default function Store_client() {
           </SwiperPaginationContainer>
         </div>
       </section>
-      <SubNav_client bottom="13px" />
+      <SubNav_client bottom="25px" />
     </main>
   );
 }
