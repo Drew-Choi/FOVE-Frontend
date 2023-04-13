@@ -175,8 +175,6 @@ export default function Detail_OrderMenu_client({
   detail,
   datas,
 }) {
-  const { id } = useParams();
-
   const dispatch = useDispatch();
 
   //카트에 추가하는 Post 요청
@@ -270,9 +268,7 @@ export default function Detail_OrderMenu_client({
 
           <AddCart onClick={addToCart}>Add Cart</AddCart>
           <br></br>
-          <BuyCart onClick={() => navigate(`/store/detail/${id}/order`)}>
-            buy
-          </BuyCart>
+          <BuyCart onClick={() => navigate(`/store/order`)}>buy</BuyCart>
         </DownInfoContain>
         <SumPrice>₩ {frontPriceComma(count * price)}</SumPrice>
       </InfoContain>

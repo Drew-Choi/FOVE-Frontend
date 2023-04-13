@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../../styles/detail_client.scss';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import Detail_Image_Layout_client from './Detail_Image_Layout_client ';
 import Detail_OrderMenu_client from './Detail_OrderMenu_client';
 import Detail_SubImgae_client from './Detail_SubImgae_client';
 import SubNav_client from './SubNav_client';
@@ -27,14 +26,22 @@ export default function Detail_client() {
     }
   };
 
+  const navigate = useNavigate();
+
   return (
     <>
       <SubNav_client
+        onClickEvent1={() => navigate('/store')}
+        onClickEvent3={() => navigate('/store/beanie')}
+        onClickEvent4={() => navigate('/store/cap')}
+        onClickEvent5={() => navigate('/store/training')}
+        onClickEvent6={() => navigate('/store/windbreaker')}
         menu1="VIEW ALL"
         menu2="NEW ARRIVALS"
         menu3="BEANIE"
-        menu4="HAT"
-        menu5="MUFFLER"
+        menu4="CAP"
+        menu5="TRAINING"
+        menu6="WINDBREAKER"
         top="70px"
       />
       <section className="pd_detail">

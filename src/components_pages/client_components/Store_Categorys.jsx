@@ -12,11 +12,13 @@ import 'swiper/css/scrollbar';
 import SwiperPaginationBTN from '../../styles/SwiperPaginationBTN';
 import SwiperPaginationContainer from '../../styles/SwiperPaginationContainer';
 import SubNav_client from './SubNav_client';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 SwiperCore.use([Navigation]);
 
-export default function Store_client() {
+export default function Store_Categorys() {
+  const { category } = useParams();
+
   //네비게이트 리액트Dom 설정
   const navigate = useNavigate();
 
@@ -27,23 +29,31 @@ export default function Store_client() {
   const [pagination3, setPagination3] = useState('off');
   const [pagination4, setPagination4] = useState('off');
 
-  //All상품데이터 get
-  const [pd_Datas, setPd_Datas] = useState([]);
+  //카테고리 상품데이터 get
+  const [pd_Datas_Cateroys, setPd_Datas_Categorys] = useState([]);
 
   //상품데이터 db에서 가져오기
   useEffect(() => {
-    getAllProducts();
-    // getFit();
-  }, []);
+    if (!category) return;
+
+    getCategoryProducts();
+  }, [category]);
 
   //엑시오스로 모든 상품 정보 요청
-  const getAllProducts = async () => {
-    const productsData = await axios.get('http://localhost:4000/store/all');
-    if (productsData.status === 200) {
-      await setPd_Datas(productsData.data);
-      return productsData.data.message;
-    } else {
-      return productsData.data.message;
+  const getCategoryProducts = async () => {
+    try {
+      const productsData = await axios.get(
+        `http://localhost:4000/store/${category}`,
+      );
+      if (productsData.status === 200) {
+        await setPd_Datas_Categorys(productsData.data);
+        return productsData.data.message;
+      } else {
+        console.log('실패');
+        return productsData.data.message;
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
 
@@ -105,7 +115,7 @@ export default function Store_client() {
           <SwiperSlide className="swiper_slide">
             <Container>
               <Row xs={2} md={4} lg={5}>
-                {pd_Datas.map((el, index) => {
+                {pd_Datas_Cateroys.map((el, index) => {
                   if (index < 10 && index >= 0)
                     return (
                       <Col
@@ -128,7 +138,7 @@ export default function Store_client() {
           <SwiperSlide className="swiper_slide">
             <Container>
               <Row xs={2} md={4} lg={5}>
-                {pd_Datas.map((el, index) => {
+                {pd_Datas_Cateroys.map((el, index) => {
                   if (index < 20 && index >= 10)
                     return (
                       <Col
@@ -151,7 +161,7 @@ export default function Store_client() {
           <SwiperSlide className="swiper_slide">
             <Container>
               <Row xs={2} md={4} lg={5}>
-                {pd_Datas.map((el, index) => {
+                {pd_Datas_Cateroys.map((el, index) => {
                   if (index < 30 && index >= 20)
                     return (
                       <Col
