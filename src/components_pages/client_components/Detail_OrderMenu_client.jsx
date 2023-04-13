@@ -223,8 +223,17 @@ export default function Detail_OrderMenu_client({
 
   const [count, setCount] = useState(1);
 
+  //콤마 찍기
   const country = navigator.language;
-  const frontPriceComma = (price) => price.toLocaleString(country);
+  const frontPriceComma = (price) => {
+    if (price && typeof price.toLocaleString === 'function') {
+      return price.toLocaleString(country, {
+        currency: 'KRW',
+      });
+    } else {
+      return price;
+    }
+  };
 
   return (
     <Detail_Order>

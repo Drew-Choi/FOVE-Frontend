@@ -49,7 +49,15 @@ export default function Store_client() {
 
   //db Number타입을 스트링으로 바꾸고 천단위 컴마 찍어 프론트에 보내기
   const country = navigator.language;
-  const frontPriceComma = (price) => price.toLocaleString(country);
+  const frontPriceComma = (price) => {
+    if (price && typeof price.toLocaleString === 'function') {
+      return price.toLocaleString(country, {
+        currency: 'KRW',
+      });
+    } else {
+      return price;
+    }
+  };
 
   return (
     <main className="store_main">

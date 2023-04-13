@@ -173,6 +173,18 @@ export default function CartModal({
   cartProductsData,
   cartProductsLength,
 }) {
+  //천단위 콤마
+  const country = navigator.language;
+  const frontPriceComma = (price) => {
+    if (price && typeof price.toLocaleString === 'function') {
+      return price.toLocaleString(country, {
+        currency: 'KRW',
+      });
+    } else {
+      return price;
+    }
+  };
+
   return (
     <>
       <CartModal_Layout className={className}>
@@ -184,7 +196,7 @@ export default function CartModal({
             <Pd_name>{el.productName}</Pd_name>
             <Pd_color>{el.color}</Pd_color>
             <Pd_size>size {el.size}</Pd_size>
-            <Pd_pice>₩ {el.unitSumPrice}</Pd_pice>
+            <Pd_pice>₩ {frontPriceComma(el.unitSumPrice)}</Pd_pice>
             <Pd_quantity_contain>
               <Line1></Line1>
               <Line2></Line2>
