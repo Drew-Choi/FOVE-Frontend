@@ -10,12 +10,15 @@ export default function TextArea_Custom({
   maxLength,
   cols,
   rows,
+  styleArea,
+  styleChildren,
 }) {
   return (
     <div>
-      <p>{children}</p>
+      <p style={styleChildren}>{children}</p>
       <textarea
         // input 값을 ref로 보내기
+        style={styleArea}
         ref={inputref}
         type={type}
         name={name}

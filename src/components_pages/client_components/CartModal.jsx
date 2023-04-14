@@ -1,5 +1,12 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { reset, update } from '../../store/modules/cart';
+import { offon } from '../../store/modules/cartmodal';
+import BTN_black_nomal_comp from '../../styles/BTN_black_nomal_comp';
+import '../../styles/cartModal.scss';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const CartModal_Layout = styled.div`
   position: fixed;
@@ -11,6 +18,7 @@ const CartModal_Layout = styled.div`
   right: 0px;
   border: 0.5px solid black;
   padding: 10px;
+  overflow: scroll;
 `;
 
 const CartTitle = styled.span`
@@ -18,6 +26,50 @@ const CartTitle = styled.span`
   font-size: 12px;
   font-weight: 700;
   padding: 20px;
+`;
+
+const ExtraTextContainer = styled.div`
+  position: relative;
+  /* background-color: aqua; */
+  display: block;
+  width: 270px;
+  height: 10px;
+`;
+
+const UnitSum = styled.span`
+  position: relative;
+  display: inline-block;
+  top: -5px;
+  left: 20px;
+  font-size: 11px;
+  font-weight: 500;
+  margin-right: 5px;
+`;
+
+const UnitSumNum = styled.span`
+  position: relative;
+  top: -5px;
+  left: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-right: 5px;
+`;
+
+const AllRemove = styled.p`
+  position: absolute;
+  display: inline-block;
+  top: 20px;
+  left: 21px;
+  font-size: 10px;
+  font-weight: 500;
+  margin-right: 5px;
+  cursor: pointer;
+  &:hover {
+    color: #ff5858;
+  }
+  &:active {
+    color: #ffe0e0;
+  }
 `;
 
 const CloseIcon = styled.span`
@@ -36,6 +88,7 @@ const ContentContainer = styled.div`
   width: 300px;
   height: 120px;
   padding: 10px;
+  margin-top: 40px;
   margin-left: auto;
   margin-right: auto;
 `;
@@ -47,7 +100,9 @@ const Img = styled.div`
   left: 0px;
   width: 100px;
   height: 100px;
-  background-image: url('/images/beanie_black_1.jpg');
+  ${(props) =>
+    props.imgURL &&
+    `background-image: url('http://localhost:4000/uploads/${props.imgURL}');`};
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -55,6 +110,7 @@ const Img = styled.div`
 
 const Pd_name = styled.p`
   position: relative;
+  width: 200px;
   left: 100px;
   font-weight: 600;
   font-size: 13px;
@@ -62,6 +118,7 @@ const Pd_name = styled.p`
   margin-bottom: 3px;
 `;
 const Pd_color = styled.p`
+  width: 200px;
   position: relative;
   left: 100px;
   font-weight: 500;
@@ -71,6 +128,7 @@ const Pd_color = styled.p`
 `;
 
 const Pd_size = styled.p`
+  width: 200px;
   position: relative;
   left: 100px;
   font-weight: 500;
@@ -79,12 +137,13 @@ const Pd_size = styled.p`
   margin-bottom: 3px;
 `;
 
-const Pd_pice = styled.p`
+const Pd_price = styled.p`
+  width: 200px;
   position: relative;
-  left: 200px;
+  left: 100px;
   font-weight: 500;
   font-size: 13px;
-  top: 15px;
+  top: 45px;
   letter-spacing: 2px;
   margin-bottom: 3px;
 `;
@@ -151,27 +210,135 @@ const Line3 = styled.div`
   border: 0.5px solid black;
 `;
 
+const RemoveIcon = styled.span`
+  font-size: 25px;
+  position: relative;
+  left: 260px;
+  bottom: 105px;
+  cursor: pointer;
+  &:hover {
+    color: #ff5858;
+  }
+  &:active {
+    color: #b4b4b4;
+  }
+`;
+
 export default function CartModal({ className }) {
+  //천단위 콤마
+  const country = navigator.language;
+  const frontPriceComma = (price) => {
+    if (price && typeof price.toLocaleString === 'function') {
+      return price.toLocaleString(country, {
+        currency: 'KRW',
+      });
+    } else {
+      return price;
+    }
+  };
+
+  const dispatch = useDispatch();
+  const cartProducts = useSelector((state) =>
+    !state.cart.cartProducts ? [] : state.cart.cartProducts,
+  );
+
+  //개별 상품 삭제
+  const deletePD = async (identity_id) => {
+    try {
+      const deleteID = await axios.post(
+        `http://localhost:4000/cart/productId/${identity_id}`,
+      );
+      if (deleteID.status === 200) {
+        dispatch(update(deleteID.data.updatedCart));
+        console.log('성공');
+      } else {
+        console.log('실패');
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  //카트 함에 담긴 물품들 합산
+  const unitSum = (el) => {
+    let sum = 0;
+    for (let i = 0; i < el.length; i += 1) {
+      sum += el[i].unitSumPrice;
+    }
+    return sum;
+  };
+
+  //전체 삭제(카트 비움)
+  const allRemove = async () => {
+    try {
+      const allRemoveCart = await axios.post(`http://localhost:4000/cleancart`);
+      if (allRemoveCart.status === 200) {
+        // dispatch(update(allRemoveCart.data.updatedCart));
+        console.log('성공');
+        dispatch(update(allRemoveCart.data.updatedCart));
+      } else {
+        console.log('실패');
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const navigate = useNavigate();
+
   return (
     <>
       <CartModal_Layout className={className}>
         <CartTitle>ORDER SUMMERY</CartTitle>
-        <CloseIcon className="material-symbols-outlined">close</CloseIcon>
-        <ContentContainer>
-          <Img></Img>
-          <Pd_name>타이틀zz11111</Pd_name>
-          <Pd_color>색상</Pd_color>
-          <Pd_size>size S</Pd_size>
-          <Pd_pice>₩ 1000000</Pd_pice>
-          <Pd_quantity_contain>
-            <Line1></Line1>
-            <Line2></Line2>
-            <Line3></Line3>
-            <Pd_plus>+</Pd_plus>
-            <Pd_count>1</Pd_count>
-            <Pd_miners>-</Pd_miners>
-          </Pd_quantity_contain>
-        </ContentContainer>
+
+        <CloseIcon
+          onClick={() => dispatch(offon())}
+          className="material-symbols-outlined"
+        >
+          close
+        </CloseIcon>
+        <ExtraTextContainer>
+          <UnitSum>Total:&nbsp;&nbsp;&nbsp;₩</UnitSum>
+          <UnitSumNum>{frontPriceComma(unitSum(cartProducts))}</UnitSumNum>
+          <UnitSum>/ {cartProducts.length} ea</UnitSum>
+          <AllRemove onClick={allRemove}>All Remove</AllRemove>
+          <BTN_black_nomal_comp
+            className="cart_Btn"
+            fontSize="12px"
+            transFontSize="10px"
+            padding="7px 30px"
+            onClickEvent={() => {
+              navigate(`/store/order`);
+              dispatch(offon());
+            }}
+          >
+            Buy
+          </BTN_black_nomal_comp>
+        </ExtraTextContainer>
+
+        {cartProducts.map((el, index) => (
+          <ContentContainer key={index}>
+            <Img imgURL={el.img}></Img>
+            <Pd_name>{el.productName}</Pd_name>
+            <Pd_color>{el.color}</Pd_color>
+            <Pd_size>size {el.size}</Pd_size>
+            <Pd_price>₩ {frontPriceComma(el.unitSumPrice)}</Pd_price>
+            <Pd_quantity_contain>
+              <Line1></Line1>
+              <Line2></Line2>
+              <Line3></Line3>
+              <Pd_plus>+</Pd_plus>
+              <Pd_count>{el.quantity}</Pd_count>
+              <Pd_miners>-</Pd_miners>
+            </Pd_quantity_contain>
+            <RemoveIcon
+              onClick={() => deletePD(el._id)}
+              className="material-symbols-outlined"
+            >
+              remove
+            </RemoveIcon>
+          </ContentContainer>
+        ))}
       </CartModal_Layout>
     </>
   );

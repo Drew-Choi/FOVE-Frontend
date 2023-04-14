@@ -33,17 +33,28 @@ export default function SubNav_client({
   menu3,
   menu4,
   menu5,
+  menu6,
+  menu7,
   bottom,
   top,
+  onClickEvent1,
+  onClickEvent2,
+  onClickEvent3,
+  onClickEvent4,
+  onClickEvent5,
+  onClickEvent6,
+  onClickEvent7,
 }) {
   return (
     <NavBar bottom={bottom} top={top}>
       <Ul>
-        <Li>{menu1}</Li>
-        <Li>{menu2}</Li>
-        <Li>{menu3}</Li>
-        <Li>{menu4}</Li>
-        <Li>{menu5}</Li>
+        <Li onClick={onClickEvent1}>{menu1}</Li>
+        <Li onClick={onClickEvent2}>{menu2}</Li>
+        <Li onClick={onClickEvent3}>{menu3}</Li>
+        <Li onClick={onClickEvent4}>{menu4}</Li>
+        <Li onClick={onClickEvent5}>{menu5}</Li>
+        <Li onClick={onClickEvent6}>{menu6}</Li>
+        <Li onClick={onClickEvent7}>{menu7}</Li>
       </Ul>
     </NavBar>
   );
