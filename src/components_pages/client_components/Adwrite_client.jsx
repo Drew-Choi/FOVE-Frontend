@@ -62,6 +62,8 @@ export default function Adwrite_client() {
             <input
               type="tel"
               id="phone2"
+              placeholder="유선전화"
+              style={{ fontSize: '12px' }}
               name="phone2"
               maxLength="4"
               pattern="[0-9]{4}"
@@ -78,19 +80,66 @@ export default function Adwrite_client() {
             />
           </div>
 
+          <div className="cell-phone-number">
+            <input
+              type="cell"
+              id="phone1"
+              name="phone1"
+              maxLength="3"
+              pattern="[0-9]{3}"
+              required
+            />
+            <label htmlFor="phone1">-</label>
+            <input
+              type="cell"
+              id="phone2"
+              placeholder="휴대전화"
+              style={{ fontSize: '12px' }}
+              name="phone2"
+              maxLength="4"
+              pattern="[0-9]{4}"
+              required
+            />
+            <label htmlFor="phone2">-</label>
+            <input
+              type="cell"
+              id="phone3"
+              name="phone3"
+              maxLength="4"
+              pattern="[0-9]{4}"
+              required
+            />
+          </div>
+
           <div className="ad_mom">
-            <BTN_black_nomal_comp
-              className="ad_btn_submit_blk"
-              onClick={() => navigate('#')}
-            >
-              취소
-            </BTN_black_nomal_comp>
             <BTN_black_nomal_comp
               className="ad_btn_submit_wht"
               onClick={() => navigate('#')}
             >
+              취소
+            </BTN_black_nomal_comp>
+
+            <BTN_black_nomal_comp
+              className="ad_btn_submit_blk"
+              onClick={() => navigate('#')}
+            >
               등록
             </BTN_black_nomal_comp>
+          </div>
+
+          <div className="caution">
+            <div className="ship_caution">
+              <span className="shipad_caution">배송주소록 유의사항</span>
+              <br />
+              <br />
+              <span>
+                배송주소록은 최대 10개까지 등록할 수 있으며, 별도로 등록하지
+                않을 경우 최근 배송주소록 기준으로 자동 업데이트 됩니다.
+                <br />
+                자동 업데이트를 원하지 않을 경우 주소록 고정 선택을 선택하시면
+                선택된 주소록은 업데이트 대상에서 제외됩니다.
+              </span>
+            </div>
           </div>
         </div>
       </div>
