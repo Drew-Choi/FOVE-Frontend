@@ -3,6 +3,10 @@ import '../../styles/order_client.scss';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import BTN_black_nomal_comp from '../../styles/BTN_black_nomal_comp';
+import RadioGroup from '../../components_elements/RadioGroup';
+import RadioEl_frontDot from '../../components_elements/RadioEl_frontDot';
+import Input_Custom from '../../components_elements/Input_Custom';
 
 const Pd_order_IMG = styled.div`
   ${(props) =>
@@ -94,7 +98,39 @@ export default function Order_client() {
               </p>
             </div>
           </div>
-          <button onClick={() => orderPOST()}>결제하기</button>
+
+          <div className="ship_info_layout">
+            <p className="ship_info_title">배송 정보</p>
+            <div className="ship_info_input_container">
+              <RadioGroup>
+                <RadioEl_frontDot>&ensp;회원 정보와 동일 </RadioEl_frontDot>
+                <RadioEl_frontDot>&ensp;새로운 배송지 </RadioEl_frontDot>
+              </RadioGroup>
+              <button>주소록 보기</button>
+              <p>*필수입력사항</p>
+              <Input_Custom type="text" placeholder="받으시는 분 성함" />
+              <Input_Custom
+                type="text"
+                placeholder="우편번호"
+                disabled
+                value={''}
+              />
+              <button>우편번호</button>
+              <Input_Custom
+                type="text"
+                placeholder="주소"
+                disabled
+                value={''}
+              />
+              <Input_Custom type="text" placeholder="상세주소" />
+              <Input_Custom />
+              <Input_Custom />
+            </div>
+          </div>
+          {/* <BTN_black_nomal_comp onClick={() => orderPOST()}>
+            결제하기
+          </BTN_black_nomal_comp> */}
+          {/* 픽스임 */}
         </>
       )}
     </div>
