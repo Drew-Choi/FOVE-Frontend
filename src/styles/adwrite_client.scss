@@ -23,18 +23,18 @@
   }
 
   .address_mom_wrap {
-display: flex;
-justify-content: center;
+    display: flex;
+    justify-content: center;
 
-.adress_wrap {
-  width: 100%;  
+    .adress_wrap {
+    width: 100%;  
   
-  .postcode_input {
-    width: 574px;
-    height: 40px;
-    margin-right: 17px;
-    margin-left: -0.5px;
-  }
+   .postcode_input {
+      width: 574px;
+      height: 40px;
+      margin-right: 17px;
+      margin-left: -0.5px;
+     }
 
   .postcode_btn {
     width: 310px;
@@ -54,13 +54,15 @@ justify-content: center;
 }
 }
 
+
+
 .ad_mom {
   display: flex;
   justify-content: center;
-  margin-top: 38px;
+  margin-top: 25px;
 
   .ad_btn_submit_wht {
-    width: 430px;
+    width: 450px;
     height: 45px;
     background-color: white;
     border: 1.5px solid black;
@@ -70,7 +72,7 @@ justify-content: center;
   }
 
   .ad_btn_submit_blk {
-    width: 430px;
+    width: 450px;
     height: 45px;
     border: 2px solid black;
     border-radius: 60px;
@@ -85,59 +87,92 @@ justify-content: center;
 
 }
 
-
 .phone-number {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center;  
 
-  label {
-    align-items: center;
-    margin-top: 0;
-    margin: 0 4px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #444;
+  .phone_select {
+    width: 200px;
+    height: 40px;
+    font-size: 14px;
+    margin-bottom: 16px;
+    border: 1px solid black;
+    margin-right: 6px;
   }
+
+  span {
+    font-weight: bold;
+    margin: 5px;
+  }
+  }
+
 
   input[type="tel"] {
-    width: 284px;
+    width: 323px;
     padding: 13px;
     border: 1px solid black;
     font-size: 16px;
     outline: none;
   }
 
-}
 
-.cell-phone-number {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
-  label {
+  .phone-number {
+    justify-content: center;
     align-items: center;
-    margin-top: 0;
-    margin: 0 4px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #444;
+    margin-bottom: -22px;
+
+  .phone_select {
+    width: 200px;
+    height: 40px;
+    font-size: 14px;
+    // margin-bottom: 16px;
+    border: 1px solid black;
+    margin-right: 6px;
   }
 
-  input[type="cell"] {
-    width: 284px;
-    padding: 13px;
-    border: 1px solid black;
-    font-size: 16px;
-    outline: none;
+  .phone_select > span {
+    font-weight: bold;
+    margin: 5px;
   }
+  }
+
+  .cell-phone-number {
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+    
+    .cellphone_select {
+      width: 200px;
+      height: 40px;
+      font-size: 14px;
+      margin-bottom: 16px;
+      border: 1px solid black;
+      margin-right: 6px;
+  }
+
+  span {
+    font-weight: bold;
+    margin: 5px;
+  }
+  
+
+    input[type="cell"] {
+      width: 323px;
+      padding: 13px;
+      border: 1px solid black;
+      font-size: 16px;
+      outline: none;
+    }
 }
+  
 
 .caution {
   position: relative;
   width: 900px;
   height: 300px;
-  margin-left: 100px;
+  margin-left: 360px;
 
 .ship_caution {
   position: absolute;
@@ -146,12 +181,9 @@ justify-content: center;
   font-size: 13px;
   text-align: left;
   
+  
   .shipad_caution {
     font-weight: bold;
-    color: rgb(42, 42, 42);
-
   }
 }
 }
-
-
