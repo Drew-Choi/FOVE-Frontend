@@ -9,6 +9,7 @@ export default function Input_Custom({
   onClickEvent,
   multiple,
   accept,
+  disabled,
 }) {
   return (
     <div>
@@ -24,6 +25,7 @@ export default function Input_Custom({
         onClick={onClickEvent}
         multiple={multiple}
         accept={accept}
+        disabled={disabled}
       />
     </div>
   );
