@@ -4,6 +4,7 @@ import React, { useRef } from 'react';
 import '../../styles/adwrite_client.scss';
 import { useNavigate } from 'react-router-dom';
 import BTN_black_nomal_comp from '../../styles/BTN_black_nomal_comp';
+import Add from './Add';
 
 export default function Adwrite_client() {
   const navigate = useNavigate();
@@ -46,44 +47,7 @@ export default function Adwrite_client() {
             />
           </div>
 
-          <div className="address_postnum">
-            <div className="address">
-              {/* 주소 안에 카카오 API 추가 필요 */}
-              <input
-                ref={inputad}
-                type="text"
-                placeholder="주소"
-                style={{ fontSize: '12px' }}
-              />
-            </div>
-
-            <div className="postnum">
-              {/* 우편번호 onclick 카카오 API 추가 필요 */}
-              <a href="#" onClick={''}>
-                우편번호
-              </a>
-            </div>
-          </div>
-
-          <div className="basicad">
-            {/* 기본주소 안에 카카오 API 주소 자동으로 추가됨 */}
-            <input
-              ref={inputbasicad}
-              type="text"
-              placeholder="기본주소"
-              style={{ fontSize: '12px' }}
-            />
-          </div>
-
-          <div className="restad">
-            {/* 나머지주소 안에 카카오 API 주소 자동으로 추가됨 */}
-            <input
-              ref={inputrestad}
-              type="text"
-              placeholder="나머지주소 (선택입력)"
-              style={{ fontSize: '12px' }}
-            />
-          </div>
+          <Add />
 
           <div className="inputtele">
             <div className="localnum">
