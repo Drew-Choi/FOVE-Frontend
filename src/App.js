@@ -21,6 +21,8 @@ import SizeFit from './components_pages/client_components/SizeFit';
 import Order_client from './components_pages/client_components/Order_client';
 import Store_Categorys from './components_pages/client_components/Store_Categorys';
 import TEST_TOSS from './components_pages/client_components/TEST_TOSS';
+import { CheckoutPage } from './components_pages/client_components/CheckOut';
+import { SuccessPage } from './components_pages/client_components/Success';
 
 function App() {
   const isLogin = useSelector((state) => state.user.isLogin);
@@ -46,6 +48,9 @@ function App() {
           {/* 임시 모달 작업 */}
           <Route path="/sizefit" element={<SizeFit />} />
 
+          <Route path="/tosspayment" element={<CheckoutPage />} />
+          <Route path="/tosspayment/success" element={<SuccessPage />} />
+          {/* <Route path="/tosspayment/fail" element={<FailPage />} /> */}
           {/* 자동 로그인 되는 버전 - 수정 예정 */}
           <Route
             path="/register"
