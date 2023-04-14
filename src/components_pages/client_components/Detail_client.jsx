@@ -3,7 +3,7 @@ import '../../styles/detail_client.scss';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Detail_OrderMenu_client from './Detail_OrderMenu_client';
-import Detail_SubImgae_client from './Detail_SubImgae_client';
+import Detail_SubImage_client from './Detail_SubImage_client';
 import SubNav_client from './SubNav_client';
 import { useDispatch, useSelector } from 'react-redux';
 import single from '../../store/modules/order';
@@ -58,7 +58,7 @@ export default function Detail_client() {
               price={productData.price}
               datas={productData}
             />
-            <Detail_SubImgae_client datas={productData} />
+            <Detail_SubImage_client datas={productData} />
           </>
         )}
       </section>

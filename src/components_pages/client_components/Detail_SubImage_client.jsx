@@ -62,7 +62,7 @@ const SecondDot = styled.div`
   background-color: black;
 `;
 
-export default function Detail_SubImgae_client({ datas }) {
+export default function Detail_SubImage_client({ datas }) {
   const [selectImgFileName, setSelectImgFileName] = useState(datas.img[0]);
   const [selectDot, setSelectDot] = useState(datas.img[0]);
 
