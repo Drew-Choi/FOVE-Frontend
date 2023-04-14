@@ -63,6 +63,7 @@ const SecondDot = styled.div`
 `;
 
 export default function Detail_SubImage_client({ datas }) {
+
   const [selectImgFileName, setSelectImgFileName] = useState(datas.img[0]);
   const [selectDot, setSelectDot] = useState(datas.img[0]);
 
@@ -70,7 +71,9 @@ export default function Detail_SubImage_client({ datas }) {
     <>
       <Detail_Sub_Image_Contain>
         <Detail_Sub_Image_PositionCenter>
+
           {datas.img.map((el, index) => (
+
             <Sub_IMG
               onClick={() => {
                 setSelectImgFileName((cur) => el);
@@ -80,7 +83,9 @@ export default function Detail_SubImage_client({ datas }) {
               imgFileName={el}
             ></Sub_IMG>
           ))}
+
           {selectDot === datas.img[0] ? <FirstDot /> : <SecondDot />}
+
         </Detail_Sub_Image_PositionCenter>
       </Detail_Sub_Image_Contain>
 
