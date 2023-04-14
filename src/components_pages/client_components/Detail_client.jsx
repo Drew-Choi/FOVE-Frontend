@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Detail_Image_Layout_client from './Detail_Image_Layout_client ';
 import Detail_OrderMenu_client from './Detail_OrderMenu_client';
-import Detail_SubImgae_client from './Detail_SubImgae_client';
+import Detail_SubImage_client from './Detail_SubImage_client';
 import SubNav_client from './SubNav_client';
 
 export default function Detail_client() {
@@ -48,7 +48,7 @@ export default function Detail_client() {
               price={productData[0].price}
               datas={productData[0]}
             />
-            <Detail_SubImgae_client datas={productData} />
+            <Detail_SubImage_client datas={productData} />
           </>
         )}
       </section>

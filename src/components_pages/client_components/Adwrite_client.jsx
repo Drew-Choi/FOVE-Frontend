@@ -63,26 +63,26 @@ export default function Adwrite_client() {
                 우편번호
               </a>
             </div>
+          </div>
 
-            <div className="basicad">
-              {/* 기본주소 안에 카카오 API 주소 자동으로 추가됨 */}
-              <input
-                ref={inputbasicad}
-                type="text"
-                placeholder="기본주소"
-                style={{ fontSize: '12px' }}
-              />
-            </div>
+          <div className="basicad">
+            {/* 기본주소 안에 카카오 API 주소 자동으로 추가됨 */}
+            <input
+              ref={inputbasicad}
+              type="text"
+              placeholder="기본주소"
+              style={{ fontSize: '12px' }}
+            />
+          </div>
 
-            <div className="restad">
-              {/* 나머지주소 안에 카카오 API 주소 자동으로 추가됨 */}
-              <input
-                ref={inputrestad}
-                type="text"
-                placeholder="나머지주소 (선택입력)"
-                style={{ fontSize: '12px' }}
-              />
-            </div>
+          <div className="restad">
+            {/* 나머지주소 안에 카카오 API 주소 자동으로 추가됨 */}
+            <input
+              ref={inputrestad}
+              type="text"
+              placeholder="나머지주소 (선택입력)"
+              style={{ fontSize: '12px' }}
+            />
           </div>
 
           <div className="inputtele">
