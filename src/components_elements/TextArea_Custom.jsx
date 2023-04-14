@@ -12,6 +12,7 @@ export default function TextArea_Custom({
   rows,
   styleArea,
   styleChildren,
+  textAreaClassName,
 }) {
   return (
     <div>
@@ -29,6 +30,7 @@ export default function TextArea_Custom({
         maxLength={maxLength}
         cols={cols}
         rows={rows}
+        className={textAreaClassName}
       />
     </div>
   );

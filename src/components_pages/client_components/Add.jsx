@@ -69,7 +69,7 @@ const Add = () => {
         </div>
       </div>
 
-      {/* <div className="add_caution">
+      <div className="add_caution">
         <span className="add_cau_title">배송주소록 유의사항</span>
         <br />
         <br />
@@ -79,7 +79,7 @@ const Add = () => {
           자동 업데이트를 원하지 않을 경우 주소록 고정 선택을 선택하시면 선택된
           주소록은 업데이트 대상에서 제외됩니다.
         </span>
-      </div> */}
+      </div>
     </div>
   );
 };
