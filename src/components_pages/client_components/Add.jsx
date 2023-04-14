@@ -1,10 +1,14 @@
 import React from 'react';
 import { useState } from 'react';
 import DaumPostcode from 'react-daum-postcode';
+import '../../styles/adwrite_client.scss';
 
 const Add = () => {
   const [openPostcode, setOpenPostcode] = useState(false);
   const [addressData, setAdressData] = useState({});
+  const handleChange = (event) => {
+    setAdressData(event.target.value);
+  };
 
   const handle = {
     // 버튼 클릭 이벤트
@@ -22,7 +26,7 @@ const Add = () => {
   };
 
   return (
-    <div>
+    <div className="adress_wrap">
       <input
         type="text"
         value={addressData.zonecode}
@@ -47,6 +51,7 @@ const Add = () => {
         type="text"
         value={addressData.buildingName}
         placeholder="나머지주소 (선택입력)"
+        onChange={handleChange}
         style={{ fontSize: '12px' }}
       />
     </div>
