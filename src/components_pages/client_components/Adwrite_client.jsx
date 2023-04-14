@@ -5,6 +5,7 @@ import '../../styles/adwrite_client.scss';
 import { useNavigate } from 'react-router-dom';
 import BTN_black_nomal_comp from '../../styles/BTN_black_nomal_comp';
 import Add from './Add';
+import { gracefulify } from 'graceful-fs';
 
 export default function Adwrite_client() {
   const navigate = useNavigate();
@@ -132,7 +133,7 @@ export default function Adwrite_client() {
               <span className="shipad_caution">배송주소록 유의사항</span>
               <br />
               <br />
-              <span>
+              <span style={{ fontColor: gracefulify }}>
                 배송주소록은 최대 10개까지 등록할 수 있으며, 별도로 등록하지
                 않을 경우 최근 배송주소록 기준으로 자동 업데이트 됩니다.
                 <br />
