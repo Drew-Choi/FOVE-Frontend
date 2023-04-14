@@ -130,6 +130,7 @@ export default function Order_client() {
           {/* <BTN_black_nomal_comp onClick={() => orderPOST()}>
             결제하기
           </BTN_black_nomal_comp> */}
+          {/* 픽스임 */}
         </>
       )}
     </div>
