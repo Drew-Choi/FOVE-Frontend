@@ -1,4 +1,13 @@
 .intor_moive{
   width: 100vw;
   height: 650px;
+  display: flex;
+  justify-content: center;
+
+  h1 {
+    padding-top: 200px;
+    text-align: center;
+    color: black;
+    font-style: italic;
+  }
 }
