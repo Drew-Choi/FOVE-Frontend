@@ -23,7 +23,6 @@ export default function Detail_client() {
     );
     if (selectData.status === 200) {
       await setProductData(selectData.data[0]);
-      dispatch(single(productData));
       return selectData.data;
     } else {
       return selectData.data;
@@ -54,10 +53,10 @@ export default function Detail_client() {
         {productData && (
           <>
             <Detail_OrderMenu_client
-              productName={productData[0].productName}
-              detail={productData[0].detail}
-              price={productData[0].price}
-              datas={productData[0]}
+              productName={productData.productName}
+              detail={productData.detail}
+              price={productData.price}
+              datas={productData}
             />
             <Detail_SubImage_client datas={productData} />
           </>

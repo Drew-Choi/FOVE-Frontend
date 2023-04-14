@@ -5,8 +5,9 @@ const initState = {
   quantity: 0,
   size: '',
   totalPrice: 0,
+  img: '',
+  color: '',
 };
-
 // 액션 타입(문자열) 설정.
 const SINGLE = 'order/SINGLE';
 
@@ -29,7 +30,8 @@ export default function order(state = initState, action) {
         price: action.payload.price,
         quantity: action.payload.quantity,
         size: action.payload.size,
-        totalPrice: action.payload.price * action.payload.quantity,
+        totalPrice: action.payload.totalPrice,
+        img: action.payload.img,
       };
     default:
       return state;

@@ -1,6 +1,6 @@
 .order_main {
   top: 80px;
-  background-color: rgb(255, 208, 208);
+  // background-color: rgb(255, 208, 208);
   position: relative;
   width: 100vw;
   height: 650px; 
@@ -9,7 +9,136 @@
     text-align: center;
   }
 
-  .order_product_title{
+  .memeber_info_contain {
+    position: relative;
+    background-color: white;
+    width: 80vw;
+    height: 120px;
+    border: 0.1px solid black;
+    margin-left:auto;
+    margin-right: auto;
+    padding: 20px;
+    font-size: 12px;
+    line-height: 5px;
     
+    .memeber_info_membership{
+
+    }
+
+    .memeber_info_event1{
+
+    }
+
+    .memeber_info_event2 {
+      margin-bottom: 20px;
+    }
+
+    .point_text1 {
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    .point_text2 {
+      display: inline-block;
+      margin-right: 10px;
+      margin-left: 60px;
+    }
+
+    .point_text3 {
+      display: inline-block;
+      margin-right: 10px;
+      margin-left: 60px;
+    }
+
+      .member_point {
+        display: inline-block;
+        font-weight: 700;
+      }
+
+      .member_deposit {
+        display: inline-block;
+        font-weight: 700;
+      }
+
+      .member_coupon {
+        display: inline-block;
+        font-weight: 700;
+      }
   }
+
+
+  .order_product_title{
+    position: relative;
+    font-size: 15px;
+    left: 170px;
+    top: 30px;
+  }
+
+  .ordermenu_product_contianer {
+    background-color: rgb(255, 255, 255);
+    position: relative;
+    width: 80vw;
+    height: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    top: 20px;
+    border-top: 0.5px solid black;
+    border-bottom: 0.5px solid black;
+
+    .order_pdIMG {
+      position: relative;
+      width: 130px;
+      // border: 0.5px solid black;
+      top: 10px;
+      height: 130px;
+      left: 20px;
+      background-size: cover;
+      background-position: center;
+    }
+    
+    .order_pd_info {
+      position: relative;
+      width:250px;
+      // background-color: aqua;
+      bottom: 115px;
+      left: 180px;
+      font-size: 13px;
+      font-weight: 500;
+
+      .order_product_Name{
+       margin: 0;
+       margin-bottom: 13px;
+       font-weight: bolder;
+      }
+      .order_product_price{
+        margin: 0;
+      }
+      .order_product_size{
+        margin: 0;
+        font-size: 12px;
+      }
+      .order_product_color{
+        margin: 0;
+        font-size: 12px;
+      }
+      .order_product_quantity{
+        margin: 0;
+        font-size: 12px;
+      }
+      .order_product_unitSumPrice {
+        margin: 0;
+        span{
+          font-weight: 800;
+        }
+      }
+    }
+  }
+
+}
+
+.resetMessage{
+  position: relative;
+  top: 50px;
+  text-align: center;
+  font-size: large;
 }
