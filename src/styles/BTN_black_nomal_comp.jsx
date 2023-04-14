@@ -12,7 +12,8 @@ const Btn_blakc_nomal = styled.span`
   transition: 0.2s ease;
   text-align: center;
   &:hover {
-    background-color: gray;
+    background-color: #97979728;
+    color: black;
   }
   &:active {
     font-size: ${(props) => props.transFontSize};
