@@ -49,58 +49,33 @@ export default function Adwrite_client() {
 
           <Add />
 
-          <div className="inputtele">
-            <div className="localnum">
-              {/* 지역번호 입력 */}
-              <input />
-            </div>
-
-            <div className="telephone">
-              {/* 유선전화 가운데 번호 입력 */}
-              <input
-                ref={telephone}
-                type="text"
-                placeholder="유선전화"
-                style={{ fontSize: '12px' }}
-              />
-            </div>
-
-            <div className="telephone_blank">
-              {/* 유선전화 마지막 번호 입력 */}
-              <input
-                ref={telephone_blank}
-                type="text"
-                placeholder=""
-                style={{ fontSize: '12px' }}
-              />
-            </div>
-
-            <div className="inputcell">
-              <div className="localnum">
-                {/* 휴대전화 지역번호 입력 */}
-                <input />
-              </div>
-
-              <div className="cellphone">
-                {/* 휴대전화 가운데 번호 입력 */}
-                <input
-                  ref={cellphone}
-                  type="text"
-                  placeholder="휴대전화"
-                  style={{ fontSize: '12px' }}
-                />
-              </div>
-
-              <div className="cellphone_blank">
-                {/* 휴대전화 마지막 번호 입력 */}
-                <input
-                  ref={cellphone_blank}
-                  type="text"
-                  placeholder=""
-                  style={{ fontSize: '12px' }}
-                />
-              </div>
-            </div>
+          <div className="phone-number">
+            <input
+              type="tel"
+              id="phone1"
+              name="phone1"
+              maxLength="3"
+              pattern="[0-9]{3}"
+              required
+            />
+            <label htmlFor="phone1">-</label>
+            <input
+              type="tel"
+              id="phone2"
+              name="phone2"
+              maxLength="4"
+              pattern="[0-9]{4}"
+              required
+            />
+            <label htmlFor="phone2">-</label>
+            <input
+              type="tel"
+              id="phone3"
+              name="phone3"
+              maxLength="4"
+              pattern="[0-9]{4}"
+              required
+            />
           </div>
 
           <div className="ad_mom">
