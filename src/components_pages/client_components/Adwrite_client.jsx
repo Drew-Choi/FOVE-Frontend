@@ -5,6 +5,7 @@ import '../../styles/adwrite_client.scss';
 import { useNavigate } from 'react-router-dom';
 import BTN_black_nomal_comp from '../../styles/BTN_black_nomal_comp';
 import Add from './Add';
+import Select_Custom from '../../components_elements/Select_Custom';
 
 export default function Adwrite_client() {
   const navigate = useNavigate();
@@ -19,6 +20,27 @@ export default function Adwrite_client() {
   const cellphone = useRef();
   const cellphone_blank = useRef();
   const postnum = useRef();
+  const selectList_phone = [
+    '02',
+    '031',
+    '032',
+    '033',
+    '041',
+    '043',
+    '042',
+    '044',
+    '051',
+    '052',
+    '053',
+    '054',
+    '055',
+    '061',
+    '062',
+    '063',
+    '064',
+    '070',
+  ];
+  const selectList_cellphone = ['010', '011', '016', '017', '018', '019'];
 
   return (
     <>
@@ -49,66 +71,60 @@ export default function Adwrite_client() {
 
           <Add />
 
-          <div className="phone-number">
-            <input
-              type="tel"
-              id="phone1"
-              name="phone1"
-              maxLength="3"
-              pattern="[0-9]{3}"
-              required
-            />
-            <label htmlFor="phone1">-</label>
-            <input
-              type="tel"
-              id="phone2"
-              placeholder="유선전화"
-              style={{ fontSize: '12px' }}
-              name="phone2"
-              maxLength="4"
-              pattern="[0-9]{4}"
-              required
-            />
-            <label htmlFor="phone2">-</label>
-            <input
-              type="tel"
-              id="phone3"
-              name="phone3"
-              maxLength="4"
-              pattern="[0-9]{4}"
-              required
-            />
-          </div>
+          <div className="phone_wrap">
+            <div className="phone-number">
+              <Select_Custom
+                classNameSelect="phone_select"
+                selectList={selectList_phone}
+              />
+              <span>-</span>
+              <input
+                type="tel"
+                id="phone2"
+                placeholder="유선전화"
+                style={{ fontSize: '12px' }}
+                name="phone2"
+                maxLength="4"
+                pattern="[0-9]{4}"
+                required
+              />
+              <span>-</span>
+              <input
+                type="tel"
+                id="phone3"
+                name="phone3"
+                maxLength="4"
+                pattern="[0-9]{4}"
+                required
+              />
+            </div>
 
-          <div className="cell-phone-number">
-            <input
-              type="cell"
-              id="phone1"
-              name="phone1"
-              maxLength="3"
-              pattern="[0-9]{3}"
-              required
-            />
-            <label htmlFor="phone1">-</label>
-            <input
-              type="cell"
-              id="phone2"
-              placeholder="휴대전화"
-              style={{ fontSize: '12px' }}
-              name="phone2"
-              maxLength="4"
-              pattern="[0-9]{4}"
-              required
-            />
-            <label htmlFor="phone2">-</label>
-            <input
-              type="cell"
-              id="phone3"
-              name="phone3"
-              maxLength="4"
-              pattern="[0-9]{4}"
-              required
-            />
+            <div className="cell-phone-number">
+              <Select_Custom
+                classNameSelect="cellphone_select"
+                selectList={selectList_cellphone}
+              />
+              <span>-</span>
+              <input
+                type="cell"
+                id="phone2"
+                placeholder="휴대전화"
+                style={{ fontSize: '12px' }}
+                name="phone2"
+                maxLength="4"
+                pattern="[0-9]{4}"
+                required
+              />
+              <span>-</span>
+              <input
+                type="cell"
+                id="phone3"
+                name="phone3"
+                maxLength="4"
+                pattern="[0-9]{4}"
+                required
+              />
+            </div>
           </div>
 
           <div className="ad_mom">
