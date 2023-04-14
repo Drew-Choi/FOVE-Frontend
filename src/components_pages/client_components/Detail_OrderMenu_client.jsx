@@ -135,7 +135,7 @@ const CountContainer = styled.div`
 
 const Plus = styled.span`
   font-size: 20px;
-  padding-right: 15px;
+  padding-left: 15px;
   cursor: pointer;
   &:active {
     color: #b4b4b4;
@@ -146,7 +146,7 @@ const Miners = styled.span`
   font-size: 22px;
   font-weight: 500;
   transform: translateY(-2px);
-  padding-left: 15px;
+  padding-right: 15px;
   cursor: pointer;
   &:active {
     color: #b4b4b4;
@@ -266,9 +266,6 @@ export default function Detail_OrderMenu_client({
         <DetailDesc>{detail}</DetailDesc>
         <DownInfoContain>
           <CountContainer>
-            <Plus onClick={() => setCount((cur) => cur + 1)}> + </Plus>
-
-            <CountNumber>{count}</CountNumber>
             <Miners
               onClick={() =>
                 count <= 1 ? setCount((cur) => 1) : setCount((cur) => cur - 1)
@@ -276,6 +273,9 @@ export default function Detail_OrderMenu_client({
             >
               -
             </Miners>
+            <CountNumber>{count}</CountNumber>
+
+            <Plus onClick={() => setCount((cur) => cur + 1)}> + </Plus>
           </CountContainer>
 
           <CartIcon className="material-symbols-rounded">

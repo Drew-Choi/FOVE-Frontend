@@ -163,7 +163,7 @@ const Pd_quantity_contain = styled.div`
 const Pd_miners = styled.span`
   font-size: 18px;
   font-weight: 550;
-  grid-column: 3/3;
+  grid-column: 1/1;
   transform: translateY(-2px);
   grid-row: 1/1;
   justify-self: center;
@@ -178,7 +178,7 @@ const Pd_plus = styled.span`
   font-size: 15px;
   justify-self: center;
   align-self: center;
-  grid-column: 1/1;
+  grid-column: 3/3;
   grid-row: 1/1;
   cursor: pointer;
   &:active {
@@ -242,6 +242,45 @@ export default function CartModal({ className }) {
     !state.cart.cartProducts ? [] : state.cart.cartProducts,
   );
 
+  //카트 상품 수량 빼기
+  const minersCartItem = async (identity_id) => {
+    try {
+      const downData = await axios.post(
+        `http://localhost:4000/cart/countminus/productId/${identity_id}`,
+      );
+      if (downData.status === 200) {
+        if (downData.data && downData.data.products) {
+          // 'cartObj' 객체가 null이 아니고 'products' 속성이 존재하는 경우에만 실행
+          // 이곳에서 'products' 속성을 사용하는 코드 작성
+          dispatch(update(downData.data));
+        }
+        console.log('성공');
+      } else {
+        console.log('실패');
+      }
+    } catch (err) {
+      dispatch(update(null));
+      console.error(err);
+    }
+  };
+
+  //카트 상품 수량 추가
+  const plusCartItem = async (identity_id) => {
+    try {
+      const upData = await axios.post(
+        `http://localhost:4000/cart/countplus/productId/${identity_id}`,
+      );
+      if (upData.status === 200) {
+        dispatch(update(upData.data));
+        console.log('성공');
+      } else {
+        console.log('실패');
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   //개별 상품 삭제
   const deletePD = async (identity_id) => {
     try {
@@ -286,6 +325,12 @@ export default function CartModal({ className }) {
 
   const navigate = useNavigate();
 
+  const sumQuantity = (data) => {
+    let sum = 0;
+    data.map((el) => (sum += el.quantity));
+    return sum;
+  };
+
   return (
     <>
       <CartModal_Layout className={className}>
@@ -300,7 +345,7 @@ export default function CartModal({ className }) {
         <ExtraTextContainer>
           <UnitSum>Total:&nbsp;&nbsp;&nbsp;₩</UnitSum>
           <UnitSumNum>{frontPriceComma(unitSum(cartProducts))}</UnitSumNum>
-          <UnitSum>/ {cartProducts.length} ea</UnitSum>
+          <UnitSum>/ {sumQuantity(cartProducts)} ea</UnitSum>
           <AllRemove onClick={allRemove}>All Remove</AllRemove>
           <BTN_black_nomal_comp
             className="cart_Btn"
@@ -327,9 +372,9 @@ export default function CartModal({ className }) {
               <Line1></Line1>
               <Line2></Line2>
               <Line3></Line3>
-              <Pd_plus>+</Pd_plus>
+              <Pd_miners onClick={() => minersCartItem(el._id)}>-</Pd_miners>
               <Pd_count>{el.quantity}</Pd_count>
-              <Pd_miners>-</Pd_miners>
+              <Pd_plus onClick={() => plusCartItem(el._id)}>+</Pd_plus>
             </Pd_quantity_contain>
             <RemoveIcon
               onClick={() => deletePD(el._id)}
