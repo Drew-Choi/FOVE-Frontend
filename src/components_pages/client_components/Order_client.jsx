@@ -154,24 +154,13 @@ export default function Order_client() {
             </div>
 
             {/* 주소록 관리 등록 제목 위치 */}
-            <div className="ad_wrap">
-              <div className="ship_name">
-                <input
-                  ref={inputshipname}
-                  type="text"
-                  placeholder="받으시는 분"
-                  style={{ fontSize: '12px' }}
-                />
-              </div>
-
-              <div className="id_name">
-                <input
-                  ref={inputidname}
-                  type="text"
-                  placeholder="성명"
-                  style={{ fontSize: '12px' }}
-                />
-              </div>
+            <div className="information_contain">
+              <input
+                className="information_name"
+                type="text"
+                placeholder="받으시는 분"
+                style={{ fontSize: '12px' }}
+              />
 
               <Add />
 

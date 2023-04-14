@@ -183,19 +183,17 @@
     }
 
   
-  .ad_wrap {
+  .information_contain {
     text-align: center;
     width: 50vw;
-    padding: 30px;
+    padding: 10px;
     background-color: darkblue;
-  
-    input {
-      margin: 5px;
-      width: 900px;
-      height: 40px;
-      padding-left: 13px;
-      border: 1px solid black;
+
+    .information_name{
+      position: relative;
+      font-size: 15px;
     }
+
     }
   
     .address_mom_wrap {
