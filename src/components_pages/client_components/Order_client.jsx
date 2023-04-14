@@ -10,6 +10,7 @@ import Input_Custom from '../../components_elements/Input_Custom';
 import { useNavigate } from 'react-router-dom';
 import Add from './Add';
 import Select_Custom from '../../components_elements/Select_Custom';
+import TextArea_Custom from '../../components_elements/TextArea_Custom';
 
 const Pd_order_IMG = styled.div`
   ${(props) =>
@@ -62,8 +63,9 @@ export default function Order_client() {
     '032',
     '033',
     '041',
-    '042',
     '043',
+    '042',
+    '044',
     '051',
     '052',
     '053',
@@ -73,11 +75,26 @@ export default function Order_client() {
     '062',
     '063',
     '064',
+    '070',
+  ];
+
+  const selectList_celPhone = ['010', '011', '016', '017', '019'];
+
+  const emailList = [
+    'gmail.com',
+    'naver.com',
+    'daum.net',
+    'hanmail.net',
+    'kakao.com',
+    'nate.com',
+    'outlook.com',
+    'icloud.com',
+    '직접입력',
   ];
 
   return (
     <div className="order_main">
-      <p className="order_title">주문서 작성</p>
+      <h2 className="subtitle">주소록 등록</h2>
 
       <div className="memeber_info_contain">
         <p className="memeber_info_membership">
@@ -125,161 +142,155 @@ export default function Order_client() {
             </div>
           </div>
 
-          <div className="ship_info_layout">
-            <p className="ship_info_title">배송 정보</p>
+          <div className="sangAh">
+            <p className="ship_input_title">배송 정보</p>
             <div className="ship_info_input_container">
-              <RadioGroup>
+              <RadioGroup classNameRadio="adressCheck">
                 <RadioEl_frontDot>&ensp;회원 정보와 동일 </RadioEl_frontDot>
                 <RadioEl_frontDot>&ensp;새로운 배송지 </RadioEl_frontDot>
               </RadioGroup>
-              <button>주소록 보기</button>
+              <button className="adressBook">주소록 보기</button>
               <p>*필수입력사항</p>
-              <Input_Custom type="text" placeholder="받으시는 분 성함" />
-              <Input_Custom
+            </div>
+
+            {/* 주소록 관리 등록 제목 위치 */}
+            <div className="ad_wrap">
+              <div className="ship_name">
+                <input
+                  ref={inputshipname}
+                  type="text"
+                  placeholder="받으시는 분"
+                  style={{ fontSize: '12px' }}
+                />
+              </div>
+
+              <div className="id_name">
+                <input
+                  ref={inputidname}
+                  type="text"
+                  placeholder="성명"
+                  style={{ fontSize: '12px' }}
+                />
+              </div>
+
+              <Add />
+
+              <div className="phone-number">
+                <Select_Custom
+                  classNameSelect="select_group2"
+                  selectList={selectList_phone}
+                />
+
+                <label htmlFor="phone1">-</label>
+                <input
+                  type="tel"
+                  id="phone2"
+                  placeholder="유선전화"
+                  style={{ fontSize: '12px' }}
+                  name="phone2"
+                  maxLength="4"
+                  pattern="[0-9]{4}"
+                  required
+                />
+                <label htmlFor="phone2">-</label>
+                <input
+                  type="tel"
+                  id="phone3"
+                  name="phone3"
+                  maxLength="4"
+                  pattern="[0-9]{4}"
+                  required
+                />
+              </div>
+
+              <div className="cell-phone-number">
+                <Select_Custom
+                  classNameSelect="select_group2"
+                  selectList={selectList_celPhone}
+                />
+                <label htmlFor="phone1">-</label>
+                <input
+                  type="cell"
+                  id="phone2"
+                  placeholder="휴대전화"
+                  style={{ fontSize: '12px' }}
+                  name="phone2"
+                  maxLength="4"
+                  pattern="[0-9]{4}"
+                  required
+                />
+                <label htmlFor="phone2">-</label>
+                <input
+                  type="cell"
+                  id="phone3"
+                  name="phone3"
+                  maxLength="4"
+                  pattern="[0-9]{4}"
+                  required
+                />
+              </div>
+
+              {/* 이메일 */}
+              <div className="cell-phone-number email">
+                <label htmlFor="email1"></label>
+                <input
+                  type="cell"
+                  id="email1"
+                  style={{ fontSize: '12px' }}
+                  name="email1"
+                  maxLength="4"
+                  pattern="[0-9]{4}"
+                  required
+                />
+                <span className="emailLogo">@ </span>
+
+                <Select_Custom
+                  classNameSelect="select_group2 email"
+                  selectList={emailList}
+                />
+                <label htmlFor="email2"></label>
+                <input
+                  type="cell"
+                  id="email2"
+                  name="email2"
+                  maxLength="4"
+                  pattern="[0-9]{4}"
+                  disabled
+                  required
+                />
+              </div>
+
+              <TextArea_Custom
+                styleArea={{ resize: 'none' }}
+                maxLength="30"
+                rows="3"
+                cols="111"
                 type="text"
-                placeholder="우편번호"
-                disabled
-                value={''}
-              />
-              <button>우편번호</button>
-              <Input_Custom
-                type="text"
-                placeholder="주소"
-                disabled
-                value={''}
-              />
-              <Input_Custom type="text" placeholder="상세주소" />
-              <Input_Custom />
-              <Input_Custom />
-            </div>
-          </div>
-          {/* <BTN_black_nomal_comp onClick={() => orderPOST()}>
-            결제하기
-          </BTN_black_nomal_comp> */}
-          {/* 픽스임 */}
-        </>
-      )}
-
-      <div className="sangAh">
-        <div className="titleArea">
-          <h2 className="subtitle">주소록 등록</h2>
-        </div>
-
-        {/* 주소록 관리 등록 제목 위치 */}
-        <div className="ad_inner">
-          <div className="ad_wrap">
-            <div className="ship_name">
-              <input
-                ref={inputshipname}
-                type="text"
-                placeholder="받으시는 분"
-                style={{ fontSize: '12px' }}
-              />
-            </div>
-
-            <div className="id_name">
-              <input
-                ref={inputidname}
-                type="text"
-                placeholder="성명"
-                style={{ fontSize: '12px' }}
-              />
-            </div>
-
-            <Add />
-
-            <div className="phone-number">
-              <Select_Custom
-                classNameSelect="select_group2"
-                selectList={selectList_phone}
               />
 
-              <label htmlFor="phone1">-</label>
-              <input
-                type="tel"
-                id="phone2"
-                placeholder="유선전화"
-                style={{ fontSize: '12px' }}
-                name="phone2"
-                maxLength="4"
-                pattern="[0-9]{4}"
-                required
-              />
-              <label htmlFor="phone2">-</label>
-              <input
-                type="tel"
-                id="phone3"
-                name="phone3"
-                maxLength="4"
-                pattern="[0-9]{4}"
-                required
-              />
-            </div>
+              <div className="ad_mom">
+                <BTN_black_nomal_comp
+                  className="ad_btn_submit_wht"
+                  onClick={() => navigate('#')}
+                >
+                  취소
+                </BTN_black_nomal_comp>
 
-            <div className="cell-phone-number">
-              <input
-                type="cell"
-                id="phone1"
-                name="phone1"
-                maxLength="3"
-                pattern="[0-9]{3}"
-                required
-              />
-              <label htmlFor="phone1">-</label>
-              <input
-                type="cell"
-                id="phone2"
-                placeholder="휴대전화"
-                style={{ fontSize: '12px' }}
-                name="phone2"
-                maxLength="4"
-                pattern="[0-9]{4}"
-                required
-              />
-              <label htmlFor="phone2">-</label>
-              <input
-                type="cell"
-                id="phone3"
-                name="phone3"
-                maxLength="4"
-                pattern="[0-9]{4}"
-                required
-              />
-            </div>
-
-            <div className="ad_mom">
-              <BTN_black_nomal_comp
-                className="ad_btn_submit_wht"
-                onClick={() => navigate('#')}
-              >
-                취소
-              </BTN_black_nomal_comp>
-
-              <BTN_black_nomal_comp
-                className="ad_btn_submit_blk"
-                onClick={() => navigate('#')}
-              >
-                등록
-              </BTN_black_nomal_comp>
-            </div>
-
-            <div className="caution">
-              <div className="ship_caution">
-                <span className="shipad_caution">배송주소록 유의사항</span>
-                <br />
-                <br />
-                <span>
-                  배송주소록은 최대 10개까지 등록할 수 있으며, 별도로 등록하지
-                  않을 경우 최근 배송주소록 기준으로 자동 업데이트 됩니다.
-                  <br />
-                  자동 업데이트를 원하지 않을 경우 주소록 고정 선택을 선택하시면
-                  선택된 주소록은 업데이트 대상에서 제외됩니다.
-                </span>
+                <BTN_black_nomal_comp
+                  className="ad_btn_submit_blk"
+                  onClick={() => navigate('#')}
+                >
+                  등록
+                </BTN_black_nomal_comp>
               </div>
             </div>
+
+            {/* <BTN_black_nomal_comp onClick={() => orderPOST()}>
+            결제하기
+          </BTN_black_nomal_comp> */}
           </div>
-        </div>
-      </div>
+        </>
+      )}
     </div>
   );
 }

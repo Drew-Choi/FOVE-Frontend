@@ -1,8 +1,11 @@
 import React from 'react';
 
-export default function RadioGroup({ label, children }) {
+export default function RadioGroup({ label, children, classNameRadio }) {
   return (
-    <fieldset style={{ border: '0px', margin: '0px', padding: '10px' }}>
+    <fieldset
+      className={classNameRadio}
+      style={{ border: '0px', margin: '0px', padding: '10px' }}
+    >
       <legend>{label}</legend>
       {children}
     </fieldset>
