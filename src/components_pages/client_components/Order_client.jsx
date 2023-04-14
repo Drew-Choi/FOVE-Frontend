@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '../../styles/order_client.scss';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
@@ -7,6 +7,9 @@ import BTN_black_nomal_comp from '../../styles/BTN_black_nomal_comp';
 import RadioGroup from '../../components_elements/RadioGroup';
 import RadioEl_frontDot from '../../components_elements/RadioEl_frontDot';
 import Input_Custom from '../../components_elements/Input_Custom';
+import { useNavigate } from 'react-router-dom';
+import Add from './Add';
+import Select_Custom from '../../components_elements/Select_Custom';
 
 const Pd_order_IMG = styled.div`
   ${(props) =>
@@ -15,6 +18,10 @@ const Pd_order_IMG = styled.div`
 `;
 
 export default function Order_client() {
+  const navigate = useNavigate();
+  const inputidname = useRef();
+  const inputshipname = useRef();
+
   const orderPOST = async () => {
     try {
       const orderData = await axios.post('http://localhost:4000/store/order', {
@@ -48,6 +55,25 @@ export default function Order_client() {
       <h2 style={{ position: 'relative', top: '100px' }}>data Error</h2>
     ),
   );
+
+  const selectList_phone = [
+    '02',
+    '031',
+    '032',
+    '033',
+    '041',
+    '042',
+    '043',
+    '051',
+    '052',
+    '053',
+    '054',
+    '055',
+    '061',
+    '062',
+    '063',
+    '064',
+  ];
 
   return (
     <div className="order_main">
@@ -133,6 +159,127 @@ export default function Order_client() {
           {/* 픽스임 */}
         </>
       )}
+
+      <div className="sangAh">
+        <div className="titleArea">
+          <h2 className="subtitle">주소록 등록</h2>
+        </div>
+
+        {/* 주소록 관리 등록 제목 위치 */}
+        <div className="ad_inner">
+          <div className="ad_wrap">
+            <div className="ship_name">
+              <input
+                ref={inputshipname}
+                type="text"
+                placeholder="받으시는 분"
+                style={{ fontSize: '12px' }}
+              />
+            </div>
+
+            <div className="id_name">
+              <input
+                ref={inputidname}
+                type="text"
+                placeholder="성명"
+                style={{ fontSize: '12px' }}
+              />
+            </div>
+
+            <Add />
+
+            <div className="phone-number">
+              <Select_Custom
+                classNameSelect="select_group2"
+                selectList={selectList_phone}
+              />
+
+              <label htmlFor="phone1">-</label>
+              <input
+                type="tel"
+                id="phone2"
+                placeholder="유선전화"
+                style={{ fontSize: '12px' }}
+                name="phone2"
+                maxLength="4"
+                pattern="[0-9]{4}"
+                required
+              />
+              <label htmlFor="phone2">-</label>
+              <input
+                type="tel"
+                id="phone3"
+                name="phone3"
+                maxLength="4"
+                pattern="[0-9]{4}"
+                required
+              />
+            </div>
+
+            <div className="cell-phone-number">
+              <input
+                type="cell"
+                id="phone1"
+                name="phone1"
+                maxLength="3"
+                pattern="[0-9]{3}"
+                required
+              />
+              <label htmlFor="phone1">-</label>
+              <input
+                type="cell"
+                id="phone2"
+                placeholder="휴대전화"
+                style={{ fontSize: '12px' }}
+                name="phone2"
+                maxLength="4"
+                pattern="[0-9]{4}"
+                required
+              />
+              <label htmlFor="phone2">-</label>
+              <input
+                type="cell"
+                id="phone3"
+                name="phone3"
+                maxLength="4"
+                pattern="[0-9]{4}"
+                required
+              />
+            </div>
+
+            <div className="ad_mom">
+              <BTN_black_nomal_comp
+                className="ad_btn_submit_wht"
+                onClick={() => navigate('#')}
+              >
+                취소
+              </BTN_black_nomal_comp>
+
+              <BTN_black_nomal_comp
+                className="ad_btn_submit_blk"
+                onClick={() => navigate('#')}
+              >
+                등록
+              </BTN_black_nomal_comp>
+            </div>
+
+            <div className="caution">
+              <div className="ship_caution">
+                <span className="shipad_caution">배송주소록 유의사항</span>
+                <br />
+                <br />
+                <span>
+                  배송주소록은 최대 10개까지 등록할 수 있으며, 별도로 등록하지
+                  않을 경우 최근 배송주소록 기준으로 자동 업데이트 됩니다.
+                  <br />
+                  자동 업데이트를 원하지 않을 경우 주소록 고정 선택을 선택하시면
+                  선택된 주소록은 업데이트 대상에서 제외됩니다.
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
