@@ -20,6 +20,22 @@ const Pd_order_IMG = styled.div`
 
 export default function Order_client() {
   const navigate = useNavigate();
+  //카트에 담긴 상품들을 주문해 보자
+  //일단, 현재 페이지의 url주소를 분석해서 싱글인지, 카트 상품인지 파악하자
+  const location = useLocation();
+  const currentURL = location.pathname;
+
+  //천단위 컴마
+  const country = navigator.language;
+  const frontPriceComma = (price) => {
+    if (price && typeof price.toLocaleString === 'function') {
+      return price.toLocaleString(country, {
+        currency: 'KRW',
+      });
+    } else {
+      return price;
+    }
+  };
 
   //리덕스 state ---------------------------
   //오더메뉴에서 넘어오는 정보들(리덕스)
@@ -103,72 +119,61 @@ export default function Order_client() {
   //14. 기타 배송 메모
   const extraMemo = useRef();
 
-  //결제 동의 결과값
-  const checkoutRef = useRef();
-  const [agreement, setAgreement] = useState();
-
   //주문 정보 백에 POST 보내기
   const orderPOST = async () => {
-    console.log('상품정보');
-    console.log('productName: ' + singleOrder.productName);
-    console.log('price: ' + singleOrder.price);
-    console.log('color: ' + singleOrder.color);
-    console.log('quantity: ' + singleOrder.quantity);
-    console.log('주문 상태(status): ' + '입금 전');
-    console.log('주문 상태(paymentMethod):' + '카드');
-    console.log('받는 곳 정보');
-    console.log('받는 분 이름: ' + recipientName.current.value);
-    console.log('받는 분 우편번호: ' + recipientZipcode.current.value);
-    console.log('받는 분 주소: ' + recipientAddress.current.value);
-    console.log('받는 분 디테일 주소: ' + recipientAddressDetail.current.value);
-    console.log('받는 분 전화번호 지역번호: ' + telAreaCode.current.value);
-    console.log(
-      '받는 분 전화번호 중간 번호: ' + !telMidNum.current.value
-        ? '전화번호 없음'
-        : telMidNum.current.value,
-    );
-    console.log(telMidNum.current.value);
-    console.log('받는 분 전화번호 마지막 번호: ' + telLastNum.current.value);
-    console.log('받는 분 핸드폰 번호 통신사: ' + phoneCode.current.value);
-    console.log('받는 분 핸드폰 번호 중간 번호: ' + phoneMidNum.current.value);
-    console.log(
-      '받는 분 핸드폰 번호 마지막 번호: ' + phoneLastNum.current.value,
-    );
-    console.log('받는 분 이메일 아이디: ' + emailID.current.value);
-    console.log('받는 분 이메일 주소: ' + emailAddress.current.value);
-    console.log(
-      '받는 분 셀프 이메일등록: ' + !selfMailInput.current.value
-        ? '셀프x'
-        : selfMailInput.current.value,
-    );
-    console.log(
-      '받는 분 기타 메모: ' + extraMemo.current.value === ''
-        ? '메모 없음'
-        : extraMemo.current.value,
-    );
+    let products = [];
+    console.log(products);
 
-    // try {
-    //   const orderData = await axios.post('http://localhost:4000/store/order', {
-    //     productName: '희성이는 예쁘다',
-    //     price: 1000000000,
-    //     size: 'S',
-    //     color: 'blue',
-    //     quantity: 10,
-    //     unitSumPrice: 20,
-    //     massage: '역시 희성이 성공 할 줄 알아썽!',
-    //     status: '역시 데이터 전송 성공! 역시 희성이구만',
-    //     paymentMethod: '현금빵',
-    //   });
-    //   if (orderData.status === 200) {
-    //     console.log('성공');
-    //     console.log(orderData);
-    //   } else {
-    //     console.log('실패');
-    //     console.log(orderData);
-    //   }
-    // } catch (err) {
-    //   console.error(err);
-    // }
+    if (currentURL === '/store/order') {
+      products.push({
+        productName: singleOrder.productName,
+        price: singleOrder.price,
+        img: singleOrder.img,
+        size: singleOrder.size,
+        color: singleOrder.color,
+        quantity: singleOrder.quantity,
+        unitSumPrice: singleOrder.totalPrice,
+      });
+    } else if (currentURL === '/store/cartorder') {
+      cartOrderData.cartProducts.map((el) => {
+        products.push(el);
+      });
+    } else {
+      return console.log('데이터 오류');
+    }
+
+    try {
+      const orderData = await axios.post('http://localhost:4000/store/order', {
+        //상품정보(싱글)
+        products: products,
+        //받는 이 정보
+        massage: extraMemo.current.value,
+        recipientName: recipientName.current.value,
+        recipientZipcode: recipientZipcode.current.value,
+        recipientAddress: recipientAddress.current.value,
+        recipientAddressDetail: recipientAddressDetail.current.value,
+        telAreaCode: telAreaCode.current.value,
+        telMidNum: telMidNum.current.value,
+        telLastNum: telLastNum.current.value,
+        phoneCode: phoneCode.current.value,
+        phoneMidNum: phoneMidNum.current.value,
+        phoneLastNum: phoneLastNum.current.value,
+        emailID: emailID.current.value,
+        emailAddress: emailAddress.current.value,
+        selfMailInput: !selfMailInput.current.value
+          ? ''
+          : selfMailInput.current.value,
+      });
+      if (orderData.status === 200) {
+        console.log('성공');
+        console.log(orderData.data);
+      } else {
+        console.log('실패');
+        console.log(orderData.data);
+      }
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const selectList_phone = [
@@ -210,7 +215,6 @@ export default function Order_client() {
   const [disOnOff, setDisOnOff] = useState(true);
   const selectorDisableOnOff = () => {
     console.log(emailAddress.current.value);
-    console.log(disOnOff);
     if (emailAddress.current.value === '직접입력') {
       setDisOnOff((cur) => false);
     } else {
@@ -232,12 +236,6 @@ export default function Order_client() {
     boxShadow: '0 0 8px rgba(0, 0, 0, 0.5)',
   };
 
-  //카트에 담긴 상품들을 주문해 보자
-  //일단, 현재 페이지의 url주소를 분석해서 싱글인지, 카트 상품인지 파악하자
-  const location = useLocation();
-  const currentURL = location.pathname;
-  console.log(currentURL);
-
   //카트데이터 계산할때 총 합계값을 반환해주는 함수
   const cartItemPriceSum = () => {
     let sum = 0;
@@ -246,20 +244,38 @@ export default function Order_client() {
     return sum;
   };
 
-  //천단위 컴마
-  const country = navigator.language;
-  const frontPriceComma = (price) => {
-    if (price && typeof price.toLocaleString === 'function') {
-      return price.toLocaleString(country, {
-        currency: 'KRW',
-      });
+  //결제 동의 결과값
+  const checkoutRef = useRef(false);
+  const [agreement, setAgreement] = useState();
+  const [toggleModal, setToggleModal] = useState(false);
+  const [on, setOn] = useState('');
+
+  //agreement 모달 스크롤기능
+  const [scrollPosition, setScrollPosition] = useState(0);
+  useEffect(() => {
+    if (toggleModal) {
+      setScrollPosition(window.pageYOffset);
+      document.body.style.overflow = 'hidden';
+      setOn('On');
     } else {
-      return price;
+      document.body.style.overflow = 'auto';
+      window.scrollTo(0, scrollPosition);
+      setOn('');
     }
-  };
+  }, [toggleModal]);
 
   return (
     <div className="order_main">
+      <div className={`orderModalOff ${on}`}>
+        <p>결제정보 확인 및 구매진행에 동의하셔야 주문이 가능합니다.</p>
+        <BTN_black_nomal_comp
+          onClickEvent={() => setToggleModal(false)}
+          className="model_checkout"
+        >
+          확인
+        </BTN_black_nomal_comp>
+      </div>
+
       <div className="memeber_info_contain">
         <p className="memeber_info_membership">
           {'000'}님은, {'[STANDARD]'} 회원이십니다.
@@ -582,9 +598,9 @@ export default function Order_client() {
 
                     <label htmlFor="agree_check">
                       <input
-                        onChange={setAgreement(
-                          (cur) => checkoutRef.current.checked,
-                        )}
+                        onClick={() =>
+                          setAgreement((cur) => checkoutRef.current.checked)
+                        }
                         ref={checkoutRef}
                         className="checkcheck"
                         type="checkbox"
@@ -599,7 +615,11 @@ export default function Order_client() {
                         fontSize="18px"
                         className="order_btn"
                         padding="10px 0px"
-                        onClickEvent={() => orderPOST()}
+                        onClickEvent={() =>
+                          !agreement
+                            ? setToggleModal((cur) => true)
+                            : orderPOST()
+                        }
                       >
                         결제하기
                       </BTN_black_nomal_comp>
