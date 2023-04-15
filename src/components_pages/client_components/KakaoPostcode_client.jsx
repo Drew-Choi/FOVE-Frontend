@@ -3,7 +3,7 @@ import { useState } from 'react';
 import DaumPostcode from 'react-daum-postcode';
 import '../../styles/adwrite_client.scss';
 
-const Add = () => {
+const KakaoPostcode_client = () => {
   const [openPostcode, setOpenPostcode] = useState(false);
   const [addressData, setAdressData] = useState({});
   const handleChange = (event) => {
@@ -59,7 +59,6 @@ const Add = () => {
               onComplete={handle.selectAddress} // 값을 선택할 경우 실행되는 이벤트
               autoClose={false} // 값을 선택할 경우 사용되는 DOM을 제거하여 자동 닫힘 설정
               defaultQuery="" // 팝업을 열때 기본적으로 입력되는 검색어
-              style={postCodeStyle}
             />
           )}
         </div>
@@ -87,4 +86,4 @@ const Add = () => {
   );
 };
 
-export default Add;
+export default KakaoPostcode_client;

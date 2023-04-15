@@ -15,6 +15,9 @@ import Register_client from './components_pages/client_components/Register_clien
 import Mypage_client from './components_pages/client_components/Mypage_client';
 import AdSubmit_client from './components_pages/client_components/AdSubmit_client';
 import Adwrite_client from './components_pages/client_components/Adwrite_client';
+import TEST_TOSS from './components_pages/client_components/TEST_TOSS';
+import Store_categorys from './components_pages/client_components/Store_categorys';
+import Order_client from './components_pages/client_components/Order_client';
 
 import { useSelector } from 'react-redux';
 import { ModalContainer_client } from './components_pages/client_components/ModalContainer_client';
@@ -28,9 +31,12 @@ function App() {
         {/* Client 영역 */}
         <Route path="/" element={<Client_main />}>
           <Route path="" element={<Intro_movie_client />} />
+          <Route path="/toss" element={<TEST_TOSS />} />
           <Route path="/aboutus" element={<AboutUs_client />} />
           <Route path="/store" element={<Store_client />} />
+          <Route path="/store/:category" element={<Store_categorys />} />
           <Route path="/store/detail/:id" element={<Detail_client />} />
+          <Route path="/store/order" element={<Order_client />} />
           <Route path="/mypage" element={<Mypage_client />} />
           <Route path="/adsubmit" element={<AdSubmit_client />} />
           <Route path="/adwrite" element={<Adwrite_client />} />

@@ -5,12 +5,14 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { importdb } from '../../store/modules/cart';
 import CartModal from './CartModal';
+import { offon } from '../../store/modules/cartmodal';
 
 export default function Header_client() {
-  const [cartDataOrigin, setCartDataOrigin] = useState(null);
   //리덕스 디스패치(액션함수 전달용)
   const dispatch = useDispatch();
-  const cartLength = useSelector((state) => state.cart.cartProductsLength);
+  const cartLength = useSelector((state) =>
+    state.cart.cartProductsLength === 0 ? 0 : state.cart.cartProductsLength,
+  );
 
   useEffect(() => {
     cartDataReq();
@@ -20,8 +22,7 @@ export default function Header_client() {
     try {
       const cartDataGet = await axios.get('http://localhost:4000');
       if (cartDataGet.status === 200) {
-        await setCartDataOrigin((cur) => cartDataGet.data.length);
-        dispatch(importdb(cartDataGet.data));
+        await dispatch(importdb(cartDataGet.data));
       } else {
         console.error(cartDataGet.status);
         console.log(cartDataGet.data.message);
@@ -34,8 +35,7 @@ export default function Header_client() {
   const navigate = useNavigate();
 
   //모달을 위한 state
-  const [turn, setTurn] = useState('off');
-  console.log(turn);
+  const offonKey = useSelector((state) => state.cartmodal.offon);
 
   return (
     <>
@@ -59,18 +59,14 @@ export default function Header_client() {
             <p onClick={() => navigate('#')}>ACCOUNT</p>
           </li>
           <li id="cate_li2_shopbag">
-            <p
-              onClick={() => (turn === 'off' ? setTurn('on') : setTurn('off'))}
-            >
-              SHOPPING BAG / {cartLength}
-            </p>
+            <p onClick={() => dispatch(offon())}>SHOPPING BAG / {cartLength}</p>
             {/* 0 이라는 숫자 장바구니에 넣을 때 올라가야 함 */}
           </li>
         </ul>
       </header>
 
       {/* 카트 모달 임 */}
-      <CartModal className={`cart_modal ${turn}`} />
+      <CartModal className={`cart_modal ${offonKey}`} />
     </>
   );
 }

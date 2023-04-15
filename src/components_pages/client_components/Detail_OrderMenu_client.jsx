@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { add } from '../../store/modules/cart';
+import { useNavigate, useParams } from 'react-router-dom';
+import { single } from '../../store/modules/order';
 
 const Detail_Order = styled.div`
   position: absolute;
@@ -96,7 +98,7 @@ const AddCart = styled.button`
   }
 `;
 
-const BuyCart = styled.button`
+const Buy = styled.button`
   position: absolute;
   all: unset;
   border: 2px solid black;
@@ -182,7 +184,7 @@ export default function Detail_OrderMenu_client({
       const reqData = await axios.post(
         `http://localhost:4000/store/productId/${datas._id}`,
         {
-          productData: datas.productData,
+          productName: datas.productName,
           img: datas.img[0],
           price: datas.price,
           size: datas.size,
@@ -220,10 +222,37 @@ export default function Detail_OrderMenu_client({
     }
   };
 
+  //주문으로 자료 넘기려는 용도
   const [count, setCount] = useState(1);
 
+  //싱글상품 데이터
+  const singleDataSum = (datas, count) => {
+    let sumData = {
+      productName: datas.productName,
+      price: datas.price,
+      quantity: count,
+      size: datas.size,
+      totalPrice: datas.price * count,
+      img: datas.img[0],
+      color: datas.color,
+    };
+    return sumData;
+  };
+
+  //콤마 찍기
   const country = navigator.language;
-  const frontPriceComma = (price) => price.toLocaleString(country);
+  const frontPriceComma = (price) => {
+    if (price && typeof price.toLocaleString === 'function') {
+      return price.toLocaleString(country, {
+        currency: 'KRW',
+      });
+    } else {
+      return price;
+    }
+  };
+
+  //라우터
+  const navigate = useNavigate();
 
   return (
     <Detail_Order>
@@ -255,7 +284,14 @@ export default function Detail_OrderMenu_client({
 
           <AddCart onClick={addToCart}>Add Cart</AddCart>
           <br></br>
-          <BuyCart>buy</BuyCart>
+          <Buy
+            onClick={async () => {
+              await dispatch(single(singleDataSum(datas, count)));
+              navigate(`/store/order`);
+            }}
+          >
+            buy
+          </Buy>
         </DownInfoContain>
         <SumPrice>₩ {frontPriceComma(count * price)}</SumPrice>
       </InfoContain>
