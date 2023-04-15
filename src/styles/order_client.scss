@@ -18,6 +18,7 @@
     border: 0.1px solid black;
     margin-left:auto;
     margin-right: auto;
+    margin-top: 20px;
     padding: 20px;
     font-size: 12px;
     line-height: 5px;
@@ -72,12 +73,19 @@
     background-color: rgb(255, 255, 255);
     position: relative;
     width: 50vw;
-    height: 150px;
     margin-left: auto;
     margin-right: auto;
     top: 20px;
     border-top: 0.5px solid black;
     border-bottom: 0.5px solid black;
+
+    .individualCopy_layout {
+      // background-color: rgb(255, 255, 255);
+      position: relative;
+      width: 50vw;
+      height: 150px;
+      margin-left: auto;
+      margin-right: auto;
 
     .order_pdIMG {
       position: relative;
@@ -126,6 +134,7 @@
         }
       }
     }
+   }
   }
 
   .sangAh {

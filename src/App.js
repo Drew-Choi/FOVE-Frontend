@@ -23,6 +23,7 @@ import Store_Categorys from './components_pages/client_components/Store_Category
 import TEST_TOSS from './components_pages/client_components/TEST_TOSS';
 import { CheckoutPage } from './components_pages/client_components/CheckOut';
 import { SuccessPage } from './components_pages/client_components/Success';
+import Error404 from './components_pages/client_components/Error404';
 
 function App() {
   const isLogin = useSelector((state) => state.user.isLogin);
@@ -39,6 +40,7 @@ function App() {
           <Route path="/store/:category" element={<Store_Categorys />} />
           <Route path="/store/detail/:id" element={<Detail_client />} />
           <Route path="/store/order" element={<Order_client />} />
+          <Route path="/store/cartorder" element={<Order_client />} />
           <Route path="/mypage" element={<Mypage_client />} />
           <Route path="/adsubmit" element={<AdSubmit_client />} />
           <Route path="/adwrite" element={<Adwrite_client />} />
@@ -72,12 +74,7 @@ function App() {
           <Route path="" element={<Home_admin />} />
           <Route path="register" element={<ProductRegister_admin />} />
         </Route>
-        <Route
-          path="*"
-          element={
-            <h2 style={{ display: 'inline-block' }}>NOT FOUND 404err</h2>
-          }
-        />
+        <Route path="*" element={<Error404 />} />
       </Routes>
     </div>
   );

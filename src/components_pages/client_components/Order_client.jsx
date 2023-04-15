@@ -6,10 +6,11 @@ import styled from 'styled-components';
 import BTN_black_nomal_comp from '../../styles/BTN_black_nomal_comp';
 import RadioGroup from '../../components_elements/RadioGroup';
 import RadioEl_frontDot from '../../components_elements/RadioEl_frontDot';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Select_Custom from '../../components_elements/Select_Custom';
 import TextArea_Custom from '../../components_elements/TextArea_Custom';
 import DaumPostcode from 'react-daum-postcode';
+import Error404 from './Error404';
 
 const Pd_order_IMG = styled.div`
   ${(props) =>
@@ -20,7 +21,8 @@ const Pd_order_IMG = styled.div`
 export default function Order_client() {
   const navigate = useNavigate();
 
-  //오더메뉴에서 넘어오는 정보들
+  //리덕스 state ---------------------------
+  //오더메뉴에서 넘어오는 정보들(리덕스)
   const singleOrder = useSelector((state) =>
     state.order ? (
       state.order
@@ -29,6 +31,17 @@ export default function Order_client() {
     ),
   );
 
+  const cartOrderData = useSelector((state) =>
+    state.cart ? (
+      state.cart
+    ) : (
+      <h2 style={{ position: 'relative', top: '100px' }}>data Error</h2>
+    ),
+  );
+
+  //----------------------------------------------------------------
+
+  //다음주소 불러오기 기능 ----------------------------------------------
   const [openPostcode, setOpenPostcode] = useState(false);
   const [addressData, setAdressData] = useState({});
   const handleChange = (event) => {
@@ -49,6 +62,7 @@ export default function Order_client() {
       setOpenPostcode(false);
     },
   };
+  //------------------------------------------------------
 
   //주문 정보 담기
   //1. 받는 분 성함
@@ -88,6 +102,10 @@ export default function Order_client() {
 
   //14. 기타 배송 메모
   const extraMemo = useRef();
+
+  //결제 동의 결과값
+  const checkoutRef = useRef();
+  const [agreement, setAgreement] = useState();
 
   //주문 정보 백에 POST 보내기
   const orderPOST = async () => {
@@ -200,10 +218,48 @@ export default function Order_client() {
     }
   };
 
+  const postCodeStyle2 = {
+    display: 'block',
+    position: 'absolute',
+    top: '88px',
+    left: '15%',
+    right: '0',
+    margin: '50px',
+    width: '30vw',
+    height: '450px',
+    zIndex: 100,
+    border: '1px solid black',
+    boxShadow: '0 0 8px rgba(0, 0, 0, 0.5)',
+  };
+
+  //카트에 담긴 상품들을 주문해 보자
+  //일단, 현재 페이지의 url주소를 분석해서 싱글인지, 카트 상품인지 파악하자
+  const location = useLocation();
+  const currentURL = location.pathname;
+  console.log(currentURL);
+
+  //카트데이터 계산할때 총 합계값을 반환해주는 함수
+  const cartItemPriceSum = () => {
+    let sum = 0;
+
+    cartOrderData.cartProducts.map((el) => (sum += el.unitSumPrice));
+    return sum;
+  };
+
+  //천단위 컴마
+  const country = navigator.language;
+  const frontPriceComma = (price) => {
+    if (price && typeof price.toLocaleString === 'function') {
+      return price.toLocaleString(country, {
+        currency: 'KRW',
+      });
+    } else {
+      return price;
+    }
+  };
+
   return (
     <div className="order_main">
-      <h2 className="subtitle">주소록 등록</h2>
-
       <div className="memeber_info_contain">
         <p className="memeber_info_membership">
           {'000'}님은, {'[STANDARD]'} 회원이십니다.
@@ -224,7 +280,9 @@ export default function Order_client() {
         <span className="member_coupon">{'0'} 개</span>
       </div>
 
-      {singleOrder.productName === '' || singleOrder.price === 0 ? (
+      {singleOrder.productName === '' &&
+      singleOrder.price === 0 &&
+      !cartOrderData ? (
         <p className="resetMessage">
           선택하신 상품이 초기화 되었습니다. 상품을 다시 선택해주세요.
         </p>
@@ -232,24 +290,65 @@ export default function Order_client() {
         <>
           <p className="order_product_title">상품 정보</p>
           <div className="ordermenu_product_contianer">
-            <Pd_order_IMG
-              img={singleOrder.img}
-              className="order_pdIMG"
-            ></Pd_order_IMG>
-            <div className="order_pd_info">
-              <p className="order_product_Name">{singleOrder.productName}</p>
-              <p className="order_product_price">₩ {singleOrder.price}</p>
-              <p className="order_product_size">size: {singleOrder.size}</p>
-              <p className="order_product_color">{singleOrder.color}</p>
-              <p className="order_product_quantity">
-                {singleOrder.quantity} ea
-              </p>
-              <p className="order_product_unitSumPrice">
-                total: ₩ <span>{singleOrder.totalPrice}</span>
-              </p>
-            </div>
-          </div>
+            {/* 싱글 오더와 카트오더를 url로 구분 각각 다른 데이터 바인딩 페이지를 보여줘야함*/}
 
+            {/* 현재 URL주소가 /store/order라면~ */}
+            {currentURL === '/store/order' ? (
+              // 아래 싱글데이터를 바인딩한걸 보여줘
+              <div className="individualCopy_layout">
+                <Pd_order_IMG
+                  img={singleOrder.img}
+                  className="order_pdIMG"
+                ></Pd_order_IMG>
+                <div className="order_pd_info">
+                  <p className="order_product_Name">
+                    {singleOrder.productName}
+                  </p>
+                  <p className="order_product_price">
+                    ₩ {frontPriceComma(singleOrder.price)}
+                  </p>
+                  <p className="order_product_size">size: {singleOrder.size}</p>
+                  <p className="order_product_color">{singleOrder.color}</p>
+                  <p className="order_product_quantity">
+                    {frontPriceComma(singleOrder.quantity)} ea
+                  </p>
+                  <p className="order_product_unitSumPrice">
+                    total: ₩{' '}
+                    <span>{frontPriceComma(singleOrder.totalPrice)}</span>
+                  </p>
+                </div>
+              </div>
+            ) : //만약 아니라면, /store/cartorder 인지 확인해봐
+            currentURL === '/store/cartorder' ? (
+              //만약 2번째 조건이 맞다면, 아래 카트데이터로 들어오는 걸 바인딩해줘
+              //카트아이템은 어레이로 들어오기 때문에 map으로 죠진다
+              cartOrderData.cartProducts.map((el, index) => (
+                <div key={el._id} className="individualCopy_layout">
+                  <Pd_order_IMG
+                    img={el.img}
+                    className="order_pdIMG"
+                  ></Pd_order_IMG>
+                  <div className="order_pd_info">
+                    <p className="order_product_Name">{el.productName}</p>
+                    <p className="order_product_price">
+                      ₩ {frontPriceComma(el.price)}
+                    </p>
+                    <p className="order_product_size">size: {el.size}</p>
+                    <p className="order_product_color">{el.color}</p>
+                    <p className="order_product_quantity">
+                      {frontPriceComma(el.quantity)} ea
+                    </p>
+                    <p className="order_product_unitSumPrice">
+                      total: ₩{' '}
+                      <span>{frontPriceComma(el.quantity * el.price)}</span>
+                    </p>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <Error404 />
+            )}
+          </div>
           <div className="sangAh">
             <p className="ship_input_title">배송 정보</p>
             <div className="ship_info_input_container">
@@ -289,6 +388,7 @@ export default function Order_client() {
                     </button>
                     {openPostcode && (
                       <DaumPostcode
+                        style={postCodeStyle2}
                         className="kakaoadd"
                         onComplete={handle.selectAddress} // 값을 선택할 경우 실행되는 이벤트
                         autoClose={false} // 값을 선택할 경우 사용되는 DOM을 제거하여 자동 닫힘 설정
@@ -433,7 +533,14 @@ export default function Order_client() {
                   <div className="final_checkout_contain">
                     <div className="unit_sum_price a">
                       <p>상품금액</p>
-                      <p>KRW {'0'}</p>
+                      <p>
+                        KRW{' '}
+                        {currentURL === '/store/order'
+                          ? frontPriceComma(singleOrder.totalPrice)
+                          : currentURL === '/store/cartorder'
+                          ? frontPriceComma(cartItemPriceSum())
+                          : null}
+                      </p>
                     </div>
                     <div className="ship_price a">
                       <p>배송비</p>
@@ -449,14 +556,36 @@ export default function Order_client() {
                     </div>
                     <div className="final_sum a">
                       <p>최종 결제 금액</p>
-                      <p>= KRW 0</p>
+                      <p>
+                        = KRW{' '}
+                        {currentURL === '/store/order'
+                          ? frontPriceComma(singleOrder.totalPrice)
+                          : currentURL === '/store/cartorder'
+                          ? frontPriceComma(cartItemPriceSum())
+                          : null}
+                      </p>
                     </div>
                     <div className="rest_point a">
-                      <p>총 적립예정금액 {'0'}</p>
+                      <p>
+                        총 적립예정금액{' '}
+                        {currentURL === '/store/order'
+                          ? frontPriceComma(
+                              Math.floor(singleOrder.totalPrice * 0.01),
+                            )
+                          : currentURL === '/store/cartorder'
+                          ? frontPriceComma(
+                              Math.floor(cartItemPriceSum() * 0.01),
+                            )
+                          : null}
+                      </p>
                     </div>
 
                     <label htmlFor="agree_check">
                       <input
+                        onChange={setAgreement(
+                          (cur) => checkoutRef.current.checked,
+                        )}
+                        ref={checkoutRef}
                         className="checkcheck"
                         type="checkbox"
                         name="agree"

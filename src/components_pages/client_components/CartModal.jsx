@@ -353,8 +353,12 @@ export default function CartModal({ className }) {
             transFontSize="10px"
             padding="7px 30px"
             onClickEvent={() => {
-              navigate(`/store/order`);
-              dispatch(offon());
+              if (cartProducts.length === 0) {
+                null;
+              } else {
+                navigate(`/store/cartorder`);
+                dispatch(offon());
+              }
             }}
           >
             Buy
