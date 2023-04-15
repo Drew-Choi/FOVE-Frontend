@@ -17,7 +17,7 @@ import AdSubmit_client from './components_pages/client_components/AdSubmit_clien
 import Adwrite_client from './components_pages/client_components/Adwrite_client';
 
 import { useSelector } from 'react-redux';
-import SizeFit from './components_pages/client_components/SizeFit';
+import { ModalContainer_client } from './components_pages/client_components/ModalContainer_client';
 
 function App() {
   const isLogin = useSelector((state) => state.user.isLogin);
@@ -38,7 +38,7 @@ function App() {
           <Route path="/privacy" element={<Privacy_client />} />
           <Route path="/guide" element={<Guide_client />} />
           {/* 임시 모달 작업 */}
-          <Route path="/sizefit" element={<SizeFit />} />
+          <Route path="/modalcontainer" element={<ModalContainer_client />} />
 
           {/* 자동 로그인 되는 버전 - 수정 예정 */}
           <Route
