@@ -21,7 +21,7 @@ export default function Footer_client() {
           <a href="#">
             <img src="/kakao.jpg" alt="kakaoicon"></img>
           </a>
-          <a href="https://www.instagram.com/tlstkddk">
+          <a href="#">
             <img src="/instagram.jpg" alt="instagramicon"></img>
           </a>
         </li>

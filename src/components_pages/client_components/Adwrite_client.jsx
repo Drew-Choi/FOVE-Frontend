@@ -4,8 +4,8 @@ import React, { useRef } from 'react';
 import '../../styles/adwrite_client.scss';
 import { useNavigate } from 'react-router-dom';
 import BTN_black_nomal_comp from '../../styles/BTN_black_nomal_comp';
-import Add from './Add';
 import Select_Custom from '../../components_elements/Select_Custom';
+import KakaoPostcode_client from './KakaoPostcode_client';
 
 export default function Adwrite_client() {
   const navigate = useNavigate();
@@ -69,7 +69,7 @@ export default function Adwrite_client() {
             />
           </div>
 
-          <Add />
+          <KakaoPostcode_client />
 
           <div className="phone_wrap">
             <div className="phone-number">
