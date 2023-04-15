@@ -59,18 +59,18 @@ const SizeBTN = styled.button`
 `;
 
 const SizeFitCheck = styled.p`
-  padding: 20px 0px;
-  font-size: 14px;
+  padding: 0px;
+  margin-top: 20px;
+  font-size: 13px;
   font-weight: bold;
   text-decoration: underline;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   cursor: pointer;
   &:hover {
     color: #a8a8a8;
   }
   &:active {
-    /* color: #d7d7d7; */
-    color: red;
+    color: #d7d7d7;
   }
 
   .material-symbols-outlined {
@@ -272,9 +272,14 @@ export default function Detail_OrderMenu_client({
         <SizeBTN>M</SizeBTN>
         <SizeBTN>L</SizeBTN>
 
-        <SizeFitCheck onClick={() => navigate('/sizemodal_cm')}>
+        <SizeFitCheck>
           {/* SIZE & FIT 모달창 '비니'만 만들어놨는데 카테고리 별로 다르게 떠야함 */}
-          SIZE & FIT
+          <span onClick={() => navigate('/sizemodal_cm')}>SIZE & FIT</span>
+          <span className="material-symbols-outlined">open_in_new</span>
+        </SizeFitCheck>
+        <SizeFitCheck>
+          {/* SIZE & FIT 모달창 '비니'만 만들어놨는데 카테고리 별로 다르게 떠야함 */}
+          <span onClick={() => navigate('/shipping')}>SHIPPING</span>
           <span className="material-symbols-outlined">open_in_new</span>
         </SizeFitCheck>
         <DetailDesc>{detail}</DetailDesc>

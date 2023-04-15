@@ -25,6 +25,8 @@ import { CheckoutPage } from './components_pages/client_components/CheckOut';
 import { SuccessPage } from './components_pages/client_components/Success';
 import Error404 from './components_pages/client_components/Error404';
 import ModalContainer_client from './components_pages/client_components/ModalContainer_client';
+import ModalContainer_client2 from './components_pages/client_components/ModalContainer_client2';
+import Shipping_client from './components_pages/client_components/Shipping_client';
 
 function App() {
   const isLogin = useSelector((state) => state.user.isLogin);
@@ -48,9 +50,10 @@ function App() {
           <Route path="/agreement" element={<Agreement_client />} />
           <Route path="/privacy" element={<Privacy_client />} />
           <Route path="/guide" element={<Guide_client />} />
+          <Route path="/shipping" element={<Shipping_client />} />
 
-          {/* SIZE & FIT 부분 : 임시 모달 작업 */}
           <Route path="/sizemodal_cm" element={<ModalContainer_client />} />
+          <Route path="/sizemodal_inch" element={<ModalContainer_client2 />} />
 
           <Route path="/tosspayment" element={<CheckoutPage />} />
           <Route path="/tosspayment/success" element={<SuccessPage />} />
