@@ -36,14 +36,31 @@ function App() {
       <Routes>
         {/* Client 영역 */}
         <Route path="/" element={<Client_main />}>
+          {/* 인트로 무비 */}
           <Route path="" element={<Intro_movie_client />} />
+          {/* 토스페이먼츠 테스트 */}
           <Route path="/toss" element={<TEST_TOSS />} />
+          {/* 토스페이먼츠 완성 */}
+          <Route path="/store/order/tosspayment" element={<CheckoutPage />} />
+          <Route
+            path="/store/cartorder/tosspayment"
+            element={<CheckoutPage />}
+          />
+          <Route path="/tosspayment/success" element={<SuccessPage />} />
+          {/* 브랜드소개 */}
           <Route path="/aboutus" element={<AboutUs_client />} />
+          {/* 상품진열 */}
           <Route path="/store" element={<Store_client />} />
+          {/* 카테고리별 아이템 분리 */}
           <Route path="/store/:category" element={<Store_Categorys />} />
+          {/* 상품상세페이지 */}
           <Route path="/store/detail/:id" element={<Detail_client />} />
+          {/* 주문서작성 영역 */}
+          {/* 1. 싱글상품 */}
           <Route path="/store/order" element={<Order_client />} />
+          {/* 2. 카트에 담긴 여러 개 상품 */}
           <Route path="/store/cartorder" element={<Order_client />} />
+          {/* account쪽 */}
           <Route path="/mypage" element={<Mypage_client />} />
           <Route path="/adsubmit" element={<AdSubmit_client />} />
           <Route path="/adwrite" element={<Adwrite_client />} />
@@ -54,9 +71,6 @@ function App() {
 
           <Route path="/sizemodal_cm" element={<ModalContainer_client />} />
           <Route path="/sizemodal_inch" element={<ModalContainer_client2 />} />
-
-          <Route path="/tosspayment" element={<CheckoutPage />} />
-          <Route path="/tosspayment/success" element={<SuccessPage />} />
           {/* <Route path="/tosspayment/fail" element={<FailPage />} /> */}
 
           {/* 자동 로그인 되는 버전 - 수정 예정 */}

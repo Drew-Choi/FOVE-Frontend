@@ -228,6 +228,9 @@ export default function Order_client() {
     }
   }, [toggleModal]);
 
+  // //마지막 결제창 넘어가기
+  // const payment = (url) => {url === '/store/order' ?)}
+
   return (
     <div className="order_main">
       <div className={`orderModalOff ${on}`}>
@@ -534,11 +537,13 @@ export default function Order_client() {
                         fontSize="18px"
                         className="order_btn"
                         padding="10px 0px"
-                        onClickEvent={() =>
+                        onClickEvent={() => {
                           !agreement
                             ? setToggleModal((cur) => true)
-                            : orderPOST()
-                        }
+                            : orderPOST();
+
+                          navigate('/store/order/tosspayment');
+                        }}
                       >
                         결제하기
                       </BTN_black_nomal_comp>
