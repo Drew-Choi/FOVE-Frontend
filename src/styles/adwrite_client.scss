@@ -60,9 +60,10 @@
   display: flex;
   justify-content: center;
   margin-top: 25px;
+  gap: 30px;
 
   .ad_btn_submit_wht {
-    width: 450px;
+    width: 430px;
     height: 45px;
     background-color: white;
     border: 1.5px solid black;
@@ -72,7 +73,7 @@
   }
 
   .ad_btn_submit_blk {
-    width: 450px;
+    width: 430px;
     height: 45px;
     border: 2px solid black;
     border-radius: 60px;
