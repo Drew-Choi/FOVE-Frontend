@@ -149,6 +149,17 @@ export default function ProductRegister_admin() {
     //페이지 요청 성공하면 200번, 아니면 오류표시
     if (newPdPostData.status !== 200) {
       //json형식으로 불러들임
+      pd_productName.current.value = '';
+      setEnterNumPrice((cur) => '');
+      setEnterNumQuantity((cur) => '');
+      setSizeType((cur) => 'OS');
+      pd_color.current.value = 'black';
+      pd_sizeOS.current.checked = true;
+      pd_sizeS.current.checked = false;
+      pd_sizeM.current.checked = false;
+      pd_sizeL.current.checked = false;
+      pd_category.current.value = 'beanie';
+      pd_detail.current.value = '';
       return alert(await newPdPostData.json());
     } else {
       return alert(await newPdPostData.json());
@@ -294,17 +305,6 @@ export default function ProductRegister_admin() {
           transFontSize="13px"
           onClickEvent={() => {
             newProductPost();
-            // pd_productName.current.value = '';
-            // setEnterNumPrice((cur) => '');
-            // setEnterNumQuantity((cur) => '');
-            // setSizeType((cur) => 'OS');
-            // pd_color.current.value = 'black';
-            // pd_sizeOS.current.checked = true;
-            // pd_sizeS.current.checked = false;
-            // pd_sizeM.current.checked = false;
-            // pd_sizeL.current.checked = false;
-            // pd_category.current.value = 'beanie';
-            // pd_detail.current.value = '';
           }}
         >
           등록
