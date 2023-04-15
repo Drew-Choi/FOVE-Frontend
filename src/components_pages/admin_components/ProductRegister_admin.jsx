@@ -125,7 +125,7 @@ export default function ProductRegister_admin() {
       'data',
       //제이슨 형식으로 바꿔줘야함
       JSON.stringify({
-        prodCode: 'asdasdasdsa',
+        prodCode: `aasddd111113333sds`,
         productName: pdProductName,
         price: pdPrice,
         size: pdSize,

@@ -1,5 +1,5 @@
 .order_main {
-  overflow:hidden;
+  overflow: hidden;
   top: 80px;
   // background-color: rgb(255, 208, 208);
   position: relative;
@@ -473,6 +473,7 @@
         position: relative;
         margin: 40px 0px 20px 0px;
         width: 47.8vw;
+        height: 60px;
         text-align: center;
 
          .order_btn {
@@ -500,4 +501,41 @@
   margin-top: 50px;
   font-size: 18px;
   text-align: center;
+ }
+
+ .model_checkout{
+  position: relative;
+  bottom:100px;
+ }
+
+ .orderModalOff {
+  display: none;
+  background-color: white;
+  position: fixed;
+  text-align: center;
+  line-height: 150px;
+  box-shadow: 1px 1px 3px 0.5px rgba(0, 0, 0, 0.3);
+  top: 300px;
+  width: 30vw;
+  height: 200px;
+  border: 1px solid black;
+  z-index: 5;
+  right: 50%;
+  transform: translateX(50%);
+ }
+
+ .orderModalOff.On{
+  display: block;
+  background-color: white;
+  position: fixed;
+  text-align: center;
+  line-height: 150px;
+  box-shadow: 1px 1px 3px 0.5px rgba(0, 0, 0, 0.3);
+  top: 300px;
+  width: 30vw;
+  height: 200px;
+  border: 1px solid black;
+  z-index: 5;
+  right: 50%;
+  transform: translateX(50%);
  }
