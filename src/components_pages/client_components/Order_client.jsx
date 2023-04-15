@@ -8,9 +8,9 @@ import RadioGroup from '../../components_elements/RadioGroup';
 import RadioEl_frontDot from '../../components_elements/RadioEl_frontDot';
 import Input_Custom from '../../components_elements/Input_Custom';
 import { useNavigate } from 'react-router-dom';
-import Add from './Add';
 import Select_Custom from '../../components_elements/Select_Custom';
 import TextArea_Custom from '../../components_elements/TextArea_Custom';
+import KakaoPostcode_client from './KakaoPostcode_client';
 
 const Pd_order_IMG = styled.div`
   ${(props) =>
@@ -162,7 +162,7 @@ export default function Order_client() {
                 style={{ fontSize: '12px' }}
               />
 
-              <Add />
+              <KakaoPostcode_client />
 
               <div className="phone-number">
                 <Select_Custom
