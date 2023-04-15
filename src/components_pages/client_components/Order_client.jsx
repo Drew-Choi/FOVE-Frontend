@@ -20,6 +20,15 @@ const Pd_order_IMG = styled.div`
 export default function Order_client() {
   const navigate = useNavigate();
 
+  //오더메뉴에서 넘어오는 정보들
+  const singleOrder = useSelector((state) =>
+    state.order ? (
+      state.order
+    ) : (
+      <h2 style={{ position: 'relative', top: '100px' }}>data Error</h2>
+    ),
+  );
+
   const [openPostcode, setOpenPostcode] = useState(false);
   const [addressData, setAdressData] = useState({});
   const handleChange = (event) => {
@@ -41,39 +50,108 @@ export default function Order_client() {
     },
   };
 
-  const orderPOST = async () => {
-    try {
-      const orderData = await axios.post('http://localhost:4000/store/order', {
-        productName: '희성이는 예쁘다',
-        price: 1000000000,
-        size: 'S',
-        color: 'blue',
-        quantity: 10,
-        unitSumPrice: 20,
-        massage: '역시 희성이 성공 할 줄 알아썽!',
-        status: '역시 데이터 전송 성공! 역시 희성이구만',
-        paymentMethod: '현금빵',
-      });
-      if (orderData.status === 200) {
-        console.log('성공');
-        console.log(orderData);
-      } else {
-        console.log('실패');
-        console.log(orderData);
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  //주문 정보 담기
+  //1. 받는 분 성함
+  const recipientName = useRef();
+  //2. 받는 분 우편번호
+  const recipientZipcode = useRef();
+  //3. 받는 분 기본 주소
+  const recipientAddress = useRef();
+  //4. 받는 분 상세주소
+  const recipientAddressDetail = useRef();
+  //------------전화번호는 합치는 작업 필요--------------
+  //5. 받는 분 전화번호의 지역번호
+  const telAreaCode = useRef();
+  //6. 받는 분 전화번호의 중간번호
+  const telMidNum = useRef();
+  //7. 받는 분 전화번호의 마지막 번호
+  const telLastNum = useRef();
+  //-------------------------------------------------
 
-  //오더메뉴에서 넘어오는 정보들
-  const singleOrder = useSelector((state) =>
-    state.order ? (
-      state.order
-    ) : (
-      <h2 style={{ position: 'relative', top: '100px' }}>data Error</h2>
-    ),
-  );
+  //------------휴대폰 번호는 합치는 작업 필요--------------
+  //8. 받는 분 전화번호의 지역번호
+  const phoneCode = useRef();
+  //9. 받는 분 전화번호의 중간번호
+  const phoneMidNum = useRef();
+  //10. 받는 분 전화번호의 마지막 번호
+  const phoneLastNum = useRef();
+  //-------------------------------------------------
+
+  //-----------이메일 합치는 작업 필요---------------------
+  //11. 이메일 아이디
+  const emailID = useRef();
+  //12. 이메일 주소
+  const emailAddress = useRef('gmail.com');
+  //13. 이메일 직접 입력
+  const selfMailInput = useRef();
+  //-------------------------------------------
+
+  //14. 기타 배송 메모
+  const extraMemo = useRef();
+
+  //주문 정보 백에 POST 보내기
+  const orderPOST = async () => {
+    console.log('상품정보');
+    console.log('productName: ' + singleOrder.productName);
+    console.log('price: ' + singleOrder.price);
+    console.log('color: ' + singleOrder.color);
+    console.log('quantity: ' + singleOrder.quantity);
+    console.log('주문 상태(status): ' + '입금 전');
+    console.log('주문 상태(paymentMethod):' + '카드');
+    console.log('받는 곳 정보');
+    console.log('받는 분 이름: ' + recipientName.current.value);
+    console.log('받는 분 우편번호: ' + recipientZipcode.current.value);
+    console.log('받는 분 주소: ' + recipientAddress.current.value);
+    console.log('받는 분 디테일 주소: ' + recipientAddressDetail.current.value);
+    console.log('받는 분 전화번호 지역번호: ' + telAreaCode.current.value);
+    console.log(
+      '받는 분 전화번호 중간 번호: ' + !telMidNum.current.value
+        ? '전화번호 없음'
+        : telMidNum.current.value,
+    );
+    console.log(telMidNum.current.value);
+    console.log('받는 분 전화번호 마지막 번호: ' + telLastNum.current.value);
+    console.log('받는 분 핸드폰 번호 통신사: ' + phoneCode.current.value);
+    console.log('받는 분 핸드폰 번호 중간 번호: ' + phoneMidNum.current.value);
+    console.log(
+      '받는 분 핸드폰 번호 마지막 번호: ' + phoneLastNum.current.value,
+    );
+    console.log('받는 분 이메일 아이디: ' + emailID.current.value);
+    console.log('받는 분 이메일 주소: ' + emailAddress.current.value);
+    console.log(
+      '받는 분 셀프 이메일등록: ' + !selfMailInput.current.value
+        ? '셀프x'
+        : selfMailInput.current.value,
+    );
+    console.log(
+      '받는 분 기타 메모: ' + extraMemo.current.value === ''
+        ? '메모 없음'
+        : extraMemo.current.value,
+    );
+
+    // try {
+    //   const orderData = await axios.post('http://localhost:4000/store/order', {
+    //     productName: '희성이는 예쁘다',
+    //     price: 1000000000,
+    //     size: 'S',
+    //     color: 'blue',
+    //     quantity: 10,
+    //     unitSumPrice: 20,
+    //     massage: '역시 희성이 성공 할 줄 알아썽!',
+    //     status: '역시 데이터 전송 성공! 역시 희성이구만',
+    //     paymentMethod: '현금빵',
+    //   });
+    //   if (orderData.status === 200) {
+    //     console.log('성공');
+    //     console.log(orderData);
+    //   } else {
+    //     console.log('실패');
+    //     console.log(orderData);
+    //   }
+    // } catch (err) {
+    //   console.error(err);
+    // }
+  };
 
   const selectList_phone = [
     '02',
@@ -109,6 +187,18 @@ export default function Order_client() {
     'icloud.com',
     '직접입력',
   ];
+
+  //메일 직접 입력 활성화
+  const [disOnOff, setDisOnOff] = useState(true);
+  const selectorDisableOnOff = () => {
+    console.log(emailAddress.current.value);
+    console.log(disOnOff);
+    if (emailAddress.current.value === '직접입력') {
+      setDisOnOff((cur) => false);
+    } else {
+      setDisOnOff((cur) => true);
+    }
+  };
 
   return (
     <div className="order_main">
@@ -177,19 +267,25 @@ export default function Order_client() {
 
             {/* 주소록 관리 등록 제목 위치 */}
             <div className="information_contain">
-              <input className="b" type="text" placeholder="받으시는 분" />
+              <input
+                ref={recipientName}
+                className="b"
+                type="text"
+                placeholder="받으시는 분"
+              />
               <div>
                 <div>
                   <div className="code_btn_container">
                     <input
+                      ref={recipientZipcode}
                       className="address b"
                       type="text"
                       value={addressData.zonecode}
-                      placeholder="주소*"
+                      placeholder="우편번호*"
                       disabled
                     />
                     <button onClick={handle.clickButton} className="postCode">
-                      우편번호
+                      주소 찾기
                     </button>
                     {openPostcode && (
                       <DaumPostcode
@@ -203,16 +299,18 @@ export default function Order_client() {
 
                   <div>
                     <input
+                      ref={recipientAddress}
                       className="b"
                       type="text"
                       value={addressData.address}
-                      placeholder="기본주소*"
+                      placeholder="주소*"
                       disabled
                     />
                   </div>
 
                   <div>
                     <input
+                      ref={recipientAddressDetail}
                       className="b"
                       type="text"
                       value={addressData.buildingName}
@@ -224,11 +322,13 @@ export default function Order_client() {
 
                 <div className="phonNum_contain">
                   <Select_Custom
+                    inputRef={telAreaCode}
                     classNameSelect="select_group2 phonNum"
                     selectList={selectList_phone}
                   />
                   <p className="numMiners">-</p>
                   <input
+                    ref={telMidNum}
                     className="phonNum mid b"
                     type="tel"
                     placeholder="유선전화 (없을 경우 생략)"
@@ -237,6 +337,7 @@ export default function Order_client() {
                   />
                   <p className="numMiners">-</p>
                   <input
+                    ref={telLastNum}
                     className="phonNum last b"
                     type="tel"
                     maxLength="4"
@@ -246,11 +347,13 @@ export default function Order_client() {
 
                 <div className="phonNum_contain">
                   <Select_Custom
+                    inputRef={phoneCode}
                     classNameSelect="select_group2 phonNum"
                     selectList={selectList_celPhone}
                   />
                   <p className="numMiners">-</p>
                   <input
+                    ref={phoneMidNum}
                     className="phonNum mid b"
                     type="tel"
                     placeholder="휴대폰"
@@ -259,6 +362,7 @@ export default function Order_client() {
                   />
                   <p className="numMiners">-</p>
                   <input
+                    ref={phoneLastNum}
                     className="phonNum last b"
                     type="tel"
                     maxLength="4"
@@ -268,27 +372,26 @@ export default function Order_client() {
 
                 {/* 이메일 */}
                 <div className="email_contain">
-                  <input
-                    className="email_ID b"
-                    type="text"
-                    maxLength="4"
-                    pattern="[0-9]{4}"
-                  />
+                  <input ref={emailID} className="email_ID b" type="text" />
                   <p className="emailLogo">@ </p>
                   <Select_Custom
+                    onChangeEvent={selectorDisableOnOff}
+                    inputRef={emailAddress}
                     classNameSelect="email_selector"
                     selectList={emailList}
                   />
                   <input
+                    ref={selfMailInput}
                     className="email_self b"
                     type="text"
                     maxLength="4"
                     pattern="[0-9]{4}"
-                    disabled
+                    disabled={disOnOff}
                   />
                 </div>
 
                 <TextArea_Custom
+                  inputref={extraMemo}
                   styleArea={{ resize: 'none' }}
                   maxLength="50"
                   rows="3"
