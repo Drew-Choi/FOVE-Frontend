@@ -50,7 +50,7 @@ function App() {
           <Route path="/guide" element={<Guide_client />} />
 
           {/* SIZE & FIT 부분 : 임시 모달 작업 */}
-          <Route path="/sizefitmodal" element={<ModalContainer_client />} />
+          <Route path="/sizemodal_cm" element={<ModalContainer_client />} />
 
           <Route path="/tosspayment" element={<CheckoutPage />} />
           <Route path="/tosspayment/success" element={<SuccessPage />} />
