@@ -108,19 +108,21 @@ export default function Order_client() {
   //-------------------------------------------------
 
   //-----------이메일 합치는 작업 필요---------------------
-  //11. 이메일 아이디
-  const emailID = useRef();
-  //12. 이메일 주소
-  const emailAddress = useRef('gmail.com');
-  //13. 이메일 직접 입력
-  const selfMailInput = useRef();
+  // 받는분 이메일은 필요없음
+  // //11. 이메일 아이디
+  // const emailID = useRef();
+  // //12. 이메일 주소
+  // const emailAddress = useRef('gmail.com');
+  // //13. 이메일 직접 입력
+  // const selfMailInput = useRef();
   //-------------------------------------------
 
   //14. 기타 배송 메모
-  const extraMemo = useRef();
+  const message = useRef();
 
   //주문 정보 백에 POST 보내기
   const orderPOST = async () => {
+
     let products = [];
     console.log(products);
 
@@ -212,6 +214,7 @@ export default function Order_client() {
   ];
 
   //메일 직접 입력 활성화
+
   const [disOnOff, setDisOnOff] = useState(true);
   const selectorDisableOnOff = () => {
     console.log(emailAddress.current.value);
@@ -221,6 +224,7 @@ export default function Order_client() {
       setDisOnOff((cur) => true);
     }
   };
+
 
   const postCodeStyle2 = {
     display: 'block',
@@ -486,7 +490,7 @@ export default function Order_client() {
                   />
                 </div>
 
-                {/* 이메일 */}
+                {/* 이메일
                 <div className="email_contain">
                   <input ref={emailID} className="email_ID b" type="text" />
                   <p className="emailLogo">@ </p>
@@ -504,10 +508,10 @@ export default function Order_client() {
                     pattern="[0-9]{4}"
                     disabled={disOnOff}
                   />
-                </div>
+                </div> */}
 
                 <TextArea_Custom
-                  inputref={extraMemo}
+                  inputref={message}
                   styleArea={{ resize: 'none' }}
                   maxLength="50"
                   rows="3"

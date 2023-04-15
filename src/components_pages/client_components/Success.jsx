@@ -15,12 +15,13 @@
 // }
 
 import { useSearchParams } from 'react-router-dom';
+// import PaymentWidget, { PaymentRequest } from '@tosspayments/payment-widget';
 
 export function SuccessPage() {
   const [searchParams] = useSearchParams();
 
   let switchday = function (num) {
-    const result = num + 1 < 10 ? '0' + num + 1 : num + 1;
+    const result = num + 1 < 10 ? '0' + (num + 1) : num + 1;
     return result;
   };
   let today = new Date();
@@ -57,6 +58,7 @@ export function SuccessPage() {
       <br />
       {/* <div>{`번호: ${searchParams.get("orderId")}`}</div> */}
       <div>{`주문번호: ${searchParams.get('orderId')}`}</div>
+      <div>{}</div>
       {/* <div>{`결제 금액: ${Number(
         searchParams.get("amount")
       ).toLocaleString()}원`}</div> */}
