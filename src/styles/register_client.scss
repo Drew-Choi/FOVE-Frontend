@@ -1,0 +1,54 @@
+.register_client {
+  position: relative;
+  top: 130px;
+  width: 710px;
+  margin: 0 auto;
+  text-align: center;
+
+  // height: 100%; // footer fixed 돼서 생기는 스크롤 안 생기는 문제 일시적 해결 -> 나중에 빼기
+
+  .register_title {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .register_text {
+    font-size: 13px;
+    text-align: left;
+    margin-bottom: 5px;
+  }
+
+  .register_input {
+    width: 700px;
+    height: 40px;
+  }
+
+  .register_input.id {
+    width: 600px;
+  }
+
+  .register_btn_small {
+    width: 100px;
+    height: 40px;
+    color: black;
+    background-color: white;
+    border: 2px solid black;
+  }
+
+  .register_btn {
+    width: 350px;
+    height: 40px;
+    color: white;
+    background-color: black;
+    border: 2px solid black;
+    border-radius: 50px;
+    box-shadow: 5px 5px 5px lightgray;
+    font-weight: 600;
+  }
+
+  .register_btn.white {
+    color: black;
+    background-color: white;
+  }
+}

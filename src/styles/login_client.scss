@@ -1,0 +1,53 @@
+.login_client {
+  position: relative;
+  top: 180px;
+
+  // 수평중앙정렬 방법 1
+  width: 1000px;
+  margin: 0 auto;
+
+  // 수평중앙정렬 방법 2
+  // left: 50%;
+  // transform: translateX(-50%);
+
+  text-align: center;
+
+  .login_title {
+    font-size: 20px;
+    margin: 0;
+  }
+
+  .login_input {
+    width: 350px;
+    height: 35px;
+    margin-bottom: 10px;
+  }
+
+  .login_btn {
+    width: 350px;
+    height: 35px;
+    margin-top: 20px;
+    color: white;
+    background-color: black;
+    border: 2px solid black;
+    border-radius: 50px;
+    box-shadow: 5px 5px 5px lightgray;
+  }
+
+  .login_btn.white {
+    // color: black;
+    background-color: white;
+    margin-top: 10px;
+  }
+
+  .login_kakao {
+    width: 350px;
+    height: 40px;
+    margin-top: 20px;
+    background-color: #f7e600;
+    border: 0;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px lightgray;
+    font-weight: 600;
+  }
+}

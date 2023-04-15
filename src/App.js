@@ -1,5 +1,6 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import Admin_main from './components_pages/admin_components/Admin_main';
 import ProductRegister_admin from './components_pages/admin_components/ProductRegister_admin';
 import Home_admin from './components_pages/admin_components/Home_admin';
@@ -15,8 +16,7 @@ import Register_client from './components_pages/client_components/Register_clien
 import Mypage_client from './components_pages/client_components/Mypage_client';
 import AdSubmit_client from './components_pages/client_components/AdSubmit_client';
 import Adwrite_client from './components_pages/client_components/Adwrite_client';
-
-import { useSelector } from 'react-redux';
+import Login_client from './components_pages/client_components/Login_client';
 import SizeFit from './components_pages/client_components/SizeFit';
 import Order_client from './components_pages/client_components/Order_client';
 import Store_Categorys from './components_pages/client_components/Store_Categorys';
@@ -51,12 +51,20 @@ function App() {
           <Route path="/tosspayment" element={<CheckoutPage />} />
           <Route path="/tosspayment/success" element={<SuccessPage />} />
           {/* <Route path="/tosspayment/fail" element={<FailPage />} /> */}
+
           {/* 자동 로그인 되는 버전 - 수정 예정 */}
-          <Route
+          {/* <Route
             path="/register"
             element={isLogin ? <Client_main /> : <Register_client />}
+          /> */}
+
+          {/* 회원 가입 */}
+          <Route path="/register" element={<Register_client />} />
+          {/* 로그인 */}
+          <Route
+            path="/login"
+            element={isLogin ? <Mypage_client /> : <Login_client />}
           />
-          {/* <Route path="/register" element={<Register_client />} /> */}
         </Route>
 
         {/* admin 영역 */}

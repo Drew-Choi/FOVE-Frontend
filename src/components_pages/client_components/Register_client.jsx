@@ -1,7 +1,9 @@
 import axios from 'axios';
 import React, { useRef } from 'react';
-import { useDispatch } from 'react-redux';
-import { login } from '../../store/modules/user';
+import { Link, useNavigate } from 'react-router-dom';
+// import { useDispatch } from 'react-redux';
+// import { login } from '../../store/modules/user';
+import '../../styles/register_client.scss';
 
 export default function Register_client() {
   const registerIdInput = useRef();
@@ -11,10 +13,14 @@ export default function Register_client() {
   const registerPhoneInput = useRef();
   const isNotDuplicatedId = useRef(); // 아이디 중복 확인 했는지 여부
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // 아이디 중복 확인 버튼
   const checkDuplicateId = async () => {
+    // 입력 안 했을 때
+    if (!registerIdInput.current.value) return alert('아이디를 입력해 주세요.');
+
     // axios 로 보내기 - try-catch문 안에 적어야!!
     try {
       const resCheckId = await axios.post(
@@ -67,32 +73,35 @@ export default function Register_client() {
 
       alert(resRegister.data); // await 하지 말기!
 
-      // 자동 로그인 부분. 수정 중!!!
-      dispatch(
-        login({
-          id: registerIdInput.current.value,
-          password: registerPwInput.current.value,
-          name: registerNameInput.current.value,
-          phone: registerPhoneInput.current.value,
-        }),
-      );
+      // // 자동 로그인 부분. 수정 중!!!
+      // dispatch(
+      //   login({
+      //     id: registerIdInput.current.value,
+      //     password: registerPwInput.current.value,
+      //     name: registerNameInput.current.value,
+      //     phone: registerPhoneInput.current.value,
+      //   }),
+      // );
     } catch (err) {
       alert(err.response.data);
     }
   };
 
   return (
-    <>
-      <h1>회원 가입</h1>
+    <div className="register_client">
+      <p className="register_title">회원 가입</p>
       <br />
-      <p>* 표시된 항목을 필수로 입력해주세요!</p>
+      <p className="register_text">* 표시된 항목을 필수로 입력해주세요!</p>
       <input
         type="text"
         ref={registerIdInput}
         placeholder="아이디* (이메일 주소를 입력해주세요)"
         required
+        className="register_input id"
       />{' '}
-      <button onClick={checkDuplicateId}>중복 확인</button>
+      <button onClick={checkDuplicateId} className="register_btn_small">
+        중복 확인
+      </button>
       <br />
       <br />
       <input
@@ -100,6 +109,7 @@ export default function Register_client() {
         ref={registerPwInput}
         placeholder="비밀번호* (영문 대/소문자, 숫자, 특수문자 중 3가지 이상 조합, 8~16자)"
         required
+        className="register_input"
       />
       <br />
       <br />
@@ -108,10 +118,17 @@ export default function Register_client() {
         ref={registerPwInputCheck}
         placeholder="비밀번호 확인*"
         required
+        className="register_input"
       />
       <br />
       <br />
-      <input type="text" ref={registerNameInput} placeholder="이름*" required />
+      <input
+        type="text"
+        ref={registerNameInput}
+        placeholder="이름*"
+        required
+        className="register_input"
+      />
       <br />
       <br />
       <input
@@ -119,14 +136,18 @@ export default function Register_client() {
         ref={registerPhoneInput}
         placeholder="핸드폰 번호*"
         required
+        className="register_input"
       />
       <br />
       <br />
       {/* 약관 체크 추가 예정 */}
       <br />
-      <button onClick={registerUser}>JOIN IN</button>{' '}
-      {/* 이전 페이지? 홈 화면? 으로 돌아가기 구현 예정 */}
-      <button>CANCEL</button>
-    </>
+      <button onClick={registerUser} className="register_btn">
+        JOIN IN
+      </button>{' '}
+      <button onClick={() => navigate(-1)} className="register_btn white">
+        CANCEL
+      </button>
+    </div>
   );
 }
