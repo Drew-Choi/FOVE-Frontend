@@ -92,16 +92,17 @@ export default function Order_client() {
   //-------------------------------------------------
 
   //-----------이메일 합치는 작업 필요---------------------
-  //11. 이메일 아이디
-  const emailID = useRef();
-  //12. 이메일 주소
-  const emailAddress = useRef('gmail.com');
-  //13. 이메일 직접 입력
-  const selfMailInput = useRef();
+  // 받는분 이메일은 필요없음
+  // //11. 이메일 아이디
+  // const emailID = useRef();
+  // //12. 이메일 주소
+  // const emailAddress = useRef('gmail.com');
+  // //13. 이메일 직접 입력
+  // const selfMailInput = useRef();
   //-------------------------------------------
 
   //14. 기타 배송 메모
-  const extraMemo = useRef();
+  const message = useRef();
 
   //결제 동의 결과값
   const checkoutRef = useRef();
@@ -134,18 +135,20 @@ export default function Order_client() {
     console.log(
       '받는 분 핸드폰 번호 마지막 번호: ' + phoneLastNum.current.value,
     );
-    console.log('받는 분 이메일 아이디: ' + emailID.current.value);
-    console.log('받는 분 이메일 주소: ' + emailAddress.current.value);
-    console.log(
-      '받는 분 셀프 이메일등록: ' + !selfMailInput.current.value
-        ? '셀프x'
-        : selfMailInput.current.value,
-    );
-    console.log(
-      '받는 분 기타 메모: ' + extraMemo.current.value === ''
-        ? '메모 없음'
-        : extraMemo.current.value,
-    );
+
+    // 성희가 받는 분 관련 필요없는 부분 주석처리함 !
+    // console.log('받는 분 이메일 아이디: ' + emailID.current.value);
+    // console.log('받는 분 이메일 주소: ' + emailAddress.current.value);
+    // console.log(
+    //   '받는 분 셀프 이메일등록: ' + !selfMailInput.current.value
+    //     ? '셀프x'
+    //     : selfMailInput.current.value,
+    // );
+    // console.log(
+    //   '받는 분 기타 메모: ' + extraMemo.current.value === ''
+    //     ? '메모 없음'
+    //     : extraMemo.current.value,
+    // );
 
     // try {
     //   const orderData = await axios.post('http://localhost:4000/store/order', {
@@ -207,16 +210,17 @@ export default function Order_client() {
   ];
 
   //메일 직접 입력 활성화
-  const [disOnOff, setDisOnOff] = useState(true);
-  const selectorDisableOnOff = () => {
-    console.log(emailAddress.current.value);
-    console.log(disOnOff);
-    if (emailAddress.current.value === '직접입력') {
-      setDisOnOff((cur) => false);
-    } else {
-      setDisOnOff((cur) => true);
-    }
-  };
+  // 메일 삭제함
+  // const [disOnOff, setDisOnOff] = useState(true);
+  // const selectorDisableOnOff = () => {
+  //   console.log(emailAddress.current.value);
+  //   console.log(disOnOff);
+  //   if (emailAddress.current.value === '직접입력') {
+  //     setDisOnOff((cur) => false);
+  //   } else {
+  //     setDisOnOff((cur) => true);
+  //   }
+  // };
 
   const postCodeStyle2 = {
     display: 'block',
@@ -470,7 +474,7 @@ export default function Order_client() {
                   />
                 </div>
 
-                {/* 이메일 */}
+                {/* 이메일
                 <div className="email_contain">
                   <input ref={emailID} className="email_ID b" type="text" />
                   <p className="emailLogo">@ </p>
@@ -488,10 +492,10 @@ export default function Order_client() {
                     pattern="[0-9]{4}"
                     disabled={disOnOff}
                   />
-                </div>
+                </div> */}
 
                 <TextArea_Custom
-                  inputref={extraMemo}
+                  inputref={message}
                   styleArea={{ resize: 'none' }}
                   maxLength="50"
                   rows="3"
