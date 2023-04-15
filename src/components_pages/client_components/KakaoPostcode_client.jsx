@@ -3,7 +3,7 @@ import { useState } from 'react';
 import DaumPostcode from 'react-daum-postcode';
 import '../../styles/adwrite_client.scss';
 
-const Add = () => {
+const KakaoPostcode_client = () => {
   const [openPostcode, setOpenPostcode] = useState(false);
   const [addressData, setAdressData] = useState({});
   const handleChange = (event) => {
@@ -23,6 +23,20 @@ const Add = () => {
       setAdressData(data);
       setOpenPostcode(false);
     },
+  };
+
+  const postCodeStyle = {
+    display: 'block',
+    position: 'absolute',
+    top: '20%',
+    left: '25%',
+    right: '0',
+    margin: '50px',
+    width: '500px',
+    height: '500px',
+    zIndex: 100,
+    border: '1px solid black',
+    boxShadow: '0 0 8px rgba(0, 0, 0, 0.5)',
   };
 
   return (
@@ -84,4 +98,4 @@ const Add = () => {
   );
 };
 
-export default Add;
+export default KakaoPostcode_client;
