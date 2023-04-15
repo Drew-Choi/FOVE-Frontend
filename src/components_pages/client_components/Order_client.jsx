@@ -89,40 +89,21 @@ export default function Order_client() {
   const recipientAddress = useRef();
   //4. 받는 분 상세주소
   const recipientAddressDetail = useRef();
-  //------------전화번호는 합치는 작업 필요--------------
-  //5. 받는 분 전화번호의 지역번호
-  const telAreaCode = useRef();
-  //6. 받는 분 전화번호의 중간번호
-  const telMidNum = useRef();
-  //7. 받는 분 전화번호의 마지막 번호
-  const telLastNum = useRef();
-  //-------------------------------------------------
 
   //------------휴대폰 번호는 합치는 작업 필요--------------
-  //8. 받는 분 전화번호의 지역번호
+  //5. 받는 분 전화번호의 지역번호
   const phoneCode = useRef();
-  //9. 받는 분 전화번호의 중간번호
+  //6. 받는 분 전화번호의 중간번호
   const phoneMidNum = useRef();
-  //10. 받는 분 전화번호의 마지막 번호
+  //7. 받는 분 전화번호의 마지막 번호
   const phoneLastNum = useRef();
   //-------------------------------------------------
-
-  //-----------이메일 합치는 작업 필요---------------------
-  // 받는분 이메일은 필요없음
-  // //11. 이메일 아이디
-  // const emailID = useRef();
-  // //12. 이메일 주소
-  // const emailAddress = useRef('gmail.com');
-  // //13. 이메일 직접 입력
-  // const selfMailInput = useRef();
-  //-------------------------------------------
 
   //14. 기타 배송 메모
   const message = useRef();
 
   //주문 정보 백에 POST 보내기
   const orderPOST = async () => {
-
     let products = [];
     console.log(products);
 
@@ -149,22 +130,14 @@ export default function Order_client() {
         //상품정보(싱글)
         products: products,
         //받는 이 정보
-        massage: extraMemo.current.value,
+        message: message.current.value,
         recipientName: recipientName.current.value,
         recipientZipcode: recipientZipcode.current.value,
         recipientAddress: recipientAddress.current.value,
         recipientAddressDetail: recipientAddressDetail.current.value,
-        telAreaCode: telAreaCode.current.value,
-        telMidNum: telMidNum.current.value,
-        telLastNum: telLastNum.current.value,
         phoneCode: phoneCode.current.value,
         phoneMidNum: phoneMidNum.current.value,
         phoneLastNum: phoneLastNum.current.value,
-        emailID: emailID.current.value,
-        emailAddress: emailAddress.current.value,
-        selfMailInput: !selfMailInput.current.value
-          ? ''
-          : selfMailInput.current.value,
       });
       if (orderData.status === 200) {
         console.log('성공');
@@ -212,19 +185,6 @@ export default function Order_client() {
     'icloud.com',
     '직접입력',
   ];
-
-  //메일 직접 입력 활성화
-
-  const [disOnOff, setDisOnOff] = useState(true);
-  const selectorDisableOnOff = () => {
-    console.log(emailAddress.current.value);
-    if (emailAddress.current.value === '직접입력') {
-      setDisOnOff((cur) => false);
-    } else {
-      setDisOnOff((cur) => true);
-    }
-  };
-
 
   const postCodeStyle2 = {
     display: 'block',
@@ -442,31 +402,6 @@ export default function Order_client() {
 
                 <div className="phonNum_contain">
                   <Select_Custom
-                    inputRef={telAreaCode}
-                    classNameSelect="select_group2 phonNum"
-                    selectList={selectList_phone}
-                  />
-                  <p className="numMiners">-</p>
-                  <input
-                    ref={telMidNum}
-                    className="phonNum mid b"
-                    type="tel"
-                    placeholder="유선전화 (없을 경우 생략)"
-                    maxLength="4"
-                    pattern="[0-9]{4}"
-                  />
-                  <p className="numMiners">-</p>
-                  <input
-                    ref={telLastNum}
-                    className="phonNum last b"
-                    type="tel"
-                    maxLength="4"
-                    pattern="[0-9]{4}"
-                  />
-                </div>
-
-                <div className="phonNum_contain">
-                  <Select_Custom
                     inputRef={phoneCode}
                     classNameSelect="select_group2 phonNum"
                     selectList={selectList_celPhone}
@@ -489,26 +424,6 @@ export default function Order_client() {
                     pattern="[0-9]{4}"
                   />
                 </div>
-
-                {/* 이메일
-                <div className="email_contain">
-                  <input ref={emailID} className="email_ID b" type="text" />
-                  <p className="emailLogo">@ </p>
-                  <Select_Custom
-                    onChangeEvent={selectorDisableOnOff}
-                    inputRef={emailAddress}
-                    classNameSelect="email_selector"
-                    selectList={emailList}
-                  />
-                  <input
-                    ref={selfMailInput}
-                    className="email_self b"
-                    type="text"
-                    maxLength="4"
-                    pattern="[0-9]{4}"
-                    disabled={disOnOff}
-                  />
-                </div> */}
 
                 <TextArea_Custom
                   inputref={message}
