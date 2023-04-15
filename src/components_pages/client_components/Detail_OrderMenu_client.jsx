@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { add } from '../../store/modules/cart';
 import { useNavigate, useParams } from 'react-router-dom';
 import { single } from '../../store/modules/order';
+import GoogleIcon from './GoogleIcon';
 
 const Detail_Order = styled.div`
   position: absolute;
@@ -58,16 +59,24 @@ const SizeBTN = styled.button`
 `;
 
 const SizeFitCheck = styled.p`
-  padding: 20px 0px;
-  font-size: 12px;
-  font-weight: 500p;
-  letter-spacing: 2px;
+  padding: 0px;
+  margin-top: 20px;
+  font-size: 13px;
+  font-weight: bold;
+  text-decoration: underline;
+  letter-spacing: 1px;
   cursor: pointer;
   &:hover {
     color: #a8a8a8;
   }
   &:active {
     color: #d7d7d7;
+  }
+
+  .material-symbols-outlined {
+    font-size: 18px;
+    font-weight: 500;
+    margin-left: 5px;
   }
 `;
 
@@ -262,7 +271,17 @@ export default function Detail_OrderMenu_client({
         <SizeBTN>S</SizeBTN>
         <SizeBTN>M</SizeBTN>
         <SizeBTN>L</SizeBTN>
-        <SizeFitCheck>Size Fit*</SizeFitCheck>
+
+        <SizeFitCheck>
+          {/* SIZE & FIT 모달창 '비니'만 만들어놨는데 카테고리 별로 다르게 떠야함 */}
+          <span onClick={() => navigate('/sizemodal_cm')}>SIZE & FIT</span>
+          <span className="material-symbols-outlined">open_in_new</span>
+        </SizeFitCheck>
+        <SizeFitCheck>
+          {/* SIZE & FIT 모달창 '비니'만 만들어놨는데 카테고리 별로 다르게 떠야함 */}
+          <span onClick={() => navigate('/shipping')}>SHIPPING</span>
+          <span className="material-symbols-outlined">open_in_new</span>
+        </SizeFitCheck>
         <DetailDesc>{detail}</DetailDesc>
         <DownInfoContain>
           <CountContainer>

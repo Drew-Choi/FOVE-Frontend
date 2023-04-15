@@ -22,7 +22,7 @@ export default function AdSubmit_client() {
       <div className="ad_mom">
         <BTN_black_nomal_comp
           className="ad_btn_submit"
-          onClick={() => navigate('/adwrite')}
+          onClickEvent={() => navigate('/adwrite')}
         >
           등록
         </BTN_black_nomal_comp>
