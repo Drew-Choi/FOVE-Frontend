@@ -42,7 +42,7 @@ export default function ProductRegister_admin() {
   //input 값을 받을 useRef생성
   const pd_productName = useRef();
   const pd_price = useRef();
-  const pd_quantity = useRef();
+  const pd_stock = useRef();
   const pd_color = useRef();
   const pd_category = useRef();
   const pd_detail = useRef();
@@ -109,7 +109,7 @@ export default function ProductRegister_admin() {
     const pdProductName = pd_productName.current.value;
     const pdPrice = resultCommaRemove(pd_price.current.value);
     const pdSize = sizeType;
-    const pdQuantity = resultCommaRemove(pd_quantity.current.value);
+    const pdStock = resultCommaRemove(pd_stock.current.value);
     const pdColor = pd_color.current.value;
     const pdCategory = pd_category.current.value;
     const pdDetail = pd_detail.current.value;
@@ -125,12 +125,13 @@ export default function ProductRegister_admin() {
       'data',
       //제이슨 형식으로 바꿔줘야함
       JSON.stringify({
+        prodCode: 'asdasdasdsa',
         productName: pdProductName,
         price: pdPrice,
         size: pdSize,
         color: pdColor,
         category: pdCategory,
-        quantity: pdQuantity,
+        stock: pdStock,
         detail: pdDetail,
       }),
     );
@@ -249,15 +250,13 @@ export default function ProductRegister_admin() {
 
         {/* 수량 인풋 */}
         <Input_Custom
-          inputref={pd_quantity}
+          inputref={pd_stock}
           type="text"
           placeholder="재고수량을 입력해주세요."
-          name="quantity"
+          name="stock"
           value={enterNumQuantity}
           onChangeEvent={() =>
-            setEnterNumQuantity(
-              changeEnteredNumComma(pd_quantity.current.value),
-            )
+            setEnterNumQuantity(changeEnteredNumComma(pd_stock.current.value))
           }
         >
           수량

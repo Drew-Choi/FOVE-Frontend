@@ -12,7 +12,7 @@ import 'swiper/css/scrollbar';
 import SwiperPaginationBTN from '../../styles/SwiperPaginationBTN';
 import SwiperPaginationContainer from '../../styles/SwiperPaginationContainer';
 import SubNav_client from './SubNav_client';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 SwiperCore.use([Navigation]);
 

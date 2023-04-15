@@ -55,6 +55,7 @@ const KakaoPostcode_client = () => {
           </button>
           {openPostcode && (
             <DaumPostcode
+              style={postCodeStyle}
               className="kakaoadd"
               onComplete={handle.selectAddress} // 값을 선택할 경우 실행되는 이벤트
               autoClose={false} // 값을 선택할 경우 사용되는 DOM을 제거하여 자동 닫힘 설정
