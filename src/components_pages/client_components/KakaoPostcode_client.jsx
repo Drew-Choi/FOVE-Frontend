@@ -82,6 +82,21 @@ const KakaoPostcode_client = () => {
           />
         </div>
       </div>
+<<<<<<< HEAD:src/components_pages/client_components/KakaoPostcode_client.jsx
+=======
+
+      <div className="add_caution">
+        <span className="add_cau_title">배송주소록 유의사항</span>
+        <br />
+        <br />
+        <span>
+          배송 주소록은 최대 10개까지 등록할 수 있으며, 별도로 등록하지 않을
+          경우 최근 배송 주소록 기준으로 자동 업데이트 됩니다. <br />
+          자동 업데이트를 원하지 않을 경우 주소록 고정 선택을 선택하시면 선택된
+          주소록은 업데이트 대상에서 제외됩니다.
+        </span>
+      </div>
+>>>>>>> 3f06206c4e52620f796e5032574502c6c696f005:src/components_pages/client_components/Add.jsx
     </div>
   );
 };

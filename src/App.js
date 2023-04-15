@@ -19,8 +19,17 @@ import TEST_TOSS from './components_pages/client_components/TEST_TOSS';
 import Order_client from './components_pages/client_components/Order_client';
 
 import { useSelector } from 'react-redux';
+<<<<<<< HEAD
 import { ModalContainer_client } from './components_pages/client_components/ModalContainer_client';
 import Store_Categorys from '../src/components_pages/client_components/Store_Categorys';
+=======
+import SizeFit from './components_pages/client_components/SizeFit';
+import Order_client from './components_pages/client_components/Order_client';
+import Store_Categorys from './components_pages/client_components/Store_Categorys';
+import TEST_TOSS from './components_pages/client_components/TEST_TOSS';
+import { CheckoutPage } from './components_pages/client_components/CheckOut';
+import { SuccessPage } from './components_pages/client_components/Success';
+>>>>>>> 3f06206c4e52620f796e5032574502c6c696f005
 
 function App() {
   const isLogin = useSelector((state) => state.user.isLogin);
@@ -46,6 +55,9 @@ function App() {
           {/* 임시 모달 작업 */}
           <Route path="/modalcontainer" element={<ModalContainer_client />} />
 
+          <Route path="/tosspayment" element={<CheckoutPage />} />
+          <Route path="/tosspayment/success" element={<SuccessPage />} />
+          {/* <Route path="/tosspayment/fail" element={<FailPage />} /> */}
           {/* 자동 로그인 되는 버전 - 수정 예정 */}
           <Route
             path="/register"
