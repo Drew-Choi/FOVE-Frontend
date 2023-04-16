@@ -68,46 +68,37 @@ const ModalView = styled.div.attrs((props) => ({
   }
 `;
 
-export default function Shipping_client() {
-  const [isOpen, setIsOpen] = useState(true);
-
-  const navigate = useNavigate();
-
-  const openModalHandler = () => {
-    setIsOpen(!isOpen);
+export default function Shipping_client({ shipoff }) {
+  const handleCloseModal = () => {
+    shipoff();
   };
 
   return (
     <>
       <ModalContainer_client1>
-        <ModalBtn onClick={openModalHandler}>
-          {isOpen ? 'Opened!' : 'Open Modal'}
-        </ModalBtn>
-        {isOpen && (
-          <ModalBackdrop onClick={openModalHandler}>
-            <ModalView onClick={(e) => e.stopPropagation()}>
-              <div className="sizing">
-                <span>SHIPPING</span>
-                <button onClick={openModalHandler}>CLOSE</button>
+        <ModalBackdrop>
+          <ModalView>
+            <div className="sizing">
+              <span>SHIPPING</span>
+              <button onClick={handleCloseModal}>CLOSE</button>
+            </div>
+            <div className="ship_des">
+              <div className="ship_letter">
+                <strong>일반배송 서비스 (CJ 대한통운)</strong>
+                <br />
+                <br />
+                <span>배송비: 무료</span>
+                <br />
+                <span>배송기간: 2 - 4 영업일</span>
+                <br />
+                <br />
+                <span>
+                  * 상품종류에 따라서 상품의 배송이 다소 지연될 수 있습니다.
+                </span>
               </div>
-              <div className="ship_des">
-                <div className="ship_letter">
-                  <strong>일반배송 서비스 (CJ 대한통운)</strong>
-                  <br />
-                  <br />
-                  <span>배송비: 무료</span>
-                  <br />
-                  <span>배송기간: 2 - 4 영업일</span>
-                  <br />
-                  <br />
-                  <span>
-                    * 상품종류에 따라서 상품의 배송이 다소 지연될 수 있습니다.
-                  </span>
-                </div>
-              </div>
-            </ModalView>
-          </ModalBackdrop>
-        )}
+            </div>
+          </ModalView>
+        </ModalBackdrop>
       </ModalContainer_client1>
     </>
   );
