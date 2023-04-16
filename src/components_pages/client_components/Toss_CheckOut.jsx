@@ -12,7 +12,7 @@ import '../../App.css';
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { orderinfo } from '../../store/modules/payment';
+import { costomer } from '../../store/modules/recipient';
 
 const PaymentBOX = styled.div`
   background-color: aqua;
@@ -21,7 +21,17 @@ const PaymentBOX = styled.div`
   padding: 20px;
 `;
 
-export function Toss_CheckOut({ userInformation }) {
+export function Toss_CheckOut({
+  userInformation,
+  recipientName,
+  recipientZipcode,
+  recipientAddress,
+  recipientAddressDetail,
+  phoneCode,
+  phoneMidNum,
+  phoneLastNum,
+  message,
+}) {
   //리덕스 state ---------------------------
   //오더메뉴에서 넘어오는 정보들(리덕스)
   const singleOrder = useSelector((state) =>
@@ -67,10 +77,9 @@ export function Toss_CheckOut({ userInformation }) {
     } else if (currentURL === '/store/cartorder') {
       setProductName((cur) => cartOrderData.cartProducts[0].productName);
     }
-  }, [singleOrder, cartOrderData, currentURL]);
+  }, []);
   console.log(price);
   console.log(productName);
-  console.log(currentURL);
   const selector = '#payment-widget';
   const clientKey = 'test_ck_D5GePWvyJnrK0W0k6q8gLzN97Eoq';
   const customerKey = 'cccccccc';
@@ -113,40 +122,20 @@ export function Toss_CheckOut({ userInformation }) {
 
   const dispatch = useDispatch();
 
-  const orderInfoSave = () => {
-    //1. 상품정보
-    let products = [];
-    if (currentURL === '/store/order') {
-      products.push({
-        productName: singleOrder.productName,
-        price: singleOrder.price,
-        img: singleOrder.img,
-        size: singleOrder.size,
-        color: singleOrder.color,
-        quantity: singleOrder.quantity,
-        unitSumPrice: singleOrder.totalPrice,
-      });
-    } else if (currentURL === '/store/cartorder') {
-      cartOrderData.cartProducts.map((el) => {
-        products.push(el);
-      });
-    } else {
-      return console.log('데이터 오류');
-    }
+  const clickReduxSave = () => {
+    // 주문자 정보 저장
+    let customerInfo = {
+      message: message.current.value,
+      recipientName: recipientName.current.value,
+      recipientZipcode: recipientZipcode.current.value,
+      recipientAddress: recipientAddress.current.value,
+      recipientAddressDetail: recipientAddressDetail.current.value,
+      phoneCode: phoneCode.current.value,
+      phoneMidNum: phoneMidNum.current.value,
+      phoneLastNum: phoneLastNum.current.value,
+    };
 
-    //2. 주문자 정보
-    // let orderInfoValue = {
-    //   message: message.current.value,
-    //   recipientName: recipientName.current.value,
-    //   recipientZipcode: recipientZipcode.current.value,
-    //   recipientAddress: recipientAddress.current.value,
-    //   recipientAddressDetail: recipientAddressDetail.current.value,
-    //   phoneCode: phoneCode.current.value,
-    //   phoneMidNum: phoneMidNum.current.value,
-    //   phoneLastNum: phoneLastNum.current.value,
-    // };
-
-    dispatch(orderinfo(products));
+    dispatch(costomer(customerInfo));
   };
 
   return (
@@ -176,7 +165,7 @@ export function Toss_CheckOut({ userInformation }) {
             } catch (error) {
               console.error(error);
             }
-            orderInfoSave();
+            clickReduxSave();
           }}
         >
           결제진행

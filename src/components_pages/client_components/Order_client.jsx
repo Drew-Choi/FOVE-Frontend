@@ -383,7 +383,16 @@ export default function Order_client() {
                     <div className="point_price_apply">예치금 사용: - {''}</div>
                   </div>
 
-                  <Toss_CheckOut />
+                  <Toss_CheckOut
+                    recipientName={recipientName}
+                    recipientZipcode={recipientZipcode}
+                    recipientAddress={recipientAddress}
+                    recipientAddressDetail={recipientAddressDetail}
+                    phoneCode={phoneCode}
+                    phoneMidNum={phoneMidNum}
+                    phoneLastNum={phoneLastNum}
+                    message={message}
+                  />
 
                   {/* 결제하기 */}
                   <p className="point_title deposit"> 총 합계 </p>

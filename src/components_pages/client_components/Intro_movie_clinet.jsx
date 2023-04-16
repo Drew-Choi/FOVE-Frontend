@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React from 'react';
 import '../../styles/intro_Movie_client.scss';
 import ReactPlayer from 'react-player';
