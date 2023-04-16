@@ -1,6 +1,6 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Admin_main from './components_pages/admin_components/Admin_main';
 import ProductRegister_admin from './components_pages/admin_components/ProductRegister_admin';
 import Home_admin from './components_pages/admin_components/Home_admin';
@@ -27,9 +27,47 @@ import TossPay_CompletePage from './components_pages/client_components/TossPay_C
 import TosApproveContain from './components_pages/client_components/TosApproveContain';
 import TossApprove from './components_pages/client_components/TossApprove';
 import { Toss_CheckOut } from './components_pages/client_components/Toss_CheckOut';
+import { useEffect } from 'react';
+import axios from 'axios';
+import { keepLogin } from './store/modules/user';
+import RegisterSuccess_client from './components_pages/client_components/RegisterSuccess_client';
 
 function App() {
   const isLogin = useSelector((state) => state.user.isLogin);
+  const isAdmin = useSelector((state) => state.user.isAdmin);
+  const dispatch = useDispatch();
+
+  // App 시작 시, 브라우저 로컬 스토리지에 저장 되어 있는 토큰이 있는지를 확인 후,
+  // 해당 토큰을 백엔드에 검증. 검증이 되면 바로 로그인 처리 / 안 되면 로그인 페이지로 이동
+  const tokenLoginCheck = async () => {
+    try {
+      // 검증을 위해, 로컬 스토리지의 토큰 axios로 보내기
+      const resToken = await axios.post('http://localhost:4000/login/token', {
+        token: window.localStorage.getItem('token'),
+      });
+
+      // 토큰 검증 결과를 받아서 처리, 필요 데이터는 data 에 담아서 전송되므로 필요한 정보 세팅
+      console.log(resToken.data.message);
+
+      // 토큰 검증이 성공 적으로 검증이 되었으므로 리덕스에 로그인 처리
+      // 해당 함수로 인하여 토큰이 있는 동안은, 로그인을 하지 않아도 바로 로그인이 처리
+      dispatch(
+        keepLogin({
+          id: resToken.data.id,
+          nameEncoded: resToken.data.nameEncoded,
+          points: resToken.data.points,
+          isAdmin: resToken.data.isAdmin,
+        }),
+      );
+    } catch (err) {
+      console.log('토큰 검증 실패, 알 수 없는 문제 발생', err);
+      return;
+    }
+  };
+  // 리액트 앱이 시작 되면 바로 토큰 검증 로직 실행 -> 토큰 로그인 수행
+  useEffect(() => {
+    tokenLoginCheck();
+  }, []);
 
   return (
     <div>
@@ -65,27 +103,36 @@ function App() {
 
           <Route path="/ordersuccess" element={<TossPay_CompletePage />} />
           {/* account쪽 */}
-          <Route path="/mypage" element={<Mypage_client />} />
-          <Route path="/adsubmit" element={<AdSubmit_client />} />
-          <Route path="/adwrite" element={<Adwrite_client />} />
           <Route path="/agreement" element={<Agreement_client />} />
           <Route path="/privacy" element={<Privacy_client />} />
           <Route path="/guide" element={<Guide_client />} />
 
           {/* <Route path="/tosspayment/fail" element={<FailPage />} /> */}
 
-          {/* 자동 로그인 되는 버전 - 수정 예정 */}
-          {/* <Route
-            path="/register"
-            element={isLogin ? <Client_main /> : <Register_client />}
-          /> */}
-
           {/* 회원 가입 */}
           <Route path="/register" element={<Register_client />} />
-          {/* 로그인 */}
           <Route
-            path="/login"
+            path="/register/success"
+            element={<RegisterSuccess_client />}
+          />
+          {/* 로그인 */}
+          <Route path="/login" element={<Login_client />} />
+
+          {/* 로그인 상태여야 이동 가능한 페이지들 */}
+          {/* 마이페이지 메인 */}
+          <Route
+            path="/mypage"
             element={isLogin ? <Mypage_client /> : <Login_client />}
+          />
+          {/* 배송주소록 목록 */}
+          <Route
+            path="/adsubmit"
+            element={isLogin ? <AdSubmit_client /> : <Login_client />}
+          />
+          {/* 배송주소지 등록 */}
+          <Route
+            path="/adwrite"
+            element={isLogin ? <Adwrite_client /> : <Login_client />}
           />
         </Route>
 

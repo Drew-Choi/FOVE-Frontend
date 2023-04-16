@@ -54,7 +54,7 @@ export default function user(state = initState, action) {
       return {
         ...state,
         userID: action.payload.id,
-        userName: action.payload.name,
+        userName: action.payload.nameEncoded,
         userPoints: action.payload.points,
         isAdmin: action.payload.isAdmin,
         isLogin: true,
