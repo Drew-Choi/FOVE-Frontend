@@ -1,8 +1,6 @@
 import axios from 'axios';
 import React, { useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-// import { useDispatch } from 'react-redux';
-// import { login } from '../../store/modules/user';
+import { useNavigate } from 'react-router-dom';
 import '../../styles/register_client.scss';
 
 export default function Register_client() {
@@ -13,7 +11,6 @@ export default function Register_client() {
   const registerPhoneInput = useRef();
   const isNotDuplicatedId = useRef(); // 아이디 중복 확인 했는지 여부
 
-  // const dispatch = useDispatch();
   const navigate = useNavigate();
 
   // 아이디 중복 확인 버튼
@@ -73,15 +70,9 @@ export default function Register_client() {
 
       alert(resRegister.data); // await 하지 말기!
 
-      // // 자동 로그인 부분. 수정 중!!!
-      // dispatch(
-      //   login({
-      //     id: registerIdInput.current.value,
-      //     password: registerPwInput.current.value,
-      //     name: registerNameInput.current.value,
-      //     phone: registerPhoneInput.current.value,
-      //   }),
-      // );
+      navigate(`/register/success`, {
+        state: { name: registerNameInput.current.value },
+      });
     } catch (err) {
       alert(err.response.data);
     }

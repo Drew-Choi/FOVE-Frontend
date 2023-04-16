@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { login } from '../../store/modules/user';
 import '../../styles/login_client.scss';
 
@@ -10,6 +10,7 @@ export default function Login_client() {
   const loginPwInput = useRef();
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // LOG IN 버튼
   const loginUser = async () => {
@@ -28,9 +29,12 @@ export default function Login_client() {
       // axios 로 보내기
       const resLogin = await axios.post('http://localhost:4000/login', {
         id: loginIdInput.current.value,
-        password: loginIdInput.current.value,
+        password: loginPwInput.current.value,
       });
 
+      // 회원이 아닐 때, 비밀번호가 틀렸을 때 뜨는 에러 메시지 처리
+      if (resLogin.status === 400) alert(resLogin.response.data.message);
+      // 로그인 성공 시, 메시지 처리
       alert(resLogin.data.message);
 
       // 로그인이 성공하면 응답 데이터 token 프로퍼티에 accessToken 이 전달 되어 오므로
@@ -38,13 +42,16 @@ export default function Login_client() {
       // 해당 정보를 통하여 리액트 실행 시, 토큰을 백엔드 서버에 검증하여 자동 로그인을 처리
       window.localStorage.setItem('token', resLogin.data.token);
 
-      return dispatch(
+      dispatch(
         login({
           id: loginIdInput.current.value,
         }),
       );
+
+      // navigate(-1); // 로그인 후 이전 페이지로 이동
+      navigate(`/store`); // 로그인 후 Store 페이지로 이동
     } catch (err) {
-      alert(err.response.message);
+      alert(err.response.data.message);
     }
   };
 

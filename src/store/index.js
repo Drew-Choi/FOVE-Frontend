@@ -4,6 +4,7 @@ import cart from './modules/cart';
 import cartmodal from './modules/cartmodal';
 import order from './modules/order';
 import payment from './modules/payment';
+import menuAccount from './modules/menuAccount';
 
 export default combineReducers({
   cart,
@@ -11,4 +12,5 @@ export default combineReducers({
   cartmodal,
   order,
   payment,
+  menuAccount,
 });

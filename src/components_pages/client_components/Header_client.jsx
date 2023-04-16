@@ -6,8 +6,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { importdb } from '../../store/modules/cart';
 import CartModal from './CartModal';
 import { offon } from '../../store/modules/cartmodal';
+import MenuAccount from './MenuAccount';
+import { clickMenu } from '../../store/modules/menuAccount';
 
 export default function Header_client() {
+  const isLogin = useSelector((state) => state.user.isLogin);
+  const menuClicked = useSelector((state) => state.menuAccount.clicked);
+
   //리덕스 디스패치(액션함수 전달용)
   const dispatch = useDispatch();
   const cartLength = useSelector((state) =>
@@ -56,7 +61,23 @@ export default function Header_client() {
         </ul>
         <ul id="cate2">
           <li id="cate_li2">
-            <p onClick={() => navigate('#')}>ACCOUNT</p>
+            {isLogin ? (
+              <p
+                onClick={() => {
+                  dispatch(clickMenu());
+                }}
+              >
+                ACCOUNT
+              </p>
+            ) : (
+              <p
+                onClick={() => {
+                  navigate(`/login`);
+                }}
+              >
+                LOG IN
+              </p>
+            )}
           </li>
           <li id="cate_li2_shopbag">
             <p onClick={() => dispatch(offon())}>SHOPPING BAG / {cartLength}</p>
@@ -67,6 +88,9 @@ export default function Header_client() {
 
       {/* 카트 모달 임 */}
       <CartModal className={`cart_modal ${offonKey}`} />
+
+      {/* ACCOUNT 메뉴 */}
+      {menuClicked && <MenuAccount />}
     </>
   );
 }

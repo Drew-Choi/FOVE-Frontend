@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { login } from '../store/modules/user';
 
 export default function Func_CheckToken() {
+  console.log('함수 입장!!');
   const dispatch = useDispatch();
 
   // 브라우저 로컬 스토리지에 저장 되어 있는 토큰이 있는지를 확인 후,
@@ -16,7 +17,7 @@ export default function Func_CheckToken() {
       });
 
       // 토큰 검증 결과를 받아서 처리, 필요 데이터는 data 에 담아서 전송되므로 필요한 정보 세팅
-      console.log(`토큰 검증 결과: ${resToken.data.message}`);
+      console.log(`토큰 검증 결과: ${resToken.data.message}`); // ////////////////////////
       alert(resToken.data.message); // 임의로 test
 
       // 토큰 검증이 성공 적으로 검증이 되었으므로 리덕스에 로그인 처리
@@ -31,4 +32,6 @@ export default function Func_CheckToken() {
       return;
     }
   };
+
+  // tokenLoginCheck();
 }
