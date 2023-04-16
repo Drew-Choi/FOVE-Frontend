@@ -25,6 +25,7 @@ import ModalContainer_client2 from './components_pages/client_components/ModalCo
 import Shipping_client from './components_pages/client_components/Shipping_client';
 import TossPay_CompletePage from './components_pages/client_components/TossPay_CompletePage';
 import TosApproveContain from './components_pages/client_components/TosApproveContain';
+import TossApprove from './components_pages/client_components/TossApprove';
 
 function App() {
   const isLogin = useSelector((state) => state.user.isLogin);
@@ -50,7 +51,7 @@ function App() {
           {/* 2. 카트에 담긴 여러 개 상품 */}
           <Route path="/store/cartorder" element={<Order_client />} />
           {/* 토스페이먼츠 완성 */}
-          <Route path="/tosspayment/approval" element={<TosApproveContain />} />
+          <Route path="/tosspayment/approval" element={<TossApprove />} />
 
           <Route path="/ordersuccess" element={<TossPay_CompletePage />} />
           {/* account쪽 */}
