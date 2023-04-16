@@ -17,16 +17,14 @@ import Mypage_client from './components_pages/client_components/Mypage_client';
 import AdSubmit_client from './components_pages/client_components/AdSubmit_client';
 import Adwrite_client from './components_pages/client_components/Adwrite_client';
 import Login_client from './components_pages/client_components/Login_client';
-
 import Order_client from './components_pages/client_components/Order_client';
 import Store_Categorys from './components_pages/client_components/Store_Categorys';
-import TEST_TOSS from './components_pages/client_components/TEST_TOSS';
-import { CheckoutPage } from './components_pages/client_components/CheckOut';
-import { SuccessPage } from './components_pages/client_components/Success';
 import Error404 from './components_pages/client_components/Error404';
 import ModalContainer_client from './components_pages/client_components/ModalContainer_client';
 import ModalContainer_client2 from './components_pages/client_components/ModalContainer_client2';
 import Shipping_client from './components_pages/client_components/Shipping_client';
+import TossPay_CompletePage from './components_pages/client_components/TossPay_CompletePage';
+import TosApproveContain from './components_pages/client_components/TosApproveContain';
 
 function App() {
   const isLogin = useSelector((state) => state.user.isLogin);
@@ -38,15 +36,6 @@ function App() {
         <Route path="/" element={<Client_main />}>
           {/* 인트로 무비 */}
           <Route path="" element={<Intro_movie_client />} />
-          {/* 토스페이먼츠 테스트 */}
-          <Route path="/toss" element={<TEST_TOSS />} />
-          {/* 토스페이먼츠 완성 */}
-          <Route path="/store/order/tosspayment" element={<CheckoutPage />} />
-          <Route
-            path="/store/cartorder/tosspayment"
-            element={<CheckoutPage />}
-          />
-          <Route path="/tosspayment/success" element={<SuccessPage />} />
           {/* 브랜드소개 */}
           <Route path="/aboutus" element={<AboutUs_client />} />
           {/* 상품진열 */}
@@ -60,6 +49,10 @@ function App() {
           <Route path="/store/order" element={<Order_client />} />
           {/* 2. 카트에 담긴 여러 개 상품 */}
           <Route path="/store/cartorder" element={<Order_client />} />
+          {/* 토스페이먼츠 완성 */}
+          <Route path="/tosspayment/approval" element={<TosApproveContain />} />
+
+          <Route path="/ordersuccess" element={<TossPay_CompletePage />} />
           {/* account쪽 */}
           <Route path="/mypage" element={<Mypage_client />} />
           <Route path="/adsubmit" element={<AdSubmit_client />} />

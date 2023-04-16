@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import '../../styles/order_client.scss';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import BTN_black_nomal_comp from '../../styles/BTN_black_nomal_comp';
 import RadioGroup from '../../components_elements/RadioGroup';
@@ -11,6 +11,8 @@ import Select_Custom from '../../components_elements/Select_Custom';
 import TextArea_Custom from '../../components_elements/TextArea_Custom';
 import DaumPostcode from 'react-daum-postcode';
 import Error404 from './Error404';
+import { Toss_CheckOut } from './Toss_CheckOut';
+import { orderinfo } from '../../store/modules/payment';
 
 const Pd_order_IMG = styled.div`
   ${(props) =>
@@ -19,7 +21,6 @@ const Pd_order_IMG = styled.div`
 `;
 
 export default function Order_client() {
-  const navigate = useNavigate();
   //카트에 담긴 상품들을 주문해 보자
   //일단, 현재 페이지의 url주소를 분석해서 싱글인지, 카트 상품인지 파악하자
   const location = useLocation();
@@ -102,89 +103,7 @@ export default function Order_client() {
   //14. 기타 배송 메모
   const message = useRef();
 
-  //주문 정보 백에 POST 보내기
-  const orderPOST = async () => {
-    let products = [];
-    console.log(products);
-
-    if (currentURL === '/store/order') {
-      products.push({
-        productName: singleOrder.productName,
-        price: singleOrder.price,
-        img: singleOrder.img,
-        size: singleOrder.size,
-        color: singleOrder.color,
-        quantity: singleOrder.quantity,
-        unitSumPrice: singleOrder.totalPrice,
-      });
-    } else if (currentURL === '/store/cartorder') {
-      cartOrderData.cartProducts.map((el) => {
-        products.push(el);
-      });
-    } else {
-      return console.log('데이터 오류');
-    }
-
-    try {
-      const orderData = await axios.post('http://localhost:4000/store/order', {
-        //상품정보(싱글)
-        products: products,
-        //받는 이 정보
-        message: message.current.value,
-        recipientName: recipientName.current.value,
-        recipientZipcode: recipientZipcode.current.value,
-        recipientAddress: recipientAddress.current.value,
-        recipientAddressDetail: recipientAddressDetail.current.value,
-        phoneCode: phoneCode.current.value,
-        phoneMidNum: phoneMidNum.current.value,
-        phoneLastNum: phoneLastNum.current.value,
-      });
-      if (orderData.status === 200) {
-        console.log('성공');
-        console.log(orderData.data);
-      } else {
-        console.log('실패');
-        console.log(orderData.data);
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  const selectList_phone = [
-    '02',
-    '031',
-    '032',
-    '033',
-    '041',
-    '043',
-    '042',
-    '044',
-    '051',
-    '052',
-    '053',
-    '054',
-    '055',
-    '061',
-    '062',
-    '063',
-    '064',
-    '070',
-  ];
-
   const selectList_celPhone = ['010', '011', '016', '017', '019'];
-
-  const emailList = [
-    'gmail.com',
-    'naver.com',
-    'daum.net',
-    'hanmail.net',
-    'kakao.com',
-    'nate.com',
-    'outlook.com',
-    'icloud.com',
-    '직접입력',
-  ];
 
   const postCodeStyle2 = {
     display: 'block',
@@ -227,9 +146,6 @@ export default function Order_client() {
       setOn('');
     }
   }, [toggleModal]);
-
-  // //마지막 결제창 넘어가기
-  // const payment = (url) => {url === '/store/order' ?)}
 
   return (
     <div className="order_main">
@@ -467,6 +383,8 @@ export default function Order_client() {
                     <div className="point_price_apply">예치금 사용: - {''}</div>
                   </div>
 
+                  <Toss_CheckOut />
+
                   {/* 결제하기 */}
                   <p className="point_title deposit"> 총 합계 </p>
                   <div className="final_checkout_contain">
@@ -534,20 +452,18 @@ export default function Order_client() {
                       결제정보를 확인하였으며, 구매진행에 동의합니다.
                     </label>
                     <div className="btn_order">
-                      <BTN_black_nomal_comp
+                      {/* <BTN_black_nomal_comp
                         fontSize="18px"
                         className="order_btn"
                         padding="10px 0px"
                         onClickEvent={() => {
                           !agreement
                             ? setToggleModal((cur) => true)
-                            : orderPOST();
-
-                          navigate('/store/order/tosspayment');
+                            : orderInfoSave();
                         }}
                       >
                         결제하기
-                      </BTN_black_nomal_comp>
+                      </BTN_black_nomal_comp> */}
                     </div>
                   </div>
                 </div>
