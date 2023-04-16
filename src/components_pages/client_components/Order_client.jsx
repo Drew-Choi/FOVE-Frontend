@@ -245,20 +245,20 @@ export default function Order_client() {
 
       <div className="memeber_info_contain">
         <p className="memeber_info_membership">
-          {'000'}님은, {'[STANDARD]'} 회원이십니다.
+          {'김영호'}님은, {'[STANDARD]'} 회원이십니다.
         </p>
         <p className="memeber_info_event1">
-          KRW 10,000이상 구매시 5%를 추가할인 받으실 수 있습니다. (최대 KDW
-          9,999,999)
+          KRW 10,000 이상 구매시 <strong>5%</strong>를 추가할인 받으실 수
+          있습니다. (최대 KDW 9,999,999)
         </p>
         <p className="memeber_info_event2">
-          KRW 10,000이상 구매시 5%를 추가할인 받으실 수 있습니다. (최대 KDW
-          9,999,999)
+          KRW 10,000 이상 구매시 <strong>5%</strong>를 추가할인 받으실 수
+          있습니다. (최대 KDW 9,999,999)
         </p>
         <span className="point_text1">가용적립금:</span>
-        <span className="member_point">{'2,000'} p</span>
+        <span className="member_point">{'2,000'} 원</span>
         <span className="point_text2">예치금:</span>
-        <span className="member_deposit">{'0'} ₩</span>
+        <span className="member_deposit">{'0'} 원</span>
         <span className="point_text3">쿠폰:</span>
         <span className="member_coupon">{'0'} 개</span>
       </div>
@@ -290,13 +290,14 @@ export default function Order_client() {
                   <p className="order_product_price">
                     ₩ {frontPriceComma(singleOrder.price)}
                   </p>
-                  <p className="order_product_size">size: {singleOrder.size}</p>
+                  <p className="order_product_size">SIZE: {singleOrder.size}</p>
                   <p className="order_product_color">{singleOrder.color}</p>
                   <p className="order_product_quantity">
-                    {frontPriceComma(singleOrder.quantity)} ea
+                    <strong>QTY</strong> :
+                    {frontPriceComma(singleOrder.quantity)}
                   </p>
                   <p className="order_product_unitSumPrice">
-                    total: ₩{' '}
+                    <strong>Total : ₩</strong>{' '}
                     <span>{frontPriceComma(singleOrder.totalPrice)}</span>
                   </p>
                 </div>
@@ -319,10 +320,10 @@ export default function Order_client() {
                     <p className="order_product_size">size: {el.size}</p>
                     <p className="order_product_color">{el.color}</p>
                     <p className="order_product_quantity">
-                      {frontPriceComma(el.quantity)} ea
+                      <strong>QTY</strong> : {frontPriceComma(el.quantity)}
                     </p>
                     <p className="order_product_unitSumPrice">
-                      total: ₩{' '}
+                      <strong>Total : ₩</strong>{' '}
                       <span>{frontPriceComma(el.quantity * el.price)}</span>
                     </p>
                   </div>
@@ -458,7 +459,7 @@ export default function Order_client() {
                     <div className="point_price_apply">포인트 사용: - {''}</div>
                   </div>
                   {/* 예치금 */}
-                  <p className="point_title diposit">예치금</p>
+                  <p className="point_title deposit">예치금</p>
                   <div className="point">
                     <input type="text" className="point_apply b" />
                     <button className="diicount_code_btn">적용</button>
@@ -467,7 +468,7 @@ export default function Order_client() {
                   </div>
 
                   {/* 결제하기 */}
-                  <p className="point_title diposit"> 총 합계 </p>
+                  <p className="point_title deposit"> 총 합계 </p>
                   <div className="final_checkout_contain">
                     <div className="unit_sum_price a">
                       <p>상품금액</p>
