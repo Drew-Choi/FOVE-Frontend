@@ -67,10 +67,7 @@ function App() {
           <Route path="/agreement" element={<Agreement_client />} />
           <Route path="/privacy" element={<Privacy_client />} />
           <Route path="/guide" element={<Guide_client />} />
-          <Route path="/shipping" element={<Shipping_client />} />
 
-          <Route path="/sizemodal_cm" element={<ModalContainer_client />} />
-          <Route path="/sizemodal_inch" element={<ModalContainer_client2 />} />
           {/* <Route path="/tosspayment/fail" element={<FailPage />} /> */}
 
           {/* 자동 로그인 되는 버전 - 수정 예정 */}

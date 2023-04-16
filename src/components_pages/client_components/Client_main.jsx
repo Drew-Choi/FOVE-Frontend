@@ -9,7 +9,6 @@ export default function Client_main() {
   return (
     <>
       <Header_client />
-      {/* 인트로에 필요없는 서브 네브 메뉴를 현재 URL을 파악하고 조건을 걸어서 나타났다 사라졌다 해줌 */}
       <Outlet></Outlet>
       <Footer_client />
     </>

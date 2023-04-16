@@ -8,7 +8,7 @@ export default function AboutUs_client() {
     <>
       <div className="aboutus">
         <div className="about_left">
-          <img src="images/aboutusspl.jpg"></img>
+          <img src="images/aboutus.gif"></img>
         </div>
         <div className="about_right">
           <div className="maintitle">
