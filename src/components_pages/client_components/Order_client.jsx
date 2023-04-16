@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import '../../styles/order_client.scss';
 import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import BTN_black_nomal_comp from '../../styles/BTN_black_nomal_comp';
 import RadioGroup from '../../components_elements/RadioGroup';
@@ -11,8 +11,6 @@ import Select_Custom from '../../components_elements/Select_Custom';
 import TextArea_Custom from '../../components_elements/TextArea_Custom';
 import DaumPostcode from 'react-daum-postcode';
 import Error404 from './Error404';
-import { Toss_CheckOut } from './Toss_CheckOut';
-import { orderinfo } from '../../store/modules/payment';
 
 const Pd_order_IMG = styled.div`
   ${(props) =>
@@ -25,6 +23,7 @@ export default function Order_client() {
   //일단, 현재 페이지의 url주소를 분석해서 싱글인지, 카트 상품인지 파악하자
   const location = useLocation();
   const currentURL = location.pathname;
+  const navigate = useNavigate();
 
   //천단위 컴마
   const country = navigator.language;
@@ -74,7 +73,6 @@ export default function Order_client() {
     // 주소 선택 이벤트
     selectAddress: (data) => {
       // console.log(typeof data); object
-      console.log(data);
       setAdressData(data);
       setOpenPostcode(false);
     },
@@ -102,6 +100,63 @@ export default function Order_client() {
 
   //14. 기타 배송 메모
   const message = useRef();
+
+  //리덕스 state ---------------------------
+  //오더메뉴에서 넘어오는 정보들(리덕스)
+
+  const orderPOST = async () => {
+    //--------싱글아이템과 멀티아이템 추리는 작업
+    let products = [];
+    if (currentURL === '/store/order') {
+      products.push({
+        productName: singleOrder.productName,
+        price: singleOrder.price,
+        img: singleOrder.img,
+        size: singleOrder.size,
+        color: singleOrder.color,
+        quantity: singleOrder.quantity,
+        unitSumPrice: singleOrder.quantity * singleOrder.price,
+      });
+    } else if (currentURL === '/store/cartorder') {
+      cartOrderData.cartProducts.map((el) => {
+        products.push(el);
+      });
+    } else {
+      return console.log('데이터 오류');
+    }
+    //-----------------------------------------
+
+    try {
+      const orderData = await axios.post('http://localhost:4000/store/order', {
+        //주문상품정보
+        products: products,
+        //받는 사람(recipien) 정보
+        message: message.current.value,
+        recipientName: recipientName.current.value,
+        recipientZipcode: recipientZipcode.current.value,
+        recipientAddress: recipientAddress.current.value,
+        recipientAddressDetail: recipientAddressDetail.current.value,
+        phoneCode: phoneCode.current.value,
+        phoneMidNum: phoneMidNum.current.value,
+        phoneLastNum: phoneLastNum.current.value,
+        //결제 전 상품 정보
+        status: 'NOT',
+        approvedAt: '',
+        method: '',
+        discount: null,
+        totalAmount: null,
+      });
+      if (orderData.status === 200) {
+        console.log('성공');
+        console.log(orderData.data);
+      } else {
+        console.log('실패');
+        console.log(orderData.data);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   const selectList_celPhone = ['010', '011', '016', '017', '019'];
 
@@ -383,17 +438,6 @@ export default function Order_client() {
                     <div className="point_price_apply">예치금 사용: - {''}</div>
                   </div>
 
-                  <Toss_CheckOut
-                    recipientName={recipientName}
-                    recipientZipcode={recipientZipcode}
-                    recipientAddress={recipientAddress}
-                    recipientAddressDetail={recipientAddressDetail}
-                    phoneCode={phoneCode}
-                    phoneMidNum={phoneMidNum}
-                    phoneLastNum={phoneLastNum}
-                    message={message}
-                  />
-
                   {/* 결제하기 */}
                   <p className="point_title deposit"> 총 합계 </p>
                   <div className="final_checkout_contain">
@@ -461,18 +505,25 @@ export default function Order_client() {
                       결제정보를 확인하였으며, 구매진행에 동의합니다.
                     </label>
                     <div className="btn_order">
-                      {/* <BTN_black_nomal_comp
+                      <BTN_black_nomal_comp
                         fontSize="18px"
                         className="order_btn"
                         padding="10px 0px"
                         onClickEvent={() => {
-                          !agreement
-                            ? setToggleModal((cur) => true)
-                            : orderInfoSave();
+                          !agreement ? (
+                            setToggleModal((cur) => true)
+                          ) : currentURL === '/store/order' ? (
+                            navigate('/store/order/checkout')
+                          ) : currentURL === '/store/cartorder' ? (
+                            navigate('/store/cartorder/checkout')
+                          ) : (
+                            <Error404 />
+                          );
+                          orderPOST();
                         }}
                       >
                         결제하기
-                      </BTN_black_nomal_comp> */}
+                      </BTN_black_nomal_comp>
                     </div>
                   </div>
                 </div>

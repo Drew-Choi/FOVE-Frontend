@@ -26,6 +26,7 @@ import Shipping_client from './components_pages/client_components/Shipping_clien
 import TossPay_CompletePage from './components_pages/client_components/TossPay_CompletePage';
 import TosApproveContain from './components_pages/client_components/TosApproveContain';
 import TossApprove from './components_pages/client_components/TossApprove';
+import { Toss_CheckOut } from './components_pages/client_components/Toss_CheckOut';
 
 function App() {
   const isLogin = useSelector((state) => state.user.isLogin);
@@ -48,10 +49,19 @@ function App() {
           {/* 주문서작성 영역 */}
           {/* 1. 싱글상품 */}
           <Route path="/store/order" element={<Order_client />} />
+          <Route path="/store/order/checkout" element={<Toss_CheckOut />} />
           {/* 2. 카트에 담긴 여러 개 상품 */}
           <Route path="/store/cartorder" element={<Order_client />} />
+          <Route path="/store/cartorder/checkout" element={<Toss_CheckOut />} />
           {/* 토스페이먼츠 완성 */}
-          <Route path="/tosspayment/approval" element={<TossApprove />} />
+          <Route
+            path="/store/order/checkout/approval_order"
+            element={<TossApprove />}
+          />
+          <Route
+            path="/store/cartorder/checkout/approval_cartorder"
+            element={<TossApprove />}
+          />
 
           <Route path="/ordersuccess" element={<TossPay_CompletePage />} />
           {/* account쪽 */}

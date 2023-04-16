@@ -1,11 +1,13 @@
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { paysuccess } from '../../store/modules/payment';
 // import PaymentWidget, { PaymentRequest } from '@tosspayments/payment-widget';
 
 export default function TossApprove() {
+  const location = useLocation();
+  const currentURL = location.pathname;
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -14,42 +16,40 @@ export default function TossApprove() {
   let paymentKeyparam = searchParams.get('paymentKey');
 
   //리덕스 자료들 불러오기
-  const orderInfo = useSelector((state) =>
+  //1. payment 결제 정보 담은 곳
+  const paymentData = useSelector((state) =>
     state.payment ? (
-      state.payment.orderInfo
+      state.payment
     ) : (
       <h2 style={{ position: 'relative', top: '100px' }}>data Error</h2>
     ),
   );
 
-  const paymentInfo = useSelector((state) =>
-    state.payment ? (
-      state.payment.paymentInfo
+  //2. recipient(받는 분) 정보 담은 곳
+  const recipientData = useSelector((state) =>
+    state.recipient ? (
+      state.recipient
     ) : (
       <h2 style={{ position: 'relative', top: '100px' }}>data Error</h2>
     ),
   );
 
-  //백으로 정보 넘기주기
-  //결제승인까지 완료 정보 백에 POST 보내기
-  const orderPOST = async () => {
-    try {
-      const orderData = await axios.post('http://localhost:4000/store/order', {
-        //상품정보 + 받는 이 정보
-        products: orderInfo,
-        payments: paymentInfo,
-      });
-      if (orderData.status === 200) {
-        console.log('성공');
-        console.log(orderData.data);
-      } else {
-        console.log('실패');
-        console.log(orderData.data);
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  //3. 주문하는 상품 담는 곳
+  const orderData = useSelector((state) =>
+    state.order ? (
+      state.order
+    ) : (
+      <h2 style={{ position: 'relative', top: '100px' }}>data Error</h2>
+    ),
+  );
+
+  const cartorderData = useSelector((state) =>
+    state.cart ? (
+      state.cart
+    ) : (
+      <h2 style={{ position: 'relative', top: '100px' }}>data Error</h2>
+    ),
+  );
 
   useEffect(() => {
     const source = axios.CancelToken.source();
@@ -78,6 +78,7 @@ export default function TossApprove() {
           if (response.status === 200) {
             await dispatch(paysuccess(response.data));
             console.log('결제승인성공');
+            console.log(response.data);
             navigate('/ordersuccess');
           }
         } catch (error) {
@@ -90,7 +91,6 @@ export default function TossApprove() {
         }
       };
       paymentApprov();
-      orderPOST();
     }
 
     return () => {
