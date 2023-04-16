@@ -1,6 +1,10 @@
 // 초기 상태 설정
 const initState = {
-  payment: {},
+  status: '',
+  approvedAt: '',
+  method: '',
+  discount: 0,
+  totalAmoount: 0,
 };
 
 // 액션 타입(문자열) 설정. user는 밑에 정의된 리듀서.
@@ -21,8 +25,12 @@ export default function payment(state = initState, action) {
   switch (action.type) {
     case PAYSUCCESS:
       return {
-        ...state.paymentInfo,
-        paymentInfo: action.payload,
+        ...state,
+        status: action.payload.status,
+        approvedAt: action.payload.approvedAt,
+        method: action.payload.method,
+        discount: action.payload.discount,
+        totalAmoount: action.payload.totalAmoount,
       };
     default:
       return state;
