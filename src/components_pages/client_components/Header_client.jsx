@@ -56,6 +56,34 @@ export default function Header_client() {
   console.log(`관리자인가요? ${isAdmin}`); // ////////////////////////////////////////////
   console.log(`로그인 상태? ${isLogin}`);
 
+  //서칭용 상태관리
+  const [searchOnOff, setSearchOnOff] = useState('off');
+  //서칭용 엔터 핸들러
+  const handleKeyPress = async (event) => {
+    if (event.key === 'Enter') {
+      // 검색 로직 실행
+      await setSearchText(event.target.value);
+      searchReq();
+    }
+  };
+  //검색어 담기
+  const [searchText, setSearchText] = useState('');
+
+  const searchReq = async () => {
+    try {
+      console.log('인풋값:' + typeof searchText);
+      const searchDataGet = await axios.post(
+        'http://localhost:4000/store/search',
+        {
+          searchText: searchText,
+        },
+      );
+      console.log(searchDataGet.data.searchedProduct);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <>
       <header className="header_client">
@@ -82,9 +110,23 @@ export default function Header_client() {
           </li>
         </ul>
         <ul id="cate2">
-          <li id="search">
-            <input type="text" placeholder="" />
-            <span className="material-symbols-outlined">search</span>
+          <li id="search_container">
+            <input
+              className={`searchInput ${searchOnOff}`}
+              type="text"
+              placeholder="상품검색"
+              onKeyPress={handleKeyPress}
+            />
+            <span
+              className="material-symbols-outlined search"
+              onClick={(cur) =>
+                searchOnOff === 'off'
+                  ? setSearchOnOff('on')
+                  : setSearchOnOff('off')
+              }
+            >
+              search
+            </span>
           </li>
           <li id="cate_li2">
             {isLogin ? (
