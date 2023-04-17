@@ -53,7 +53,6 @@ export default function Header_client() {
     dispatch(offon());
   };
 
-
   console.log(`관리자인가요? ${isAdmin}`); // ////////////////////////////////////////////
   console.log(`로그인 상태? ${isLogin}`);
 
@@ -85,7 +84,6 @@ export default function Header_client() {
     }
   };
 
-
   return (
     <>
       <header className="header_client">
@@ -95,7 +93,7 @@ export default function Header_client() {
 
         {/* 관리자 페이지 이동 버튼 - test 중 */}
         {isAdmin && (
-          <button onClick={() => navigate('/admin')}>관리자 페이지</button>
+          <button onClick={() => navigate('/admin')}>👩‍💻 관리자 페이지</button>
         )}
 
         <ul id="cate">
