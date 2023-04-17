@@ -8,6 +8,7 @@ import CartModal from './CartModal';
 import { offon } from '../../store/modules/cartmodal';
 import MenuAccount from './MenuAccount';
 import { clickMenu } from '../../store/modules/menuAccount';
+import GoogleIcon from './GoogleIcon';
 
 export default function Header_client() {
   const isLogin = useSelector((state) => state.user.isLogin);
@@ -60,6 +61,10 @@ export default function Header_client() {
           </li>
         </ul>
         <ul id="cate2">
+          <li id="search">
+            <input type="text" placeholder="" />
+            <span className="material-symbols-outlined">search</span>
+          </li>
           <li id="cate_li2">
             {isLogin ? (
               <p
