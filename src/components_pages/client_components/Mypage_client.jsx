@@ -1,9 +1,12 @@
 import React from 'react';
 import '../../styles/mypage_client.scss';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 export default function Mypage_client() {
   const navigate = useNavigate();
+  const userNameEncoded = useSelector((state) => state.user.userName);
+
   return (
     <>
       {/* ACCOUNT 제목 위치 */}
@@ -21,7 +24,7 @@ export default function Mypage_client() {
               <span>
                 저희 쇼핑몰을 이용해주셔서 감사합니다.
                 <br />
-                <span className="name">김영호</span> 님은
+                <span className="name">{userNameEncoded}</span> 님은
                 <span className="namegrade"> STANDARD </span>
                 회원이십니다.
                 <br />
@@ -118,23 +121,29 @@ export default function Mypage_client() {
           {/* 박스 4개 */}
           <div className="fourbox">
             <div className="line_one">
-              <div onClick={() => navigate('#')} className="shopmain_order">
-                <p>주문조회</p>
+              <div
+                onClick={() => navigate('/mypage/checkOrder')}
+                className="shopmain_order"
+              >
+                <p>주문 조회</p>
                 <span className="material-symbols-outlined">
                   local_shipping
                 </span>
               </div>
-              <div onClick={() => navigate('#')} className="shopmain_profile">
-                <p>회원정보</p>
+              <div
+                onClick={() => navigate('/mypage/editInfo')}
+                className="shopmain_profile"
+              >
+                <p>회원정보 수정</p>
                 <span className="material-symbols-outlined">person</span>
               </div>
             </div>
             <div className="line_two">
               <div
-                onClick={() => navigate('/adsubmit')}
+                onClick={() => navigate('/mypage/checkAddress')}
                 className="shopmain_address"
               >
-                <p>배송주소록</p>
+                <p>배송 주소록</p>
                 <span className="material-symbols-outlined">home</span>
               </div>
               <div onClick={() => navigate('#')} className="shopmain_mypick">

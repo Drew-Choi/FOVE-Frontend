@@ -48,8 +48,7 @@ export default function Login_client() {
         }),
       );
 
-      // navigate(-1); // 로그인 후 이전 페이지로 이동
-      navigate(`/store`); // 로그인 후 Store 페이지로 이동
+      navigate(-1); // 로그인 후 이전 페이지로 이동
     } catch (err) {
       alert(err.response.data.message);
     }

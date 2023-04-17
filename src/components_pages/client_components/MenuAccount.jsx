@@ -17,9 +17,20 @@ const MenuAccountWrap = styled.div`
   padding: 3px 7px;
 `;
 
+const ContentTitle = styled.p`
+  margin: 0;
+  font-size: 15px;
+  font-weight: 800;
+`;
+
 const Content = styled.p`
   margin: 0;
   font-size: 15px;
+  cursor: pointer;
+  &:hover {
+    font-weight: 800;
+    background-color: #e9e9e9;
+  }
 `;
 
 export default function MenuAccount() {
@@ -31,13 +42,14 @@ export default function MenuAccount() {
   const logoutUser = () => {
     alert('정상적으로 로그아웃 되었습니다!');
     window.localStorage.clear(); // 로컬 스토리지의 로그인 토큰 삭제
-    dispatch(clickMenu());
-    dispatch(logout());
+    dispatch(clickMenu()); // MenuAccount 닫기
+    dispatch(logout()); // 로그아웃 처리
+    navigate(`/login`); // 로그인 페이지로 이동
   };
 
   return (
     <MenuAccountWrap>
-      <Content>{userName} 님, 환영합니다!</Content>
+      <ContentTitle>{userName} 님, 환영합니다!</ContentTitle>
       <Content
         onClick={() => {
           dispatch(clickMenu());
