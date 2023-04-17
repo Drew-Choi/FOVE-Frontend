@@ -20,11 +20,7 @@ import Login_client from './components_pages/client_components/Login_client';
 import Order_client from './components_pages/client_components/Order_client';
 import Store_Categorys from './components_pages/client_components/Store_Categorys';
 import Error404 from './components_pages/client_components/Error404';
-import ModalContainer_client from './components_pages/client_components/ModalContainer_client';
-import ModalContainer_client2 from './components_pages/client_components/ModalContainer_client2';
-import Shipping_client from './components_pages/client_components/Shipping_client';
 import TossPay_CompletePage from './components_pages/client_components/TossPay_CompletePage';
-import TosApproveContain from './components_pages/client_components/TosApproveContain';
 import TossApprove from './components_pages/client_components/TossApprove';
 import { Toss_CheckOut } from './components_pages/client_components/Toss_CheckOut';
 import { useEffect } from 'react';
@@ -49,6 +45,7 @@ function App() {
 
       // 토큰 검증 결과를 받아서 처리, 필요 데이터는 data 에 담아서 전송되므로 필요한 정보 세팅
       console.log(resToken.data.message);
+
       console.log(`A** 받은 isAdmin: ${resToken.data.isAdmin}`); // /////////////////////////////////////////
       console.log(`A** 받은 name: ${resToken.data.nameEncoded}`); // /////////////////////////////////////////
 
@@ -65,6 +62,7 @@ function App() {
 
       console.log(`A** ** 리덕스 이름? ${reduxName}`); // /////////////////////////////////////////////////
       console.log(`A** ** 리덕스 관리자인가? ${isAdmin}`); // /////////////////////////////////////////////////
+
     } catch (err) {
       console.log('토큰 검증 실패, 알 수 없는 문제 발생', err);
       return;
@@ -93,21 +91,19 @@ function App() {
           {/* 주문서작성 영역 */}
           {/* 1. 싱글상품 */}
           <Route path="/store/order" element={<Order_client />} />
-          <Route path="/store/order/checkout" element={<Toss_CheckOut />} />
           {/* 2. 카트에 담긴 여러 개 상품 */}
           <Route path="/store/cartorder" element={<Order_client />} />
-          <Route path="/store/cartorder/checkout" element={<Toss_CheckOut />} />
+          <Route path="/store/order/checkout" element={<Toss_CheckOut />} />
           {/* 토스페이먼츠 완성 */}
           <Route
             path="/store/order/checkout/approval_order"
             element={<TossApprove />}
           />
+          {/* 토스페이먼츠 결제성공페이지 */}
           <Route
-            path="/store/cartorder/checkout/approval_cartorder"
-            element={<TossApprove />}
+            path="store/order_success"
+            element={<TossPay_CompletePage />}
           />
-
-          <Route path="/ordersuccess" element={<TossPay_CompletePage />} />
           {/* account쪽 */}
           <Route path="/agreement" element={<Agreement_client />} />
           <Route path="/privacy" element={<Privacy_client />} />
