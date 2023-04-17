@@ -58,19 +58,47 @@ header.header_client {
     margin-top: 2%;
     list-style: none;
     list-style-type: none;
+  }
 
-    li {
+  li {
     cursor: pointer;
     transition: color 0.3s ease-in-out;
+
+   #search {
+      position: relative;     
+    }
+    #search > input {
+      // position: absolute;
+      width: 200px;
+      margin-bottom: 10px;
+      height: 30px;
+      // padding: 4px 10px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      border-radius: 5px;
+      outline: none;
+      transition: width 0.4s;
+    }
+
+    #search>input:focus {
+      width: 190px;
+    }
+    
+    #search>input:focus::placeholder {
+      color: #656565;
+    }
+
+    span {
+      margin-right: 2px;
+      margin-left: 5px;
+    }
 
       &:hover {
         color: darken(#000000, 10%);
         font-weight: bold;
       }
     
-
     }
-  }
 }
 
 .cart_modal.off {
