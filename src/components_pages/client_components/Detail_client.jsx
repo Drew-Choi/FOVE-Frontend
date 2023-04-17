@@ -6,12 +6,10 @@ import Detail_OrderMenu_client from './Detail_OrderMenu_client';
 import Detail_SubImage_client from './Detail_SubImage_client';
 import SubNav_client from './SubNav_client';
 import { useDispatch, useSelector } from 'react-redux';
-import single from '../../store/modules/order';
 
 export default function Detail_client() {
   const { id } = useParams();
   const [productData, setProductData] = useState();
-  const dispatch = useDispatch();
 
   useEffect(() => {
     getSelectProduct();
@@ -28,6 +26,8 @@ export default function Detail_client() {
       return selectData.data;
     }
   };
+
+  console.log(productData);
 
   const navigate = useNavigate();
 
