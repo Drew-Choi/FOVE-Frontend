@@ -44,6 +44,15 @@ export default function Header_client() {
   //모달을 위한 state
   const offonKey = useSelector((state) => state.cartmodal.offon);
 
+  // 장바구니 버튼(Shopping Bag) - 로그인 상태에서 사용 가능하게
+  const clickShoppingBag = () => {
+    if (!isLogin) {
+      alert('로그인이 필요한 서비스입니다.');
+      return navigate(`/login`);
+    }
+    dispatch(offon());
+  };
+
   console.log(`관리자인가요? ${isAdmin}`); // ////////////////////////////////////////////
   console.log(`로그인 상태? ${isLogin}`);
 
@@ -97,7 +106,7 @@ export default function Header_client() {
             )}
           </li>
           <li id="cate_li2_shopbag">
-            <p onClick={() => dispatch(offon())}>SHOPPING BAG / {cartLength}</p>
+            <p onClick={clickShoppingBag}>SHOPPING BAG / {cartLength}</p>
             {/* 0 이라는 숫자 장바구니에 넣을 때 올라가야 함 */}
           </li>
         </ul>

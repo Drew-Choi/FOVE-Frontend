@@ -27,6 +27,7 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import { keepLogin } from './store/modules/user';
 import RegisterSuccess_client from './components_pages/client_components/RegisterSuccess_client';
+import EditInfo_client from './components_pages/client_components/EditInfo_client';
 
 function App() {
   const isLogin = useSelector((state) => state.user.isLogin);
@@ -126,14 +127,19 @@ function App() {
             path="/mypage"
             element={isLogin ? <Mypage_client /> : <Login_client />}
           />
-          {/* 배송주소록 목록 */}
+          {/* 회원정보 수정 */}
           <Route
-            path="/adsubmit"
+            path="/mypage/editInfo"
+            element={isLogin ? <EditInfo_client /> : <Login_client />}
+          />
+          {/* 배송 주소록 목록 */}
+          <Route
+            path="/mypage/checkAddress"
             element={isLogin ? <AdSubmit_client /> : <Login_client />}
           />
-          {/* 배송주소지 등록 */}
+          {/* 배송 주소지 수정 */}
           <Route
-            path="/adwrite"
+            path="/mypage/editAddress"
             element={isLogin ? <Adwrite_client /> : <Login_client />}
           />
         </Route>
