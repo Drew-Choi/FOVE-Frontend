@@ -140,11 +140,13 @@ export default function Order_client() {
         phoneMidNum: phoneMidNum.current.value,
         phoneLastNum: phoneLastNum.current.value,
         //결제 전 상품 정보
-        status: 'NOT',
-        approvedAt: '',
-        method: '',
-        discount: null,
-        totalAmount: null,
+        // payments: {
+        //   status: 'NOT',
+        //   approvedAt: '',
+        //   method: '',
+        //   discount: null,
+        //   totalAmount: null,
+        // },
       });
       if (orderData.status === 200) {
         console.log('성공');
