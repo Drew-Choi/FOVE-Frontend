@@ -1,13 +1,16 @@
 nav.navbar_admin {
   border-right: solid 0.5px black;
-  width: 150px;
-  height: 100vw;
+  width: 200px;
+  height: 900px;
   display: inline-block;
+  // background-color: blue;
+  // border-bottom: 0.5px solid black;
+
   ul {
     list-style: none;
-    padding-top: 30px;
-   li{
-    margin-bottom: 10px;
+    padding: 100px 40px;
+    li{
+    margin-bottom: 30px;
     cursor: pointer;
     &:hover {
       color: grey;

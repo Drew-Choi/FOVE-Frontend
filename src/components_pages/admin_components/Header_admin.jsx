@@ -7,11 +7,9 @@ export default function Header_admin() {
   return (
     <header className="header_admin">
       <p className="logo" onClick={() => navigate('/admin')}>
-        logo
+        FOVE Admin
       </p>
-      <p className="admin" onClick={() => navigate('/admin')}>
-        Admin
-      </p>
+      <strong>관리자 페이지</strong>
     </header>
   );
 }
