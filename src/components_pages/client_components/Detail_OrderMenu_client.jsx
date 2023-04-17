@@ -187,9 +187,19 @@ export default function Detail_OrderMenu_client({
   datas,
 }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // 로그인 여부 확인 - 장바구니 담기, 바로 구매 가능 여부 판단
+  const isLogin = useSelector((state) => state.user.isLogin);
 
   //카트에 추가하는 Post 요청
   const addToCart = async () => {
+    // 로그인 상태가 아니면, 로그인 페이지로 이동
+    if (!isLogin) {
+      alert('로그인이 필요한 서비스입니다.');
+      return navigate(`/login`);
+    }
+
     try {
       const reqData = await axios.post(
         `http://localhost:4000/store/productId/${datas._id}`,
@@ -262,7 +272,6 @@ export default function Detail_OrderMenu_client({
   };
 
   //라우터
-  const navigate = useNavigate();
   const [shipon, setShipon] = useState(true);
   const handleOpenModal = () => {
     setShipon(true);
@@ -270,6 +279,18 @@ export default function Detail_OrderMenu_client({
 
   const handleCloseModal = () => {
     setShipon(false);
+  };
+
+  // 바로 구매 시(Buy 버튼)
+  const buyNow = async () => {
+    // 로그인 상태가 아니면, 로그인 페이지로 이동
+    if (!isLogin) {
+      alert('로그인이 필요한 서비스입니다.');
+      return navigate(`/login`);
+    }
+
+    await dispatch(single(singleDataSum(datas, count)));
+    navigate(`/store/order`);
   };
 
   return (
@@ -315,14 +336,7 @@ export default function Detail_OrderMenu_client({
 
           <AddCart onClick={addToCart}>Add Cart</AddCart>
           <br></br>
-          <Buy
-            onClick={async () => {
-              await dispatch(single(singleDataSum(datas, count)));
-              navigate(`/store/order`);
-            }}
-          >
-            buy
-          </Buy>
+          <Buy onClick={buyNow}>Buy</Buy>
         </DownInfoContain>
         <SumPrice>₩ {frontPriceComma(count * price)}</SumPrice>
       </InfoContain>
