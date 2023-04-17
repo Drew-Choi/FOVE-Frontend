@@ -68,11 +68,7 @@ const ModalView = styled.div.attrs((props) => ({
   }
 `;
 
-export default function Shipping_client({ shipoff }) {
-  const handleCloseModal = () => {
-    shipoff();
-  };
-
+export default function Shipping_client({ handleCloseModal }) {
   return (
     <>
       <ModalContainer_client1>

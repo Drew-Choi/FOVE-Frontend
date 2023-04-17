@@ -7,6 +7,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { single } from '../../store/modules/order';
 import GoogleIcon from './GoogleIcon';
 import Shipping_client from './Shipping_client';
+import ModalContainer_client from './ModalContainer_client';
+import ModalContainer_client2 from './ModalContainer_client2';
 
 const Detail_Order = styled.div`
   position: absolute;
@@ -278,7 +280,7 @@ export default function Detail_OrderMenu_client({
   };
 
   //라우터
-  const [shipon, setShipon] = useState(true);
+  const [shipon, setShipon] = useState(false);
   const handleOpenModal = () => {
     setShipon(true);
   };
@@ -299,10 +301,25 @@ export default function Detail_OrderMenu_client({
     navigate(`/store/order`);
   };
 
+  const [beanieSizeOn, setBeanieSizeOn] = useState(false);
+  const handleOpenModal2 = () => {
+    setBeanieSizeOn(true);
+  };
+
+  const handleCloseModa2 = () => {
+    setBeanieSizeOn(false);
+  };
+
   return (
     <Detail_Order>
       {/* 일단 SHIPPING만 불러오기 */}
-      {shipon && <Shipping_client shipoff={handleCloseModal} />}
+      {shipon && <Shipping_client handleCloseModal={handleCloseModal} />}
+      {beanieSizeOn && (
+        <>
+          <ModalContainer_client handleCloseModa2={handleCloseModa2} />{' '}
+          <ModalContainer_client2 handleCloseModa2={handleCloseModa2} />
+        </>
+      )}
 
       <Title>{productName}</Title>
       <InfoContain>
@@ -313,12 +330,12 @@ export default function Detail_OrderMenu_client({
         <DetailDesc>{detail}</DetailDesc>
         <SizeFitCheck>
           {/* SIZE & FIT 모달창 '비니'만 만들어놨는데 카테고리 별로 다르게 떠야함 */}
-          <span>SIZE & FIT</span>
+          <span onClick={handleOpenModal2}>SIZE & FIT</span>
           <span className="material-symbols-outlined">open_in_new</span>
         </SizeFitCheck>
         <SizeFitCheck>
           {/* SIZE & FIT 모달창 '비니'만 만들어놨는데 카테고리 별로 다르게 떠야함 */}
-          <span onClick={() => handleOpenModal}>SHIPPING</span>
+          <span onClick={handleOpenModal}>SHIPPING</span>
           <span className="material-symbols-outlined">open_in_new</span>
         </SizeFitCheck>
 
