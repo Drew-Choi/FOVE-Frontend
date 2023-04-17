@@ -26,7 +26,7 @@ export function login(loginInfo) {
 
 export function keepLogin(loginInfo) {
   return {
-    type: LOGIN,
+    type: KEEPLOGIN,
     payload: loginInfo,
   };
 }
@@ -51,7 +51,6 @@ export default function user(state = initState, action) {
         isLogin: true,
       };
     case KEEPLOGIN:
-      console.log(action.payload);
       return {
         ...state,
         userID: action.payload.id,
