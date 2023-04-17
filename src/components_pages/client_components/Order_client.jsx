@@ -197,7 +197,7 @@ export default function Order_client() {
 
       <div className="memeber_info_contain">
         <p className="memeber_info_membership">
-          {'김영호'}님은, {'[STANDARD]'} 회원이십니다.
+          {'김영호'}님은, <strong>{'[STANDARD]'}</strong> 회원이십니다.
         </p>
         <p className="memeber_info_event1">
           KRW 10,000 이상 구매시 <strong>5%</strong>를 추가할인 받으실 수

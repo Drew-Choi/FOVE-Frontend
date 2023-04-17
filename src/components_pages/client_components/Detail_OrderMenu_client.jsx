@@ -32,41 +32,43 @@ const Title = styled.p`
 const InfoContain = styled.div`
   position: absolute;
   top: 120px;
-  left: 65px;
+  left: 51px;
 `;
 
 const SizeBTN = styled.button`
   all: unset;
   position: relative;
   bottom: 10px;
-  background-color: #000000;
-  color: white;
-  border: 2px solid black;
-  width: 30px;
+  /* background-color: #000000; */
+  color: black;
+  border: 1.5px solid black;
+  width: 40px;
   margin-right: 10px;
   text-align: center;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 15px;
   transition: 0.2s ease;
   cursor: pointer;
   &:hover {
-    background-color: white;
-    color: black;
+    background-color: black;
+    color: white;
   }
   &:active {
-    background-color: white;
-    color: #d7d7d7;
+    background-color: black;
+    color: white;
+    transform: scale(1.2);
   }
 `;
 
 const SizeFitCheck = styled.p`
-  padding: 0px;
-  margin-top: 20px;
+  /* padding: 0px; */
+  /* margin-top: 20px; */
   font-size: 13px;
   font-weight: bold;
   text-decoration: underline;
   letter-spacing: 1px;
   cursor: pointer;
+
   &:hover {
     color: #a8a8a8;
   }
@@ -308,7 +310,7 @@ export default function Detail_OrderMenu_client({
         <SizeBTN>S</SizeBTN>
         <SizeBTN>M</SizeBTN>
         <SizeBTN>L</SizeBTN>
-
+        <DetailDesc>{detail}</DetailDesc>
         <SizeFitCheck>
           {/* SIZE & FIT 모달창 '비니'만 만들어놨는데 카테고리 별로 다르게 떠야함 */}
           <span>SIZE & FIT</span>
@@ -319,7 +321,7 @@ export default function Detail_OrderMenu_client({
           <span onClick={() => handleOpenModal}>SHIPPING</span>
           <span className="material-symbols-outlined">open_in_new</span>
         </SizeFitCheck>
-        <DetailDesc>{detail}</DetailDesc>
+
         <DownInfoContain>
           <CountContainer>
             <Miners
