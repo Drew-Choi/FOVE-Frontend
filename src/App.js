@@ -31,6 +31,7 @@ import RegisterSuccess_client from './components_pages/client_components/Registe
 function App() {
   const isLogin = useSelector((state) => state.user.isLogin);
   const isAdmin = useSelector((state) => state.user.isAdmin);
+  const reduxName = useSelector((state) => state.user.useName); // /////////////////////////////////////////////////
   const dispatch = useDispatch();
 
   // App 시작 시, 브라우저 로컬 스토리지에 저장 되어 있는 토큰이 있는지를 확인 후,
@@ -45,6 +46,9 @@ function App() {
       // 토큰 검증 결과를 받아서 처리, 필요 데이터는 data 에 담아서 전송되므로 필요한 정보 세팅
       console.log(resToken.data.message);
 
+      console.log(`A** 받은 isAdmin: ${resToken.data.isAdmin}`); // /////////////////////////////////////////
+      console.log(`A** 받은 name: ${resToken.data.nameEncoded}`); // /////////////////////////////////////////
+
       // 토큰 검증이 성공 적으로 검증이 되었으므로 리덕스에 로그인 처리
       // 해당 함수로 인하여 토큰이 있는 동안은, 로그인을 하지 않아도 바로 로그인이 처리
       dispatch(
@@ -55,6 +59,10 @@ function App() {
           isAdmin: resToken.data.isAdmin,
         }),
       );
+
+      console.log(`A** ** 리덕스 이름? ${reduxName}`); // /////////////////////////////////////////////////
+      console.log(`A** ** 리덕스 관리자인가? ${isAdmin}`); // /////////////////////////////////////////////////
+
     } catch (err) {
       console.log('토큰 검증 실패, 알 수 없는 문제 발생', err);
       return;

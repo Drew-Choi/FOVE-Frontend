@@ -51,6 +51,7 @@ export default function user(state = initState, action) {
         isLogin: true,
       };
     case KEEPLOGIN:
+      console.log(action.payload);
       return {
         ...state,
         userID: action.payload.id,
