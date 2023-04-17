@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import '../../styles/order_client.scss';
-import axios from 'axios';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import BTN_black_nomal_comp from '../../styles/BTN_black_nomal_comp';
@@ -100,13 +99,11 @@ export default function Order_client() {
 
   //14. 기타 배송 메모
   const message = useRef();
+  //-------------------------------------------------
 
-  //리덕스 state ---------------------------
-  //오더메뉴에서 넘어오는 정보들(리덕스)
-
-  const orderPOST = async () => {
-    //--------싱글아이템과 멀티아이템 추리는 작업
-    let products = [];
+  const orderListLocalSave = async () => {
+    //--------싱글아이템과 멀티아이템 추리는 작업 그리고 products키로 로컬스토리지에 JSON화 저장
+    const products = [];
     if (currentURL === '/store/order') {
       products.push({
         productName: singleOrder.productName,
@@ -124,40 +121,22 @@ export default function Order_client() {
     } else {
       return console.log('데이터 오류');
     }
-    //-----------------------------------------
 
-    try {
-      const orderData = await axios.post('http://localhost:4000/store/order', {
-        //주문상품정보
-        products: products,
-        //받는 사람(recipien) 정보
-        message: message.current.value,
-        recipientName: recipientName.current.value,
-        recipientZipcode: recipientZipcode.current.value,
-        recipientAddress: recipientAddress.current.value,
-        recipientAddressDetail: recipientAddressDetail.current.value,
-        phoneCode: phoneCode.current.value,
-        phoneMidNum: phoneMidNum.current.value,
-        phoneLastNum: phoneLastNum.current.value,
-        //결제 전 상품 정보
-        // payments: {
-        //   status: 'NOT',
-        //   approvedAt: '',
-        //   method: '',
-        //   discount: null,
-        //   totalAmount: null,
-        // },
-      });
-      if (orderData.status === 200) {
-        console.log('성공');
-        console.log(orderData.data);
-      } else {
-        console.log('실패');
-        console.log(orderData.data);
-      }
-    } catch (err) {
-      console.error(err);
-    }
+    //받는 사람(recipien) 정보, recipien키로 JSON화 해서 통으로 넣기
+    const recipien = {
+      message: message.current.value,
+      recipientName: recipientName.current.value,
+      recipientZipcode: recipientZipcode.current.value,
+      recipientAddress: recipientAddress.current.value,
+      recipientAddressDetail: recipientAddressDetail.current.value,
+      phoneCode: phoneCode.current.value,
+      phoneMidNum: phoneMidNum.current.value,
+      phoneLastNum: phoneLastNum.current.value,
+    };
+
+    //결제 전 2개 객체 products, recipien, payments
+    localStorage.setItem('products', JSON.stringify(products));
+    localStorage.setItem('recipien', JSON.stringify(recipien));
   };
 
   const selectList_celPhone = ['010', '011', '016', '017', '019'];
@@ -238,7 +217,7 @@ export default function Order_client() {
 
       {singleOrder.productName === '' &&
       singleOrder.price === 0 &&
-      !cartOrderData ? (
+      currentURL === '/store/order' ? (
         <p className="resetMessage">
           선택하신 상품이 초기화 되었습니다. 상품을 다시 선택해주세요.
         </p>
@@ -512,16 +491,10 @@ export default function Order_client() {
                         className="order_btn"
                         padding="10px 0px"
                         onClickEvent={() => {
-                          !agreement ? (
-                            setToggleModal((cur) => true)
-                          ) : currentURL === '/store/order' ? (
-                            navigate('/store/order/checkout')
-                          ) : currentURL === '/store/cartorder' ? (
-                            navigate('/store/cartorder/checkout')
-                          ) : (
-                            <Error404 />
-                          );
-                          orderPOST();
+                          !agreement
+                            ? setToggleModal((cur) => true)
+                            : navigate('/store/order/checkout');
+                          orderListLocalSave();
                         }}
                       >
                         결제하기
