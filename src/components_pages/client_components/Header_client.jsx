@@ -9,11 +9,13 @@ import { offon } from '../../store/modules/cartmodal';
 import MenuAccount from './MenuAccount';
 import { clickMenu } from '../../store/modules/menuAccount';
 import GoogleIcon from './GoogleIcon';
+import { searchinput } from '../../store/modules/search';
 
 export default function Header_client() {
   const isAdmin = useSelector((state) => state.user.isAdmin);
   const isLogin = useSelector((state) => state.user.isLogin);
   const menuClicked = useSelector((state) => state.menuAccount.clicked);
+  const navigate = useNavigate();
 
   //리덕스 디스패치(액션함수 전달용)
   const dispatch = useDispatch();
@@ -39,8 +41,6 @@ export default function Header_client() {
     }
   };
 
-  const navigate = useNavigate();
-
   //모달을 위한 state
   const offonKey = useSelector((state) => state.cartmodal.offon);
 
@@ -58,29 +58,18 @@ export default function Header_client() {
 
   //서칭용 상태관리
   const [searchOnOff, setSearchOnOff] = useState('off');
-  //서칭용 엔터 핸들러
-  const handleKeyPress = async (event) => {
-    if (event.key === 'Enter') {
-      // 검색 로직 실행
-      await setSearchText(event.target.value);
-      searchReq();
-    }
-  };
-  //검색어 담기
+  //인풋값 담기
   const [searchText, setSearchText] = useState('');
+  //검색창에 검색 안할떄
+  const [empty, setEmpty] = useState('상품검색');
 
-  const searchReq = async () => {
-    try {
-      console.log('인풋값:' + typeof searchText);
-      const searchDataGet = await axios.post(
-        'http://localhost:4000/store/search',
-        {
-          searchText: searchText,
-        },
-      );
-      console.log(searchDataGet.data.searchedProduct);
-    } catch (err) {
-      console.error(err);
+  //서칭용 엔터 핸들러
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      // 검색 로직 실행
+      dispatch(searchinput(e.target.value));
+      // setSearchText(e.target.value);
+      // navigate(`/store?keyword=${searchText}`);
     }
   };
 
@@ -112,8 +101,9 @@ export default function Header_client() {
             <input
               className={`searchInput ${searchOnOff}`}
               type="text"
-              placeholder="상품검색"
-              onKeyPress={handleKeyPress}
+              placeholder={'검색어를 입력해 주세요'}
+              onKeyDown={(e) => handleKeyPress(e)}
+              onChange={(e) => (e.target.value ? setEmpty('상품 검색') : null)}
             />
             <span
               className="material-symbols-outlined search"
