@@ -140,7 +140,7 @@ const ModalView = styled.div.attrs((props) => ({
   }
 `;
 
-export default function ModalContainer_client2() {
+export default function ModalContainer_client2({ handleCloseModa2 }) {
   const [isOpen, setIsOpen] = useState(true);
 
   const navigate = useNavigate();
@@ -162,7 +162,7 @@ export default function ModalContainer_client2() {
             <ModalView onClick={(e) => e.stopPropagation()}>
               <div className="sizing">
                 <span>PRODUCT MEASUREMENTS</span>
-                <button onClick={openModalHandler}>CLOSE</button>
+                <button onClick={handleCloseModa2}>CLOSE</button>
                 <div className="size-detail">
                   <div className="size_img_wrap">
                     <img
