@@ -1,17 +1,24 @@
 header.header_admin {
+  background-color: white;
+  box-sizing: border-box;
+  position: fixed;
   border-bottom: solid 0.5px black;
-  height: 60px;
+  height: 70px;
   width: 100%;
   display: flex;
   align-items: center;
-
-  p {
-    margin-bottom: 0px;
-  }
+  justify-content: space-between;
+  white-space: nowrap;
+  padding: 0 50px;
+  z-index: 3;
 
   .logo {
-    padding: 30px;
+    position: relative;
     cursor: pointer;
+    font-size: 283%;
+    font-weight: 600;
+    font-style: italic;
+    margin-top: 0.8%;
   }
 
   .admin {
