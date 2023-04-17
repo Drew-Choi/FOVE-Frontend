@@ -27,11 +27,8 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import { keepLogin } from './store/modules/user';
 import RegisterSuccess_client from './components_pages/client_components/RegisterSuccess_client';
-<<<<<<< Updated upstream
 import EditInfo_client from './components_pages/client_components/EditInfo_client';
-=======
 import ProductList_admin from './components_pages/admin_components/ProductList_admin';
->>>>>>> Stashed changes
 
 function App() {
   const isLogin = useSelector((state) => state.user.isLogin);

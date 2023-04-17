@@ -6,7 +6,7 @@ export default function Header_admin() {
   const navigate = useNavigate();
   return (
     <header className="header_admin">
-      <p className="logo" onClick={() => navigate('/admin')}>
+      <p className="logo" onClick={() => navigate('/')}>
         FOVE Admin
       </p>
       <strong>관리자 페이지</strong>

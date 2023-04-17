@@ -18,6 +18,25 @@ header.header_client {
   padding: 0 50px;
   z-index: 3;
 
+  button {
+    position: absolute;
+    margin-left: 155px;
+    width: 150px;
+    height: 30px;
+    font-size: 13px;
+    font-weight: bold;
+    border-radius: 50px;
+    background-color: white;
+    border: 2px solid black;
+    transition: 0.3s ease;
+
+    &:hover {
+      background-color: rgb(0, 0, 0);
+      color: white;
+      border: none;
+    }
+  }
+
   .logo {
     position: relative;
     cursor: pointer;
@@ -35,6 +54,7 @@ header.header_client {
     align-items: center;
     gap: 30px;
     margin-top: 2%;
+    margin-left: 18%;
 
     #cate_li {
       cursor: pointer;
@@ -68,11 +88,9 @@ header.header_client {
       position: relative;     
     }
     #search > input {
-      // position: absolute;
       width: 200px;
       margin-bottom: 10px;
       height: 30px;
-      // padding: 4px 10px;
       border: 1px solid #ccc;
       box-sizing: border-box;
       border-radius: 5px;
