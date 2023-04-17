@@ -17,7 +17,7 @@ const PaymentBOX = styled.div`
   position: relative;
   margin: 0px auto;
   top: 200px;
-  background-color: aqua;
+  /* background-color: aqua; */
   width: 50vw;
   border: 1px solid black;
   padding: 20px;
@@ -121,7 +121,7 @@ export function Toss_CheckOut() {
                     : null,
                 customerName: '유저 정보 입력예정',
                 customerEmail: '주문자 이메일 (회원정보에서 끌어다 씀)',
-                successUrl: `${window.location.origin}/tosspayment/${
+                successUrl: `${window.location.origin}/${
                   currentURL === '/store/order/checkout'
                     ? '/store/order/checkout/approval_order'
                     : currentURL === '/store/cartorder/checkout'
