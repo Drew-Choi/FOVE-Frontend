@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { relative } from 'path-browserify';
+import '../../styles/productList_admin.scss';
+
 import { useEffect, useRef, useState } from 'react';
 axios;
 export default function ProductList_admin() {
@@ -117,7 +119,7 @@ export default function ProductList_admin() {
 
   const productList = data.map((item, index) => (
     <>
-      <div key={item._id}>
+      <div key={item._id} className="pdlist_wrap">
         <li>
           {/* <div style={{}}>
             <img
