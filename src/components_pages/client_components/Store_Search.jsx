@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../../styles/store_client.scss';
 import Product_client_indiLayout from './Product_client_indiLayout';
@@ -12,14 +12,48 @@ import 'swiper/css/scrollbar';
 import SwiperPaginationBTN from '../../styles/SwiperPaginationBTN';
 import SwiperPaginationContainer from '../../styles/SwiperPaginationContainer';
 import SubNav_client from './SubNav_client';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 SwiperCore.use([Navigation]);
 
-export default function Store_client() {
-  const searchText = useSelector((state) => state.search.searchData);
-  const orignData = useRef([]);
+export default function Store_Search() {
+  //URL주소에 쿼리를 가져와서 그걸로 Post 요청
+  const [searchParams] = useSearchParams();
+  const searchWord = searchParams.get('keyword');
+  console.log(searchWord);
+  //키워드로 post한 데이터 담기
+  const [searchData, setSearchData] = useState(null);
+
+  useEffect(() => {
+    searchReq();
+  }, [searchWord]);
+
+  const searchReq = async () => {
+    try {
+      const searchDataGet = await axios.post(
+        'http://localhost:4000/store/search',
+        {
+          searchText: searchWord,
+        },
+      );
+      setSearchData((cur) => searchData);
+      console.log(searchDataGet);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  //리덕스 소환
+  const searchResultData = useSelector((state) =>
+    !state.search ? (
+      state.search.searchData
+    ) : (
+      <h2 style={{ position: 'relative', top: '100px' }}>
+        검색어에 해당하는 상품이 없습니다.
+      </h2>
+    ),
+  );
 
   //네비게이트 리액트Dom 설정
   const navigate = useNavigate();
@@ -32,43 +66,24 @@ export default function Store_client() {
   const [pagination4, setPagination4] = useState('off');
 
   //All상품데이터 get
-  const [pd_Datas, setPd_Datas] = useState([]);
+  // const [pd_Datas, setPd_Datas] = useState([]);
 
-  const searchProducts = (text) => {
-    setPd_Datas((cur) => {
-      const newData = [...orignData.current];
-      console.log('@@@@@@@', text);
-      if (text !== '') {
-        return newData.filter((el) => {
-          return el.productName.indexOf(text) !== -1;
-        });
-      } else {
-        return newData;
-      }
-    });
-  };
+  // //상품데이터 db에서 가져오기
+  // useEffect(() => {
+  //   getAllProducts();
+  //   // getFit();
+  // }, []);
 
-  //상품데이터 db에서 가져오기
-  useEffect(() => {
-    getAllProducts();
-    // getFit();
-  }, []);
-
-  useEffect(() => {
-    searchProducts(searchText);
-  }, [searchText]);
-
-  //엑시오스로 모든 상품 정보 요청
-  const getAllProducts = async () => {
-    const productsData = await axios.get('http://localhost:4000/store/all');
-    if (productsData.status === 200) {
-      orignData.current = productsData.data;
-      await setPd_Datas(productsData.data);
-      return productsData.data.message;
-    } else {
-      return productsData.data.message;
-    }
-  };
+  // //엑시오스로 모든 상품 정보 요청
+  // const getAllProducts = async () => {
+  //   const productsData = await axios.get('http://localhost:4000/store/all');
+  //   if (productsData.status === 200) {
+  //     await setPd_Datas(productsData.data);
+  //     return productsData.data.message;
+  //   } else {
+  //     return productsData.data.message;
+  //   }
+  // };
 
   //db Number타입을 스트링으로 바꾸고 천단위 컴마 찍어 프론트에 보내기
   const country = navigator.language;
@@ -128,7 +143,8 @@ export default function Store_client() {
           <SwiperSlide className="swiper_slide">
             <Container>
               <Row xs={2} md={4} lg={5}>
-                {pd_Datas.map((el, index) => {
+                {/* db데이터 만큼 카피해서 뿌림 */}
+                {searchResultData.map((el, index) => {
                   if (index < 10 && index >= 0)
                     return (
                       <Col
@@ -151,7 +167,7 @@ export default function Store_client() {
           <SwiperSlide className="swiper_slide">
             <Container>
               <Row xs={2} md={4} lg={5}>
-                {pd_Datas.map((el, index) => {
+                {searchResultData.map((el, index) => {
                   if (index < 20 && index >= 10)
                     return (
                       <Col
@@ -174,7 +190,7 @@ export default function Store_client() {
           <SwiperSlide className="swiper_slide">
             <Container>
               <Row xs={2} md={4} lg={5}>
-                {pd_Datas.map((el, index) => {
+                {searchResultData.map((el, index) => {
                   if (index < 30 && index >= 20)
                     return (
                       <Col
