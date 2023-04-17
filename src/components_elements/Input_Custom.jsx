@@ -10,6 +10,7 @@ export default function Input_Custom({
   multiple,
   accept,
   disabled,
+  classNameNew,
 }) {
   return (
     <div>
@@ -26,6 +27,7 @@ export default function Input_Custom({
         multiple={multiple}
         accept={accept}
         disabled={disabled}
+        className={classNameNew}
       />
     </div>
   );

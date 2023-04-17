@@ -1,16 +1,22 @@
 section.productRegister_admin {
+  position: relative;
   width: 100%;
-  height: auto;
+  // background-color: aqua;
+  height: 1500px;
   margin-top: 56px;
   overflow: hidden;
   .register_container {
+    position: relative;
     padding: 30px;
+    // background-color: aqua;
+    width: 1000px;
+    height: auto;
+
     div {
       display: flex;
       align-items: center;
       padding: 11px;
       
-
       p {
         display: block;
         margin-right: 20px;
@@ -51,13 +57,17 @@ section.productRegister_admin {
       }
 
       .select_btn {
-        width: 300px;
+        margin-top: 30px;
+        position: relative;
+        right: 20px;
+        width: 430px;
         height: 30px;
         border: 1.5px solid black;
         background-color: white;
         color: black;
         border-radius: 60px;
         line-height: 20px;
+        display: block;
         
         &:hover {
           background-color: black;
@@ -83,4 +93,25 @@ section.productRegister_admin {
 }
 }
 }
+}
+
+.new_Item {
+  position: relative;
+  top: 0px;
+  left: px;
+  width: 10px;
+  font-size: 10px;
+  padding: 10px;
+}
+
+#newArrival {
+  position: relative;
+  left: 75px;
+  width: 20px;
+  height: 20px;
+}
+
+#checkLabel {
+position: relative;
+left: 10px;
 }

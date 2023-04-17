@@ -7,18 +7,50 @@ import BTN_black_nomal_comp from '../../styles/BTN_black_nomal_comp';
 import Select_Custom from '../../components_elements/Select_Custom';
 import TextArea_Custom from '../../components_elements/TextArea_Custom';
 import { Tab } from 'react-bootstrap';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  display: block !important;
+  position: relative !important;
+`;
+
+const Layout = styled.div`
+  display: flex;
+`;
+
+const Preview = styled.div`
+  position: relative;
+  display: block;
+  width: 150px;
+  height: 150px;
+  margin: 5px;
+  margin-right: 10px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url(${(props) => props.thumbnail});
+  cursor: pointer;
+`;
+
+const Text = styled.span`
+  position: relative;
+  left: 60px;
+  padding: 10px;
+  margin-right: 110px;
+  margin-bottom: 20px;
+`;
 
 export default function ProductRegister_admin() {
   //-------
   //가격 콤마용
   const [enterNumPrice, setEnterNumPrice] = useState('');
   //재고수량 콤마용
-  const [enterNumQuantity, setEnterNumQuantity] = useState('');
-  // //사이즈를 위한 state
-  const [sizeType, setSizeType] = useState('OS');
-  //컬러적용을 위한 배열, 클릭 이벤트가 필요없어서 일반 변수로 선언
-  // const colorArr = ['black', 'white', 'orange', 'gray'];
-  //종류적용을 위한 배열, 클릭 이벤트가 필요없어서 일반 변수로 선언
+  const [enterNumQuantity1, setEnterNumQuantity1] = useState('');
+  const [enterNumQuantity2, setEnterNumQuantity2] = useState('');
+  const [enterNumQuantity3, setEnterNumQuantity3] = useState('');
+  const [enterNumQuantity4, setEnterNumQuantity4] = useState('');
+
+  //카테고리 모음
   const kindArr = ['BEANIE', 'CAP', 'TRAINING', 'WINDBREAKER'];
 
   //천단위 콤마생성
@@ -41,19 +73,17 @@ export default function ProductRegister_admin() {
   //-------
 
   //input 값을 받을 useRef생성
+  const pd_code = useRef();
   const pd_productName = useRef();
   const pd_price = useRef();
-  const pd_stock = useRef();
-  const pd_color = useRef();
   const pd_category = useRef();
-  const pd_detail = useRef();
-  //사이즈의 경우 초기화를 위해 사용
   const pd_sizeOS = useRef();
   const pd_sizeS = useRef();
   const pd_sizeM = useRef();
   const pd_sizeL = useRef();
-  //이미지업로드 컨트롤용
+  const pd_detail = useRef();
   const pd_img = useRef();
+  const pd_newArrival = useRef();
 
   //--------이미지 영역 특수해서 따로 분리----------
   //이미지 파일 업로드용 Ref
@@ -66,7 +96,17 @@ export default function ProductRegister_admin() {
   };
 
   //이미지 접근하여 state를 이미지 값으로 변경
+  //및 이미지 숫자를 5개로 제한
+  //이미지 갯수 상태 보관
+  const [files, setFiles] = useState([]);
+  //Array.from은 배열과 유사한 것을 배열화 시킴, 이미지 갯수 대문에 배열화
   const uploadProfile = (e) => {
+    const selectedFiles = Array.from(e.target.files);
+    if (selectedFiles.length > 5) {
+      alert('최대 5개까지 업로드 가능합니다.');
+    } else {
+      setFiles(selectedFiles);
+    }
     const fileList = e.target.files;
     const length = fileList.length;
     let copy = [];
@@ -91,12 +131,11 @@ export default function ProductRegister_admin() {
       return <></>;
     }
     return imageFile.map((el, index) => (
-      <img
+      <Preview
+        thumbnail={el.thumbnail}
         key={index}
-        src={el.thumbnail}
-        alt={el.type}
         onClick={handleClickFileInput}
-      />
+      ></Preview>
     ));
   }, [imageFile]);
   //----- 이미지 끝-------
@@ -105,15 +144,19 @@ export default function ProductRegister_admin() {
   //기능: 클릭 발생하면 fetch로 서버에 해당 페이지 요청을 보냄
   //Post요청이므로 ref값에 접근하여 객체(혹은 배열)를 만들고 데이터를 담아서 보낸다.
   //express에서는 이 값을 req.body.data / 혹은 req.files로 받는다.
+
   const newProductPost = async () => {
     //이미지 외 자료들 남기
-    const pdProductName = pd_productName.current.value;
-    const pdPrice = resultCommaRemove(pd_price.current.value);
-    const pdSize = sizeType;
-    const pdStock = resultCommaRemove(pd_stock.current.value);
-    const pdColor = pd_color.current.value;
-    const pdCategory = pd_category.current.value;
-    const pdDetail = pd_detail.current.value;
+    let productCode = pd_code.current.value;
+    let newArrival = pd_newArrival.current.checked === !true ? '' : '신상품';
+    let productName = pd_productName.current.value;
+    let price = resultCommaRemove(pd_price.current.value);
+    let sizeSO = resultCommaRemove(pd_sizeOS.current.value);
+    let sizeS = resultCommaRemove(pd_sizeOS.current.value);
+    let sizeM = resultCommaRemove(pd_sizeOS.current.value);
+    let sizeL = resultCommaRemove(pd_sizeOS.current.value);
+    let category = pd_category.current.value;
+    let detail = pd_detail.current.value;
 
     //이미지 폼데이터 만들기
     const formData = new FormData();
@@ -126,14 +169,16 @@ export default function ProductRegister_admin() {
       'data',
       //제이슨 형식으로 바꿔줘야함
       JSON.stringify({
-        prodCode: `aasddd111113333sds`,
-        productName: pdProductName,
-        price: pdPrice,
-        size: pdSize,
-        color: pdColor,
-        category: pdCategory,
-        stock: pdStock,
-        detail: pdDetail,
+        productCode: productCode,
+        newArrival: newArrival,
+        productName: productName,
+        price: price,
+        category: category,
+        detail: detail,
+        sizeSO: sizeSO,
+        sizeS: sizeS,
+        sizeM: sizeM,
+        sizeL: sizeL,
       }),
     );
 
@@ -151,47 +196,91 @@ export default function ProductRegister_admin() {
     //페이지 요청 성공하면 200번, 아니면 오류표시
     if (newPdPostData.status !== 200) {
       //json형식으로 불러들임
-      pd_productName.current.value = '';
-      setEnterNumPrice((cur) => '');
-      setEnterNumQuantity((cur) => '');
-      setSizeType((cur) => 'OS');
-      pd_color.current.value = 'black';
-      pd_sizeOS.current.checked = true;
-      pd_sizeS.current.checked = false;
-      pd_sizeM.current.checked = false;
-      pd_sizeL.current.checked = false;
-      pd_category.current.value = 'beanie';
-      pd_detail.current.value = '';
+      // productCode = '';
+      // newArrival = false;
+      // productName = '';
+      // setEnterNumPrice((cur) => '');
+      // setEnterNumQuantity1((cur) => '');
+      // setEnterNumQuantity2((cur) => '');
+      // setEnterNumQuantity1((cur) => '');
+      // setEnterNumQuantity1((cur) => '');
+      // category = 'beanie';
+      // detail = '';
+      console.log(newPdPostData);
+
       return alert(await newPdPostData.json());
     } else {
       return alert(await newPdPostData.json());
     }
   };
 
+  //고유번호를 위해 ref값을 실식간 렌더링
+  const [selectCategory, setSeloectCategory] = useState('BEANIE');
+  //고유번호 자동생성 함수
+  console.log(selectCategory);
+  const productCodeCreat = () => {
+    const today = new Date();
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+    const date = today
+      .toLocaleDateString('ko-KR', options)
+      .replace(/[\s.-]/g, '');
+
+    let code = 'F';
+
+    if (selectCategory === 'BEANIE') {
+      code += 'BE';
+    } else if (selectCategory === 'CAP') {
+      code += 'CA';
+    } else if (selectCategory === 'TRAINING') {
+      code += 'TR';
+    } else if (selectCategory === 'WINDBREAKER') {
+      code += 'WI';
+    }
+    code += date;
+
+    return code;
+  };
+
   return (
     <section className="productRegister_admin">
       <div className="register_container">
         {/* 종류인풋(셀렉터) */}
-        <Select_Custom selectList={kindArr} inputRef={pd_category}>
+        <Select_Custom
+          selectList={kindArr}
+          inputRef={pd_category}
+          name="category"
+          onChangeEvent={(cur) => setSeloectCategory(pd_category.current.value)}
+        >
           종류&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </Select_Custom>
 
         {/* 상품고유번호 인풋 */}
         <Input_Custom
-          className="상품고유번호"
-          // inputref={pd_productName}
+          inputref={pd_code}
           type="text"
-          name="name"
-          placeholder="상품코드를 입력해주세요."
+          name="productCode"
+          value={productCodeCreat()}
+          //백에서 DB추가될때 마다 숫자 추가해주면 될듯
         >
           상품고유번호
         </Input_Custom>
+
+        {/* 신상품 */}
+        <label id="checkLabel" htmlFor="newArrival">
+          신상품
+        </label>
+        <input
+          ref={pd_newArrival}
+          type="checkbox"
+          name="newArrival"
+          id="newArrival"
+        />
 
         {/* 상품명 인풋 */}
         <Input_Custom
           inputref={pd_productName}
           type="text"
-          name="name"
+          name="productName"
           placeholder="상품이름을 입력해주세요."
         >
           상품명 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -199,7 +288,6 @@ export default function ProductRegister_admin() {
 
         {/* 가격인풋 */}
         <Input_Custom
-          className="prcie_border"
           inputref={pd_price}
           type="text"
           placeholder="가격을 입력해주세요."
@@ -213,140 +301,86 @@ export default function ProductRegister_admin() {
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </Input_Custom>
 
-        {/* 사이즈라디오 - 수정 필요*/}
-        {/* <RadioGroup>
-          사이즈&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <RadioEl
-            inputref={pd_sizeOS}
-            name="size"
-            value={sizeType}
-            onChangeEvent={() => setSizeType((cur) => 'OS')}
-            defaultChecked
-          >
-            OS&nbsp;&nbsp;
-          </RadioEl>
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          <RadioEl
-            inputref={pd_sizeS}
-            name="size"
-            value={sizeType}
-            onChangeEvent={() => setSizeType((cur) => 'S')}
-          >
-            S&nbsp;&nbsp;
-          </RadioEl>
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          <RadioEl
-            inputref={pd_sizeM}
-            name="size"
-            value={sizeType}
-            onChangeEvent={() => setSizeType((cur) => 'M')}
-          >
-            M&nbsp;&nbsp;
-          </RadioEl>
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          <RadioEl
-            inputref={pd_sizeL}
-            name="size"
-            value={sizeType}
-            onChangeEvent={() => setSizeType((cur) => 'L')}
-          >
-            L&nbsp;&nbsp;
-          </RadioEl>
-          &nbsp;&nbsp;&nbsp;&nbsp;
-        </RadioGroup> */}
-        {/* 수량 인풋 */}
-        {/* <Input_Custom
-          inputref={pd_stock}
-          type="text"
-          placeholder="재고수량을 입력해주세요."
-          name="stock"
-          value={enterNumQuantity}
-          onChangeEvent={() =>
-            setEnterNumQuantity(changeEnteredNumComma(pd_stock.current.value))
-          }
-        >
-          수량
-        </Input_Custom> */}
-
         {/* 사이즈 별 수량 */}
         <Input_Custom
-          inputref={pd_stock}
+          inputref={pd_sizeOS}
           type="text"
           placeholder="OS 사이즈 재고수량을 입력해주세요."
-          name="stock"
-          value={enterNumQuantity}
+          name="size[OS]"
+          value={enterNumQuantity1}
           onChangeEvent={() =>
-            setEnterNumQuantity(changeEnteredNumComma(pd_stock.current.value))
+            setEnterNumQuantity1(changeEnteredNumComma(pd_sizeOS.current.value))
           }
         >
           재고수량 <strong>OS</strong>&nbsp;&nbsp;
         </Input_Custom>
         <Input_Custom
-          inputref={pd_stock}
+          inputref={pd_sizeS}
           type="text"
           placeholder="S 사이즈 재고수량을 입력해주세요."
-          name="stock"
-          value={enterNumQuantity}
+          name="size[M]"
+          value={enterNumQuantity2}
           onChangeEvent={() =>
-            setEnterNumQuantity(changeEnteredNumComma(pd_stock.current.value))
+            setEnterNumQuantity2(changeEnteredNumComma(pd_sizeS.current.value))
           }
         >
           재고수량 <strong>S </strong>&nbsp;&nbsp;&nbsp;&nbsp;
         </Input_Custom>
         <Input_Custom
-          inputref={pd_stock}
+          inputref={pd_sizeM}
           type="text"
           placeholder="M 사이즈 재고수량을 입력해주세요."
-          name="stock"
-          value={enterNumQuantity}
+          name="size[M]"
+          value={enterNumQuantity3}
           onChangeEvent={() =>
-            setEnterNumQuantity(changeEnteredNumComma(pd_stock.current.value))
+            setEnterNumQuantity3(changeEnteredNumComma(pd_sizeM.current.value))
           }
         >
           재고수량 <strong>M </strong>&nbsp;&nbsp;&nbsp;
         </Input_Custom>
         <Input_Custom
-          inputref={pd_stock}
+          inputref={pd_sizeL}
           type="text"
           placeholder="L 사이즈 재고수량을 입력해주세요."
           name="stock"
-          value={enterNumQuantity}
+          value={enterNumQuantity4}
           onChangeEvent={() =>
-            setEnterNumQuantity(changeEnteredNumComma(pd_stock.current.value))
+            setEnterNumQuantity4(changeEnteredNumComma(pd_sizeL.current.value))
           }
         >
           재고수량 <strong>L </strong>&nbsp;&nbsp;&nbsp;&nbsp;
         </Input_Custom>
 
         {/* 상품이미지 등록 */}
-        <div>
-          {showImage}
-          <p>파일업로드</p>&nbsp;&nbsp;&nbsp;&nbsp;
-          <form>
-            <input
-              style={{ display: 'none' }}
-              type="file"
-              accept="image/jpg, image/jpeg, image/png"
-              ref={fileInputRef}
-              onChange={uploadProfile}
-              name="imgMain"
-              multiple
-            />
-            <BTN_black_nomal_comp
-              className="select_btn"
-              type="button"
-              onClick={handleClickFileInput}
-              fontSize="12px"
-            >
-              파일선택
-            </BTN_black_nomal_comp>
-          </form>
-        </div>
+        <Container>
+          <Layout>{showImage}</Layout>
+          <Text>메인</Text>
+          <Text>서브1</Text>
+          <Text>서브2</Text>
+          <Text>서브3</Text>
+          <Text>서브4</Text>
+          <input
+            style={{ display: 'none' }}
+            type="file"
+            accept="image/jpg, image/jpeg, image/png"
+            ref={fileInputRef}
+            onChange={uploadProfile}
+            name="img"
+            multiple
+          />
+          <BTN_black_nomal_comp
+            className="select_btn"
+            onClickEvent={handleClickFileInput}
+            fontSize="12px"
+          >
+            파일선택
+          </BTN_black_nomal_comp>
+        </Container>
         {/* 상품상세설명 인풋 */}
         <TextArea_Custom
           inputref={pd_detail}
           type="text"
-          name="pd_description"
+          name="detail"
           placeholder=" ex )
           Jacquard and embroidery artwork (상품상세설명)
           Acrylic 100% (혼용률)
@@ -357,6 +391,7 @@ export default function ProductRegister_admin() {
         >
           상품상세설명
         </TextArea_Custom>
+
         {/* 클릭시 axios각 작동할 수 있게 위에 만든 함수를 넣어준다. */}
         <BTN_black_nomal_comp
           className="save_btn"
