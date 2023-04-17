@@ -53,9 +53,6 @@ export default function Header_client() {
     dispatch(offon());
   };
 
-  console.log(`관리자인가요? ${isAdmin}`); // ////////////////////////////////////////////
-  console.log(`로그인 상태? ${isLogin}`);
-
   return (
     <>
       <header className="header_client">
@@ -64,11 +61,9 @@ export default function Header_client() {
         </p>
 
         {/* 관리자 페이지 이동 버튼 - test 중 */}
-        {/* {isAdmin && (
-          <li id="cate_li2"> */}
-        <button onClick={() => navigate('/admin')}>관리자 페이지</button>
-        {/* </li>
-        )} */}
+        {isAdmin && (
+          <button onClick={() => navigate('/admin')}>관리자 페이지</button>
+        )}
 
         <ul id="cate">
           <li id="cate_li">
