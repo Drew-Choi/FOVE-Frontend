@@ -186,6 +186,10 @@ export default function Detail_OrderMenu_client({
   detail,
   datas,
 }) {
+  //리덕스 state 모음
+  const user_ID = useSelector((state) => state.user.userID);
+  console.log(user_ID);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -202,7 +206,7 @@ export default function Detail_OrderMenu_client({
 
     try {
       const reqData = await axios.post(
-        `http://localhost:4000/store/productId/${datas._id}`,
+        `http://localhost:4000/cart/add/${user_ID}`,
         {
           productName: datas.productName,
           img: datas.img[0],
