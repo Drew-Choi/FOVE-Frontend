@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { relative } from 'path-browserify';
 import { useEffect, useRef, useState } from 'react';
 axios;
 export default function ProductList_admin() {
@@ -13,6 +14,9 @@ export default function ProductList_admin() {
   const productUpdate = async (index) => {
     setDisa((prevState) => {
       const newState = [...prevState];
+      for (let i = 0; i < newState.length; i++) {
+        newState[i] = true;
+      }
       newState[index] = false;
       return newState;
     });
@@ -20,7 +24,7 @@ export default function ProductList_admin() {
 
   const updateSubmit = async (prodCode, index) => {
     try {
-      console.log(1);
+      console.log('data.index', data.index);
 
       // const result = () => {
       //   productName.current[index].value == ''
@@ -30,9 +34,10 @@ export default function ProductList_admin() {
       // result();
 
       const result = () => {
+        console.log('data[index]', data[index]);
         return {
           stock:
-            productName.current[index].value === ''
+            stock.current[index].value === ''
               ? data[index].stock
               : stock.current[index].value,
           productName:
@@ -40,7 +45,7 @@ export default function ProductList_admin() {
               ? data[index].productName
               : productName.current[index].value,
           price:
-            productName.current[index].value === ''
+            price.current[index].value === ''
               ? data[index].price
               : price.current[index].value,
         };
@@ -49,7 +54,7 @@ export default function ProductList_admin() {
 
       const Result = await result();
       // alert(Result);
-      console.log(Result);
+      console.log('아라라라랄ㄹㄹ', Result);
 
       // setRedirect(true);
 
@@ -62,7 +67,7 @@ export default function ProductList_admin() {
         },
       );
       console.log(2);
-      // setRedirect(true);
+
       setData((prevState) => {
         const newData = [...prevState];
         newData[index] = response.data;
@@ -70,8 +75,8 @@ export default function ProductList_admin() {
       });
       console.log('prev');
       alert('수정되었습니다');
-      setRedirect(true);
-      alert('hh');
+      setRedirect((cur) => !cur);
+      // alert('hh');
 
       setDisa((prevState) => {
         const newState = [...prevState];
@@ -114,8 +119,21 @@ export default function ProductList_admin() {
     <>
       <div key={item._id}>
         <li>
+          {/* <div style={{}}>
+            <img
+              style={{ width: '60px' }}
+              src={`http://localhost:4000/uploads/${item.img[0]}`}
+            ></img>{' '}
+            <button>수정</button>
+            <img
+              style={{ width: '60px' }}
+              src={`http://localhost:4000/uploads/${item.img[1]}`}
+            ></img>{' '}
+            <button>수정</button>
+          </div>
+          <div></div> */}
           {/* {index + 1} */}
-          번호 :{' '}
+          번호 :{}
           <input
             type="text"
             name={name}
@@ -171,12 +189,16 @@ export default function ProductList_admin() {
             style={{ fontSize: '12px' }}
             disabled={disa[index]}
           />{' '}
-          <button onClick={() => productUpdate(index)}> 수정</button>{' '}
+          <button onClick={() => productUpdate(index)}>수정</button>{' '}
           <button onClick={() => updateSubmit(item.prodCode, index)}>
             {' '}
             완료
           </button>{' '}
-          <button onClick={() => productUpdate()}> 삭제 </button>
+          {/* <button onClick={() => productUpdate()}> 삭제 </button> */}
+          <div></div>
+          <div
+            style={{ border: '0.1px solid black ', margin: '10px 0px' }}
+          ></div>
         </li>
       </div>
       <div> </div>
@@ -187,5 +209,9 @@ export default function ProductList_admin() {
     // </li>
   ));
 
-  return <ol>{productList}</ol>;
+  return (
+    <div style={{ position: 'relative', top: '100px' }}>
+      <ul>{productList}</ul>
+    </div>
+  );
 }
