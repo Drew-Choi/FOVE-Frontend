@@ -309,7 +309,7 @@ export default function ProductList_admin() {
               key={item?.id}
               multiple
             /> */}
-            번호 :{}
+            번호 :{''}
             <input
               type="text"
               name={name}
@@ -375,9 +375,8 @@ export default function ProductList_admin() {
               name={name}
               placeholder={item?.price}
               style={{ fontSize: '12px' }}
-
               disabled={disa[index]}
-            /> */}
+            />{' '}
             {/* <img
               style={{ width: '60px' }}
               src={`http://localhost:4000/uploads/${item.img[1]}`}

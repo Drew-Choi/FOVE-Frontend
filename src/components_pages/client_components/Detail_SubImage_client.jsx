@@ -80,8 +80,8 @@ export default function Detail_SubImage_client({ datas }) {
               imgFileName={el}
             ></Sub_IMG>
           ))}
-
-          {selectDot === datas.img[0] ? <FirstDot /> : <SecondDot />}
+          {/* 
+          {selectDot === datas.img[0] ? <FirstDot /> : <SecondDot />} */}
         </Detail_Sub_Image_PositionCenter>
       </Detail_Sub_Image_Contain>
 
