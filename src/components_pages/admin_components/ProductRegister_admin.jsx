@@ -9,6 +9,7 @@ import TextArea_Custom from '../../components_elements/TextArea_Custom';
 import { Tab } from 'react-bootstrap';
 import styled from 'styled-components';
 import axios from 'axios';
+import { redirect } from 'react-router-dom';
 
 const Container = styled.div`
   display: block !important;
@@ -169,7 +170,6 @@ export default function ProductRegister_admin() {
   const newProductPost = async () => {
     //이미지 외 자료들 남기
     let productCode = pd_code.current.value;
-    console.log(productCode);
     // let newArrival = pd_newArrival.current.checked === !true ? '' : '신상품';
     let productName = pd_productName.current.value;
     let price = resultCommaRemove(pd_price.current.value);
@@ -216,22 +216,10 @@ export default function ProductRegister_admin() {
         body: formData,
       },
     );
-
+    window.location.reload();
     //페이지 요청 성공하면 200번, 아니면 오류표시
     if (newPdPostData.status !== 200) {
       //json형식으로 불러들임
-      // productCode = '';
-      // newArrival = false;
-      // productName = '';
-      // setEnterNumPrice((cur) => '');
-      // setEnterNumQuantity1((cur) => '');
-      // setEnterNumQuantity2((cur) => '');
-      // setEnterNumQuantity1((cur) => '');
-      // setEnterNumQuantity1((cur) => '');
-      // category = 'beanie';
-      // detail = '';
-      console.log(newPdPostData);
-
       return alert(await newPdPostData.json());
     } else {
       return alert(await newPdPostData.json());
