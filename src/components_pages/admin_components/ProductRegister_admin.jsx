@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import '../../styles/productRegister_admin.scss';
 import RadioGroup from '../../components_elements/RadioGroup';
 import RadioEl from '../../components_elements/RadioEl';
@@ -8,6 +8,7 @@ import Select_Custom from '../../components_elements/Select_Custom';
 import TextArea_Custom from '../../components_elements/TextArea_Custom';
 import { Tab } from 'react-bootstrap';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const Container = styled.div`
   display: block !important;
@@ -41,6 +42,25 @@ const Text = styled.span`
 `;
 
 export default function ProductRegister_admin() {
+  const [pd_Datas, setPd_Datas] = useState(null);
+
+  useEffect(() => {
+    getAllProducts();
+  }, []);
+
+  //모든 요청
+  //엑시오스로 모든 상품 정보 요청
+  const getAllProducts = async () => {
+    const productsData = await axios.get('http://localhost:4000/store/all');
+    if (productsData.status === 200) {
+      await setPd_Datas(productsData.data.length);
+      console.log(productsData.data.length);
+      return productsData.data.message;
+    } else {
+      return productsData.data.message;
+    }
+  };
+
   //-------
   //가격 콤마용
   const [enterNumPrice, setEnterNumPrice] = useState('');
@@ -265,17 +285,6 @@ export default function ProductRegister_admin() {
         >
           상품고유번호
         </Input_Custom>
-
-        {/* 신상품 */}
-        <label id="checkLabel" htmlFor="newArrival">
-          신상품
-        </label>
-        <input
-          ref={pd_newArrival}
-          type="checkbox"
-          name="newArrival"
-          id="newArrival"
-        />
 
         {/* 상품명 인풋 */}
         <Input_Custom
