@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { relative } from 'path-browserify';
+// import '../../styles/productList_admin.scss';
 
 import { useEffect, useRef, useState } from 'react';
 axios;
@@ -7,18 +8,6 @@ import { useMemo } from 'react';
 import BTN_black_nomal_comp from '../../styles/BTN_black_nomal_comp';
 import '../../styles/productRegister_admin.scss';
 import styled from 'styled-components';
-
-const Preview = styled.div`
-  position: relative;
-  display: block;
-  width: 150px;
-  height: 150px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-image: url(${(props) => props.thumbnail});
-  cursor: pointer;
-`;
 
 export default function ProductList_admin() {
   const [data, setData] = useState([]);
@@ -217,6 +206,8 @@ export default function ProductList_admin() {
           'http://localhost:4000/admin/productlist',
         );
 
+        console.log('$$$$$$$$$$$$$$$$$$', response.data);
+
         setData(response.data);
         setDisa(new Array(response.data.length).fill(true));
       } catch (error) {
@@ -226,191 +217,28 @@ export default function ProductList_admin() {
     fetchData();
   }, [redirect]);
 
-  const [imageFile, setImageFile] = useState(null);
-  const imgRef = useRef([]);
-
-  // const handleClickFileInput = (e) => {
-  //   e.target.click();
-  // };
-
-  // const thumb = useRef([]);
-  // const index = useRef();
-  // const showImage = useRef([]);
-
-  // const uploadProfile = (e, idx) => {
-  //   const selectedFiles = Array.from(e.target.files);
-
-  //   if (selectedFiles.length > 5) {
-  //     alert('최대 5개까지 업로드 가능합니다.');
-  //   } else {
-  //     setImageFile(selectedFiles);
-  //   }
-  //   const fileList = e.target.files;
-  //   const length = fileList.length;
-  //   let copy = [];
-  //   if (fileList) {
-  //     for (let i = 0; i < length; i += 1) {
-  //       const imgInfo = {
-  //         file: fileList[i],
-  //         thumbnail: URL.createObjectURL(fileList[i]),
-  //         type: fileList[i].type.slice(0, 5),
-  //       };
-  //       copy.push(imgInfo);
-  //     }
-  //   }
-  //   setImageFile((cur) => copy);
-  //   index.current = idx;
-  //   imgRef.current = fileList;
-  // };
-
-  // let showImage = [];
-
-  // useEffect(() => {
-  //   const thumbImg = imageFile?.map((el, index) => {
-  //     return (
-  //       <Preview
-  //         thumbnail={el.thumbnail}
-  //         key={index}
-  //         onClick={handleClickFileInput}
-  //       ></Preview>
-  //     );
-  //   });
-
-  //   console.log(thumbImg);
-
-  //   showImage.push(thumbImg);
-  // }, [imageFile]);
-
-  //이미지 프리뷰
-
-  // showImage.current = [
-  //   ...showImage.current,
-  //   useMemo(() => {
-  //     return imageFile?.map((el, index) => {
-  //       return (
-  //         <Preview
-  //           thumbnail={el.thumbnail}
-  //           key={index}
-  //           onClick={(e) => handleClickFileInput(e)}
-  //         ></Preview>
-  //       );
-  //     });
-  //   }, [imageFile]),
-  // ];
-  // showImage.current = showImage.current.filter((el) => {
-  //   if (el !== undefined) thumb.current[index.current] = el;
-  // });
-
-
-  const productList = data.map((item, index) => {
-    // thumb.current.push([]);
-    return (
-      <>
-        <div key={item?._id} className="pdlist_wrap">
-          <li>
-            {/* {thumb.current[index]} */}
-            {/* 사진
-            <input
+  const productList = data.map((item, index) => (
+    <>
+      <div key={item?._id} className="pdlist_wrap">
+        <li>
+          <div style={{}}>
+            {/* <input
               type="file"
-              accept="image/jpg, image/jpeg, image/png"
-              ref={imgRef}
-              onChange={(e) => uploadProfile(e, index)}
-              name="img"
-              key={item?.id}
-              multiple
-            /> */}
-            번호 :{}
-            <input
-              type="text"
-              name={name}
-              // placeholder={item.productCode}
-              style={{ fontSize: '12px' }}
-              disabled={true}
-            />
-            이름 :{' '}
-            <input
-              ref={(el) => (productName.current[index] = el)}
-              key={item?.id}
-              type="text"
-              name={name}
-              placeholder={item?.productName}
-              style={{ fontSize: '12px' }}
-              disabled={disa[index]}
-
-            />{' '}
-            OS수량 :{' '}
-            <input
-              ref={(el) => (os.current[index] = el)}
-              key={item?.id}
-              type="text"
-              name={name}
-              placeholder={item?.size.OS}
-              style={{ fontSize: '12px' }}
-              disabled={disa[index]}
-            />{' '}
-            S수량 :{' '}
-            <input
-              ref={(el) => (s.current[index] = el)}
-              key={item?.id}
-              type="text"
-              name={name}
-              placeholder={item?.size.S}
-              style={{ fontSize: '12px' }}
-              disabled={disa[index]}
-            />{' '}
-            M수량 :{' '}
-            <input
-              ref={(el) => (m.current[index] = el)}
-              key={item?.id}
-              type="text"
-              name={name}
-              placeholder={item?.size.M}
-              style={{ fontSize: '12px' }}
-              disabled={disa[index]}
-            />{' '}
-            L수량 :{' '}
-            <input
-              ref={(el) => (l.current[index] = el)}
-              key={item?.id}
-              type="text"
-              name={name}
-              placeholder={item?.size.L}
-              style={{ fontSize: '12px' }}
-              disabled={disa[index]}
-            />{' '}
-            가격 :
-            <input
-              ref={(el) => (price.current[index] = el)}
-              key={item?.id}
-              type="text"
-              name={name}
-              placeholder={item?.price}
-              style={{ fontSize: '12px' }}
-              disabled={disa[index]}
-            />{' '}
-            <button onClick={() => productUpdate(index)}>수정</button>{' '}
-            <button
-              onClick={() => {
-                const result = updateSubmit(item?._id, index);
-                alert(item._id);
+              onChange={() => {
+                handleFirstImageChange;
               }}
-            >
-              {' '}
-              완료
-            </button>{' '}
-            <button onClick={() => productDelete(item?._id)}>삭제</button>
-            {/* <button onClick={() => productUpdate()}> 삭제 </button> */}
-            <div></div>
-            <div
-              style={{ border: '0.1px solid black ', margin: '10px 0px' }}
-            ></div>
-          </li>
-        </div>
-        <div> </div>
-      </>
-    );
-  });
-
+              disabled={disa[index]}
+            /> */}
+            {/* <img
+              style={{ width: '60px' }}
+              src={`http://localhost:4000/uploads/${item.img[1]}`}
+            ></img>{' '} */}
+            {/* <input
+              type="file"
+              onChange={() => {
+                handleSecondImageChange;
+              }}
+              disabled={disa[index]}
             /> */}
             {/* 상품이미지 등록 */}
             {/* <div>
