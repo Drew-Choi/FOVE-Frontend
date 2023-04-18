@@ -67,7 +67,7 @@ export default function OrderList_admin() {
           Date : {}
           <input
             placeholder={item?.payments.approvedAt}
-            style={{ fontSize: '12px' }}
+            style={{ width: '300px', fontSize: '13px' }}
             disabled={true}
           />
           {/* <div
