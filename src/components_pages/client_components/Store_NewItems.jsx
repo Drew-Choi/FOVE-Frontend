@@ -13,14 +13,10 @@ import SwiperPaginationBTN from '../../styles/SwiperPaginationBTN';
 import SwiperPaginationContainer from '../../styles/SwiperPaginationContainer';
 import SubNav_client from './SubNav_client';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
 SwiperCore.use([Navigation]);
 
-export default function Store_client() {
-  const searchText = useSelector((state) => state.search.searchData);
-  const orignData = useRef([]);
-
+export default function Store_NewItems() {
   //네비게이트 리액트Dom 설정
   const navigate = useNavigate();
 
@@ -31,42 +27,29 @@ export default function Store_client() {
   const [pagination3, setPagination3] = useState('off');
   const [pagination4, setPagination4] = useState('off');
 
-  //All상품데이터 get
-  const [pd_Datas, setPd_Datas] = useState([]);
-
-  const searchProducts = (text) => {
-    setPd_Datas((cur) => {
-      const newData = [...orignData.current];
-      console.log('@@@@@@@', text);
-      if (text !== '') {
-        return newData.filter((el) => {
-          return el.productName.indexOf(text) !== -1;
-        });
-      } else {
-        return newData;
-      }
-    });
-  };
+  //카테고리 상품데이터 get
+  const [pd_New_Items, setPd_New_Items] = useState([]);
 
   //상품데이터 db에서 가져오기
   useEffect(() => {
-    getAllProducts();
-    // getFit();
+    getCategoryProducts();
   }, []);
 
-  useEffect(() => {
-    searchProducts(searchText);
-  }, [searchText]);
-
   //엑시오스로 모든 상품 정보 요청
-  const getAllProducts = async () => {
-    const productsData = await axios.get('http://localhost:4000/store/all');
-    if (productsData.status === 200) {
-      orignData.current = productsData.data;
-      await setPd_Datas(productsData.data);
-      return productsData.data.message;
-    } else {
-      return productsData.data.message;
+  const getCategoryProducts = async () => {
+    try {
+      const newProductsData = await axios.get(
+        `http://localhost:4000/store/new`,
+      );
+      if (newProductsData.status === 200) {
+        await setPd_New_Items(newProductsData.data);
+        return newProductsData.data.message;
+      } else {
+        console.log('실패');
+        return newProductsData.data.message;
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
 
@@ -129,7 +112,7 @@ export default function Store_client() {
           <SwiperSlide className="swiper_slide">
             <Container>
               <Row xs={2} md={4} lg={5}>
-                {pd_Datas.map((el, index) => {
+                {pd_New_Items.map((el, index) => {
                   if (index < 10 && index >= 0)
                     return (
                       <Col
@@ -152,7 +135,7 @@ export default function Store_client() {
           <SwiperSlide className="swiper_slide">
             <Container>
               <Row xs={2} md={4} lg={5}>
-                {pd_Datas.map((el, index) => {
+                {pd_New_Items.map((el, index) => {
                   if (index < 20 && index >= 10)
                     return (
                       <Col
@@ -175,7 +158,7 @@ export default function Store_client() {
           <SwiperSlide className="swiper_slide">
             <Container>
               <Row xs={2} md={4} lg={5}>
-                {pd_Datas.map((el, index) => {
+                {pd_New_Items.map((el, index) => {
                   if (index < 30 && index >= 20)
                     return (
                       <Col

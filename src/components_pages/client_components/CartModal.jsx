@@ -238,21 +238,29 @@ export default function CartModal({ className }) {
   };
 
   const dispatch = useDispatch();
+
+  //리덕스
+  //상품정보 state
   const cartProducts = useSelector((state) =>
     !state.cart.cartProducts ? [] : state.cart.cartProducts,
+  );
+
+  //유저정보 state
+  const userID = useSelector((state) =>
+    state.user.userID === 0 ? 0 : state.user.userID,
   );
 
   //카트 상품 수량 빼기
   const minersCartItem = async (identity_id) => {
     try {
       const downData = await axios.post(
-        `http://localhost:4000/cart/countminus/productId/${identity_id}`,
+        `http://localhost:4000/cart/qtyminus/${userID}/${identity_id}`,
       );
       if (downData.status === 200) {
-        if (downData.data && downData.data.products) {
+        if (downData.data && downData.data.userCart) {
           // 'cartObj' 객체가 null이 아니고 'products' 속성이 존재하는 경우에만 실행
           // 이곳에서 'products' 속성을 사용하는 코드 작성
-          dispatch(update(downData.data));
+          dispatch(update(downData.data.userCart));
         }
         console.log('성공');
       } else {
@@ -268,10 +276,10 @@ export default function CartModal({ className }) {
   const plusCartItem = async (identity_id) => {
     try {
       const upData = await axios.post(
-        `http://localhost:4000/cart/countplus/productId/${identity_id}`,
+        `http://localhost:4000/cart/qtyplus/${userID}/${identity_id}`,
       );
       if (upData.status === 200) {
-        dispatch(update(upData.data));
+        dispatch(update(upData.data.userCart));
         console.log('성공');
       } else {
         console.log('실패');
@@ -285,7 +293,7 @@ export default function CartModal({ className }) {
   const deletePD = async (identity_id) => {
     try {
       const deleteID = await axios.post(
-        `http://localhost:4000/cart/productId/${identity_id}`,
+        `http://localhost:4000/cart/remove/${userID}/${identity_id}`,
       );
       if (deleteID.status === 200) {
         dispatch(update(deleteID.data.updatedCart));
@@ -310,11 +318,13 @@ export default function CartModal({ className }) {
   //전체 삭제(카트 비움)
   const allRemove = async () => {
     try {
-      const allRemoveCart = await axios.post(`http://localhost:4000/cleancart`);
+      const allRemoveCart = await axios.post(
+        `http://localhost:4000/cart/clean/${userID}`,
+      );
       if (allRemoveCart.status === 200) {
         // dispatch(update(allRemoveCart.data.updatedCart));
         console.log('성공');
-        dispatch(update(allRemoveCart.data.updatedCart));
+        dispatch(update(allRemoveCart.data.userCart));
       } else {
         console.log('실패');
       }

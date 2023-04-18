@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router';
 import styled from 'styled-components';
 import { logout } from '../../store/modules/user';
 import { clickMenu } from '../../store/modules/menuAccount';
+import { reset, update } from '../../store/modules/cart';
+import axios from 'axios';
 
 const MenuAccountWrap = styled.div`
   position: fixed;
@@ -34,6 +36,12 @@ const Content = styled.p`
 `;
 
 export default function MenuAccount() {
+  //리덕스
+  //유저정보 state
+  const userID = useSelector((state) =>
+    state.user.userID === 0 ? 0 : state.user.userID,
+  );
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userName = useSelector((state) => state.user.userName);
@@ -44,6 +52,7 @@ export default function MenuAccount() {
     window.localStorage.clear(); // 로컬 스토리지의 로그인 토큰 삭제
     dispatch(clickMenu()); // MenuAccount 닫기
     dispatch(logout()); // 로그아웃 처리
+    dispatch(reset());
     navigate(`/login`); // 로그인 페이지로 이동
   };
 

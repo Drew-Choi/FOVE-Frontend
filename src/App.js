@@ -29,6 +29,7 @@ import { keepLogin } from './store/modules/user';
 import RegisterSuccess_client from './components_pages/client_components/RegisterSuccess_client';
 import EditInfo_client from './components_pages/client_components/EditInfo_client';
 import ProductList_admin from './components_pages/admin_components/ProductList_admin';
+import Store_NewItems from './components_pages/client_components/Store_NewItems';
 
 function App() {
   const isLogin = useSelector((state) => state.user.isLogin);
@@ -81,6 +82,8 @@ function App() {
           <Route path="/store" element={<Store_client />} />
           {/* 카테고리별 아이템 분리 */}
           <Route path="/store/:category" element={<Store_Categorys />} />
+          {/* 신상품 */}
+          <Route path="/store/new" element={<Store_NewItems />} />
           {/* 상품상세페이지 */}
           <Route path="/store/detail/:id" element={<Detail_client />} />
           {/* 주문서작성 영역 */}
