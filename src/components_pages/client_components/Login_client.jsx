@@ -63,8 +63,8 @@ export default function Login_client() {
           id: loginIdInput.current.value,
         }),
       );
-      cartDataReq(loginIdInput.current.value);
-      navigate('/store'); // 로그인 후 이전 페이지로 이동
+      cartDataReq();
+      navigate(-1); // 로그인 후 이전 페이지로 이동
     } catch (err) {
       alert(err.response.data.message);
     }
