@@ -1,4 +1,4 @@
-.titleArea1111 {
+.titleArea {
   width: 100%;
   text-align: center;
 
@@ -54,6 +54,7 @@
 
     .olthumb {
       margin-left: 0;
+      margin-bottom: 20x;
       font-size: 14px
     }
 
@@ -66,21 +67,6 @@
     .status {
       position: absolute;
       font-size: 14px;
-    }
-
-    button {
-      border: 1px solid black;
-      font-size: 14px;
-      padding: 5px 10px;
-      background-color: white;
-      margin-bottom: 10px;
-      cursor: pointer;
-      transition: 0.2s ease;
-
-      &:hover {
-        background-color: black;
-        color:white;
-      }
     }
   }}
 

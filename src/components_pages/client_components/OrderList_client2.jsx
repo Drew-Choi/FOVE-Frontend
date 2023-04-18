@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import '../../styles/orderlist_client.scss';
+import '../../styles/orderlist_client2.scss';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-export default function OrderList_client() {
+export default function OrderList_client2() {
   const navigate = useNavigate();
   const userNameEncoded = useSelector((state) => state.user.userName);
   const [isSpanClicked, setIsSpanClicked] = useState(false);
@@ -22,21 +22,21 @@ export default function OrderList_client() {
         <div className="orderstatus1">
           <span
             className="ordersuc"
-            style={{ borderBottom: '1px solid black' }}
-            onClick={() => navigate('/mypage/orderlist')}
+            style={{
+              fontWeight: isSpanClicked ? 'bold' : 'normal',
+              textDecoration: isSpanClicked ? 'underline' : 'none',
+            }}
+            onClick={() => {
+              window.location.href = '/mypage/orderlist';
+            }}
           >
             주문내역조회
             <span>(1)</span>
           </span>
           <span
             className="ordercan"
-            style={{
-              fontWeight: isSpanClicked ? 'bold' : 'normal',
-              textDecoration: isSpanClicked ? 'underline' : 'none',
-            }}
-            onClick={() => {
-              window.location.href = '/mypage/orderlist2';
-            }}
+            style={{ borderBottom: '1px solid black' }}
+            onClick={() => navigate('/mypage/orderlist2')}
           >
             취소/반품/교환 내역
             <span>(0)</span>
@@ -67,12 +67,8 @@ export default function OrderList_client() {
                   KRW <strong>89,000 1</strong>개
                 </span>
               </div>
-              <strong className="status">입금전</strong>
+              <strong className="status">입금전취소</strong>
               <br />
-              <br />
-              <button onClick={() => navigate('/mypage/orderlist2')}>
-                주문취소
-              </button>
             </div>
           </div>
         </div>
