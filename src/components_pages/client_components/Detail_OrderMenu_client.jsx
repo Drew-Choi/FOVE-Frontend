@@ -191,8 +191,10 @@ export default function Detail_OrderMenu_client({
   datas,
 }) {
   //리덕스 state 모음
-  const user_ID = useSelector((state) => state.user);
-  console.log(user_ID);
+  //유저정보 state
+  const userID = useSelector((state) =>
+    state.user.userID === 0 ? 0 : state.user.userID,
+  );
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -210,12 +212,12 @@ export default function Detail_OrderMenu_client({
 
     try {
       const reqData = await axios.post(
-        `http://localhost:4000/cart/add/${user_ID.userID}`,
+        `http://localhost:4000/cart/add/${userID}`,
         {
           productName: datas.productName,
           img: datas.img[0],
           price: datas.price,
-          size: datas.size,
+          size: 'OS',
           color: datas.color,
           quantity: count,
           unitSumPrice: datas.price * count,
@@ -237,7 +239,9 @@ export default function Detail_OrderMenu_client({
   //카트 업데이트용 겟요청. => 이 데이터를 리덕스 리듀서로 보내서 데이터 업데이트 해줌
   const updateCart = async () => {
     try {
-      const reqUpdat = await axios.get('http://localhost:4000');
+      const reqUpdat = await axios.post(
+        `http://localhost:4000/cart/list/${userID}`,
+      );
       if (reqUpdat.status === 200) {
         dispatch(add(reqUpdat.data));
         console.log('성공');

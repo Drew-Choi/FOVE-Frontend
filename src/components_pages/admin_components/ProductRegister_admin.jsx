@@ -148,13 +148,13 @@ export default function ProductRegister_admin() {
   const newProductPost = async () => {
     //이미지 외 자료들 남기
     let productCode = pd_code.current.value;
-    let newArrival = pd_newArrival.current.checked === !true ? '' : '신상품';
+    // let newArrival = pd_newArrival.current.checked === !true ? '' : '신상품';
     let productName = pd_productName.current.value;
     let price = resultCommaRemove(pd_price.current.value);
-    let sizeSO = resultCommaRemove(pd_sizeOS.current.value);
-    let sizeS = resultCommaRemove(pd_sizeOS.current.value);
-    let sizeM = resultCommaRemove(pd_sizeOS.current.value);
-    let sizeL = resultCommaRemove(pd_sizeOS.current.value);
+    let sizeOS = resultCommaRemove(pd_sizeOS.current.value);
+    let sizeS = resultCommaRemove(pd_sizeS.current.value);
+    let sizeM = resultCommaRemove(pd_sizeM.current.value);
+    let sizeL = resultCommaRemove(pd_sizeL.current.value);
     let category = pd_category.current.value;
     let detail = pd_detail.current.value;
 
@@ -170,15 +170,16 @@ export default function ProductRegister_admin() {
       //제이슨 형식으로 바꿔줘야함
       JSON.stringify({
         productCode: productCode,
-        newArrival: newArrival,
         productName: productName,
         price: price,
         category: category,
         detail: detail,
-        sizeSO: sizeSO,
-        sizeS: sizeS,
-        sizeM: sizeM,
-        sizeL: sizeL,
+        size: {
+          OS: sizeOS,
+          S: sizeS,
+          M: sizeM,
+          L: sizeL,
+        },
       }),
     );
 

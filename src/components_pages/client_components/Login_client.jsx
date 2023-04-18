@@ -1,9 +1,10 @@
 import axios from 'axios';
 import React, { useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { login } from '../../store/modules/user';
 import '../../styles/login_client.scss';
+import { importdb } from '../../store/modules/cart';
 
 export default function Login_client() {
   const loginIdInput = useRef();
@@ -11,6 +12,22 @@ export default function Login_client() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const cartDataReq = async () => {
+    try {
+      const cartDataGet = await axios.post(
+        `http://localhost:4000/cart/list/${loginIdInput}`,
+      );
+      if (cartDataGet.status === 200) {
+        await dispatch(importdb(cartDataGet.data.product));
+      } else {
+        console.error(cartDataGet.status);
+        console.log(cartDataGet.data.message);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   // LOG IN 버튼
   const loginUser = async () => {
@@ -41,14 +58,13 @@ export default function Login_client() {
       // 로컬 스토리지에 로그인 정보가 저장 된 토큰을 저장
       // 해당 정보를 통하여 리액트 실행 시, 토큰을 백엔드 서버에 검증하여 자동 로그인을 처리
       window.localStorage.setItem('token', resLogin.data.token);
-
       dispatch(
         login({
           id: loginIdInput.current.value,
         }),
       );
-
-      navigate(-1); // 로그인 후 이전 페이지로 이동
+      cartDataReq(loginIdInput.current.value);
+      navigate('/store'); // 로그인 후 이전 페이지로 이동
     } catch (err) {
       alert(err.response.data.message);
     }

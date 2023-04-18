@@ -73,6 +73,7 @@ export default function Store_Categorys() {
     <main className="store_main">
       <SubNav_client
         onClickEvent1={() => navigate('/store')}
+        onClickEvent2={() => navigate('/store/new')}
         onClickEvent3={() => navigate('/store/beanie')}
         onClickEvent4={() => navigate('/store/cap')}
         onClickEvent5={() => navigate('/store/training')}

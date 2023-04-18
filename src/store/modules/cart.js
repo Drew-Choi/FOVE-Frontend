@@ -49,19 +49,25 @@ export default function cart(state = initState, action) {
       return {
         ...state,
         cartProducts: action.payload.products,
-        cartProductsLength: action.payload.length,
+        cartProductsLength: action.payload.cartQuantity,
       };
     case ADD:
       return {
         ...state,
         cartProducts: action.payload.products,
-        cartProductsLength: action.payload.length,
+        cartProductsLength: action.payload.cartQuantity,
       };
     case UPDATE:
       return {
         ...state,
         cartProducts: action.payload.products,
-        cartProductsLength: action.payload.products.length,
+        cartProductsLength: action.payload.products.cartQuantity,
+      };
+    case RESET:
+      return {
+        ...state,
+        cartProducts: '',
+        cartProductsLength: '',
       };
     default:
       return state;

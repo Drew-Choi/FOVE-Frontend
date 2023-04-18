@@ -19,17 +19,20 @@ export default function Header_client() {
 
   //리덕스 디스패치(액션함수 전달용)
   const dispatch = useDispatch();
+  //상품정보 state
   const cartLength = useSelector((state) =>
     state.cart.cartProductsLength === 0 ? 0 : state.cart.cartProductsLength,
   );
-
-  useEffect(() => {
-    cartDataReq();
-  }, []);
+  //유저정보 state
+  const userID = useSelector((state) =>
+    state.user.userID === 0 ? 0 : state.user.userID,
+  );
 
   const cartDataReq = async () => {
     try {
-      const cartDataGet = await axios.get('http://localhost:4000');
+      const cartDataGet = await axios.post(
+        `http://localhost:4000/cart/list/${userID}`,
+      );
       if (cartDataGet.status === 200) {
         await dispatch(importdb(cartDataGet.data));
       } else {
@@ -40,6 +43,10 @@ export default function Header_client() {
       console.error(err);
     }
   };
+
+  useEffect(() => {
+    cartDataReq();
+  });
 
   //모달을 위한 state
   const offonKey = useSelector((state) => state.cartmodal.offon);
