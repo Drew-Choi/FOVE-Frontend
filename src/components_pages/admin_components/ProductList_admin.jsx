@@ -4,15 +4,26 @@ import '../../styles/productList_admin.scss';
 
 import { useEffect, useRef, useState } from 'react';
 axios;
+import { useMemo } from 'react';
+import BTN_black_nomal_comp from '../../styles/BTN_black_nomal_comp';
+import '../../styles/productRegister_admin.scss';
+import styled from 'styled-components';
+
 export default function ProductList_admin() {
   const [data, setData] = useState([]);
   const [disa, setDisa] = useState([]);
   const [redirect, setRedirect] = useState(false);
 
   const productName = useRef([]);
-  const stock = useRef([]);
+  const os = useRef([]);
+  const s = useRef([]);
+  const m = useRef([]);
+  const l = useRef([]);
   const price = useRef([]);
 
+  console.log('data.index', data.index);
+
+  // 수정 버튼 누를시
   const productUpdate = async (index) => {
     setDisa((prevState) => {
       const newState = [...prevState];
@@ -24,24 +35,42 @@ export default function ProductList_admin() {
     });
   };
 
+  console.log('hi');
+
+  // 삭제기능
+  const productDelete = async (id) => {
+    // alert(id);
+    try {
+      await axios.post(`http://localhost:4000/admin/productlist/delete/${id}`);
+      alert('삭제되었습니다');
+      setRedirect((cur) => !cur);
+    } catch (error) {
+      console.log('hi');
+    }
+  };
+
+  // 수정이후 확인
   const updateSubmit = async (prodCode, index) => {
     try {
-      console.log('data.index', data.index);
-
-      // const result = () => {
-      //   productName.current[index].value == ''
-      //     ? data[index].productName
-      //     : productName.current[index].value;
-      // };
-      // result();
-
       const result = () => {
         console.log('data[index]', data[index]);
         return {
-          stock:
-            stock.current[index].value === ''
-              ? data[index].stock
-              : stock.current[index].value,
+          os:
+            os.current[index].value === ''
+              ? data[index].size.OS
+              : os.current[index].value,
+          s:
+            s.current[index].value === ''
+              ? data[index].size.S
+              : s.current[index].value,
+          m:
+            m.current[index].value === ''
+              ? data[index].size.M
+              : m.current[index].value,
+          l:
+            l.current[index].value === ''
+              ? data[index].size.L
+              : l.current[index].value,
           productName:
             productName.current[index].value === ''
               ? data[index].productName
@@ -51,23 +80,98 @@ export default function ProductList_admin() {
               ? data[index].price
               : price.current[index].value,
         };
+        // formData.append('image', imageFile); // 이미지 파일
       };
-      // setRedirect(false);
 
       const Result = await result();
+      console.log('hihihiihihihi', Result);
+      // handelSubmit(Result);
+
       // alert(Result);
       console.log('아라라라랄ㄹㄹ', Result);
+      console.log(1);
+
+      // 객체로 stock 받음
+
+      // //이미지 외 자료들 formdata에 담음
+      const size = {
+        OS: Result.os,
+        S: Result.s,
+        M: Result.m,
+        L: Result.l,
+      };
+
+      // formData.append(
+      //   'data',
+      //   //제이슨 형식으로 바꿔줘야함
+      //   JSON.stringify({
+      //     productName: Result.productName,
+      //     price: Result.price,
+      //     size: size,
+      //     // size: pdSize,
+      //     // color: pdColor,
+      //     // category: pdCategory,
+      //     // detail: pdDetail,
+      //   }),
+      // );
+
+      // const response = await fetch(
+      //   //요청할 페이지 날림 -> 이 서버 라우터에서 몽고디비에 인설트 하는 컨트롤을 가지고 있음
+      //   `http://localhost:4000/admin/productlist/modify/${prodCode}`,
+      //   {
+      //     method: 'POST',
+      //     headers: {},
+      //     //여기가 데이터 담아 보내는 것
+      //     body: formData,
+      //   },
+      // );
 
       // setRedirect(true);
 
-      const response = await axios.post(
+      const formData = new FormData();
+
+      formData.append(
+        'data',
+        //제이슨 형식으로 바꿔줘야함
+        JSON.stringify({
+          productName: Result.productName,
+          size: size,
+          price: Result.price,
+        }),
+      );
+
+      const response = await fetch(
+        //요청할 페이지 날림 -> 이 서버 라우터에서 몽고디비에 인설트 하는 컨트롤을 가지고 있음
         `http://localhost:4000/admin/productlist/modify/${prodCode}`,
         {
-          stock: Number(Result.stock),
-          productName: Result.productName,
-          price: Number(Result.price),
+          method: 'POST',
+          headers: {},
+          //여기가 데이터 담아 보내는 것
+          body: formData,
         },
       );
+
+      // const response = await axios.post(
+      //   `http://localhost:4000/admin/productlist/modify/${prodCode}`,
+      //   {
+      //     // formData.append(
+      //     //   'data',
+      //     //   //제이슨 형식으로 바꿔줘야함
+      //     //   JSON.stringify({
+      //     //     productName: Result.productName,
+      //     //     price: Result.price,
+      //     //     size: size,
+      //     //     // size: pdSize,
+      //     //     // color: pdColor,
+      //     //     // category: pdCategory,
+      //     //     // detail: pdDetail,
+      //     //   }),
+      //     // );
+      //     // formData,
+      //     // img[0]: firstImage,
+      //     // img[1]: firstImage,
+      //   },
+      // );
       console.log(2);
 
       setData((prevState) => {
@@ -80,11 +184,11 @@ export default function ProductList_admin() {
       setRedirect((cur) => !cur);
       // alert('hh');
 
-      setDisa((prevState) => {
-        const newState = [...prevState];
-        newState[index] = true;
-        return newState;
-      });
+      // setDisa((prevState) => {
+      //   const newState = [...prevState];
+      //   newState[index] = true;
+      //   return newState;
+      // });
 
       // alert('수정되었습니다');
     } catch (error) {
@@ -93,13 +197,6 @@ export default function ProductList_admin() {
       console.error(error);
     }
   };
-  // const productUpdate = () => {
-  //   alert('hi');
-  //   setDisa(false);
-  // };
-  // function productUpdate() {
-  //   alert('hi');
-  // }
 
   // 컴포넌트가 마운트될때 API 요청을 보냄
   useEffect(() => {
@@ -108,6 +205,9 @@ export default function ProductList_admin() {
         const response = await axios.get(
           'http://localhost:4000/admin/productlist',
         );
+
+        console.log('$$$$$$$$$$$$$$$$$$', response.data);
+
         setData(response.data);
         setDisa(new Array(response.data.length).fill(true));
       } catch (error) {
@@ -119,83 +219,170 @@ export default function ProductList_admin() {
 
   const productList = data.map((item, index) => (
     <>
-      <div key={item._id} className="pdlist_wrap">
+      <div key={item?._id} className="pdlist_wrap">
         <li>
-          {/* <div style={{}}>
-            <img
-              style={{ width: '60px' }}
-              src={`http://localhost:4000/uploads/${item.img[0]}`}
-            ></img>{' '}
-            <button>수정</button>
-            <img
+          <div style={{}}>
+            {/* <input
+              type="file"
+              onChange={() => {
+                handleFirstImageChange;
+              }}
+              disabled={disa[index]}
+            /> */}
+            {/* <img
               style={{ width: '60px' }}
               src={`http://localhost:4000/uploads/${item.img[1]}`}
-            ></img>{' '}
-            <button>수정</button>
+            ></img>{' '} */}
+            {/* <input
+              type="file"
+              onChange={() => {
+                handleSecondImageChange;
+              }}
+              disabled={disa[index]}
+            /> */}
+            {/* 상품이미지 등록 */}
+            {/* <div>
+              {showImage}
+              <p>파일업로드</p>&nbsp;&nbsp;&nbsp;&nbsp;
+              <form> */}
+            {/* <input
+                  style={{ display: 'none' }}
+                  type="file"
+                  accept="image/jpg, image/jpeg, image/png"
+                  ref={fileInputRef}
+                  onChange={uploadProfile}
+                  name="imgMain"
+                  multiple
+                /> */}
+            {/* <BTN_black_nomal_comp
+                  className="select_btn"
+                  type="button"
+                  onClick={handleClickFileInput}
+                  fontSize="12px"
+                >
+                  파일선택
+                </BTN_black_nomal_comp> */}
+            {/* </form>
+            </div> */}
+            {/* 상품이미지 등록 */}
+            {/* <Container>
+              <Layout>{showImage}</Layout>
+              <Text>
+                {' '}
+                <img
+                  style={{ width: '60px' }}
+                  src={`http://localhost:4000/uploads/${item.img[0]}`}
+                ></img>{' '}
+              </Text>
+              <Text>
+                {' '}
+                <img
+                  style={{ width: '60px' }}
+                  src={`http://localhost:4000/uploads/${item.img[0]}`}
+                ></img>{' '}
+              </Text> */}
+            {/* <Text>서브2</Text>
+              <Text>서브3</Text>
+              <Text>서브4</Text> */}
+            {/* <input
+                style={{ display: 'none' }}
+                type="file"
+                accept="image/jpg, image/jpeg, image/png"
+                ref={fileInputRef}
+                onChange={uploadProfile}
+                name="img"
+                multiple
+              />
+              <BTN_black_nomal_comp
+                className="select_btn"
+                onClickEvent={handleClickFileInput}
+                fontSize="12px"
+              >
+                파일선택
+              </BTN_black_nomal_comp>
+            </Container> */}
           </div>
-          <div></div> */}
+          <div></div>
           {/* {index + 1} */}
           번호 :{}
           <input
             type="text"
             name={name}
-            placeholder={item.prodCode}
+            // placeholder={item.productCode}
             style={{ fontSize: '12px' }}
             disabled={true}
           />
           이름 :{' '}
           <input
             ref={(el) => (productName.current[index] = el)}
-            key={item.id}
+            key={item?.id}
             type="text"
             name={name}
-            placeholder={item.productName}
+            placeholder={item?.productName}
+            style={{ fontSize: '12px' }}
+            disabled={disa[index]}
+          />{' '}
+          OS수량 :{' '}
+          <input
+            ref={(el) => (os.current[index] = el)}
+            key={item?.id}
+            type="text"
+            name={name}
+            placeholder={item?.size.OS}
             style={{ fontSize: '12px' }}
             disabled={disa[index]}
           />{' '}
           S수량 :{' '}
           <input
-            ref={(el) => (stock.current[index] = el)}
-            key={item.id}
+            ref={(el) => (s.current[index] = el)}
+            key={item?.id}
             type="text"
             name={name}
-            placeholder={item.stock}
+            placeholder={item?.size.S}
             style={{ fontSize: '12px' }}
             disabled={disa[index]}
           />{' '}
           M수량 :{' '}
           <input
-            key={item.id}
+            ref={(el) => (m.current[index] = el)}
+            key={item?.id}
             type="text"
             name={name}
-            placeholder={item.stock}
+            placeholder={item?.size.M}
             style={{ fontSize: '12px' }}
             disabled={disa[index]}
           />{' '}
           L수량 :{' '}
           <input
-            key={item.id}
+            ref={(el) => (l.current[index] = el)}
+            key={item?.id}
             type="text"
             name={name}
-            placeholder={item.stock}
+            placeholder={item?.size.L}
             style={{ fontSize: '12px' }}
             disabled={disa[index]}
           />{' '}
           가격 :
           <input
             ref={(el) => (price.current[index] = el)}
-            key={item.id}
+            key={item?.id}
             type="text"
             name={name}
-            placeholder={item.price}
+            placeholder={item?.price}
             style={{ fontSize: '12px' }}
             disabled={disa[index]}
           />{' '}
           <button onClick={() => productUpdate(index)}>수정</button>{' '}
-          <button onClick={() => updateSubmit(item.prodCode, index)}>
+          <button
+            onClick={() => {
+              const result = updateSubmit(item?._id, index);
+              alert(item._id);
+            }}
+          >
             {' '}
             완료
           </button>{' '}
+          <button onClick={() => productDelete(item?._id)}>삭제</button>
           {/* <button onClick={() => productUpdate()}> 삭제 </button> */}
           <div></div>
           <div
@@ -205,10 +392,6 @@ export default function ProductList_admin() {
       </div>
       <div> </div>
     </>
-    // <li key={item.id}>
-    //   상품이름 :{item.productName}
-    //   <button>수정</button>
-    // </li>
   ));
 
   return (
