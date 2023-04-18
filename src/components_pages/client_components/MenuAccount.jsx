@@ -13,7 +13,7 @@ const MenuAccountWrap = styled.div`
   right: 0;
   z-index: 1000; // 장바구니보다 위에 위치
   width: 280px;
-  height: 100px;
+  height: 120px;
   border: 2px solid black;
   background-color: white;
   padding: 3px 7px;
@@ -45,6 +45,7 @@ export default function MenuAccount() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userName = useSelector((state) => state.user.userName);
+  const userPoints = useSelector((state) => state.user.userPoints);
 
   // 로그아웃
   const logoutUser = () => {
@@ -59,6 +60,7 @@ export default function MenuAccount() {
   return (
     <MenuAccountWrap>
       <ContentTitle>{userName} 님, 환영합니다!</ContentTitle>
+      <ContentTitle>Point : {userPoints}p</ContentTitle>
       <Content
         onClick={() => {
           dispatch(clickMenu());

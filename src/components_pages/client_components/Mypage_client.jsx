@@ -134,7 +134,7 @@ export default function Mypage_client() {
                 onClick={() => navigate('/mypage/editInfo')}
                 className="shopmain_profile"
               >
-                <p>회원정보 수정</p>
+                <p>회원 정보 수정</p>
                 <span className="material-symbols-outlined">person</span>
               </div>
             </div>
