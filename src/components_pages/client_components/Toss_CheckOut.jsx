@@ -16,11 +16,29 @@ import { useLocation } from 'react-router-dom';
 const PaymentBOX = styled.div`
   position: relative;
   margin: 0px auto;
-  top: 200px;
+  top: 150px;
   /* background-color: aqua; */
   width: 50vw;
-  border: 1px solid black;
-  padding: 20px;
+  height: 48vh;
+  border: 2px solid black;
+  padding: 30px;
+
+  button {
+    background-color: black;
+    margin-left: 20px;
+    width: 750px;
+    padding: 10px 40px;
+    border: 1px solid black;
+    border-radius: 50px;
+    font-size: 14px;
+    color: white;
+    transition: all 0.3s;
+
+    &:hover {
+      background-color: white;
+      color: black;
+    }
+  }
 `;
 
 const selector = '#payment-widget';
