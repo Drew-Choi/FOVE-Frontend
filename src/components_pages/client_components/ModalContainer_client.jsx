@@ -163,10 +163,7 @@ export default function ModalContainer_client({ handleCloseModa2 }) {
                 <button onClick={handleCloseModa2}>CLOSE</button>
                 <div className="size-detail">
                   <div className="size_img_wrap">
-                    <img
-                      src="./images/size_beanie.svg"
-                      alt="beanie size artwork"
-                    />
+                    <img src="#" alt="beanie size artwork" />
                   </div>
                   <div className="middle_line"></div>
                   <div className="size_os_wrap">
