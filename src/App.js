@@ -34,8 +34,8 @@ import Store_NewItems from './components_pages/client_components/Store_NewItems'
 
 function App() {
   const isLogin = useSelector((state) => state.user.isLogin);
-  const isAdmin = useSelector((state) => state.user.isAdmin);
-  const reduxName = useSelector((state) => state.user.userName);
+  // const isAdmin = useSelector((state) => state.user.isAdmin);
+  // const reduxName = useSelector((state) => state.user.userName);
   const dispatch = useDispatch();
 
   // App 시작 시, 브라우저 로컬 스토리지에 저장 되어 있는 토큰이 있는지를 확인 후,

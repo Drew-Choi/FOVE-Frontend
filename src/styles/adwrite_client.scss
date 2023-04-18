@@ -20,41 +20,66 @@
     padding-left: 13px;
     border: 1px solid black;
   }
+
+  // 우편번호 부분 SCSS
+  .adress_wrap {
+    .postcode_wrap {
+      .postcode_input {
+        width: 574px;
+        height: 40px;
+        margin-right: 17px;
+        margin-left: -0.5px;
+      }
+      .postcode_btn {
+        width: 310px;
+        height: 40px;
+        border: 1px solid black;
+        background-color: white;
+        color: rgb(118, 118, 118);
+        font-size: 12px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background-color: #9797977a;
+          color: black;
+        }
+      }
+    }
   }
+}
 
-  .address_mom_wrap {
-    display: flex;
-    justify-content: center;
+.address_mom_wrap {
+  display: flex;
+  justify-content: center;
 
-    .adress_wrap {
-    width: 100%;  
-  
-   .postcode_input {
+  .adress_wrap {
+    width: 100%;
+
+    .postcode_input {
       width: 574px;
       height: 40px;
       margin-right: 17px;
       margin-left: -0.5px;
-     }
+    }
 
-  .postcode_btn {
-    width: 310px;
-    height: 40px;
-    border: 1px solid black;
-    background-color: white;
-    color: rgb(118, 118, 118);
-    font-size: 12px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    .postcode_btn {
+      width: 310px;
+      height: 40px;
+      border: 1px solid black;
+      background-color: white;
+      color: rgb(118, 118, 118);
+      font-size: 12px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
 
-    &:hover {
-      background-color: #9797977a;
-      color: black;
+      &:hover {
+        background-color: #9797977a;
+        color: black;
+      }
+    }
   }
 }
-}
-}
-
-
 
 .ad_mom {
   display: flex;
@@ -78,20 +103,19 @@
     border: 2px solid black;
     border-radius: 60px;
     line-height: 37px;
-    
+
     &:hover {
       background-color: rgba(0, 0, 0, 0.683);
       border-style: none;
       color: white;
     }
   }
-
 }
 
 .phone-number {
   display: flex;
   justify-content: center;
-  align-items: center;  
+  align-items: center;
 
   .phone_select {
     width: 200px;
@@ -106,23 +130,20 @@
     font-weight: bold;
     margin: 5px;
   }
-  }
+}
 
+input[type='tel'] {
+  width: 323px;
+  padding: 13px;
+  border: 1px solid black;
+  font-size: 16px;
+  outline: none;
+}
 
-  input[type="tel"] {
-    width: 323px;
-    padding: 13px;
-    border: 1px solid black;
-    font-size: 16px;
-    outline: none;
-  }
-
-
-
-  .phone-number {
-    justify-content: center;
-    align-items: center;
-    margin-bottom: -22px;
+.phone-number {
+  justify-content: center;
+  align-items: center;
+  margin-bottom: -22px;
 
   .phone_select {
     width: 200px;
@@ -137,37 +158,35 @@
     font-weight: bold;
     margin: 5px;
   }
-  }
+}
 
-  .cell-phone-number {
-    display: flex;
-    justify-content: center;
-    align-items: center;  
-    
-    .cellphone_select {
-      width: 200px;
-      height: 40px;
-      font-size: 14px;
-      margin-bottom: 16px;
-      border: 1px solid black;
-      margin-right: 6px;
+.cell-phone-number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .cellphone_select {
+    width: 200px;
+    height: 40px;
+    font-size: 14px;
+    margin-bottom: 16px;
+    border: 1px solid black;
+    margin-right: 6px;
   }
 
   span {
     font-weight: bold;
     margin: 5px;
   }
-  
 
-    input[type="cell"] {
-      width: 323px;
-      padding: 13px;
-      border: 1px solid black;
-      font-size: 16px;
-      outline: none;
-    }
+  input[type='cell'] {
+    width: 323px;
+    padding: 13px;
+    border: 1px solid black;
+    font-size: 16px;
+    outline: none;
+  }
 }
-  
 
 .caution {
   position: relative;
@@ -175,16 +194,15 @@
   height: 300px;
   margin-left: 360px;
 
-.ship_caution {
-  position: absolute;
-  display: block;
-  padding-top: 70px;
-  font-size: 13px;
-  text-align: left;
-  
-  
-  .shipad_caution {
-    font-weight: bold;
+  .ship_caution {
+    position: absolute;
+    display: block;
+    padding-top: 70px;
+    font-size: 13px;
+    text-align: left;
+
+    .shipad_caution {
+      font-weight: bold;
+    }
   }
-}
 }
