@@ -31,6 +31,7 @@ import EditInfo_client from './components_pages/client_components/EditInfo_clien
 import ProductList_admin from './components_pages/admin_components/ProductList_admin';
 import OrderList_client from './components_pages/client_components/OrderList_client';
 import Store_NewItems from './components_pages/client_components/Store_NewItems';
+import OrderList_admin from './components_pages/admin_components/OrderList_admin';
 
 function App() {
   const isLogin = useSelector((state) => state.user.isLogin);
@@ -153,6 +154,7 @@ function App() {
         </Route>
 
         {/* admin 영역 */}
+
         <Route
           path="/admin"
           element={!isAdmin ? <Error404 /> : isAdmin && <Admin_main />}
@@ -168,6 +170,7 @@ function App() {
             path="list"
             element={!isAdmin ? <Error404 /> : isAdmin && <ProductList_admin />}
           />
+
         </Route>
         <Route path="*" element={<Error404 />} />
       </Routes>

@@ -4,9 +4,9 @@
   // background-color: rgb(255, 208, 208);
   position: relative;
   width: 100vw;
-  height: 1870px;
-  
-  .order_title{
+  height: 2000px;
+
+  .order_title {
     text-align: center;
   }
 
@@ -16,7 +16,7 @@
     width: 50vw;
     height: 120px;
     border: 0.1px solid black;
-    margin-left:auto;
+    margin-left: auto;
     margin-right: auto;
     margin-top: 20px;
     padding: 20px;
@@ -44,24 +44,23 @@
       margin-left: 60px;
     }
 
-      .member_point {
-        display: inline-block;
-        font-weight: 700;
-      }
+    .member_point {
+      display: inline-block;
+      font-weight: 700;
+    }
 
-      .member_deposit {
-        display: inline-block;
-        font-weight: 700;
-      }
+    .member_deposit {
+      display: inline-block;
+      font-weight: 700;
+    }
 
-      .member_coupon {
-        display: inline-block;
-        font-weight: 700;
-      }
+    .member_coupon {
+      display: inline-block;
+      font-weight: 700;
+    }
   }
 
-
-  .order_product_title{
+  .order_product_title {
     font-size: 15px;
     position: relative;
     left: 420px;
@@ -80,7 +79,6 @@
     border-bottom: 0.5px solid black;
 
     .individualCopy_layout {
-
       // background-color: aqua;
       border-bottom: 1px solid rgb(185, 185, 185);
       position: relative;
@@ -90,55 +88,54 @@
       margin-left: auto;
       margin-right: auto;
 
-    .order_pdIMG {
- 
-      position: relative;
-      width: 130px;
-      // border: 0.5px solid black;
-      top: 10px;
-      height: 130px;
-      left: 20px;
-      background-size: cover;
-      background-position: center;
-    }
-    
-    .order_pd_info {
-      position: relative;
-      width:250px;
-      bottom: 120px;
-      left: 180px;
-      font-size: 12px;
-      font-weight: 500;
+      .order_pdIMG {
+        position: relative;
+        width: 130px;
+        // border: 0.5px solid black;
+        top: 10px;
+        height: 130px;
+        left: 20px;
+        background-size: cover;
+        background-position: center;
+      }
 
-      .order_product_Name{
-       margin: 0;
-       margin-bottom: 13px;
-       font-weight: bolder;
-      }
-      .order_product_price{
-        margin: 0;
-      }
-      .order_product_size{
-        margin: 0;
+      .order_pd_info {
+        position: relative;
+        width: 250px;
+        bottom: 120px;
+        left: 180px;
         font-size: 12px;
-      }
-      .order_product_color{
-        margin: 0;
-        font-size: 12px;
-      }
-      .order_product_quantity{
-        padding-top: 10px;
-        margin: 0;
-        font-size: 12px;
-      }
-      .order_product_unitSumPrice {
-        margin: 0;
-        span{
-          font-weight: 800;
+        font-weight: 500;
+
+        .order_product_Name {
+          margin: 0;
+          margin-bottom: 13px;
+          font-weight: bolder;
+        }
+        .order_product_price {
+          margin: 0;
+        }
+        .order_product_size {
+          margin: 0;
+          font-size: 12px;
+        }
+        .order_product_color {
+          margin: 0;
+          font-size: 12px;
+        }
+        .order_product_quantity {
+          padding-top: 10px;
+          margin: 0;
+          font-size: 12px;
+        }
+        .order_product_unitSumPrice {
+          margin: 0;
+          span {
+            font-weight: 800;
+          }
         }
       }
     }
-   }
   }
 
   .sangAh {
@@ -149,7 +146,7 @@
     margin-right: auto;
     // background-color: bisque;
 
-    .ship_input_title{
+    .ship_input_title {
       font-size: 15px;
     }
 
@@ -160,7 +157,7 @@
       // background-color: aqua;
       bottom: 15px;
 
-      .adressCheck{
+      .adressCheck {
         position: relative;
         left: -8px;
         margin: 0px;
@@ -168,7 +165,7 @@
         top: -5px;
         font-size: 13px;
       }
-      
+
       .adressBook {
         position: relative;
         left: 250px;
@@ -181,11 +178,11 @@
         font-size: 12px;
         cursor: pointer;
         transition: background-color 0.3s ease;
-    
+
         &:hover {
           background-color: #6c6c6c7a;
           color: black;
-       }
+        }
       }
 
       p {
@@ -197,29 +194,28 @@
       }
     }
 
-  
-  .information_contain {
-    width: 50vw;
-    // background-color: darkblue;
-    text-align: justify;
-     
-    input.b {
-      position: relative;
-      font-size: 13px;
-      margin-bottom: 20px;
+    .information_contain {
       width: 50vw;
-      height: 35px;
-      border: 1px solid black;
-      padding: 0px 10px;
-    }
-    .code_btn_container {
-      display: flex;
-      flex-wrap:nowrap;
+      // background-color: darkblue;
+      text-align: justify;
 
-      .address{
-        flex: 2;
+      input.b {
+        position: relative;
+        font-size: 13px;
+        margin-bottom: 20px;
+        width: 50vw;
+        height: 35px;
+        border: 1px solid black;
+        padding: 0px 10px;
       }
-      .postCode {
+      .code_btn_container {
+        display: flex;
+        flex-wrap: nowrap;
+
+        .address {
+          flex: 2;
+        }
+        .postCode {
           flex: 1;
           position: relative;
           padding: 0px;
@@ -234,286 +230,277 @@
           &:hover {
             background-color: #6c6c6c7a;
             color: black;
-         }
+          }
+        }
       }
-    }
 
-    .phonNum_contain {
-      display: grid;
-      grid-template-columns: 1fr 20px  1fr  20px  1fr;
-      grid-template-rows: 1fr;
-      gap: 10px;
-
-      .phonNum {
-        font-size: 13px;
-        width: 100%;
-      }
-      .phonNum.last {
-  
-       }
-
-      .numMiners {
-        position: relative;
-        top: 3px;
-        text-align: center;
-      }
-      .select_group2{
-        width: 100%;
-        position: relative;
-        font-size: 13px;
-        padding: 6px 0px;
-        border: 1px solid black;
-        bottom: 15px;
-      }
-      .phonNum.mid{
-  
-      }
-    }
-
-    .email_contain {
-      display: grid;
-      grid-template-columns: 1fr 36px 1fr 40px 1fr;
-      grid-template-rows: 1fr;
-
-      .email_ID{
-        width: 98%;
-      }
-      .emailLogo{
-        position: relative;
-        top: 3px;
-        width: 100%;
-        text-align: center;
-      }
-      .email_selector{
-        width: 101%;
-        position: relative;
-        font-size: 13px;
-        padding: 6px 0px;
-        border: 1px solid black;
-        bottom: 15px;
-      }
-      .email_self{
-        width: 100%;
-        grid-column: 5/5;
-        grid-row: 1/1;
-      }
-    }
-
-    .textAreaClassName {
-      border: 1px solid black;
-      font-size: 13px;
-      width: 100%;
-    }
-
-    .payment_contain {
-      // background-color: beige;
-      width: 50vw;
-      margin-top: 40px;
-
-      .discount_title{
-        font-size: 15px;
-        margin: 0px;
-        margin-bottom: 10px;
-      }
-      .discount_apply{
-        font-size: 13px;
-        margin: 0px;
-        margin-bottom: 5px;
-      }
-      .discount_area{
+      .phonNum_contain {
         display: grid;
-        width: 50vw;
-        grid-template-columns: 1fr 0.1fr;
-        grid-auto-rows: 1fr, 1fr;
+        grid-template-columns: 1fr 20px 1fr 20px 1fr;
+        grid-template-rows: 1fr;
         gap: 10px;
-        margin-bottom: 20px;
 
-        .discount_code{
-          width: 100%;
-          grid-row: 1/2;
-          grid-column: 1/2;
-        }
-        .diicount_code_btn{
-          width: 100%;
-          grid-row: 1/2;
-          grid-column: 2/2;
-          position: relative;
-          padding: 0px;
-          height: 35px;
-          border: 1px solid black;
-          background-color: white;
-          color: rgb(118, 118, 118);
+        .phonNum {
           font-size: 13px;
-          cursor: pointer;
-          transition: background-color 0.3s ease;
-          &:hover {
-            background-color: #6c6c6c7a;
-            color: black;
-         }
-       
-        }
-        .discount_price{
           width: 100%;
-          grid-row: 2/2;
-          grid-column: 1/2;
+        }
+        .phonNum.last {
+        }
+
+        .numMiners {
           position: relative;
-          bottom: 25px;
-          font-size: 11px;
+          top: 3px;
+          text-align: center;
+        }
+        .select_group2 {
+          width: 100%;
+          position: relative;
+          font-size: 13px;
+          padding: 6px 0px;
+          border: 1px solid black;
+          bottom: 15px;
+        }
+        .phonNum.mid {
         }
       }
 
-      .point_title.deposit{
-        font-size: 15px;
-        margin: 0px;
-        margin-bottom: 15px;
-      }
-      .point{
+      .email_contain {
         display: grid;
-        width: 50vw;
-        grid-template-columns: 1fr 0.1fr;
-        grid-auto-rows: 1fr, 1fr, 1fr;
-        gap: 10px;
-        margin-bottom: 35px;
+        grid-template-columns: 1fr 36px 1fr 40px 1fr;
+        grid-template-rows: 1fr;
 
-        .point_apply{
-          width: 100%;
-          grid-row: 1/3;
-          grid-column: 1/2;
+        .email_ID {
+          width: 98%;
         }
-        .diicount_code_btn{
-          width: 100%;
-          grid-row: 1/3;
-          grid-column: 2/2;
+        .emailLogo {
           position: relative;
-          padding: 0px;
-          height: 35px;
-          border: 1px solid black;
-          background-color: white;
-          color: rgb(118, 118, 118);
+          top: 3px;
+          width: 100%;
+          text-align: center;
+        }
+        .email_selector {
+          width: 101%;
+          position: relative;
           font-size: 13px;
-          cursor: pointer;
-          transition: background-color 0.3s ease;
-          &:hover {
-            background-color: #6c6c6c7a;
-            color: black;
-         }
-       
+          padding: 6px 0px;
+          border: 1px solid black;
+          bottom: 15px;
         }
-        .preview_point{
+        .email_self {
           width: 100%;
-          grid-row: 2/3;
-          grid-column: 1/2;
-          position: relative;
-          font-size: 11px;
-        }
-        .point_price_apply{
-          width: 100%;
-          grid-row: 3/3;
-          grid-column: 1/2;
-          position: relative;
-          bottom: 5px;
-          font-size: 11px;
+          grid-column: 5/5;
+          grid-row: 1/1;
         }
       }
 
-      .final_checkout_contain {
-        padding: 20px;
-        width: 50vw;
-        height: 320px;
-        
-        // background-color: aqua;
+      .textAreaClassName {
         border: 1px solid black;
-        font-size: 14px;
+        font-size: 13px;
+        width: 100%;
+      }
 
-        .unit_sum_price {
-          display: flex;
-          justify-content: space-between;
-        }
-        .ship_price{
-          display: flex;
-          justify-content: space-between;
-        }
-        .extra_ship_price {
-          display: flex;
-          justify-content: space-between;
-        }
-        .total_discount{
-          display: flex;
-          justify-content: space-between;
-        }
-        .final_sum{
-          display: flex;
-          flex-wrap: nowrap;
-          justify-content: space-between;
+      .payment_contain {
+        // background-color: beige;
+        width: 50vw;
+        margin-top: 40px;
 
-          p:first-child {
-            font-size: 20px;
-            font-weight: 700;
-          }
-          p:last-child {
-            font-size: 20px;
-            font-weight: 700;
-          }
+        .discount_title {
+          font-size: 15px;
+          margin: 0px;
+          margin-bottom: 10px;
         }
-        .rest_point{
-          font-size: 11px !important;
-          display: flex;
-          justify-content: right;
-          p:first-child {
-            margin: 0px;
-          }
-        }
-
-        p {
-          margin-bottom: 0px;
-        }
-        .a{
+        .discount_apply {
+          font-size: 13px;
+          margin: 0px;
           margin-bottom: 5px;
-          font-size: 13px;
         }
-        
-      }
+        .discount_area {
+          display: grid;
+          width: 50vw;
+          grid-template-columns: 1fr 0.1fr;
+          grid-auto-rows: 1fr, 1fr;
+          gap: 10px;
+          margin-bottom: 20px;
 
-      .btn_order{
-        position: relative;
-        margin: 40px 0px 20px 0px;
-        width: 47.8vw;
-        height: 60px;
-        text-align: center;
+          .discount_code {
+            width: 100%;
+            grid-row: 1/2;
+            grid-column: 1/2;
+          }
+          .diicount_code_btn {
+            width: 100%;
+            grid-row: 1/2;
+            grid-column: 2/2;
+            position: relative;
+            padding: 0px;
+            height: 35px;
+            border: 1px solid black;
+            background-color: white;
+            color: rgb(118, 118, 118);
+            font-size: 13px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            &:hover {
+              background-color: #6c6c6c7a;
+              color: black;
+            }
+          }
+          .discount_price {
+            width: 100%;
+            grid-row: 2/2;
+            grid-column: 1/2;
+            position: relative;
+            bottom: 25px;
+            font-size: 11px;
+          }
+        }
 
-         .order_btn {
-          display: block;
+        .point_title.deposit {
+          font-size: 15px;
+          margin: 0px;
+          margin-bottom: 15px;
+        }
+        .point {
+          display: grid;
+          width: 50vw;
+          grid-template-columns: 1fr 0.1fr;
+          grid-auto-rows: 1fr, 1fr, 1fr;
+          gap: 10px;
+          margin-bottom: 35px;
+
+          .point_apply {
+            width: 100%;
+            grid-row: 1/3;
+            grid-column: 1/2;
+          }
+          .diicount_code_btn {
+            width: 100%;
+            grid-row: 1/3;
+            grid-column: 2/2;
+            position: relative;
+            padding: 0px;
+            height: 35px;
+            border: 1px solid black;
+            background-color: white;
+            color: rgb(118, 118, 118);
+            font-size: 13px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            &:hover {
+              background-color: #6c6c6c7a;
+              color: black;
+            }
+          }
+          .preview_point {
+            width: 100%;
+            grid-row: 2/3;
+            grid-column: 1/2;
+            position: relative;
+            font-size: 11px;
+          }
+          .point_price_apply {
+            width: 100%;
+            grid-row: 3/3;
+            grid-column: 1/2;
+            position: relative;
+            bottom: 5px;
+            font-size: 11px;
+          }
+        }
+
+        .final_checkout_contain {
+          padding: 20px;
+          width: 50vw;
+          height: 320px;
+
+          // background-color: aqua;
+          border: 1px solid black;
+          font-size: 14px;
+
+          .unit_sum_price {
+            display: flex;
+            justify-content: space-between;
+          }
+          .ship_price {
+            display: flex;
+            justify-content: space-between;
+          }
+          .extra_ship_price {
+            display: flex;
+            justify-content: space-between;
+          }
+          .total_discount {
+            display: flex;
+            justify-content: space-between;
+          }
+          .final_sum {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+
+            p:first-child {
+              font-size: 20px;
+              font-weight: 700;
+            }
+            p:last-child {
+              font-size: 20px;
+              font-weight: 700;
+            }
+          }
+          .rest_point {
+            font-size: 11px !important;
+            display: flex;
+            justify-content: right;
+            p:first-child {
+              margin: 0px;
+            }
+          }
+
+          p {
+            margin-bottom: 0px;
+          }
+          .a {
+            margin-bottom: 5px;
+            font-size: 13px;
+          }
+        }
+
+        .btn_order {
           position: relative;
-          border: 2px solid black;
-          border-radius: 60px;
-          &:hover {
-            background-color: rgba(0, 0, 0, 0.683);
-            border-style: none;
-            color: white;
+          margin: 40px 0px 20px 0px;
+          width: 47.8vw;
+          height: 60px;
+          text-align: center;
+
+          .order_btn {
+            display: block;
+            position: relative;
+            border: 2px solid black;
+            border-radius: 60px;
+            &:hover {
+              background-color: rgba(0, 0, 0, 0.683);
+              border-style: none;
+              color: white;
+            }
           }
         }
       }
-     
     }
-
   }
-  
-  }
- }
+}
 
-
- .resetMessage {
+.resetMessage {
   margin-top: 50px;
   font-size: 18px;
   text-align: center;
- }
+}
 
- .model_checkout{
+.model_checkout {
   position: relative;
-  bottom:100px;
- }
+  bottom: 100px;
+}
 
- .orderModalOff {
+.orderModalOff {
   display: none;
   background-color: white;
   position: fixed;
@@ -527,9 +514,9 @@
   z-index: 5;
   right: 50%;
   transform: translateX(50%);
- }
+}
 
- .orderModalOff.On{
+.orderModalOff.On {
   display: block;
   background-color: white;
   position: fixed;
@@ -543,4 +530,4 @@
   z-index: 5;
   right: 50%;
   transform: translateX(50%);
- }
+}
