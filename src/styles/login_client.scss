@@ -29,15 +29,25 @@
     margin-top: 20px;
     color: white;
     background-color: black;
-    border: 2px solid black;
+    border: 1px solid black;
     border-radius: 50px;
     // box-shadow: 5px 5px 5px lightgray;
+    transition: 0.5s all;
+
+    &:hover {
+      background-color: white;
+      color: black;
+    }
   }
 
   .login_btn.white {
-    // color: black;
     background-color: white;
     margin-top: 10px;
+    transition: 1s all;
+
+    &:hover {
+      border: 2px solid black;
+    }
   }
 
   .login_kakao {
