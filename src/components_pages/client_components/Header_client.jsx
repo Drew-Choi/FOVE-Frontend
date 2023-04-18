@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../../styles/header_client.scss';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { importdb } from '../../store/modules/cart';
@@ -28,6 +28,9 @@ export default function Header_client() {
     state.user.userID === 0 ? 0 : state.user.userID,
   );
 
+  const location = useLocation();
+  const currentURL = location.pathname;
+
   const cartDataReq = async () => {
     try {
       const cartDataGet = await axios.post(
@@ -46,7 +49,7 @@ export default function Header_client() {
 
   useEffect(() => {
     cartDataReq();
-  }, []);
+  });
 
   //모달을 위한 state
   const offonKey = useSelector((state) => state.cartmodal.offon);
@@ -86,7 +89,9 @@ export default function Header_client() {
 
         {/* 관리자 페이지 이동 버튼 */}
         {isAdmin && (
-          <button onClick={() => navigate('/admin')}>👩‍💻 관리자 페이지</button>
+          <button onClick={() => navigate('/admin/register')}>
+            👩‍💻 관리자 페이지
+          </button>
         )}
 
         <ul id="cate">
@@ -96,29 +101,32 @@ export default function Header_client() {
           <li id="cate_li">
             <p onClick={() => navigate('/store')}>STORE</p>
           </li>
-          <li id="cate_li">
+          {/* <li id="cate_li">
             <p onClick={() => navigate('#')}>COLLECTION</p>
-          </li>
+          </li> */}
         </ul>
         <ul id="cate2">
           <li id="search_container">
             <input
               className={`searchInput ${searchOnOff}`}
               type="text"
-              placeholder={'검색어를 입력해 주세요'}
+              placeholder={empty}
               onKeyDown={(e) => handleKeyPress(e)}
-              onChange={(e) => (e.target.value ? setEmpty('상품 검색') : null)}
             />
-            <span
-              className="material-symbols-outlined search"
-              onClick={(cur) =>
-                searchOnOff === 'off'
-                  ? setSearchOnOff('on')
-                  : setSearchOnOff('off')
-              }
-            >
-              search
-            </span>
+            {currentURL === '/' ? (
+              <></>
+            ) : (
+              <span
+                className="material-symbols-outlined search"
+                onClick={(cur) =>
+                  searchOnOff === 'off'
+                    ? setSearchOnOff('on')
+                    : setSearchOnOff('off')
+                }
+              >
+                search
+              </span>
+            )}
           </li>
           <li id="cate_li2">
             {isLogin ? (
