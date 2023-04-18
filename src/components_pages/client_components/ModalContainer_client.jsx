@@ -68,6 +68,13 @@ const ModalView = styled.div.attrs((props) => ({
     z-index: 1;
   }
 
+  .size_img_wrap {
+    background-color: orange;
+    img {
+      width: 120px;
+    }
+  }
+
   .size_os_wrap {
     display: grid;
     grid-template-columns: 200px 200px;
@@ -152,9 +159,6 @@ export default function ModalContainer_client({ handleCloseModa2 }) {
   return (
     <>
       <ModalContainer_client1>
-        <ModalBtn onClick={openModalHandler}>
-          {isOpen ? 'Opened!' : 'Open Modal'}
-        </ModalBtn>
         {isOpen && (
           <ModalBackdrop onClick={openModalHandler}>
             <ModalView onClick={(e) => e.stopPropagation()}>
@@ -163,7 +167,7 @@ export default function ModalContainer_client({ handleCloseModa2 }) {
                 <button onClick={handleCloseModa2}>CLOSE</button>
                 <div className="size-detail">
                   <div className="size_img_wrap">
-                    <img src="#" alt="beanie size artwork" />
+                    <img src="/images/bnsize.jpg" alt="beanie size artwork" />
                   </div>
                   <div className="middle_line"></div>
                   <div className="size_os_wrap">
@@ -193,7 +197,7 @@ export default function ModalContainer_client({ handleCloseModa2 }) {
                       className="inch"
                       onClick={() => navigate('/sizemodal_inch')}
                     >
-                      INCHES
+                      CENTIMETERS
                     </a>
                   </div>
                 </div>

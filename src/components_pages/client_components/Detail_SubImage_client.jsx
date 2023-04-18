@@ -50,7 +50,7 @@ const FirstDot = styled.div`
   left: 0px;
   width: 50px;
   height: 2px;
-  background-color: black;
+  /* background-color: black; */
 `;
 
 const SecondDot = styled.div`

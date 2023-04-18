@@ -31,6 +31,7 @@ const ModalView = styled.div.attrs((props) => ({
 }))`
   display: flex;
   position: absolute;
+  z-index: 5;
   grid-template-columns: repeat(2, 1fr);
   gap: 3rem;
   padding: 0 3rem;
@@ -58,14 +59,23 @@ const ModalView = styled.div.attrs((props) => ({
     text-decoration: underline;
     border: none;
     font-weight: bold;
+    margin-left: 70px;
   }
 
   .middle_line {
     position: fixed;
-    width: 432.66px;
+    width: 500px;
     height: 53px;
     border-bottom: 1.5px solid darkgray;
     z-index: 1;
+  }
+
+  .size_img_wrap {
+    position: relative;
+    z-index: 5;
+    img {
+      width: 500px;
+    }
   }
 
   .size_os_wrap {
@@ -95,7 +105,7 @@ const ModalView = styled.div.attrs((props) => ({
       display: grid;
       gap: 20px;
       box-sizing: border-box;
-      margin-left: 90px;
+      margin-left: 150px;
 
       /* OS */
       .box3_os {
@@ -165,7 +175,7 @@ export default function ModalContainer_client2({ handleCloseModa2 }) {
                 <button onClick={handleCloseModa2}>CLOSE</button>
                 <div className="size-detail">
                   <div className="size_img_wrap">
-                    <img src="#" alt="beanie size artwork" />
+                    <img src="/images/bnsize.jpg" alt="beanie size artwork" />
                   </div>
                   <div className="middle_line"></div>
                   <div className="size_os_wrap">
@@ -182,20 +192,19 @@ export default function ModalContainer_client2({ handleCloseModa2 }) {
                         <span className="box3_os">OS</span>
                       </div>
                       <div className="size_box4">
-                        <span className="box4_os">6.3</span>
+                        <span className="box4_os">16</span>
                       </div>
                     </div>
                   </div>
                   <div className="cen_inc">
-                    <a
+                    {/*<a
                       className="centi"
                       onClick={() => navigate('/sizemodal_cm')}
                     >
                       CENTIMETERS
-                    </a>
-                    /
+                    </a> */}
                     <a className="inch" href="#">
-                      INCHES
+                      CENTIMETERS
                     </a>
                   </div>
                 </div>

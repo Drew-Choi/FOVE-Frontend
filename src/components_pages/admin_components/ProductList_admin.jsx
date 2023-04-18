@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { relative } from 'path-browserify';
-import '../../styles/productList_admin.scss';
 
 import { useEffect, useRef, useState } from 'react';
 axios;
