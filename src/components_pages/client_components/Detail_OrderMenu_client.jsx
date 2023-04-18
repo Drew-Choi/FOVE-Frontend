@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { add } from '../../store/modules/cart';
@@ -9,6 +9,7 @@ import GoogleIcon from './GoogleIcon';
 import Shipping_client from './Shipping_client';
 import ModalContainer_client from './ModalContainer_client';
 import ModalContainer_client2 from './ModalContainer_client2';
+import '../../styles/detail_orderMenu.scss';
 
 const Detail_Order = styled.div`
   position: absolute;
@@ -217,7 +218,7 @@ export default function Detail_OrderMenu_client({
           productName: datas.productName,
           img: datas.img[0],
           price: datas.price,
-          size: 'OS',
+          size: sizeCheck,
           color: datas.color,
           quantity: count,
           unitSumPrice: datas.price * count,
@@ -258,12 +259,12 @@ export default function Detail_OrderMenu_client({
   const [count, setCount] = useState(1);
 
   //싱글상품 데이터
-  const singleDataSum = (datas, count) => {
+  const singleDataSum = (datas, count, sizeCheck) => {
     let sumData = {
       productName: datas.productName,
       price: datas.price,
       quantity: count,
-      size: datas.size,
+      size: sizeCheck,
       totalPrice: datas.price * count,
       img: datas.img[0],
       color: datas.color,
@@ -301,7 +302,7 @@ export default function Detail_OrderMenu_client({
       return navigate(`/login`);
     }
 
-    await dispatch(single(singleDataSum(datas, count)));
+    await dispatch(single(singleDataSum(datas, count, sizeCheck)));
     navigate(`/store/order`);
   };
 
@@ -312,6 +313,43 @@ export default function Detail_OrderMenu_client({
 
   const handleCloseModa2 = () => {
     setBeanieSizeOn(false);
+  };
+
+  //상품 사이즈 첵
+  const [sizeCheck, setSizeCheck] = useState('');
+  const [onOS, setOnOS] = useState('on');
+  const [onS, setOnS] = useState('');
+  const [onM, setOnM] = useState('');
+  const [onL, setOnL] = useState('');
+
+  const handle = (e) => {
+    if (e.target.value === 'OS') {
+      setOnOS('on');
+      setSizeCheck('OS');
+    } else {
+      setOnOS('');
+    }
+
+    if (e.target.value === 'S') {
+      setOnS('on');
+      setSizeCheck('S');
+    } else {
+      setOnS('');
+    }
+
+    if (e.target.value === 'M') {
+      setOnM('on');
+      setSizeCheck('M');
+    } else {
+      setOnM('');
+    }
+
+    if (e.target.value === 'L') {
+      setOnL('on');
+      setSizeCheck('L');
+    } else {
+      setOnL('');
+    }
   };
 
   return (
@@ -327,10 +365,43 @@ export default function Detail_OrderMenu_client({
 
       <Title>{productName}</Title>
       <InfoContain>
-        <SizeBTN>OS</SizeBTN>
-        <SizeBTN>S</SizeBTN>
-        <SizeBTN>M</SizeBTN>
-        <SizeBTN>L</SizeBTN>
+        {datas.size.OS > 0 ? (
+          <SizeBTN
+            className={`sizeBTN ${onOS}`}
+            onClick={(e) => handle(e)}
+            value="OS"
+          >
+            OS
+          </SizeBTN>
+        ) : null}
+        {datas.size.S > 0 ? (
+          <SizeBTN
+            className={`sizeBTN ${onS}`}
+            onClick={(e) => handle(e)}
+            value="S"
+          >
+            S
+          </SizeBTN>
+        ) : null}
+        {datas.size.M > 0 ? (
+          <SizeBTN
+            className={`sizeBTN ${onM}`}
+            onClick={(e) => handle(e)}
+            value="M"
+          >
+            M
+          </SizeBTN>
+        ) : null}
+        {datas.size.L > 0 ? (
+          <SizeBTN
+            className={`sizeBTN ${onL}`}
+            onClick={(e) => handle(e)}
+            value="L"
+          >
+            L
+          </SizeBTN>
+        ) : null}
+
         <DetailDesc>{detail}</DetailDesc>
         <SizeFitCheck>
           {/* SIZE & FIT 모달창 '비니'만 만들어놨는데 카테고리 별로 다르게 떠야함 */}

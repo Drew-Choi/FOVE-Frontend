@@ -7,6 +7,11 @@ import '../../styles/login_client.scss';
 import { importdb } from '../../store/modules/cart';
 
 export default function Login_client() {
+  //유저정보 state
+  const userID = useSelector((state) =>
+    state.user.userID === 0 ? 0 : state.user.userID,
+  );
+
   const loginIdInput = useRef();
   const loginPwInput = useRef();
 
@@ -16,8 +21,9 @@ export default function Login_client() {
   const cartDataReq = async () => {
     try {
       const cartDataGet = await axios.post(
-        `http://localhost:4000/cart/list/${loginIdInput}`,
+        `http://localhost:4000/cart/list/${userID}`,
       );
+      console.log(userID);
       if (cartDataGet.status === 200) {
         await dispatch(importdb(cartDataGet.data.product));
       } else {
