@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { relative } from 'path-browserify';
+// import '../../styles/productList_admin.scss';
 
 import { useEffect, useRef, useState } from 'react';
 axios;
@@ -7,18 +8,6 @@ import { useMemo } from 'react';
 import BTN_black_nomal_comp from '../../styles/BTN_black_nomal_comp';
 import '../../styles/productRegister_admin.scss';
 import styled from 'styled-components';
-
-const Preview = styled.div`
-  position: relative;
-  display: block;
-  width: 150px;
-  height: 150px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-image: url(${(props) => props.thumbnail});
-  cursor: pointer;
-`;
 
 export default function ProductList_admin() {
   const [data, setData] = useState([]);
@@ -217,6 +206,8 @@ export default function ProductList_admin() {
           'http://localhost:4000/admin/productlist',
         );
 
+        console.log('$$$$$$$$$$$$$$$$$$', response.data);
+
         setData(response.data);
         setDisa(new Array(response.data.length).fill(true));
       } catch (error) {
@@ -384,14 +375,19 @@ export default function ProductList_admin() {
               name={name}
               placeholder={item?.price}
               style={{ fontSize: '12px' }}
+
               disabled={disa[index]}
-            />{' '}
-            <button onClick={() => productUpdate(index)}>수정</button>{' '}
-            <button
-              onClick={() => {
-                const result = updateSubmit(item?._id, index);
-                alert(item._id);
+            /> */}
+            {/* <img
+              style={{ width: '60px' }}
+              src={`http://localhost:4000/uploads/${item.img[1]}`}
+            ></img>{' '} */}
+            {/* <input
+              type="file"
+              onChange={() => {
+                handleSecondImageChange;
               }}
+
             >
               {' '}
               완료
@@ -415,6 +411,7 @@ export default function ProductList_admin() {
   }
   {
     /* <div>
+
               {showImage}
               <p>파일업로드</p>&nbsp;&nbsp;&nbsp;&nbsp;
               <form> */
