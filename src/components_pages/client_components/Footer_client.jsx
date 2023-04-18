@@ -32,8 +32,8 @@ export default function Footer_client() {
         </li>
         <li id="foot_info2">
           <p>
-            TEAM MEMBER. CHOI DREW, KIM SUNG HYUN, SHIN SANG AH, SONG MIN SEON,
-            PARK SUNG HEE
+            TEAM MEMBER. CHOI DREW, KIM SEONG HYEON, SHIN SANG AH, SONG MIN
+            SEON, PARK SUNG HEE
           </p>
         </li>
         <li id="foot_info2">

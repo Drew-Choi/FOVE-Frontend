@@ -29,6 +29,7 @@ import { keepLogin } from './store/modules/user';
 import RegisterSuccess_client from './components_pages/client_components/RegisterSuccess_client';
 import EditInfo_client from './components_pages/client_components/EditInfo_client';
 import ProductList_admin from './components_pages/admin_components/ProductList_admin';
+import OrderList_client from './components_pages/client_components/OrderList_client';
 import Store_NewItems from './components_pages/client_components/Store_NewItems';
 
 function App() {
@@ -129,11 +130,19 @@ function App() {
             path="/mypage/editInfo"
             element={isLogin ? <EditInfo_client /> : <Login_client />}
           />
+
+          {/* 주문조회 */}
+          <Route
+            path="/mypage/orderlist"
+            element={isLogin ? <OrderList_client /> : <OrderList_client />}
+          />
+
           {/* 배송 주소록 목록 */}
           <Route
             path="/mypage/checkAddress"
             element={isLogin ? <AdSubmit_client /> : <Login_client />}
           />
+
           {/* 배송 주소지 수정 */}
           <Route
             path="/mypage/editAddress"

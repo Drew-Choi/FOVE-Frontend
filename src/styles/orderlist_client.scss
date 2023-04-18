@@ -1,0 +1,85 @@
+.titleArea {
+  width: 100%;
+  text-align: center;
+
+  h2 {
+    font-weight: bold;
+    font-size: 14px;
+  }
+}
+
+.account_inner {
+  position: relative;
+  width: 100%;
+  align-items: center;
+  font-size: 14px;
+
+  .orderstatus1 {
+    display: flex;
+    gap: 20px;
+    margin-left:360px;
+    margin-bottom: 30px;
+    font-size: 14px;
+    color: black;
+}
+
+}
+
+.orderlist_wrap {
+  padding: 0;
+  margin: 0;
+  
+
+  .orderlist_info {
+  display: flex;
+  width: 1000px;
+  margin-left: 360px;
+  border: 1px solid black;
+  height: auto;
+  padding: 20px;
+
+  .ol_des {
+    position: relative;
+    width: 900px;
+    margin-left: 30px;
+
+    .olimg {
+      border: 1px solid black;
+      width: 120px;
+      height: 120px;
+      margin-bottom: 10px;
+    }
+
+    .olthumb {
+      margin-left: 0;
+      font-size: 14px
+    }
+
+    .pdnameprice {
+      position: absolute;
+      top: 38px;
+      left: 140px;
+    }
+
+    .status {
+      position: absolute;
+      font-size: 14px;
+    }
+
+    button {
+      border: 1px solid black;
+      font-size: 14px;
+      padding: 5px 10px;
+      background-color: white;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: 0.2s ease;
+
+      &:hover {
+        background-color: black;
+        color:white;
+      }
+    }
+  }}
+
+}
