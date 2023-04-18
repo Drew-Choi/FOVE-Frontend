@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { keepLogin } from '../../store/modules/user';
+import { keepLogin, logout } from '../../store/modules/user';
 
 const EditInfoWrap = styled.div`
   position: relative;
@@ -193,6 +193,34 @@ export default function EditInfo_client() {
   };
 
   // 회원 정보 삭제
+  const deleteUserInfo = async () => {
+    try {
+      // confirm 창으로 탈퇴 여부 묻기
+      if (
+        window.confirm(
+          '회원 탈퇴 시, FOVE 에 등록된 모든 개인정보와 적립 포인트는\n삭제 처리되며 복구되지 않습니다.\n또한, 동일 아이디(이메일)로 재가입하실 수 없습니다.\n탈퇴하시겠습니까?',
+        )
+      ) {
+        const resInfo = await axios.post(
+          'http://localhost:4000/mypage/deleteInfo',
+          {
+            id: inputId.current.value,
+          },
+        );
+
+        alert(resInfo.data);
+
+        // 로그아웃 처리
+        window.localStorage.clear(); // 로컬 스토리지의 토큰 삭제
+        dispatch(logout()); // 리덕스 로그아웃 처리
+        navigate(`/`); // 홈으로 이동
+      } else {
+        return;
+      }
+    } catch (err) {
+      alert(err);
+    }
+  };
 
   return (
     <EditInfoWrap>
@@ -237,7 +265,7 @@ export default function EditInfo_client() {
       <ButtonBK onClick={editUserInfo}>회원 정보 수정</ButtonBK>{' '}
       <ButtonWT onClick={() => navigate(-1)}>취소</ButtonWT>
       <br />
-      <ButtonRED onClick={() => navigate(`/mypage`)}>회원 탈퇴</ButtonRED>
+      <ButtonRED onClick={deleteUserInfo}>회원 탈퇴</ButtonRED>
     </EditInfoWrap>
   );
 }
