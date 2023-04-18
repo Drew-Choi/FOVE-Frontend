@@ -12,20 +12,20 @@ import ModalContainer_client2 from './ModalContainer_client2';
 import '../../styles/detail_orderMenu.scss';
 
 const Detail_Order = styled.div`
+  /* background-color: aqua; */
   position: absolute;
-  top: 40px;
-  right: 150px;
-  /* box-shadow: 0.5px 0.5px 2px 2px rgba(58, 58, 58, 0.2); */
+  top: 24px;
+  right: 170px;
   border-radius: 10px;
   border: 1px solid black;
   width: 300px;
-  height: 550px;
+  height: 600px;
   z-index: 3;
 `;
 
 const Title = styled.p`
   position: relative;
-  top: 50px;
+  top: 35px;
   text-align: center;
   font-size: 25px;
   font-weight: 700;
@@ -34,14 +34,14 @@ const Title = styled.p`
 
 const InfoContain = styled.div`
   position: absolute;
-  top: 120px;
+  top: 170px;
   left: 51px;
 `;
 
 const SizeBTN = styled.button`
   all: unset;
   position: relative;
-  bottom: 10px;
+  bottom: 28px;
   /* background-color: #000000; */
   color: black;
   border: 1.5px solid black;
@@ -51,21 +51,20 @@ const SizeBTN = styled.button`
   cursor: pointer;
   border-radius: 15px;
   transition: 0.2s ease;
-  cursor: pointer;
+
   &:hover {
-    background-color: black;
-    color: white;
+    background-color: #cacaca5b;
+    color: black;
   }
   &:active {
-    background-color: black;
+    background-color: #eeeeee56;
     color: white;
     transform: scale(1.2);
   }
 `;
 
 const SizeFitCheck = styled.p`
-  /* padding: 0px; */
-  /* margin-top: 20px; */
+  /* background-color: red; */
   font-size: 13px;
   font-weight: bold;
   text-decoration: underline;
@@ -87,8 +86,11 @@ const SizeFitCheck = styled.p`
 `;
 
 const DetailDesc = styled.div`
-  margin-bottom: 70px;
-  font-size: 15px;
+  /* background-color: blue; */
+  width: 200px;
+  height: 100px;
+  margin-bottom: 30px;
+  font-size: 13px;
   font-weight: 500p;
   letter-spacing: 1px;
 `;
@@ -97,19 +99,23 @@ const AddCart = styled.button`
   position: absolute;
   all: unset;
   border: 2px solid black;
-  padding: 10px 20px;
-  border-radius: 5px;
+  padding: 8px 45px;
+  border-radius: 50px;
   margin-bottom: 10px;
   margin-left: 45px;
-  letter-spacing: 2px;
   font-weight: 500;
-  color: white;
-  background-color: black;
-  transition: 0.2s ease;
+  color: black;
+  transition: transform 1s ease;
   cursor: pointer;
+
+  &:hover {
+    background-color: black;
+    color: white;
+  }
+
   &:active {
-    background-color: white;
-    color: black;
+    background-color: black;
+    color: white;
   }
 `;
 
@@ -117,15 +123,20 @@ const Buy = styled.button`
   position: absolute;
   all: unset;
   border: 2px solid black;
-  padding: 10px 66px;
-  border-radius: 5px;
-  margin-bottom: 20px;
-  letter-spacing: 2px;
+  padding: 8px 85px;
+  border-radius: 50px;
+  margin-bottom: 25px;
+  letter-spacing: 1px;
   font-weight: 600;
   color: white;
   background-color: black;
   transition: 0.2s ease;
   cursor: pointer;
+
+  &:hover {
+    background: white;
+    color: black;
+  }
   &:active {
     background-color: white;
     color: black;
@@ -135,17 +146,19 @@ const Buy = styled.button`
 const CartIcon = styled.span`
   font-size: 30px;
   position: absolute;
+  margin-bottom: -5px;
   bottom: 90px;
   left: 3px;
 `;
 
 const CountContainer = styled.div`
   position: relative;
-  right: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 10px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  /* background-color: yellow; */
 `;
 
 const Plus = styled.span`
@@ -175,9 +188,10 @@ const CountNumber = styled.span`
 const SumPrice = styled.p`
   position: relative;
   font-size: 25px;
-  letter-spacing: 3px;
-  bottom: 30px;
-  left: 25px;
+  letter-spacing: 2px;
+  top: 25px;
+  left: 85px;
+  color: #555555;
 `;
 
 const DownInfoContain = styled.div`
@@ -364,6 +378,8 @@ export default function Detail_OrderMenu_client({
       )}
 
       <Title>{productName}</Title>
+
+      <SumPrice>₩ {frontPriceComma(count * price)}</SumPrice>
       <InfoContain>
         {datas.size.OS > 0 ? (
           <SizeBTN
@@ -403,6 +419,7 @@ export default function Detail_OrderMenu_client({
         ) : null}
 
         <DetailDesc>{detail}</DetailDesc>
+
         <SizeFitCheck>
           {/* SIZE & FIT 모달창 '비니'만 만들어놨는데 카테고리 별로 다르게 떠야함 */}
           <span onClick={handleOpenModal2}>SIZE & FIT</span>
@@ -436,7 +453,6 @@ export default function Detail_OrderMenu_client({
           <br></br>
           <Buy onClick={buyNow}>Buy</Buy>
         </DownInfoContain>
-        <SumPrice>₩ {frontPriceComma(count * price)}</SumPrice>
       </InfoContain>
     </Detail_Order>
   );
