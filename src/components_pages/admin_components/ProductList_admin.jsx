@@ -269,10 +269,12 @@ export default function ProductList_admin() {
               <Layout>{showImage}</Layout>
               <Text>
                 {' '}
+
                 <img
                   style={{ width: '60px' }}
                   src={`http://localhost:4000/uploads/${item.img[0]}`}
                 ></img>{' '}
+                
               </Text>
               <Text>
                 {' '}
