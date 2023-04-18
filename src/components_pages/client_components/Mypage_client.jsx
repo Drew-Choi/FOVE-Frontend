@@ -122,7 +122,7 @@ export default function Mypage_client() {
           <div className="fourbox">
             <div className="line_one">
               <div
-                onClick={() => navigate('/mypage/checkOrder')}
+                onClick={() => navigate('/mypage/orderlist')}
                 className="shopmain_order"
               >
                 <p>주문 조회</p>
