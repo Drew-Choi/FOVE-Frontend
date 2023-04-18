@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 const PaginationContainer = styled.div`
   display: flex;
+  bottom: 50px;
   justify-content: ${(props) => props.justifyContent};
   align-items: ${(props) => props.alignItems};
 `;

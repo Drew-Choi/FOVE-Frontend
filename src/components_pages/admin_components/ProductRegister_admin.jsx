@@ -120,6 +120,7 @@ export default function ProductRegister_admin() {
   //이미지 갯수 상태 보관
   const [files, setFiles] = useState([]);
   //Array.from은 배열과 유사한 것을 배열화 시킴, 이미지 갯수 대문에 배열화
+
   const uploadProfile = (e) => {
     const selectedFiles = Array.from(e.target.files);
     if (selectedFiles.length > 5) {

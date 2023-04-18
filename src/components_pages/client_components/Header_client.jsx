@@ -60,9 +60,6 @@ export default function Header_client() {
     dispatch(offon());
   };
 
-  console.log(`관리자인가요? ${isAdmin}`); // ////////////////////////////////////////////
-  console.log(`로그인 상태? ${isLogin}`);
-
   //서칭용 상태관리
   const [searchOnOff, setSearchOnOff] = useState('off');
   //인풋값 담기
@@ -87,7 +84,7 @@ export default function Header_client() {
           FOVE
         </p>
 
-        {/* 관리자 페이지 이동 버튼 - test 중 */}
+        {/* 관리자 페이지 이동 버튼 */}
         {isAdmin && (
           <button onClick={() => navigate('/admin')}>👩‍💻 관리자 페이지</button>
         )}

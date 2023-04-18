@@ -302,7 +302,7 @@ export default function ProductList_admin() {
   //   if (el !== undefined) thumb.current[index.current] = el;
   // });
 
-  //-----------
+
   const productList = data.map((item, index) => {
     // thumb.current.push([]);
     return (
@@ -337,6 +337,7 @@ export default function ProductList_admin() {
               placeholder={item?.productName}
               style={{ fontSize: '12px' }}
               disabled={disa[index]}
+
             />{' '}
             OS수량 :{' '}
             <input
@@ -410,6 +411,163 @@ export default function ProductList_admin() {
       </>
     );
   });
+
+            /> */}
+            {/* 상품이미지 등록 */}
+            {/* <div>
+              {showImage}
+              <p>파일업로드</p>&nbsp;&nbsp;&nbsp;&nbsp;
+              <form> */}
+            {/* <input
+                  style={{ display: 'none' }}
+                  type="file"
+                  accept="image/jpg, image/jpeg, image/png"
+                  ref={fileInputRef}
+                  onChange={uploadProfile}
+                  name="imgMain"
+                  multiple
+                /> */}
+            {/* <BTN_black_nomal_comp
+                  className="select_btn"
+                  type="button"
+                  onClick={handleClickFileInput}
+                  fontSize="12px"
+                >
+                  파일선택
+                </BTN_black_nomal_comp> */}
+            {/* </form>
+            </div> */}
+            {/* 상품이미지 등록 */}
+            {/* <Container>
+              <Layout>{showImage}</Layout>
+              <Text>
+                {' '}
+
+                <img
+                  style={{ width: '60px' }}
+                  src={`http://localhost:4000/uploads/${item.img[0]}`}
+                ></img>{' '}
+                
+              </Text>
+              <Text>
+                {' '}
+                <img
+                  style={{ width: '60px' }}
+                  src={`http://localhost:4000/uploads/${item.img[0]}`}
+                ></img>{' '}
+              </Text> */}
+            {/* <Text>서브2</Text>
+              <Text>서브3</Text>
+              <Text>서브4</Text> */}
+            {/* <input
+                style={{ display: 'none' }}
+                type="file"
+                accept="image/jpg, image/jpeg, image/png"
+                ref={fileInputRef}
+                onChange={uploadProfile}
+                name="img"
+                multiple
+              />
+              <BTN_black_nomal_comp
+                className="select_btn"
+                onClickEvent={handleClickFileInput}
+                fontSize="12px"
+              >
+                파일선택
+              </BTN_black_nomal_comp>
+            </Container> */}
+          </div>
+          <div></div>
+          {/* {index + 1} */}
+          번호 :{}
+          <input
+            type="text"
+            name={name}
+            // placeholder={item.productCode}
+            style={{ fontSize: '12px' }}
+            disabled={true}
+          />
+          이름 :{' '}
+          <input
+            ref={(el) => (productName.current[index] = el)}
+            key={item?.id}
+            type="text"
+            name={name}
+            placeholder={item?.productName}
+            style={{ fontSize: '12px' }}
+            disabled={disa[index]}
+          />{' '}
+          OS수량 :{' '}
+          <input
+            ref={(el) => (os.current[index] = el)}
+            key={item?.id}
+            type="text"
+            name={name}
+            placeholder={item?.size.OS}
+            style={{ fontSize: '12px' }}
+            disabled={disa[index]}
+          />{' '}
+          S수량 :{' '}
+          <input
+            ref={(el) => (s.current[index] = el)}
+            key={item?.id}
+            type="text"
+            name={name}
+            placeholder={item?.size.S}
+            style={{ fontSize: '12px' }}
+            disabled={disa[index]}
+          />{' '}
+          M수량 :{' '}
+          <input
+            ref={(el) => (m.current[index] = el)}
+            key={item?.id}
+            type="text"
+            name={name}
+            placeholder={item?.size.M}
+            style={{ fontSize: '12px' }}
+            disabled={disa[index]}
+          />{' '}
+          L수량 :{' '}
+          <input
+            ref={(el) => (l.current[index] = el)}
+            key={item?.id}
+            type="text"
+            name={name}
+            placeholder={item?.size.L}
+            style={{ fontSize: '12px' }}
+            disabled={disa[index]}
+          />{' '}
+          가격 :
+          <input
+            ref={(el) => (price.current[index] = el)}
+            key={item?.id}
+            type="text"
+            name={name}
+            placeholder={item?.price}
+            style={{ fontSize: '12px' }}
+            disabled={disa[index]}
+          />{' '}
+          <button onClick={() => productUpdate(index)}>수정</button>{' '}
+          <button
+            onClick={() => {
+              const result = updateSubmit(item?._id, index);
+              alert(item._id);
+            }}
+          >
+            {' '}
+            완료
+          </button>{' '}
+          <button onClick={() => productDelete(item?._id)}>삭제</button>
+          {/* <button onClick={() => productUpdate()}> 삭제 </button> */}
+          <div></div>
+          <div
+            style={{ border: '0.1px solid black ', margin: '10px 0px' }}
+          ></div>
+        </li>
+      </div>
+      <div> </div>
+    </>
+  ));
 
   return (
     <div style={{ position: 'relative', top: '100px' }}>
