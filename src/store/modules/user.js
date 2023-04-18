@@ -37,10 +37,6 @@ export function logout() {
   };
 }
 
-// 회원 이름 가져오기
-// 포인트 가져오기
-// 관리자 페이지 접근 가능성
-
 // 리듀서. export default ; 이 파일을 import 하면 기본으로 나가는.
 export default function user(state = initState, action) {
   switch (action.type) {
