@@ -169,6 +169,7 @@ export default function ProductRegister_admin() {
   const newProductPost = async () => {
     //이미지 외 자료들 남기
     let productCode = pd_code.current.value;
+    console.log(productCode);
     // let newArrival = pd_newArrival.current.checked === !true ? '' : '신상품';
     let productName = pd_productName.current.value;
     let price = resultCommaRemove(pd_price.current.value);
@@ -215,6 +216,7 @@ export default function ProductRegister_admin() {
         body: formData,
       },
     );
+
     //페이지 요청 성공하면 200번, 아니면 오류표시
     if (newPdPostData.status !== 200) {
       //json형식으로 불러들임
@@ -281,7 +283,7 @@ export default function ProductRegister_admin() {
           inputref={pd_code}
           type="text"
           name="productCode"
-          value={productCodeCreat()}
+          // value={productCodeCreat()}
           //백에서 DB추가될때 마다 숫자 추가해주면 될듯
         >
           상품고유번호

@@ -30,7 +30,6 @@ import RegisterSuccess_client from './components_pages/client_components/Registe
 import EditInfo_client from './components_pages/client_components/EditInfo_client';
 import ProductList_admin from './components_pages/admin_components/ProductList_admin';
 import OrderList_client from './components_pages/client_components/OrderList_client';
-import OrderList_client2 from './components_pages/client_components/OrderList_client2';
 import Store_NewItems from './components_pages/client_components/Store_NewItems';
 
 function App() {
@@ -136,12 +135,6 @@ function App() {
           <Route
             path="/mypage/orderlist"
             element={isLogin ? <OrderList_client /> : <OrderList_client />}
-          />
-
-          {/* 취소반품내역 */}
-          <Route
-            path="/mypage/orderlist2"
-            element={isLogin ? <OrderList_client2 /> : <OrderList_client2 />}
           />
 
           {/* 배송 주소록 목록 */}

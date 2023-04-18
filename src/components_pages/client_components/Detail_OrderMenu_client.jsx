@@ -27,7 +27,7 @@ const Title = styled.p`
   position: relative;
   top: 35px;
   text-align: center;
-  font-size: 25px;
+  font-size: 22px;
   font-weight: 700;
   letter-spacing: 1px;
 `;
@@ -90,9 +90,10 @@ const DetailDesc = styled.div`
   width: 200px;
   height: 100px;
   margin-bottom: 30px;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500p;
   letter-spacing: 1px;
+  white-space: pre-line;
 `;
 
 const AddCart = styled.button`
@@ -187,10 +188,10 @@ const CountNumber = styled.span`
 
 const SumPrice = styled.p`
   position: relative;
-  font-size: 25px;
+  font-size: 22px;
   letter-spacing: 2px;
   top: 25px;
-  left: 85px;
+  left: 100px;
   color: #555555;
 `;
 
