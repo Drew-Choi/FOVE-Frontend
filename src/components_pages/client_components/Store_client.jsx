@@ -37,7 +37,6 @@ export default function Store_client() {
   const searchProducts = (text) => {
     setPd_Datas((cur) => {
       const newData = [...orignData.current];
-      console.log('@@@@@@@', text);
       if (text !== '') {
         return newData.filter((el) => {
           return el.productName.indexOf(text) !== -1;

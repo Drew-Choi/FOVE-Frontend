@@ -46,7 +46,7 @@ export default function Header_client() {
 
   useEffect(() => {
     cartDataReq();
-  });
+  }, []);
 
   //모달을 위한 state
   const offonKey = useSelector((state) => state.cartmodal.offon);
