@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '../../styles/header_client.scss';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -12,6 +12,8 @@ import GoogleIcon from './GoogleIcon';
 import { searchinput } from '../../store/modules/search';
 
 export default function Header_client() {
+  const excludeRef = useRef(null);
+  const searchBTN = useRef();
   const isAdmin = useSelector((state) => state.user.isAdmin);
   const isLogin = useSelector((state) => state.user.isLogin);
   const menuClicked = useSelector((state) => state.menuAccount.clicked);
@@ -75,9 +77,40 @@ export default function Header_client() {
     if (e.key === 'Enter') {
       // 검색 로직 실행
       dispatch(searchinput(e.target.value));
+      if (!e.target.value) {
+        setEmpty('검색어를 입력해주세요.');
+      } else {
+        searchBTN.current.click();
+        e.target.value = '';
+      }
+
       // setSearchText(e.target.value);
       // navigate(`/store?keyword=${searchText}`);
     }
+  };
+
+  //윈도우 클릭시 기능해제, 돋보기
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        searchBTN.current &&
+        !searchBTN.current.contains(event.target) &&
+        excludeRef.current &&
+        !excludeRef.current.contains(event.target)
+      ) {
+        setSearchOnOff('off');
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [searchBTN, excludeRef]);
+
+  const handleClick = () => {
+    setSearchOnOff('on');
   };
 
   return (
@@ -89,9 +122,7 @@ export default function Header_client() {
 
         {/* 관리자 페이지 이동 버튼 */}
         {isAdmin && (
-          <button onClick={() => navigate('/admin/register')}>
-            👩‍💻 관리자 페이지
-          </button>
+          <button onClick={() => navigate('/admin')}>👩‍💻 관리자 페이지</button>
         )}
 
         <ul id="cate">
@@ -101,22 +132,25 @@ export default function Header_client() {
           <li id="cate_li">
             <p onClick={() => navigate('/store')}>STORE</p>
           </li>
-          {/* <li id="cate_li">
+          <li id="cate_li">
             <p onClick={() => navigate('#')}>COLLECTION</p>
-          </li> */}
+          </li>
         </ul>
         <ul id="cate2">
           <li id="search_container">
             <input
+              ref={excludeRef}
               className={`searchInput ${searchOnOff}`}
               type="text"
               placeholder={empty}
               onKeyDown={(e) => handleKeyPress(e)}
+              onClick={handleClick}
             />
             {currentURL === '/' ? (
               <></>
             ) : (
               <span
+                ref={searchBTN}
                 className="material-symbols-outlined search"
                 onClick={(cur) =>
                   searchOnOff === 'off'

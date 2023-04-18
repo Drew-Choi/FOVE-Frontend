@@ -30,6 +30,7 @@ export default function Store_client() {
   const [pagination2, setPagination2] = useState('off');
   const [pagination3, setPagination3] = useState('off');
   const [pagination4, setPagination4] = useState('off');
+  const [pagination5, setPagination5] = useState('off');
 
   //All상품데이터 get
   const [pd_Datas, setPd_Datas] = useState([]);
@@ -37,9 +38,11 @@ export default function Store_client() {
   const searchProducts = (text) => {
     setPd_Datas((cur) => {
       const newData = [...orignData.current];
-      if (text !== '') {
+      const lowercaseText = text.toLowerCase();
+      if (lowercaseText !== '') {
         return newData.filter((el) => {
-          return el.productName.indexOf(text) !== -1;
+          const lowercaseProductName = el.productName.toLowerCase();
+          return lowercaseProductName.indexOf(lowercaseText) !== -1;
         });
       } else {
         return newData;
@@ -68,6 +71,8 @@ export default function Store_client() {
       return productsData.data.message;
     }
   };
+
+  console.log(pd_Datas);
 
   //db Number타입을 스트링으로 바꾸고 천단위 컴마 찍어 프론트에 보내기
   const country = navigator.language;
@@ -121,6 +126,9 @@ export default function Store_client() {
             swiper.activeIndex !== 3
               ? setPagination4((cur) => 'off')
               : setPagination4((cur) => 'on');
+            swiper.activeIndex !== 4
+              ? setPagination5((cur) => 'off')
+              : setPagination5((cur) => 'on');
           }}
           mousewheel={false}
           className="swiper_container"
@@ -194,6 +202,54 @@ export default function Store_client() {
               </Row>
             </Container>
           </SwiperSlide>
+
+          <SwiperSlide className="swiper_slide">
+            <Container>
+              <Row xs={2} md={4} lg={5}>
+                {pd_Datas.map((el, index) => {
+                  if (index < 40 && index >= 30)
+                    return (
+                      <Col
+                        onClick={() => navigate(`/store/detail/${el._id}`)}
+                        className="store_col"
+                        key={el._id}
+                        onMouseEnter={() => {}}
+                      >
+                        <Product_client_indiLayout
+                          imgFileName={el.img}
+                          productName={el.productName}
+                          price={frontPriceComma(el.price)}
+                        />
+                      </Col>
+                    );
+                })}
+              </Row>
+            </Container>
+          </SwiperSlide>
+
+          <SwiperSlide className="swiper_slide">
+            <Container>
+              <Row xs={2} md={4} lg={5}>
+                {pd_Datas.map((el, index) => {
+                  if (index < 50 && index >= 40)
+                    return (
+                      <Col
+                        onClick={() => navigate(`/store/detail/${el._id}`)}
+                        className="store_col"
+                        key={el._id}
+                        onMouseEnter={() => {}}
+                      >
+                        <Product_client_indiLayout
+                          imgFileName={el.img}
+                          productName={el.productName}
+                          price={frontPriceComma(el.price)}
+                        />
+                      </Col>
+                    );
+                })}
+              </Row>
+            </Container>
+          </SwiperSlide>
         </Swiper>
 
         <div className="navi_pagi_fix">
@@ -240,6 +296,22 @@ export default function Store_client() {
               onClickEvent={() => swiperEl.slideTo(2)}
             >
               3
+            </SwiperPaginationBTN>
+            <SwiperPaginationBTN
+              className={`pagi4 ${pagination4}`}
+              color="gray"
+              hoverColor="lightgray"
+              onClickEvent={() => swiperEl.slideTo(3)}
+            >
+              4
+            </SwiperPaginationBTN>
+            <SwiperPaginationBTN
+              className={`pagi5 ${pagination5}`}
+              color="gray"
+              hoverColor="lightgray"
+              onClickEvent={() => swiperEl.slideTo(4)}
+            >
+              5
             </SwiperPaginationBTN>
           </SwiperPaginationContainer>
         </div>

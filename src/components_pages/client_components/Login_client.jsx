@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { login } from '../../store/modules/user';
@@ -7,6 +7,20 @@ import '../../styles/login_client.scss';
 import { importdb } from '../../store/modules/cart';
 
 export default function Login_client() {
+  const loginbtn = useRef();
+
+  const handleKeyPress1 = (e) => {
+    if (e.key === 'Enter') {
+      loginbtn.current?.click();
+    }
+  };
+
+  const handleKeyPress2 = (e) => {
+    if (e.key === 'Enter') {
+      loginbtn.current?.click();
+    }
+  };
+
   //유저정보 state
   const userID = useSelector((state) =>
     state.user.userID === 0 ? 0 : state.user.userID,
@@ -86,6 +100,7 @@ export default function Login_client() {
         placeholder="ID (Email Address)"
         required
         className="login_input"
+        onKeyDown={(e) => handleKeyPress1(e)}
       />
       <br />
       <input
@@ -94,9 +109,10 @@ export default function Login_client() {
         placeholder="PW"
         required
         className="login_input"
+        onKeyDown={(e) => handleKeyPress2(e)}
       />
       <br />
-      <button onClick={loginUser} className="login_btn">
+      <button ref={loginbtn} onClick={loginUser} className="login_btn">
         LOG IN
       </button>
       <br />

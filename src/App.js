@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Admin_main from './components_pages/admin_components/Admin_main';
 import ProductRegister_admin from './components_pages/admin_components/ProductRegister_admin';
@@ -70,6 +70,8 @@ function App() {
   useEffect(() => {
     tokenLoginCheck();
   }, [isLogin]); // isLogin 값 바뀔 때마다
+
+  const isAdmin = useSelector((state) => state.user.isAdmin);
 
   return (
     <div>
@@ -152,11 +154,23 @@ function App() {
         </Route>
 
         {/* admin 영역 */}
-        <Route path="/admin" element={<Admin_main />}>
-          <Route path="" element={<Home_admin />} />
-          <Route path="register" element={<ProductRegister_admin />} />
-          <Route path="list" element={<ProductList_admin />} />
-          <Route path="orderlist" element={<OrderList_admin />} />
+
+        <Route
+          path="/admin"
+          element={!isAdmin ? <Error404 /> : isAdmin && <Admin_main />}
+        >
+          {/* <Route path="" element={<Home_admin />} /> */}
+          <Route
+            path=""
+            element={
+              !isAdmin ? <Error404 /> : isAdmin && <ProductRegister_admin />
+            }
+          />
+          <Route
+            path="list"
+            element={!isAdmin ? <Error404 /> : isAdmin && <ProductList_admin />}
+          />
+
         </Route>
         <Route path="*" element={<Error404 />} />
       </Routes>
