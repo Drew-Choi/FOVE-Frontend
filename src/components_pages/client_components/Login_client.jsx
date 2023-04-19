@@ -116,17 +116,17 @@ export default function Login_client() {
         LOG IN
       </button>
       <br />
-      <button className="login_btn white">
-        <Link to="/register" style={{ textDecoration: 'none', color: 'black' }}>
-          Create Account
-        </Link>
+      <button className="login_btn white" onClick={() => navigate(`/register`)}>
+        {/* <Link to="/register" style={{ textDecoration: 'none', color: 'black' }}> */}
+        Create Account
+        {/* </Link> */}
       </button>
-      <br />
+      {/* <br />
       <button className="login_kakao">
         <Link to="" style={{ textDecoration: 'none', color: '#3a1d1d' }}>
           카카오 계정으로 로그인
         </Link>
-      </button>
+      </button> */}
     </div>
   );
 }

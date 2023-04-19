@@ -13,10 +13,10 @@ const MenuAccountWrap = styled.div`
   right: 0;
   z-index: 1000; // 장바구니보다 위에 위치
   width: 280px;
-  height: 120px;
+  height: 150px;
   border: 2px solid black;
   background-color: white;
-  padding: 3px 7px;
+  padding: 15px;
 `;
 
 const ContentTitle = styled.p`
@@ -30,8 +30,9 @@ const Content = styled.p`
   font-size: 15px;
   cursor: pointer;
   &:hover {
-    font-weight: 800;
-    background-color: #e9e9e9;
+    font-weight: 900;
+    border-bottom: 2px solid black;
+    /* background-color: #e9e9e9; */
   }
 `;
 
@@ -60,7 +61,7 @@ export default function MenuAccount() {
   return (
     <MenuAccountWrap>
       <ContentTitle>{userName} 님, 환영합니다!</ContentTitle>
-      <ContentTitle>Point : {userPoints}p</ContentTitle>
+      <ContentTitle>Point : {userPoints} p</ContentTitle>
       <Content
         onClick={() => {
           dispatch(clickMenu());
@@ -69,7 +70,7 @@ export default function MenuAccount() {
       >
         MY PAGE
       </Content>
-      <Content>ORDER</Content>
+      <Content onClick={() => navigate(`/mypage/orderlist`)}>ORDER</Content>
       <Content onClick={logoutUser}>LOGOUT</Content>
     </MenuAccountWrap>
   );

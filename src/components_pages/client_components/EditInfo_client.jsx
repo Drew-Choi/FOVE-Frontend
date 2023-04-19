@@ -8,8 +8,8 @@ import { keepLogin, logout } from '../../store/modules/user';
 const EditInfoWrap = styled.div`
   position: relative;
   top: 130px;
-  width: 1000px;
-  height: 1000px; // 스크롤 생기게 임시방편
+  width: 800px;
+  height: 500px; // 스크롤 생기게 임시방편
   margin: 0 auto;
   text-align: center;
 
@@ -41,7 +41,7 @@ const SubTitle = styled.p`
 
 const InputText = styled.input`
   display: inline-block;
-  width: 880px;
+  width: 680px;
   height: 40px;
   margin-bottom: 20px;
   padding: 10px;
@@ -49,7 +49,7 @@ const InputText = styled.input`
 
 const InputTextId = styled.input`
   display: inline-block;
-  width: 880px;
+  width: 680px;
   height: 40px;
   margin-bottom: 20px;
   padding: 10px;
@@ -57,8 +57,8 @@ const InputTextId = styled.input`
 `;
 
 const ButtonBK = styled.button`
-  width: 490px;
-  margin: 0 4px 20px;
+  width: 390px;
+  margin: 30px 4px 20px;
   height: 40px;
   color: white;
   background-color: black;
@@ -68,8 +68,8 @@ const ButtonBK = styled.button`
 `;
 
 const ButtonWT = styled.button`
-  width: 490px;
-  margin: 0 4px 20px;
+  width: 390px;
+  margin: 30px 4px 20px;
   height: 40px;
   color: black;
   background-color: white;
@@ -79,7 +79,7 @@ const ButtonWT = styled.button`
 `;
 
 const ButtonRED = styled.button`
-  width: 1000px;
+  width: 800px;
   height: 40px;
   color: white;
   background-color: #b20000;

@@ -35,7 +35,11 @@
     height: 40px;
     color: black;
     background-color: white;
-    border: 2px solid black;
+    border: 1px solid black;
+
+    &:hover {
+      border: 3px solid black;
+    }
   }
 
   .register_btn {
@@ -43,14 +47,26 @@
     height: 40px;
     color: white;
     background-color: black;
-    border: 2px solid black;
+    border: 1px solid black;
     border-radius: 50px;
     // box-shadow: 5px 5px 5px lightgray;
     font-weight: 600;
+    transition: 0.3s all;
+
+    &:hover {
+      // color: black;
+      background-color: rgb(158, 158, 158);
+    }
   }
 
   .register_btn.white {
     color: black;
     background-color: white;
+    transition: 0.3s all;
+
+    &:hover {
+      color: white;
+      background-color: rgb(158, 158, 158);
+    }
   }
 }
