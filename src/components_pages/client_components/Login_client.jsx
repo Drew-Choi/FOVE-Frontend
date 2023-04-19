@@ -32,22 +32,22 @@ export default function Login_client() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const cartDataReq = async (parmas) => {
-    try {
-      const cartDataGet = await axios.post(
-        `http://localhost:4000/cart/list/${parmas}`,
-      );
-      console.log(userID);
-      if (cartDataGet.status === 200) {
-        await dispatch(importdb(cartDataGet.data.product));
-      } else {
-        console.error(cartDataGet.status);
-        console.log(cartDataGet.data.message);
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  // const cartDataReq = async (parmas) => {
+  //   try {
+  //     const cartDataGet = await axios.post(
+  //       `http://localhost:4000/cart/list/${parmas}`,
+  //     );
+  //     console.log(userID);
+  //     if (cartDataGet.status === 200) {
+  //       await dispatch(importdb(cartDataGet.data.product));
+  //     } else {
+  //       console.error(cartDataGet.status);
+  //       console.log(cartDataGet.data.message);
+  //     }
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
 
   // LOG IN 버튼
   const loginUser = async () => {
@@ -83,7 +83,7 @@ export default function Login_client() {
           id: loginIdInput.current.value,
         }),
       );
-      cartDataReq(loginIdInput.current.value);
+      // cartDataReq(loginIdInput.current.value);
       navigate('/store'); // 로그인 후 이전 페이지로 이동
     } catch (err) {
       alert(err.response.data.message);

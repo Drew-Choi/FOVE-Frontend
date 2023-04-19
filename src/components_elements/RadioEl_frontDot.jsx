@@ -9,6 +9,8 @@ export default function RadioEl_frontDot({
   disabled,
   inputref,
   onChangeEvent,
+  onClickEvent,
+  checkedEvent,
 }) {
   return (
     <label>
@@ -20,6 +22,8 @@ export default function RadioEl_frontDot({
         defaultChecked={defaultChecked}
         disabled={disabled}
         onChange={onChangeEvent}
+        onClick={onClickEvent}
+        checked={checkedEvent}
       />
       {children}
     </label>
