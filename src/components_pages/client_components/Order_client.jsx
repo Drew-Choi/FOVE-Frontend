@@ -54,6 +54,9 @@ export default function Order_client() {
     ),
   );
 
+  const userName = useSelector((state) => state.user.userName);
+  const userPoints = useSelector((state) => state.user.userPoints);
+
   //----------------------------------------------------------------
 
   //다음주소 불러오기 기능 ----------------------------------------------
@@ -197,7 +200,7 @@ export default function Order_client() {
 
       <div className="memeber_info_contain">
         <p className="memeber_info_membership">
-          {'김영호'}님은, <strong>{'[STANDARD]'}</strong> 회원이십니다.
+          {userName}님은, <strong>{'[STANDARD]'}</strong> 회원이십니다.
         </p>
         <p className="memeber_info_event1">
           KRW 10,000 이상 구매시 <strong>5%</strong>를 추가할인 받으실 수
@@ -208,7 +211,7 @@ export default function Order_client() {
           있습니다. (최대 KDW 9,999,999)
         </p>
         <span className="point_text1">가용적립금:</span>
-        <span className="member_point">{'2,000'} 원</span>
+        <span className="member_point">{userPoints} 원</span>
         <span className="point_text2">예치금:</span>
         <span className="member_deposit">{'0'} 원</span>
         <span className="point_text3">쿠폰:</span>
@@ -407,7 +410,9 @@ export default function Order_client() {
                   <div className="point">
                     <input type="text" className="point_apply b" />
                     <button className="diicount_code_btn">적용</button>
-                    <div className="preview_point">사용가능 포인트: {''}</div>
+                    <div className="preview_point">
+                      사용가능 포인트: {userPoints} p
+                    </div>
                     <div className="point_price_apply">포인트 사용: - {''}</div>
                   </div>
                   {/* 예치금 */}
