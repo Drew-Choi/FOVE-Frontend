@@ -25,8 +25,8 @@ const PaymentBOX = styled.div`
 
   button {
     background-color: black;
-    margin-left: 20px;
-    width: 750px;
+    margin-left: 0px;
+    width: 710px;
     padding: 10px 40px;
     border: 1px solid black;
     border-radius: 50px;
