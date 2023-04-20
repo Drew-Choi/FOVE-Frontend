@@ -55,11 +55,9 @@ export default function Order_client() {
     ),
   );
 
-
   const userId = useSelector((state) => state.user.userID);
   const userName = useSelector((state) => state.user.userName);
   const userPoints = useSelector((state) => state.user.userPoints);
-
 
   //----------------------------------------------------------------
 
@@ -193,10 +191,6 @@ export default function Order_client() {
   //배송지 주소 가져오기
   const defaultAdd = useRef();
   const [addData, setAddData] = useState([]);
-  const [checked, setChecked] = useState(false);
-  const handleChangeon = () => {
-    setChecked(!checked);
-  };
 
   //디폴트 주소만 거르기
   const filteredAdd = addData.filter((addData) => addData.isDefault === true);
@@ -334,8 +328,7 @@ export default function Order_client() {
                 <RadioEl_frontDot
                   value="false"
                   inputref={defaultAdd}
-                  checked={checked}
-                  onChangeEvent={handleChangeon}
+                  checkedEvent="true"
                   name="adressbooks"
                 >
                   &ensp;회원 정보와 동일 &ensp;&ensp; &ensp;
@@ -354,7 +347,6 @@ export default function Order_client() {
                 ref={recipientName}
                 className="b"
                 type="text"
-                value={checked === true ? filteredAdd[0].recipient : ''}
                 placeholder="받으시는 분"
               />
               <div>
@@ -364,11 +356,7 @@ export default function Order_client() {
                       ref={recipientZipcode}
                       className="address b"
                       type="text"
-                      value={
-                        checked === true
-                          ? filteredAdd[0].zipCode
-                          : addressData.zonecode
-                      }
+                      value={addressData.zonecode}
                       placeholder="우편번호*"
                       disabled
                     />
@@ -391,11 +379,7 @@ export default function Order_client() {
                       ref={recipientAddress}
                       className="b"
                       type="text"
-                      value={
-                        checked === true
-                          ? filteredAdd[0].address
-                          : addressData.address
-                      }
+                      value={addressData.address}
                       placeholder="주소*"
                       disabled
                     />
@@ -406,11 +390,7 @@ export default function Order_client() {
                       ref={recipientAddressDetail}
                       className="b"
                       type="text"
-                      value={
-                        checked === true
-                          ? filteredAdd[0].addressDetail
-                          : addressData.buildingName
-                      }
+                      value={addressData.buildingName}
                       placeholder="나머지주소 (선택입력)"
                       onChange={handleChange}
                     />
@@ -426,11 +406,6 @@ export default function Order_client() {
                   <p className="numMiners">-</p>
                   <input
                     ref={phoneMidNum}
-                    value={
-                      checked === true
-                        ? filteredAdd[0].recipientPhone.slice(3, 6)
-                        : ''
-                    }
                     className="phonNum mid b"
                     type="tel"
                     placeholder="휴대폰"
@@ -444,11 +419,6 @@ export default function Order_client() {
                     type="tel"
                     maxLength="4"
                     pattern="[0-9]{4}"
-                    value={
-                      checked === true
-                        ? filteredAdd[0].recipientPhone.slice(7, 10)
-                        : ''
-                    }
                   />
                 </div>
 

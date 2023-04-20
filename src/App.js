@@ -20,7 +20,7 @@ import Login_client from './components_pages/client_components/Login_client';
 import Order_client from './components_pages/client_components/Order_client';
 import Store_Categorys from './components_pages/client_components/Store_Categorys';
 import Error404 from './components_pages/client_components/Error404';
-import TossPay_CompletePage from './components_pages/client_components/TossPay_CompletePage';
+import TossPay_Complete from './components_pages/client_components/TossPay_Complete';
 import TossApprove from './components_pages/client_components/TossApprove';
 import { Toss_CheckOut } from './components_pages/client_components/Toss_CheckOut';
 import { useEffect } from 'react';
@@ -102,10 +102,7 @@ function App() {
             element={<TossApprove />}
           />
           {/* 토스페이먼츠 결제성공페이지 */}
-          <Route
-            path="store/order_success"
-            element={<TossPay_CompletePage />}
-          />
+          <Route path="store/order_success" element={<TossPay_Complete />} />
           {/* account쪽 */}
           <Route path="/agreement" element={<Agreement_client />} />
           <Route path="/privacy" element={<Privacy_client />} />
@@ -171,6 +168,10 @@ function App() {
             element={!isAdmin ? <Error404 /> : isAdmin && <ProductList_admin />}
           />
 
+          <Route
+            path="orderlist"
+            element={!isAdmin ? <Error404 /> : isAdmin && <OrderList_admin />}
+          />
         </Route>
         <Route path="*" element={<Error404 />} />
       </Routes>

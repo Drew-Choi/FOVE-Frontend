@@ -25,7 +25,7 @@ export default function Header_admin() {
   const navigate = useNavigate();
   return (
     <header className="header_admin">
-      <p className="logo" onClick={() => navigate('/admin/register')}>
+      <p className="logo" onClick={() => navigate('/admin')}>
         FOVE Admin
       </p>
       <strong style={{ position: 'relative', left: '600px' }}>
