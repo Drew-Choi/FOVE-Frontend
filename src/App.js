@@ -33,6 +33,8 @@ import OrderList_client from './components_pages/client_components/OrderList_cli
 import Store_NewItems from './components_pages/client_components/Store_NewItems';
 import OrderList_admin from './components_pages/admin_components/OrderList_admin';
 
+// 팔만대장경 컴포넌트 여기까지 하겠습니다.
+
 function App() {
   const isLogin = useSelector((state) => state.user.isLogin);
   // const isAdmin = useSelector((state) => state.user.isAdmin);
